@@ -31,25 +31,25 @@ DevOps-Jan26/
   - **Focus**: Basic navigation (cd, ls, error messages, hidden files)
   - **Duration**: 60-90 minutes
   - **Download**: See `Linux Module/STUDENT_COMMAND.txt`
-- **Lab 2**: File System Scavenger Hunt
-  - **Version**: v1.0
-  - **Focus**: Linux CLI basics (navigation, reading, searching)
-  - **Duration**: 1-2 hours
-  - **Download**: See `Linux Module/STUDENT_COMMAND.txt`
-- **Lab 3**: File and Directory Management
+- **Lab 2**: File and Directory Management
   - **Version**: v1.2
   - **Focus**: File and directory management (mkdir, touch, cp, mv, rm, rmdir)
   - **Duration**: 75-90 minutes
   - **Download**: See `Linux Module/STUDENT_COMMAND.txt`
-- **Lab 4**: Reading Files
+- **Lab 3**: Reading Files
   - **Version**: v1.3
   - **Focus**: Reading files (cat, less, head, tail)
   - **Duration**: 60-75 minutes
   - **Download**: See `Linux Module/STUDENT_COMMAND.txt`
-- **Lab 5**: Search Basics
+- **Lab 4**: Search Basics
   - **Version**: v1.4
   - **Focus**: Searching with grep and find
   - **Duration**: 60-75 minutes
+  - **Download**: See `Linux Module/STUDENT_COMMAND.txt`
+- **Lab 5**: File System Scavenger Hunt
+  - **Version**: v1.0
+  - **Focus**: Comprehensive CLI practice - Final lab combining all skills
+  - **Duration**: 1-2 hours
   - **Download**: See `Linux Module/STUDENT_COMMAND.txt`
 
 ---

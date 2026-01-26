@@ -19,21 +19,7 @@ curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v1.1/linu
 Release: https://github.com/IITC-College/DevOps-Jan26/releases/tag/v1.1
 
 ========================================================
-              LAB 2: File System Scavenger Hunt
-========================================================
-
-Version: v1.0
-Focus: Linux CLI basics (navigation, reading, searching)
-Duration: 1-2 hours
-
-✅ Copy and paste this command:
-
-curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v1.0/linux_scavenger_hunt.tar.gz | tar -xz && cd linux_scavenger_hunt && cat start_here.txt
-
-Release: https://github.com/IITC-College/DevOps-Jan26/releases/tag/v1.0
-
-========================================================
-              LAB 3: File and Directory Management
+              LAB 2: File and Directory Management
 ========================================================
 
 Version: v1.2
@@ -47,7 +33,7 @@ curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v1.2/linu
 Release: https://github.com/IITC-College/DevOps-Jan26/releases/tag/v1.2
 
 ========================================================
-              LAB 4: Reading Files
+              LAB 3: Reading Files
 ========================================================
 
 Version: v1.3
@@ -61,7 +47,7 @@ curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v1.3/linu
 Release: https://github.com/IITC-College/DevOps-Jan26/releases/tag/v1.3
 
 ========================================================
-              LAB 5: Search Basics
+              LAB 4: Search Basics
 ========================================================
 
 Version: v1.4
@@ -73,6 +59,20 @@ Duration: 60-75 minutes
 curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v1.4/linux_search_basics.tar.gz | tar -xz && cd linux_search_basics && cat start_here.txt
 
 Release: https://github.com/IITC-College/DevOps-Jan26/releases/tag/v1.4
+
+========================================================
+              LAB 5: File System Scavenger Hunt
+========================================================
+
+Version: v1.0
+Focus: Comprehensive CLI practice - Final lab combining all skills
+Duration: 1-2 hours
+
+✅ Copy and paste this command:
+
+curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v1.0/linux_scavenger_hunt.tar.gz | tar -xz && cd linux_scavenger_hunt && cat start_here.txt
+
+Release: https://github.com/IITC-College/DevOps-Jan26/releases/tag/v1.0
 
 ========================================================
                     Resources
