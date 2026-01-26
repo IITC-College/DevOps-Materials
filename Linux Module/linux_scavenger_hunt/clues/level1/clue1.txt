@@ -1,0 +1,26 @@
+================================================================================
+                            LEVEL 1 - CLUE 1
+================================================================================
+
+Welcome to Level 1!
+
+Your mission: Find the system administrator's password hint.
+
+INSTRUCTIONS:
+-------------
+1. The password hint is hidden in a log file
+2. The log file is located in the 'data/logs/' directory
+3. The file is called 'system.log'
+4. Look for a line that contains the word "password"
+
+COMMANDS TO USE:
+----------------
+- Navigate to the data/logs directory: cd ../../data/logs
+- Read the log file: cat system.log
+- Or search for the specific word: grep "password" system.log
+
+Once you find the password hint, write it down!
+
+Then proceed to the next clue: clue2.txt in this same directory.
+
+Hint: Use 'ls' to see what other files are in the current directory.

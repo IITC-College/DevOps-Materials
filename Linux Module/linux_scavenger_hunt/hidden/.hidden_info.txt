@@ -1,0 +1,26 @@
+========================================
+     HIDDEN INFORMATION FILE
+========================================
+
+This is a hidden file!
+
+In Linux, files starting with a dot (.) are
+hidden by default. They won't show up with
+a regular 'ls' command.
+
+To see hidden files, use: ls -a
+
+IMPORTANT PROJECT INFORMATION:
+-------------------------------
+- Total projects in lab: 3
+- Project names: Alpha, Beta, Gamma
+- Primary language: Python (Alpha), JavaScript (Beta, Gamma)
+- All projects are interconnected
+- Alpha handles backend API
+- Beta provides the frontend UI
+- Gamma processes analytics
+
+This information is crucial for understanding
+the overall system architecture!
+
+========================================

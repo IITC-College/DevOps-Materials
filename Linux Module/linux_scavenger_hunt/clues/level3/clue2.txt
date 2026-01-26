@@ -1,0 +1,34 @@
+================================================================================
+                            LEVEL 3 - CLUE 2
+================================================================================
+
+Need some hints for finding the Master Key?
+
+HINT FOR PART 1:
+----------------
+- Go to data/secrets/
+- There are multiple files there
+- Use: grep "PART1" *
+- The code is exactly 4 characters
+
+HINT FOR PART 2:
+----------------
+- Go to projects/project_alpha/
+- Search all files: grep -r "PART2" .
+- Look in configuration files
+
+HINT FOR PART 3:
+----------------
+- File: data/logs/backup.log
+- Search for: grep "PART3" data/logs/backup.log
+- It's in a timestamp entry
+
+HINT FOR PART 4:
+----------------
+- Hidden file in projects/project_beta/
+- Use: ls -la projects/project_beta/
+- Read the hidden file
+
+Good luck assembling the Master Key!
+
+Final clue: clue3.txt

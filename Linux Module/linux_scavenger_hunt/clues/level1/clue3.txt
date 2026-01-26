@@ -1,0 +1,35 @@
+================================================================================
+                            LEVEL 1 - CLUE 3
+================================================================================
+
+Excellent detective work!
+
+Now for something trickier: hidden files!
+
+BACKGROUND:
+-----------
+In Linux, files that start with a dot (.) are hidden.
+They don't show up with a regular 'ls' command.
+
+TASK:
+-----
+Find a hidden file in the 'hidden' directory.
+This file contains important information about the project structure.
+
+INSTRUCTIONS:
+-------------
+1. Navigate to the 'hidden' directory
+2. Use 'ls -a' to see ALL files (including hidden ones)
+3. Find the file that starts with a dot
+4. Read its contents
+
+COMMANDS TO USE:
+----------------
+- cd ../../hidden
+- ls -a
+- cat .filename
+
+Write down what you find - it's an important clue!
+
+CONGRATULATIONS! You've completed Level 1!
+Now advance to Level 2: cd ../clues/level2

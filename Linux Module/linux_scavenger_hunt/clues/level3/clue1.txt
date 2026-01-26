@@ -1,0 +1,28 @@
+================================================================================
+                            LEVEL 3 - CLUE 1
+================================================================================
+
+Welcome to the FINAL LEVEL!
+
+This level combines everything you've learned.
+
+THE ULTIMATE CHALLENGE:
+-----------------------
+Find the "Master Key" - a special code hidden across multiple files.
+
+The Master Key consists of 4 parts:
+- Part 1: In a file that contains "PART1" in data/secrets/
+- Part 2: Hidden in project_alpha (search for "PART2")
+- Part 3: In a log file from last month (data/logs/backup.log)
+- Part 4: In a hidden file somewhere in the projects directory
+
+STRATEGY:
+---------
+1. Use 'find' to locate files
+2. Use 'grep' to search within files
+3. Use 'ls -a' to find hidden files
+4. Combine all 4 parts in order
+
+Start searching! All the commands you've learned will be useful here.
+
+Next clue has a hint: clue2.txt

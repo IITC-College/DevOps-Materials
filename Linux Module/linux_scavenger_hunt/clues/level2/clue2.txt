@@ -1,0 +1,31 @@
+================================================================================
+                            LEVEL 2 - CLUE 2
+================================================================================
+
+Time to practice file management!
+
+TASK:
+-----
+Create your own answer directory and organize your findings.
+
+INSTRUCTIONS:
+-------------
+1. Go to the main lab directory
+2. Create a new directory called 'my_answers'
+3. Inside it, create three subdirectories:
+   - codes
+   - passwords
+   - configs
+
+COMMANDS TO USE:
+----------------
+- cd ../../
+- mkdir my_answers
+- cd my_answers
+- mkdir codes passwords configs
+- Or in one command: mkdir -p my_answers/{codes,passwords,configs}
+
+Verify your work:
+- ls -l my_answers/
+
+Next: clue3.txt

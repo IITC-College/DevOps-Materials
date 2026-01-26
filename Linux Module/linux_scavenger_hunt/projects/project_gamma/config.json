@@ -1,0 +1,27 @@
+{
+  "service": {
+    "name": "Project Gamma Analytics",
+    "version": "3.0.1",
+    "environment": "production"
+  },
+  "database": {
+    "type": "mongodb",
+    "host": "localhost",
+    "port": 27017,
+    "name": "gamma_analytics"
+  },
+  "queue": {
+    "redis_host": "localhost",
+    "redis_port": 6379,
+    "max_retries": 3
+  },
+  "analytics": {
+    "batch_size": 1000,
+    "processing_interval": 300,
+    "retention_days": 90
+  },
+  "api": {
+    "rate_limit": 1000,
+    "timeout": 30000
+  }
+}

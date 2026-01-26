@@ -1,0 +1,31 @@
+================================================================================
+                            LEVEL 2 - CLUE 1
+================================================================================
+
+Welcome to Level 2!
+
+Things are getting more challenging now.
+
+TASK:
+-----
+Find all files in the 'projects' directory that contain the word "CONFIG".
+
+INSTRUCTIONS:
+-------------
+1. Navigate to the projects directory
+2. Use grep with the recursive flag to search all files
+3. Look for the word "CONFIG" (case-sensitive)
+4. Note which project files contain this word
+
+COMMANDS TO USE:
+----------------
+- cd ../../projects
+- grep -r "CONFIG" .
+- Or for more detail: grep -rn "CONFIG" .
+
+The -r flag searches recursively (in all subdirectories)
+The -n flag shows line numbers
+
+Write down which files contain "CONFIG" and their line numbers.
+
+Next: clue2.txt in this directory (cd ../clues/level2)

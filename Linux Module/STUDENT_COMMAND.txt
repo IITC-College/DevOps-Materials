@@ -1,0 +1,13 @@
+========================================================
+                  פקודה לתלמידים
+========================================================
+
+✅ הכל מוכן! תן לתלמידים את הפקודה הזו:
+
+curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v1.0/linux_scavenger_hunt.tar.gz | tar -xz && cd linux_scavenger_hunt && cat start_here.txt
+
+========================================================
+
+Release URL: https://github.com/IITC-College/DevOps-Jan26/releases/tag/v1.0
+
+========================================================

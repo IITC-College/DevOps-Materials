@@ -1,0 +1,38 @@
+[2026-01-26 00:00:01] Application started - Version 3.2.1
+[2026-01-26 00:00:02] Loading configuration from /etc/app/config.yaml
+[2026-01-26 00:00:03] Database connection pool initialized (max: 20)
+[2026-01-26 00:00:04] Redis cache connected: localhost:6379
+[2026-01-26 00:00:05] HTTP server listening on port 8080
+[2026-01-26 00:00:06] HTTPS server listening on port 8443
+[2026-01-26 00:00:07] Worker threads started (count: 4)
+[2026-01-26 00:00:08] Application ready to accept connections
+[2026-01-26 00:05:15] INFO: First request received from 192.168.1.50
+[2026-01-26 00:10:23] INFO: User registration: user@example.com
+[2026-01-26 00:15:44] WARNING: Slow query detected (2.3s): SELECT * FROM users
+[2026-01-26 00:20:12] INFO: Cache hit rate: 87%
+[2026-01-26 00:25:33] ERROR: Failed to connect to external API (timeout)
+[2026-01-26 00:30:45] INFO: Retrying API connection
+[2026-01-26 00:35:22] INFO: API connection restored
+[2026-01-26 01:00:00] INFO: Hourly statistics: 1,245 requests processed
+[2026-01-26 01:15:33] WARNING: Memory usage at 85%
+[2026-01-26 01:30:12] ERROR: Out of memory exception in worker thread 3
+[2026-01-26 01:30:13] INFO: Worker thread 3 restarted
+[2026-01-26 02:00:00] INFO: Hourly statistics: 2,341 requests processed
+[2026-01-26 02:15:44] INFO: Database backup completed
+[2026-01-26 02:30:55] WARNING: SSL certificate expires in 30 days
+[2026-01-26 03:00:00] INFO: Hourly statistics: 1,876 requests processed
+[2026-01-26 03:15:22] ERROR: Invalid authentication token from 192.168.1.75
+[2026-01-26 03:30:11] INFO: Session cleanup: 234 expired sessions removed
+[2026-01-26 04:00:00] INFO: Hourly statistics: 987 requests processed
+[2026-01-26 04:15:33] INFO: Scheduled task executed: email_notifications
+[2026-01-26 04:30:44] INFO: All pending emails sent successfully
+[2026-01-26 05:00:00] INFO: Hourly statistics: 654 requests processed
+[2026-01-26 05:15:22] WARNING: Disk space low on /var/log (15% remaining)
+[2026-01-26 05:30:11] INFO: Log rotation completed
+[2026-01-26 06:00:00] INFO: Hourly statistics: 1,432 requests processed
+[2026-01-26 06:15:44] INFO: Database optimization started
+[2026-01-26 06:45:22] INFO: Database optimization completed
+[2026-01-26 07:00:00] INFO: Hourly statistics: 2,876 requests processed
+[2026-01-26 07:15:33] INFO: Peak traffic detected - scaling up
+[2026-01-26 07:30:12] INFO: Additional worker threads spawned (count: 8)
+[2026-01-26 08:00:00] INFO: Hourly statistics: 4,321 requests processed

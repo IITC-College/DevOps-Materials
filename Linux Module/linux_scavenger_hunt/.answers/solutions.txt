@@ -1,0 +1,205 @@
+================================================================================
+                    LAB SOLUTIONS - INSTRUCTOR COPY
+================================================================================
+
+This file contains all answers to the Linux File System Scavenger Hunt lab.
+Keep this file secure and do not share with students.
+
+================================================================================
+                            LEVEL 1 SOLUTIONS
+================================================================================
+
+CLUE 1 - Password Hint
+----------------------
+Location: data/logs/system.log
+Command: grep "password" data/logs/system.log
+Answer: "The answer is always 'linux2026'"
+Line: [2026-01-20 13:45:12] Admin password hint: The answer is always "linux2026"
+
+CLUE 2 - Secret Code
+--------------------
+Location: data/secrets/secret_code.txt
+Command: find . -name "secret_code.txt"
+         cat data/secrets/secret_code.txt
+Answer: 9472
+
+CLUE 3 - Hidden File
+--------------------
+Location: hidden/.hidden_info.txt
+Commands: cd hidden
+          ls -a
+          cat .hidden_info.txt
+Answer: Project information - 3 projects (Alpha, Beta, Gamma), interconnected system
+
+================================================================================
+                            LEVEL 2 SOLUTIONS
+================================================================================
+
+CLUE 1 - Files Containing "CONFIG"
+-----------------------------------
+Command: grep -rn "CONFIG" projects/
+Answer: projects/project_alpha/config.yaml (multiple lines contain "CONFIG")
+        Line 2: # CONFIG settings for Project Alpha
+
+CLUE 2 - Directory Creation
+----------------------------
+Commands: mkdir my_answers
+          cd my_answers
+          mkdir codes passwords configs
+          OR: mkdir -p my_answers/{codes,passwords,configs}
+Verification: ls -l my_answers/
+Answer: Successfully created 3 subdirectories
+
+CLUE 3 - Reading Log Files
+---------------------------
+Location: data/archives/application.log
+Commands: head -n 15 data/archives/application.log
+          tail -n 10 data/archives/application.log
+          grep "ERROR" data/archives/application.log
+Answer: 3 ERROR messages in the file
+        - Line 13: ERROR: Failed to connect to external API (timeout)
+        - Line 19: ERROR: Out of memory exception in worker thread 3
+        - Line 25: ERROR: Invalid authentication token from 192.168.1.75
+
+================================================================================
+                            LEVEL 3 SOLUTIONS
+================================================================================
+
+THE MASTER KEY CHALLENGE
+-------------------------
+
+Part 1: In data/secrets/
+Command: grep "PART1" data/secrets/*
+Location: data/secrets/vault.txt
+Answer: A3F7
+
+Part 2: In project_alpha
+Command: grep -r "PART2" projects/project_alpha/
+Location: projects/project_alpha/config.yaml (line 21)
+Answer: M5N3
+
+Part 3: In backup log
+Command: grep "PART3" data/logs/backup.log
+Location: data/logs/backup.log
+Answer: 7B9K
+
+Part 4: Hidden file in project_beta
+Commands: ls -la projects/project_beta/
+          cat projects/project_beta/.env.example
+Location: projects/project_beta/.env.example (line 6)
+Answer: X2D8
+
+COMPLETE MASTER KEY: A3F7M5N37B9KX2D8
+(Combined: PART1 + PART2 + PART3 + PART4)
+
+================================================================================
+                        COMPLETE ANSWERS SUMMARY
+================================================================================
+
+1. Password Hint: "linux2026"
+2. Secret Code: 9472
+3. Hidden File Info: Information about 3 interconnected projects
+4. CONFIG Files: projects/project_alpha/config.yaml
+5. ERROR Count: 3 errors in application.log
+6. Master Key: A3F7M5N37B9KX2D8
+
+================================================================================
+                        COMMANDS STUDENTS SHOULD USE
+================================================================================
+
+Navigation:
+- pwd (check current location)
+- cd <directory> (change directory)
+- cd .. (go up one level)
+- cd ../.. (go up two levels)
+- ls (list files)
+- ls -l (detailed list)
+- ls -a (show hidden files)
+- ls -la (detailed list with hidden files)
+
+Reading Files:
+- cat <file> (display entire file)
+- less <file> (paginated view)
+- head -n <number> <file> (first N lines)
+- tail -n <number> <file> (last N lines)
+
+Searching:
+- grep "pattern" <file> (search in file)
+- grep -r "pattern" <directory> (recursive search)
+- grep -rn "pattern" <directory> (with line numbers)
+- find . -name "filename" (find file by name)
+
+File Management:
+- mkdir <directory> (create directory)
+- mkdir -p <path> (create nested directories)
+- touch <file> (create empty file)
+- cp <source> <destination> (copy)
+- mv <source> <destination> (move/rename)
+
+================================================================================
+                        GRADING RUBRIC (SUGGESTION)
+================================================================================
+
+Task 1 - Basic Navigation (10 points)
+- Successfully navigated through directories
+- Used ls and pwd correctly
+- Found all clues in Level 1
+
+Task 2 - Reading Files (15 points)
+- Correctly read log files
+- Used cat, head, tail appropriately
+- Found password hint
+
+Task 3 - Searching (20 points)
+- Used grep effectively
+- Found all CONFIG references
+- Correctly used find command
+- Found secret code
+
+Task 4 - Hidden Files (15 points)
+- Used ls -a to find hidden files
+- Read hidden file contents
+- Found all 4 Master Key parts
+
+Task 5 - File Management (10 points)
+- Created directories correctly
+- Organized files appropriately
+
+Task 6 - Complete Master Key (20 points)
+- Found all 4 parts
+- Correctly assembled: A3F7M5N37B9KX2D8
+
+Documentation (10 points)
+- Created my_answers.txt
+- Provided clear, complete answers
+- Showed command usage
+
+TOTAL: 100 points
+
+================================================================================
+                            NOTES FOR INSTRUCTOR
+================================================================================
+
+Common Student Mistakes:
+1. Forgetting to use 'ls -a' for hidden files
+2. Not using grep -r for recursive search
+3. Incorrect path navigation (using absolute vs relative paths)
+4. Not reading error messages carefully
+5. Trying to search with GUI mindset instead of CLI tools
+
+Tips for Helping Students:
+- Remind them to use 'pwd' often
+- Encourage reading man pages (man grep, man find)
+- Show them tab completion
+- Emphasize error messages are helpful, not scary
+- Practice path navigation before searching
+
+Typical Completion Time:
+- Fast students: 45-60 minutes
+- Average students: 90-120 minutes
+- Struggling students: 150+ minutes
+
+This lab reinforces Day 1 material and should be achievable for all students
+who attended the class and took notes.
+
+================================================================================

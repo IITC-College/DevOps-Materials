@@ -1,0 +1,29 @@
+================================================================================
+                            LEVEL 2 - CLUE 3
+================================================================================
+
+Let's practice reading files efficiently!
+
+TASK:
+-----
+There's a large log file in data/archives/ called 'application.log'
+You only need to see the first 15 lines and the last 10 lines.
+
+INSTRUCTIONS:
+-------------
+1. Navigate to data/archives/
+2. Use 'head' to see the first 15 lines
+3. Use 'tail' to see the last 10 lines
+4. Look for any ERROR messages
+
+COMMANDS TO USE:
+----------------
+- cd ../data/archives
+- head -n 15 application.log
+- tail -n 10 application.log
+- Or search for errors: grep "ERROR" application.log
+
+How many ERROR messages are in the file?
+
+LEVEL 2 COMPLETE!
+Advance to Level 3: cd ../../clues/level3

@@ -1,0 +1,53 @@
+================================================================================
+    WELCOME TO THE LINUX FILE SYSTEM SCAVENGER HUNT!
+================================================================================
+
+Hello, Linux Explorer!
+
+This lab is designed to help you practice essential Linux commands in a
+fun and interactive way. You will navigate through directories, search for
+information, read files, and follow clues to complete your mission.
+
+================================================================================
+    YOUR FIRST TASK
+================================================================================
+
+1. Check where you are right now:
+   Run: pwd
+
+2. List all files in the current directory:
+   Run: ls -la
+
+3. Navigate to the clues directory:
+   Run: cd clues/level1
+
+4. Read the first clue file:
+   Run: cat clue1.txt
+
+================================================================================
+    HOW THIS LAB WORKS
+================================================================================
+
+- Each level contains clues that will guide you to the next step
+- You'll need to use various Linux commands to find information
+- Some information is hidden in log files or secret directories
+- Pay attention to details - file names, line numbers, and keywords matter
+
+================================================================================
+    IMPORTANT REMINDERS
+================================================================================
+
+* Use 'pwd' often to know where you are
+* Use 'ls -la' to see all files including hidden ones
+* Read error messages carefully - they help you
+* Take notes as you progress through the lab
+
+================================================================================
+    READY? LET'S BEGIN!
+================================================================================
+
+Your first destination: clues/level1/clue1.txt
+
+Navigate there and read the file to begin your adventure!
+
+Good luck!

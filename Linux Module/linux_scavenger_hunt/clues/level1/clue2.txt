@@ -1,0 +1,27 @@
+================================================================================
+                            LEVEL 1 - CLUE 2
+================================================================================
+
+Great job finding the password hint!
+
+Now let's practice file searching.
+
+TASK:
+-----
+Find a file named "secret_code.txt" somewhere in the lab directory structure.
+
+INSTRUCTIONS:
+-------------
+1. Go back to the main lab directory (linux_scavenger_hunt)
+2. Use the 'find' command to locate the file
+3. The file contains a 4-digit code - remember it!
+
+COMMANDS TO USE:
+----------------
+- Go to lab root: cd ../..
+- Find the file: find . -name "secret_code.txt"
+- Once found, read it: cat <path_to_file>
+
+The code you find will be needed later!
+
+Next clue: clue3.txt
