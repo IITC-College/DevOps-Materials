@@ -1,22 +1,49 @@
 ========================================================
-              Student Download Command
+          Student Download Commands - Linux Module
 ========================================================
+
+This file contains download commands for all Linux Module labs.
+
+========================================================
+              LAB 1: File System Scavenger Hunt
+========================================================
+
+Version: v1.0
+Focus: Linux CLI basics (navigation, reading, searching)
+Duration: 1-2 hours
+
+✅ Copy and paste this command:
+
+curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v1.0/linux_scavenger_hunt.tar.gz | tar -xz && cd linux_scavenger_hunt && cat start_here.txt
+
+Release: https://github.com/IITC-College/DevOps-Jan26/releases/tag/v1.0
+
+========================================================
+              LAB 2: Navigation Basics
+========================================================
+
+Version: v1.1
+Focus: Basic navigation (cd, ls, error messages, hidden files)
+Duration: 60-90 minutes
 
 ✅ Copy and paste this command:
 
 curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v1.1/linux_navigation_basics.tar.gz | tar -xz && cd linux_navigation_basics && cat start_here.txt
 
-========================================================
-
-📚 Resources:
-
-Repository: https://github.com/IITC-College/DevOps-Jan26
 Release: https://github.com/IITC-College/DevOps-Jan26/releases/tag/v1.1
 
 ========================================================
+                    Resources
+========================================================
 
-📝 What This Command Does:
+Repository: https://github.com/IITC-College/DevOps-Jan26
+All Releases: https://github.com/IITC-College/DevOps-Jan26/releases
 
+========================================================
+              What These Commands Do
+========================================================
+
+Each command:
 1. Downloads the lab archive from GitHub
 2. Extracts all files
 3. Navigates into the lab directory
