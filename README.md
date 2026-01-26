@@ -41,6 +41,11 @@ DevOps-Jan26/
   - **Focus**: File and directory management (mkdir, touch, cp, mv, rm, rmdir)
   - **Duration**: 75-90 minutes
   - **Download**: See `Linux Module/STUDENT_COMMAND.txt`
+- **Lab 4**: Reading Files
+  - **Version**: v1.3
+  - **Focus**: Reading files (cat, less, head, tail)
+  - **Duration**: 60-75 minutes
+  - **Download**: See `Linux Module/STUDENT_COMMAND.txt`
 
 ---
 
@@ -211,7 +216,7 @@ Every lab must meet these criteria:
 
 | Module | Labs | Total Files | Total Size |
 |--------|------|-------------|------------|
-| Linux  | 3    | 72          | ~36KB      |
+| Linux  | 4    | 89          | ~49KB      |
 | Docker | -    | -           | -          |
 | K8s    | -    | -           | -          |
 
