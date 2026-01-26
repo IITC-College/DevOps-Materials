@@ -1,0 +1,84 @@
+================================================================================
+                            LEVEL 3 - EXERCISE 3
+================================================================================
+
+FINAL CHALLENGE!
+
+You've mastered file reading commands. Now complete this final mission.
+
+EXERCISE:
+---------
+Complete a comprehensive file reading task using everything you've learned.
+
+INSTRUCTIONS:
+-------------
+Your mission: Read files using all the methods you've learned.
+
+1. Start from lab root:
+   Run: cd ~/linux_reading_files
+   Run: pwd
+
+2. Read files using different methods:
+   
+   a) Read a short file with cat:
+      Run: cat data/secrets/tips.txt
+      What tips are mentioned?
+   
+   b) Read the beginning of a long file:
+      Run: head -n 20 data/logs/long_log.txt
+      What do the first lines show?
+   
+   c) Read the end of the same file:
+      Run: tail -n 20 data/logs/long_log.txt
+      What do the last lines show?
+   
+   d) Read the long file with less:
+      Run: less data/logs/long_log.txt
+      Navigate through it, then press 'q'
+   
+   e) Try reading a system file:
+      Run: cat /etc/hostname
+      What does it show?
+
+3. Try reading a protected file (observe the error):
+   Run: cat /etc/shadow
+   What error appears?
+
+4. Create your final answer file:
+   Run: cat > my_answers.txt
+   (Then type your answers, press Ctrl+D when done)
+   
+   OR use an editor to create my_answers.txt with all your answers
+
+COMMANDS TO USE:
+----------------
+- All the commands you've learned!
+- cat, less, head, tail
+
+FINAL QUESTIONS:
+----------------
+Answer these in my_answers.txt:
+
+1. What is the main difference between cat and less?
+2. When would you use head instead of cat?
+3. When would you use tail instead of less?
+4. What does "Permission denied" mean?
+5. What did you learn about reading files in Linux?
+
+CONGRATULATIONS!
+================
+
+You've completed the Linux Reading Files Lab!
+
+You now know:
+- How to read files with cat (entire file)
+- How to read files with less (interactive, page by page)
+- How to read first lines with head
+- How to read last lines with tail
+- How to understand permission errors
+- When to use each command
+
+Great job! These commands are essential for working with files in Linux.
+Keep practicing - you'll use them every day!
+
+================================================================================

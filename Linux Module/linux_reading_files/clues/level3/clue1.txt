@@ -1,0 +1,54 @@
+================================================================================
+                            LEVEL 3 - EXERCISE 1
+================================================================================
+
+Welcome to Level 3!
+
+Now let's learn about file permissions by observing an error.
+
+EXERCISE 5 - Permission Denied (Observation Only):
+---------------------------------------------------
+
+IMPORTANT: This exercise is for OBSERVATION ONLY.
+Do NOT try to fix the error with sudo!
+
+INSTRUCTIONS:
+-------------
+1. Try to read the following file:
+   Run: cat /etc/shadow
+
+2. Observe the error message that appears.
+
+3. What does the error tell you?
+
+COMMANDS TO USE:
+----------------
+- cat /etc/shadow (will show permission error)
+
+WHAT TO OBSERVE:
+----------------
+- What error message appears?
+- What does it say?
+- Why do you think this file is protected?
+
+WRITE YOUR ANSWER:
+------------------
+After trying to read the file, write in my_answers.txt:
+
+What error message did you receive?
+(You should receive: "cat: /etc/shadow: Permission denied"
+or similar. This file contains sensitive password information and is
+protected so only the system (root) can read it.)
+
+Add your answer to my_answers.txt.
+
+IMPORTANT REMINDER:
+-------------------
+⚠️ Do NOT try to fix this with sudo!
+This is intentional - some files are protected for security reasons.
+Just observe the error and understand what it means.
+
+Then proceed to the next exercise: clue2.txt in this same directory.
+
+Hint: Permission denied means you don't have the right to read this file.
+This is a security feature, not a bug!

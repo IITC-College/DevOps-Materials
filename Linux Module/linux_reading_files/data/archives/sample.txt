@@ -1,0 +1,18 @@
+Sample File for Reading Practice
+=================================
+
+This is a sample file that you can use to practice reading files
+with different commands.
+
+File Reading Commands:
+- cat: Display entire file
+- less: View file page by page
+- head: Show first lines
+- tail: Show last lines
+
+Try reading this file with each command to see the difference!
+
+This file is short, so cat works well here.
+For longer files, you might prefer less, head, or tail.
+
+Happy practicing!

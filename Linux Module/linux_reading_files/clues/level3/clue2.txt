@@ -1,0 +1,64 @@
+================================================================================
+                            LEVEL 3 - EXERCISE 2
+================================================================================
+
+Great observation! You've seen how Linux protects sensitive files.
+
+Now let's practice advanced reading techniques.
+
+EXERCISE:
+---------
+Compare different reading methods and understand when to use each.
+
+INSTRUCTIONS:
+-------------
+1. Navigate to the lab's data directory:
+   Run: cd ~/linux_reading_files/data/logs
+
+2. Compare reading methods on the same file:
+   
+   a) Read with cat:
+      Run: cat long_log.txt | head -n 5
+      (This shows first 5 lines, but cat still reads the whole file)
+   
+   b) Read with head:
+      Run: head -n 5 long_log.txt
+      (This only reads the first 5 lines - more efficient!)
+   
+   c) Read with less:
+      Run: less long_log.txt
+      Navigate around, then press 'q'
+   
+   d) Read with tail:
+      Run: tail -n 10 long_log.txt
+      (Shows last 10 lines)
+
+3. Read the tips file:
+   Run: cd ../secrets
+   Run: cat tips.txt
+
+4. Read the sample file:
+   Run: cd ../archives
+   Run: cat sample.txt
+
+COMMANDS TO USE:
+----------------
+- cat (entire file)
+- less (interactive)
+- head (beginning)
+- tail (end)
+
+WHAT TO LEARN:
+--------------
+- cat: Simple, shows everything, good for short files
+- less: Best for long files, interactive navigation
+- head: Quick preview of beginning, efficient
+- tail: Quick preview of end, great for logs
+
+WRITE YOUR ANSWER:
+------------------
+In my_answers.txt, write:
+- When would you use cat vs less?
+- When would you use head vs tail?
+
+Next: clue3.txt (Final Challenge!)

@@ -1,0 +1,62 @@
+================================================================================
+                            LEVEL 2 - EXERCISE 3
+================================================================================
+
+Excellent! You've learned head and tail.
+
+Now let's practice with files in the lab directory.
+
+EXERCISE:
+---------
+Practice reading files from the lab's data directory.
+
+INSTRUCTIONS:
+-------------
+1. Navigate to the lab's data/logs directory:
+   Run: cd ~/linux_reading_files/data/logs
+
+2. Read the long log file with different methods:
+   
+   a) Try cat first:
+      Run: cat long_log.txt
+      (Notice how it scrolls past quickly)
+   
+   b) Use less for better control:
+      Run: less long_log.txt
+      Scroll around, then press 'q' to exit
+   
+   c) Use head to see the beginning:
+      Run: head long_log.txt
+      Run: head -n 15 long_log.txt
+   
+   d) Use tail to see the end:
+      Run: tail long_log.txt
+      Run: tail -n 15 long_log.txt
+
+3. Compare the methods:
+   - Which is best for quick preview?
+   - Which is best for reading the whole file?
+   - Which is best for long files?
+
+COMMANDS TO USE:
+----------------
+- cat (entire file, scrolls quickly)
+- less (interactive, page by page)
+- head (first lines)
+- tail (last lines)
+
+WHAT TO LEARN:
+--------------
+- cat: Good for short files, shows everything
+- less: Best for long files, interactive navigation
+- head: Quick preview of beginning
+- tail: Quick preview of end (useful for logs!)
+
+WRITE YOUR ANSWER:
+------------------
+In my_answers.txt, write:
+- When would you use head instead of cat?
+- When would you use tail instead of less?
+
+CONGRATULATIONS! You've completed Level 2!
+Now advance to Level 3: cd ../level3

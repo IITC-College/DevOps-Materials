@@ -1,0 +1,66 @@
+================================================================================
+    WELCOME TO THE LINUX READING FILES LAB!
+================================================================================
+
+Hello, Linux Explorer!
+
+This lab is designed to help you practice reading files using the Linux
+command line. You will learn to use cat, less, head, and tail commands
+to read and view file contents.
+
+================================================================================
+    YOUR FIRST TASK
+================================================================================
+
+1. Check where you are right now:
+   Run: pwd
+
+2. Navigate to the lab directory:
+   Run: cd linux_reading_files
+
+3. Read the first exercise:
+   Run: cat clues/level1/clue1.txt
+
+================================================================================
+    HOW THIS LAB WORKS
+================================================================================
+
+- Each level contains exercises that build on previous skills
+- You'll read real system files and practice files
+- Some exercises will show you error messages to learn from
+- Pay attention to what each command does differently!
+
+================================================================================
+    ALLOWED COMMANDS
+================================================================================
+
+In this lab, you may only use these commands:
+
+- cat (display entire file)
+- less (view file page by page)
+- head (display first lines)
+- tail (display last lines)
+
+Plus navigation commands: cd, ls, pwd
+
+================================================================================
+    IMPORTANT REMINDERS
+================================================================================
+
+* Read error messages carefully - they help you understand what went wrong
+* Use less for long files - it's easier to navigate
+* Use head/tail for quick previews
+* Don't use GUI tools - use only the command line
+* Don't use sudo - not needed for this lab
+* Don't use regex or pipes - focus on basic reading commands
+* Take notes as you progress through the exercises
+
+================================================================================
+    READY? LET'S BEGIN!
+================================================================================
+
+Your first destination: clues/level1/clue1.txt
+
+Navigate there and read the file to begin your practice!
+
+Good luck!

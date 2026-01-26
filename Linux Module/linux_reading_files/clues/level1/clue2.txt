@@ -1,0 +1,42 @@
+================================================================================
+                            LEVEL 1 - EXERCISE 2
+================================================================================
+
+Great job! You've learned how cat displays files.
+
+Now let's read a system file.
+
+EXERCISE 2 - Read a System File:
+---------------------------------
+
+INSTRUCTIONS:
+-------------
+1. Read the following system file:
+   Run: cat /etc/hostname
+
+2. Observe what is displayed:
+   - What kind of information does this file contain?
+   - What is the purpose of this file?
+
+COMMANDS TO USE:
+----------------
+- cat /etc/hostname (read system file)
+
+WHAT TO LEARN:
+--------------
+- /etc/hostname contains the system's hostname
+- System files are in the /etc directory
+- These files contain system configuration information
+
+WRITE YOUR ANSWER:
+------------------
+After reading the file, write in my_answers.txt:
+
+What kind of information does this file contain?
+(The file contains the hostname of the system - the name that identifies
+this computer on the network. It's a simple text file with just the
+hostname, usually one word like "localhost" or a custom name.)
+
+Add your answer to my_answers.txt.
+
+Next: clue3.txt

@@ -1,0 +1,58 @@
+================================================================================
+                            LEVEL 2 - EXERCISE 1
+================================================================================
+
+Welcome to Level 2!
+
+Now let's learn about less - a better way to read long files.
+
+EXERCISE 3 - Use less to Read a File:
+--------------------------------------
+
+INSTRUCTIONS:
+-------------
+1. Open the following file using less:
+   Run: less /etc/services
+
+2. This file is long! Practice scrolling:
+   - Use arrow keys (Up/Down) to move line by line
+   - Use Page Up / Page Down to move page by page
+   - Use Space bar to move forward one page
+   - Use 'b' to move backward one page
+
+3. Try searching (optional):
+   - Press '/' and type a word to search
+   - Press 'n' to find next occurrence
+
+4. Exit less:
+   Press 'q' to quit
+
+COMMANDS TO USE:
+----------------
+- less <file> (open file in less viewer)
+- Navigation: Arrow keys, Page Up/Down, Space, 'b'
+- Exit: 'q'
+
+WHAT TO OBSERVE:
+----------------
+- How does less display the file differently from cat?
+- Can you scroll up and down?
+- Is it easier to read long files this way?
+
+WRITE YOUR ANSWER:
+------------------
+After using less, write in my_answers.txt:
+
+1. Which key did you use to exit?
+   (The 'q' key - press 'q' to quit less)
+
+2. Why is less useful for large files?
+   (less allows you to scroll through files page by page, making it much
+   easier to read long files. Unlike cat which displays everything at once,
+   less lets you navigate and control the viewing experience.)
+
+Add your answers to my_answers.txt.
+
+Then proceed to the next exercise: clue2.txt in this same directory.
+
+Hint: less is called "less" because it's "more" than the older "more" command!

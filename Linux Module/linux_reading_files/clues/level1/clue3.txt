@@ -1,0 +1,53 @@
+================================================================================
+                            LEVEL 1 - EXERCISE 3
+================================================================================
+
+Excellent! You're getting comfortable with cat.
+
+Now let's practice more with cat.
+
+EXERCISE:
+---------
+Practice reading multiple files and different file types.
+
+INSTRUCTIONS:
+-------------
+1. Read another system file:
+   Run: cat /etc/os-release
+   
+   What information does this show?
+
+2. Read multiple files at once:
+   Run: cat /etc/hostname /etc/os-release
+   
+   What happens when you cat multiple files?
+
+3. Navigate to the lab's data directory:
+   Run: cd ~/linux_reading_files/data/archives
+   Run: cat sample.txt
+
+4. Try reading a file that doesn't exist:
+   Run: cat nonexistent.txt
+   
+   What error do you get?
+
+COMMANDS TO USE:
+----------------
+- cat <file1> <file2> (read multiple files)
+- cat <file> (read single file)
+
+WHAT TO LEARN:
+--------------
+- cat can read multiple files in sequence
+- cat displays them one after another
+- If a file doesn't exist, cat shows an error message
+- /etc/os-release contains information about the operating system
+
+WRITE YOUR ANSWER:
+------------------
+In my_answers.txt, write:
+- What happens when you cat multiple files?
+- What error message appears for a non-existent file?
+
+CONGRATULATIONS! You've completed Level 1!
+Now advance to Level 2: cd ../level2

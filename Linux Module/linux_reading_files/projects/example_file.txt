@@ -1,0 +1,12 @@
+Example File
+============
+
+This is an example file in the projects directory.
+
+You can practice reading this file with:
+- cat example_file.txt
+- less example_file.txt
+- head example_file.txt
+- tail example_file.txt
+
+Notice how each command displays the file differently!

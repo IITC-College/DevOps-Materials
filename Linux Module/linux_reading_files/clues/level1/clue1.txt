@@ -1,0 +1,58 @@
+================================================================================
+                            LEVEL 1 - EXERCISE 1
+================================================================================
+
+Welcome to Level 1!
+
+Your first exercise: Read a file you created.
+
+EXERCISE 1 - Read a File You Created:
+--------------------------------------
+
+INSTRUCTIONS:
+-------------
+1. Navigate to your linux_lab/docs directory:
+   Run: cd ~/linux_lab/docs
+   
+   (If you haven't created linux_lab yet from the previous lab, create it now:
+    mkdir -p ~/linux_lab/docs
+    cd ~/linux_lab/docs)
+
+2. If notes.txt doesn't exist, create it:
+   Run: touch notes.txt
+   Run: echo "This is a test file for reading practice." > notes.txt
+
+3. Read the file using cat:
+   Run: cat notes.txt
+
+4. Observe what happens:
+   - What is displayed?
+   - Does cat stop or continue until the end of the file?
+
+COMMANDS TO USE:
+----------------
+- cd <directory> (navigate)
+- cat <file> (display file contents)
+- echo "text" > file (create file with content)
+
+WHAT TO OBSERVE:
+----------------
+- What text appears on screen?
+- Does cat show the entire file at once?
+- Does it pause or scroll automatically?
+
+WRITE YOUR ANSWER:
+------------------
+After reading the file, write in my_answers.txt (create it in the lab directory):
+
+1. What is displayed?
+   (The contents of notes.txt - "This is a test file for reading practice.")
+
+2. Does cat stop or continue until the end of the file?
+   (cat continues and displays the entire file from start to finish without stopping)
+
+Add your answers to my_answers.txt.
+
+Then proceed to the next exercise: clue2.txt in this same directory.
+
+Hint: cat stands for "concatenate" - it displays the entire file contents at once.

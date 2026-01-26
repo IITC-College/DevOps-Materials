@@ -1,0 +1,57 @@
+================================================================================
+                            LEVEL 2 - EXERCISE 2
+================================================================================
+
+Great job with less! Now let's learn about head and tail.
+
+EXERCISE 4 - Read Only Part of a File:
+---------------------------------------
+
+INSTRUCTIONS:
+-------------
+1. Display the first lines of the file:
+   Run: head /etc/services
+
+2. Observe: How many lines does head show by default?
+   (Usually 10 lines)
+
+3. Display the last lines of the file:
+   Run: tail /etc/services
+
+4. Observe: How many lines does tail show by default?
+   (Usually 10 lines)
+
+5. Try specifying a number:
+   Run: head -n 5 /etc/services
+   Run: tail -n 5 /etc/services
+
+6. Try with a larger number:
+   Run: head -n 20 /etc/services
+   Run: tail -n 20 /etc/services
+
+COMMANDS TO USE:
+----------------
+- head <file> (display first 10 lines)
+- head -n <number> <file> (display first N lines)
+- tail <file> (display last 10 lines)
+- tail -n <number> <file> (display last N lines)
+
+WHAT TO OBSERVE:
+----------------
+- What does head show?
+- What does tail show?
+- How are they different?
+- When would you use each?
+
+WRITE YOUR ANSWER:
+------------------
+After trying both commands, write in my_answers.txt:
+
+What is the difference between head and tail?
+(head displays the FIRST lines of a file (the beginning), while tail
+displays the LAST lines of a file (the end). Both show 10 lines by
+default, but you can specify a different number with -n.)
+
+Add your answer to my_answers.txt.
+
+Next: clue3.txt
