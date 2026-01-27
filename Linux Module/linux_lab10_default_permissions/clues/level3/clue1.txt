@@ -1,0 +1,109 @@
+================================================================================
+    LEVEL 3 - EXERCISE 1: Change umask Temporarily
+================================================================================
+
+TASK: Modify your umask value and observe how it affects new files
+
+Up until now, you've been observing your system's default umask. Now it's time
+to take control and change it yourself!
+
+================================================================================
+    INSTRUCTIONS
+================================================================================
+
+1. First, note your current umask:
+   Run: umask
+   Write it down: _____
+
+2. Change your umask to 027:
+   Run: umask 027
+
+3. Verify the change:
+   Run: umask
+   You should see: 027
+
+4. Create a test file with the new umask:
+   Run: touch test_umask_027.txt
+
+5. Check the permissions:
+   Run: ls -l test_umask_027.txt
+
+6. What permissions does it have?
+   Expected: -rw-r----- (640)
+   Calculation: 666 - 027 = 640
+
+7. Create a test directory:
+   Run: mkdir test_umask_027_dir
+
+8. Check directory permissions:
+   Run: ls -ld test_umask_027_dir
+
+9. What permissions does it have?
+   Expected: drwxr-x--- (750)
+   Calculation: 777 - 027 = 750
+
+================================================================================
+    IMPORTANT: SESSION-SPECIFIC
+================================================================================
+
+⚠️ CRITICAL UNDERSTANDING:
+
+The umask change you just made is TEMPORARY. It only affects:
+  - The current shell session
+  - Files created in this session
+  - It will NOT persist after you close the terminal
+
+This is different from permanent configuration (which goes in .bashrc or similar).
+
+================================================================================
+    EXPERIMENT
+================================================================================
+
+Try changing umask to different values and creating files:
+
+1. Change to umask 077:
+   Run: umask 077
+   Run: touch test_umask_077.txt
+   Run: ls -l test_umask_077.txt
+   What permissions? _____
+
+2. Change to umask 022:
+   Run: umask 022
+   Run: touch test_umask_022.txt
+   Run: ls -l test_umask_022.txt
+   What permissions? _____
+
+3. Compare all three files:
+   Run: ls -l test_umask_*.txt
+   
+   Notice how each file has different permissions based on the umask
+   that was active when it was created!
+
+================================================================================
+    YOUR ANSWER
+================================================================================
+
+Original umask: _____
+After changing to 027:
+  File permissions: _____
+  Directory permissions: _____
+  Calculation verified: Yes / No
+
+After changing to 077:
+  File permissions: _____
+  Calculation: 666 - 077 = _____
+
+After changing to 022:
+  File permissions: _____
+  Calculation: 666 - 022 = _____
+
+Key insight: umask changes are _____ (temporary / permanent)
+
+================================================================================
+    NEXT STEP
+================================================================================
+
+Now that you can change umask, let's apply it to real scenarios:
+  cat clue2.txt
+
+Great work!

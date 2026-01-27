@@ -1,0 +1,140 @@
+================================================================================
+    LEVEL 3 - EXERCISE 3: Synthesis Challenge
+================================================================================
+
+TASK: Given a requirement, determine the correct umask value and verify it
+
+This is your final challenge! You'll need to combine everything you've learned
+to solve a real problem.
+
+================================================================================
+    THE CHALLENGE
+================================================================================
+
+Requirement: "I need to create files that are readable by my group members,
+but not by others. Only I should be able to write to them."
+
+Your task:
+1. Determine what permissions the files should have
+2. Calculate what umask value will produce those permissions
+3. Set the umask
+4. Create a test file
+5. Verify the permissions match the requirement
+
+================================================================================
+    STEP-BY-STEP SOLUTION
+================================================================================
+
+Step 1: Determine required permissions
+  - Owner: read + write = rw- (6)
+  - Group: read only = r-- (4)
+  - Others: nothing = --- (0)
+  - Result: 640 (rw-r-----)
+
+Step 2: Calculate umask
+  - For files: 666 - umask = 640
+  - Therefore: umask = 666 - 640 = 026
+  - Wait... let's verify: 666 - 026 = 640 ✓
+
+Step 3: Set umask and test
+  Run: umask 026
+  Run: touch final_test.txt
+  Run: ls -l final_test.txt
+  Expected: -rw-r----- (640)
+
+Step 4: Verify it meets the requirement
+  - Owner can read and write? Yes / No
+  - Group can read? Yes / No
+  - Group can write? Yes / No (should be No)
+  - Others can read? Yes / No (should be No)
+
+================================================================================
+    ADDITIONAL CHALLENGES
+================================================================================
+
+Challenge A: "Files readable by everyone, writable only by me"
+  Required permissions: _____
+  umask value: _____
+  Verify: Create test file and check
+
+Challenge B: "Files accessible only by me, no one else"
+  Required permissions: _____
+  umask value: _____
+  Verify: Create test file and check
+
+Challenge C: "Files readable and writable by group, nothing for others"
+  Required permissions: _____
+  umask value: _____
+  Verify: Create test file and check
+
+================================================================================
+    FINAL HINT
+================================================================================
+
+Check the secrets file for the final answer and verification:
+  cat ../../data/secrets/tips.txt
+
+It contains the solution to the main challenge and additional insights!
+
+================================================================================
+    YOUR ANSWER
+================================================================================
+
+Main Challenge:
+  Required permissions: _____
+  Calculated umask: _____
+  Verification: File created with permissions _____
+  Meets requirement: Yes / No
+
+Challenge A:
+  Required permissions: _____
+  umask: _____
+  Verified: Yes / No
+
+Challenge B:
+  Required permissions: _____
+  umask: _____
+  Verified: Yes / No
+
+Challenge C:
+  Required permissions: _____
+  umask: _____
+  Verified: Yes / No
+
+================================================================================
+    CONGRATULATIONS!
+================================================================================
+
+🎉 You've completed Level 3 and the entire lab! 🎉
+
+You now understand:
+  ✓ How to check and modify umask
+  ✓ How umask affects file and directory permissions
+  ✓ How to calculate permissions from umask values
+  ✓ Security implications of different umask values
+  ✓ When to use different umask values in real scenarios
+  ✓ How to determine the right umask for specific requirements
+
+================================================================================
+    KEY TAKEAWAY
+================================================================================
+
+Remember: Default permissions are not random - they are INTENTIONAL DECISIONS.
+
+By understanding umask, you can:
+  - Make informed security decisions
+  - Balance security with collaboration needs
+  - Plan ahead before creating files
+  - Control who can access your files by default
+
+================================================================================
+    FINAL STEP
+================================================================================
+
+Create your answers file:
+  cd ../..
+  touch my_answers.txt
+
+Write down all your answers from all three levels, then save the file.
+
+Well done! You've mastered umask and default permissions!

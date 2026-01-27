@@ -1,0 +1,102 @@
+================================================================================
+    LEVEL 2 - EXERCISE 2: Calculate Expected Permissions
+================================================================================
+
+TASK: Given umask values, calculate what permissions files and directories
+      should have, then verify with actual files
+
+Now that you've seen examples, let's practice calculating permissions from
+umask values. This is a crucial skill for understanding and planning!
+
+================================================================================
+    INSTRUCTIONS
+================================================================================
+
+1. For each umask value below, calculate:
+   - What permissions FILES will have (666 - umask)
+   - What permissions DIRECTORIES will have (777 - umask)
+
+2. Then verify your calculations by checking the actual files in data/examples/
+
+================================================================================
+    CALCULATION EXERCISES
+================================================================================
+
+Exercise A: umask 022
+  File calculation: 666 - 022 = ?
+  Directory calculation: 777 - 022 = ?
+  Verify: Check umask_022/ directory
+
+Exercise B: umask 027
+  File calculation: 666 - 027 = ?
+  Directory calculation: 777 - 027 = ?
+  Verify: Check umask_027/ directory
+
+Exercise C: umask 077
+  File calculation: 666 - 077 = ?
+  Directory calculation: 777 - 077 = ?
+  Verify: Check umask_077/ directory
+
+Exercise D: umask 002
+  File calculation: 666 - 002 = ?
+  Directory calculation: 777 - 002 = ?
+  (This one might not have an example - calculate it anyway!)
+
+================================================================================
+    OCTAL TO SYMBOLIC CONVERSION
+================================================================================
+
+Remember the octal to symbolic mapping:
+  4 = read (r)
+  2 = write (w)
+  1 = execute (x)
+  7 = 4+2+1 = read+write+execute (rwx)
+  6 = 4+2 = read+write (rw)
+  5 = 4+1 = read+execute (rx)
+  0 = no permissions (---)
+
+Example: 644 = rw-r--r--
+  - 6 (4+2) = rw- (owner)
+  - 4 = r-- (group)
+  - 4 = r-- (others)
+
+================================================================================
+    YOUR TASK
+================================================================================
+
+1. Calculate all four exercises above
+2. Convert the octal results to symbolic format (rwx notation)
+3. Verify your calculations by checking actual files in data/examples/
+4. If your calculation doesn't match, figure out why!
+
+================================================================================
+    YOUR ANSWER
+================================================================================
+
+umask 022:
+  Files: 666 - 022 = _____ (symbolic: _____)
+  Directories: 777 - 022 = _____ (symbolic: _____)
+  Verified: Yes / No
+
+umask 027:
+  Files: 666 - 027 = _____ (symbolic: _____)
+  Directories: 777 - 027 = _____ (symbolic: _____)
+  Verified: Yes / No
+
+umask 077:
+  Files: 666 - 077 = _____ (symbolic: _____)
+  Directories: 777 - 077 = _____ (symbolic: _____)
+  Verified: Yes / No
+
+umask 002:
+  Files: 666 - 002 = _____ (symbolic: _____)
+  Directories: 777 - 002 = _____ (symbolic: _____)
+
+================================================================================
+    NEXT STEP
+================================================================================
+
+Once you can calculate permissions, move to understanding security:
+  cat clue3.txt
+
+Excellent progress!

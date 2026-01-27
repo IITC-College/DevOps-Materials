@@ -1,0 +1,106 @@
+================================================================================
+    LEVEL 1 - EXERCISE 3: Create Directory and Observe Permissions
+================================================================================
+
+TASK: Create a directory and see how umask affects its default permissions
+
+Directories work similarly to files, but they use a different starting point.
+Let's discover the difference!
+
+================================================================================
+    INSTRUCTIONS
+================================================================================
+
+1. Create a new test directory:
+   Run: mkdir test_directory
+
+2. Check the permissions of this new directory:
+   Run: ls -ld test_directory
+   
+   (Note: The -d flag shows the directory itself, not its contents)
+
+3. Look at the permissions column:
+   - It will look like: drwxr-xr-x or drwxrwxr-x or similar
+   - Notice the 'd' at the start (means directory)
+   - Notice the 'x' permissions (directories need execute to be entered)
+
+4. Understand the formula for directories:
+   - Linux starts with maximum permissions for directories: 777 (rwxrwxrwx)
+   - Then it SUBTRACTS your umask value
+   - Result: 777 - umask = directory permissions
+
+================================================================================
+    CALCULATION EXAMPLE
+================================================================================
+
+If your umask is 022:
+  - Maximum: 777 (rwxrwxrwx)
+  - Subtract umask: 777 - 022 = 755
+  - Result: drwxr-xr-x (owner: all, group: read+execute, others: read+execute)
+
+If your umask is 002:
+  - Maximum: 777 (rwxrwxrwx)
+  - Subtract umask: 777 - 002 = 775
+  - Result: drwxrwxr-x (owner: all, group: all, others: read+execute)
+
+================================================================================
+    KEY DIFFERENCE: FILES vs DIRECTORIES
+================================================================================
+
+FILES:
+  - Start with: 666 (rw-rw-rw-) - NO execute permission
+  - Formula: 666 - umask
+
+DIRECTORIES:
+  - Start with: 777 (rwxrwxrwx) - WITH execute permission
+  - Formula: 777 - umask
+  - Why? Directories need 'x' to be entered (cd into them)
+
+================================================================================
+    YOUR TASK
+================================================================================
+
+1. Create the test directory: mkdir test_directory
+2. Check permissions: ls -ld test_directory
+3. Write down the permissions you see
+4. Calculate: 777 - (your umask) = ?
+5. Verify: Does the calculation match what you see?
+
+================================================================================
+    WHAT TO OBSERVE
+================================================================================
+
+- What permissions did your directory get?
+- Does the formula 777 - umask match what you see?
+- Notice that directories ALWAYS have execute permission (the 'x')
+- Compare: Are directory permissions different from file permissions? Why?
+
+================================================================================
+    YOUR ANSWER
+================================================================================
+
+Document your findings:
+  My umask is: _____
+  Directory permissions I see: _____
+  Calculation: 777 - _____ = _____
+  Do they match? Yes / No
+  Key difference from files: _____
+
+================================================================================
+    CONGRATULATIONS!
+================================================================================
+
+You've completed Level 1! You now understand:
+  ✓ How to check umask
+  ✓ How umask affects file permissions (666 - umask)
+  ✓ How umask affects directory permissions (777 - umask)
+
+================================================================================
+    NEXT STEP
+================================================================================
+
+You're ready for Level 2! Navigate there:
+  cd ../level2
+  cat clue1.txt
+
+Great progress!

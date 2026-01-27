@@ -1,0 +1,51 @@
+================================================================================
+    LEVEL 1 - EXERCISE 1: Check Your Current umask
+================================================================================
+
+TASK: Discover your current umask value
+
+Every Linux system has a default umask value that determines what permissions
+new files and directories will get. Let's find out what yours is!
+
+================================================================================
+    INSTRUCTIONS
+================================================================================
+
+1. Check your current umask value:
+   Run: umask
+
+2. What do you see?
+   - The output is a number (usually 022, 002, or 077)
+   - This is in octal notation (base 8)
+   - This number tells Linux what permissions to REMOVE from new files
+
+3. Also try the symbolic format:
+   Run: umask -S
+   
+   This shows the same information in a more readable format.
+
+================================================================================
+    WHAT TO OBSERVE
+================================================================================
+
+- What is your current umask value?
+- What does the number mean? (We'll learn this in the next exercises)
+- How does the symbolic format (-S) differ from the numeric format?
+
+================================================================================
+    YOUR ANSWER
+================================================================================
+
+Write down your umask value. You'll need it for the next exercises!
+
+Example format:
+  My current umask is: _____
+
+================================================================================
+    NEXT STEP
+================================================================================
+
+Once you've checked your umask, move to the next exercise:
+  cat clue2.txt
+
+Good luck!

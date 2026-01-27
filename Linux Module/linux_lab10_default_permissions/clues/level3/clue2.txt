@@ -1,0 +1,108 @@
+================================================================================
+    LEVEL 3 - EXERCISE 2: Real-World Scenarios
+================================================================================
+
+TASK: Apply different umask values to solve real-world file creation scenarios
+
+Now you'll practice setting the right umask for different situations. This is
+where theory meets practice!
+
+================================================================================
+    SCENARIO 1: Private Files
+================================================================================
+
+Situation: You need to create files containing sensitive information that
+should only be accessible to you.
+
+1. Set the appropriate umask:
+   Run: umask 077
+
+2. Create a private file:
+   Run: touch private_secret.txt
+   Run: echo "This is sensitive data" > private_secret.txt
+
+3. Verify permissions:
+   Run: ls -l private_secret.txt
+   Expected: -rw------- (600)
+   
+4. Why is this secure?
+   Answer: _____
+
+================================================================================
+    SCENARIO 2: Team Collaboration
+================================================================================
+
+Situation: You're working on a team project. All team members need to read
+and write files, but outsiders should not have access.
+
+1. Set the appropriate umask:
+   Run: umask 027
+
+2. Create a team file:
+   Run: touch team_project.txt
+   Run: echo "Team collaboration file" > team_project.txt
+
+3. Verify permissions:
+   Run: ls -l team_project.txt
+   Expected: -rw-r----- (640)
+   
+4. Why is this good for teams?
+   Answer: _____
+
+================================================================================
+    SCENARIO 3: Public Readable Files
+================================================================================
+
+Situation: You're creating files for a web application. The web server needs
+to read them, but only you should be able to write.
+
+1. Set the appropriate umask:
+   Run: umask 022
+
+2. Create a web file:
+   Run: touch web_content.txt
+   Run: echo "Public web content" > web_content.txt
+
+3. Verify permissions:
+   Run: ls -l web_content.txt
+   Expected: -rw-r--r-- (644)
+   
+4. Why is this good for web files?
+   Answer: _____
+
+================================================================================
+    HINT: Check the Log
+================================================================================
+
+If you're unsure about which umask to use, check the permissions history log:
+  cat ../../data/logs/permissions_history.log
+
+It contains hints about which umask values are appropriate for different scenarios!
+
+================================================================================
+    YOUR ANSWER
+================================================================================
+
+Scenario 1 (Private):
+  umask used: _____
+  File permissions: _____
+  Why secure: _____
+
+Scenario 2 (Team):
+  umask used: _____
+  File permissions: _____
+  Why good for teams: _____
+
+Scenario 3 (Public):
+  umask used: _____
+  File permissions: _____
+  Why good for web: _____
+
+================================================================================
+    NEXT STEP
+================================================================================
+
+Final challenge: Solve a problem that requires you to determine the umask:
+  cat clue3.txt
+
+You're almost done!

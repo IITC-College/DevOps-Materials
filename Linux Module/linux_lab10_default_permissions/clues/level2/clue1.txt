@@ -1,0 +1,105 @@
+================================================================================
+    LEVEL 2 - EXERCISE 1: Analyze Files with Different umasks
+================================================================================
+
+TASK: Examine pre-created files that were made with different umask values
+
+In the data/examples/ directory, you'll find files created with three different
+umask values: 022, 027, and 077. Your job is to analyze them and understand
+the patterns.
+
+================================================================================
+    INSTRUCTIONS
+================================================================================
+
+1. Navigate to the examples directory:
+   Run: cd ../../data/examples
+
+2. List what's there:
+   Run: ls -la
+
+3. You should see three directories:
+   - umask_022/
+   - umask_027/
+   - umask_077/
+
+4. Examine files in each directory:
+   Run: ls -l umask_022/
+   Run: ls -l umask_027/
+   Run: ls -l umask_077/
+
+5. Also check directories in each:
+   Run: ls -ld umask_022/
+   Run: ls -ld umask_027/
+   Run: ls -ld umask_077/
+
+================================================================================
+    YOUR ANALYSIS TASK
+================================================================================
+
+For each umask value, document:
+
+1. **umask_022**:
+   - What permissions do the FILES have?
+   - What permissions do the DIRECTORIES have?
+   - Who can access these files? (owner, group, others)
+
+2. **umask_027**:
+   - What permissions do the FILES have?
+   - What permissions do the DIRECTORIES have?
+   - Who can access these files? (owner, group, others)
+
+3. **umask_077**:
+   - What permissions do the FILES have?
+   - What permissions do the DIRECTORIES have?
+   - Who can access these files? (owner, group, others)
+
+================================================================================
+    PATTERN RECOGNITION
+================================================================================
+
+Look for patterns:
+- How does umask 022 differ from 027?
+- How does umask 027 differ from 077?
+- What happens to "others" permissions as umask increases?
+- What happens to "group" permissions?
+
+================================================================================
+    HINT
+================================================================================
+
+Check the permissions_history.log file for additional clues:
+  cat ../logs/permissions_history.log
+
+It might contain useful information about these examples!
+
+================================================================================
+    YOUR ANSWER
+================================================================================
+
+Document your findings:
+
+umask_022:
+  File permissions: _____
+  Directory permissions: _____
+  Access: _____
+
+umask_027:
+  File permissions: _____
+  Directory permissions: _____
+  Access: _____
+
+umask_077:
+  File permissions: _____
+  Directory permissions: _____
+  Access: _____
+
+================================================================================
+    NEXT STEP
+================================================================================
+
+Once you've analyzed the examples, move to calculating:
+  cd ../../clues/level2
+  cat clue2.txt
+
+Keep up the great work!

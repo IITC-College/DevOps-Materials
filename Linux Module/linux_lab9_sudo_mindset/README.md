@@ -7,9 +7,9 @@ Welcome to your Linux sudo practice lab!
 ### Method 1: Download with curl (Recommended)
 
 ```bash
-curl -L -o lab.tar.gz https://github.com/IITC-College/DevOps-Jan26/releases/download/v2.7/linux_lab8_sudo_mindset.tar.gz
+curl -L -o lab.tar.gz https://github.com/IITC-College/DevOps-Jan26/releases/download/v2.8/linux_lab9_sudo_mindset.tar.gz
 tar -xzf lab.tar.gz
-cd linux_lab8_sudo_mindset
+cd linux_lab9_sudo_mindset
 ```
 
 ## Lab Objective
@@ -139,4 +139,4 @@ Remember: sudo is a powerful tool that should be used thoughtfully and responsib
 
 **Linux Course - Day 2**  
 **Understanding sudo: When and Why Lab**  
-**Version**: v2.7
+**Version**: v2.8

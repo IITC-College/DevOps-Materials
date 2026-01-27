@@ -1,0 +1,142 @@
+================================================================================
+    LEVEL 2 - EXERCISE 3: Security Implications
+================================================================================
+
+TASK: Understand when to use different umask values based on security needs
+
+Different umask values have different security implications. Let's explore
+real-world scenarios where each umask value is appropriate.
+
+================================================================================
+    INSTRUCTIONS
+================================================================================
+
+1. Navigate to the projects directory:
+   Run: cd ../../projects
+
+2. Explore the three project directories:
+   - secure_files/    (maximum security scenario)
+   - shared_team/     (team collaboration scenario)
+   - default_app/     (standard application scenario)
+
+3. Read the README files in each:
+   Run: cat secure_files/README.md
+   Run: cat shared_team/README.md
+   Run: cat default_app/README.md
+
+4. Check the permissions of files in each:
+   Run: ls -l secure_files/
+   Run: ls -l shared_team/
+   Run: ls -l default_app/
+
+================================================================================
+    SECURITY ANALYSIS
+================================================================================
+
+For each umask value, analyze:
+
+**umask 022** (default_app/):
+  - Who can read the files? (owner, group, others)
+  - Who can write the files? (owner, group, others)
+  - Security level: Low / Medium / High
+  - When to use: Public files, shared resources, less sensitive data
+  - Risk: Others can read your files (information leakage)
+
+**umask 027** (shared_team/):
+  - Who can read the files? (owner, group, others)
+  - Who can write the files? (owner, group, others)
+  - Security level: Low / Medium / High
+  - When to use: Team projects, collaborative work, group access needed
+  - Risk: Group members can modify files (need to trust group)
+
+**umask 077** (secure_files/):
+  - Who can read the files? (owner, group, others)
+  - Who can write the files? (owner, group, others)
+  - Security level: Low / Medium / High
+  - When to use: Private files, sensitive data, personal documents
+  - Risk: No sharing possible (collaboration blocked)
+
+================================================================================
+    REAL-WORLD SCENARIOS
+================================================================================
+
+Match each scenario to the appropriate umask:
+
+Scenario 1: Personal SSH keys and passwords
+  Recommended umask: _____
+  Why: _____
+
+Scenario 2: Team project where all team members need to edit files
+  Recommended umask: _____
+  Why: _____
+
+Scenario 3: Web server files that need to be readable by web server
+  Recommended umask: _____
+  Why: _____
+
+Scenario 4: Configuration files with sensitive API keys
+  Recommended umask: _____
+  Why: _____
+
+================================================================================
+    HINT
+================================================================================
+
+Check the README files in each project directory - they contain clues about
+which umask was used and why!
+
+================================================================================
+    YOUR ANSWER
+================================================================================
+
+umask 022:
+  Security level: _____
+  Best for: _____
+  Risk: _____
+
+umask 027:
+  Security level: _____
+  Best for: _____
+  Risk: _____
+
+umask 077:
+  Security level: _____
+  Best for: _____
+  Risk: _____
+
+Scenarios:
+  SSH keys: umask _____ because _____
+  Team project: umask _____ because _____
+  Web server: umask _____ because _____
+  Config files: umask _____ because _____
+
+================================================================================
+    KEY INSIGHT
+================================================================================
+
+Remember: Default permissions are a DECISION. You must choose:
+  - Security (restrictive umask like 077)
+  - Collaboration (permissive umask like 022)
+  - Balance (moderate umask like 027)
+
+There's no "one size fits all" - it depends on your needs!
+
+================================================================================
+    CONGRATULATIONS!
+================================================================================
+
+You've completed Level 2! You now understand:
+  ✓ How to analyze different umask values
+  ✓ How to calculate permissions from umask
+  ✓ Security implications of different umask values
+  ✓ When to use each umask value
+
+================================================================================
+    NEXT STEP
+================================================================================
+
+You're ready for Level 3! Navigate there:
+  cd ../level3
+  cat clue1.txt
+
+Outstanding work!

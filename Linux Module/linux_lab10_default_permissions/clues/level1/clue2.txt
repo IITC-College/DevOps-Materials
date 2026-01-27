@@ -1,0 +1,78 @@
+================================================================================
+    LEVEL 1 - EXERCISE 2: Create File and Observe Permissions
+================================================================================
+
+TASK: Create a file and see how umask affects its default permissions
+
+Now that you know your umask value, let's see how it actually affects the
+permissions of new files you create.
+
+================================================================================
+    INSTRUCTIONS
+================================================================================
+
+1. Create a new test file:
+   Run: touch test_file.txt
+
+2. Check the permissions of this new file:
+   Run: ls -l test_file.txt
+
+3. Look at the permissions column (first column after file type):
+   - It will look like: -rw-r--r-- or -rw-rw-r-- or similar
+   - This shows: owner permissions, group permissions, others permissions
+
+4. Understand the formula:
+   - Linux starts with maximum permissions for files: 666 (rw-rw-rw-)
+   - Then it SUBTRACTS your umask value
+   - Result: 666 - umask = file permissions
+
+================================================================================
+    CALCULATION EXAMPLE
+================================================================================
+
+If your umask is 022:
+  - Maximum: 666 (rw-rw-rw-)
+  - Subtract umask: 666 - 022 = 644
+  - Result: -rw-r--r-- (owner: read+write, group: read, others: read)
+
+If your umask is 002:
+  - Maximum: 666 (rw-rw-rw-)
+  - Subtract umask: 666 - 002 = 664
+  - Result: -rw-rw-r-- (owner: read+write, group: read+write, others: read)
+
+================================================================================
+    YOUR TASK
+================================================================================
+
+1. Create the test file: touch test_file.txt
+2. Check permissions: ls -l test_file.txt
+3. Write down the permissions you see
+4. Calculate: 666 - (your umask) = ?
+5. Verify: Does the calculation match what you see?
+
+================================================================================
+    WHAT TO OBSERVE
+================================================================================
+
+- What permissions did your file get?
+- Does the formula 666 - umask match what you see?
+- Notice that files NEVER get execute permission by default (that's why max is 666, not 777)
+
+================================================================================
+    YOUR ANSWER
+================================================================================
+
+Document your findings:
+  My umask is: _____
+  File permissions I see: _____
+  Calculation: 666 - _____ = _____
+  Do they match? Yes / No
+
+================================================================================
+    NEXT STEP
+================================================================================
+
+Once you understand how umask affects files, move to directories:
+  cat clue3.txt
+
+Good work so far!
