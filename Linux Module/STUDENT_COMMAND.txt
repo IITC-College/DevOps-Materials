@@ -1,98 +1,25 @@
 ========================================================
-            Linux Labs - Student Download Commands
+              Student Download Command
 ========================================================
 
-📚 Available Labs - Copy and paste the command for your lab:
+✅ Copy and paste this command:
 
-========================================================
-LAB 1: Navigation Basics (v2.0)
-========================================================
-
-curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v2.0/linux_lab1_navigation_basics.tar.gz | tar -xz && cd linux_lab1_navigation_basics && cat start_here.txt
-
-========================================================
-LAB 2: File and Directory Management (v2.1)
-========================================================
-
-curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v2.1/linux_lab2_file_management.tar.gz | tar -xz && cd linux_lab2_file_management && cat start_here.txt
-
-========================================================
-LAB 3: Reading Files (v2.2)
-========================================================
-
-curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v2.2/linux_lab3_reading_files.tar.gz | tar -xz && cd linux_lab3_reading_files && cat start_here.txt
-
-========================================================
-LAB 4: Search Basics (v2.3)
-========================================================
-
-curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v2.3/linux_lab4_search_basics.tar.gz | tar -xz && cd linux_lab4_search_basics && cat start_here.txt
-
-========================================================
-LAB 5: File System Scavenger Hunt (v2.4)
-========================================================
-
-curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v2.4/linux_lab5_scavenger_hunt.tar.gz | tar -xz && cd linux_lab5_scavenger_hunt && cat start_here.txt
-
-========================================================
-LAB 6: Permission Encounter (v2.5)
-========================================================
-
-curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v2.5/linux_lab6_permission_encounter.tar.gz | tar -xz && cd linux_lab6_permission_encounter && cat start_here.txt
-
-========================================================
-LAB 7: Why Script Doesn't Run (v2.6)
-========================================================
-
-curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v2.6/linux_lab7_why_script_doesnt_run.tar.gz | tar -xz && cd linux_lab7_why_script_doesnt_run && cat start_here.txt
-
-========================================================
-LAB 8: Ownership and Groups
-========================================================
-
-⚠️  Not yet released - Coming soon!
-
-========================================================
-LAB 9: Sudo Mindset
-========================================================
-
-⚠️  Not yet released - Coming soon!
-
-========================================================
-LAB 10: Default Permissions (umask) (v2.9)
-========================================================
-
-curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v2.9/linux_lab10_default_permissions.tar.gz | tar -xz && cd linux_lab10_default_permissions && cat start_here.txt
-
-========================================================
-LAB 11: Debug Mindset - 4-Step Debug Flow (v2.8)
-========================================================
-
-curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v2.8/linux_lab11_debug_mindset.tar.gz | tar -xz && cd linux_lab11_debug_mindset && cat start_here.txt
+curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v2.7/linux_lab8_ownership_and_groups.tar.gz | tar -xz && cd linux_lab8_ownership_and_groups && cat start_here.txt
 
 ========================================================
 
 📚 Resources:
 
 Repository: https://github.com/IITC-College/DevOps-Jan26
-All Releases: https://github.com/IITC-College/DevOps-Jan26/releases
+Release: https://github.com/IITC-College/DevOps-Jan26/releases/tag/v2.7
 
 ========================================================
 
-📝 What Each Command Does:
+📝 What This Command Does:
 
 1. Downloads the lab archive from GitHub
 2. Extracts all files
 3. Navigates into the lab directory
 4. Displays the starting instructions
-
-========================================================
-
-💡 Tips:
-
-- Make sure you have curl and tar installed
-- Run the command in a directory where you want the lab extracted
-- Each lab is self-contained and can be completed independently
-- Follow the instructions in start_here.txt after extraction
 
 ========================================================
