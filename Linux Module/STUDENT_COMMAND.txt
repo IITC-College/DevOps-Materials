@@ -1,25 +1,123 @@
 ========================================================
-              Student Download Command
+          Student Download Commands - Linux Module
 ========================================================
+
+This file contains download commands for all Linux Module labs.
+Labs are numbered in the order they should be completed.
+
+========================================================
+              LAB 1: Navigation Basics
+========================================================
+
+Version: v2.0
+Focus: Basic navigation (cd, ls, error messages, hidden files)
+Duration: 60-90 minutes
+
+✅ Copy and paste this command:
+
+curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v2.0/linux_lab1_navigation_basics.tar.gz | tar -xz && cd linux_lab1_navigation_basics && cat start_here.txt
+
+Release: https://github.com/IITC-College/DevOps-Jan26/releases/tag/v2.0
+
+========================================================
+              LAB 2: File and Directory Management
+========================================================
+
+Version: v2.1
+Focus: File and directory management (mkdir, touch, cp, mv, rm, rmdir)
+Duration: 75-90 minutes
+
+✅ Copy and paste this command:
+
+curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v2.1/linux_lab2_file_management.tar.gz | tar -xz && cd linux_lab2_file_management && cat start_here.txt
+
+Release: https://github.com/IITC-College/DevOps-Jan26/releases/tag/v2.1
+
+========================================================
+              LAB 3: Reading Files
+========================================================
+
+Version: v2.2
+Focus: Reading files (cat, less, head, tail)
+Duration: 60-75 minutes
+
+✅ Copy and paste this command:
+
+curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v2.2/linux_lab3_reading_files.tar.gz | tar -xz && cd linux_lab3_reading_files && cat start_here.txt
+
+Release: https://github.com/IITC-College/DevOps-Jan26/releases/tag/v2.2
+
+========================================================
+              LAB 4: Search Basics
+========================================================
+
+Version: v2.3
+Focus: Searching with grep and find
+Duration: 60-75 minutes
+
+✅ Copy and paste this command:
+
+curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v2.3/linux_lab4_search_basics.tar.gz | tar -xz && cd linux_lab4_search_basics && cat start_here.txt
+
+Release: https://github.com/IITC-College/DevOps-Jan26/releases/tag/v2.3
+
+========================================================
+              LAB 5: File System Scavenger Hunt
+========================================================
+
+Version: v2.4
+Focus: Comprehensive CLI practice - Final lab combining all skills
+Duration: 1-2 hours
+
+✅ Copy and paste this command:
+
+curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v2.4/linux_lab5_scavenger_hunt.tar.gz | tar -xz && cd linux_lab5_scavenger_hunt && cat start_here.txt
+
+Release: https://github.com/IITC-College/DevOps-Jan26/releases/tag/v2.4
+
+========================================================
+              LAB 6: Permission Encounter
+========================================================
+
+Version: v2.5
+Focus: Introduction to Linux permissions - Reading and understanding permissions
+Duration: 60-75 minutes
 
 ✅ Copy and paste this command:
 
 curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v2.5/linux_lab6_permission_encounter.tar.gz | tar -xz && cd linux_lab6_permission_encounter && cat start_here.txt
 
-========================================================
-
-📚 Resources:
-
-Repository: https://github.com/IITC-College/DevOps-Jan26
 Release: https://github.com/IITC-College/DevOps-Jan26/releases/tag/v2.5
 
 ========================================================
+                    Resources
+========================================================
 
-📝 What This Command Does:
+Repository: https://github.com/IITC-College/DevOps-Jan26
+All Releases: https://github.com/IITC-College/DevOps-Jan26/releases
 
+========================================================
+              What These Commands Do
+========================================================
+
+Each command:
 1. Downloads the lab archive from GitHub
 2. Extracts all files
 3. Navigates into the lab directory
 4. Displays the starting instructions
+
+========================================================
+              Course Structure
+========================================================
+
+The labs follow the course progression:
+1. Navigation - Learn to move around
+2. File Management - Create, copy, move, delete
+3. Reading Files - View file contents
+4. Search - Find information with grep and find
+5. Scavenger Hunt - Apply all skills together
+6. Permission Encounter - Introduction to Linux permissions
+
+Complete the labs in order for the best learning experience!
 
 ========================================================
