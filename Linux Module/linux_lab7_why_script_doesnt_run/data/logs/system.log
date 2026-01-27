@@ -1,0 +1,10 @@
+[2026-01-27 10:00:00] System startup
+[2026-01-27 10:00:15] Services initialized
+[2026-01-27 10:01:00] Application started
+[2026-01-27 10:02:30] Database connection established
+[2026-01-27 10:05:00] Cache refreshed
+[2026-01-27 10:10:00] Backup completed successfully
+[2026-01-27 10:15:00] System running normally
+
+This is a log file. Log files are data files that should be readable
+but do NOT need execute permission. They are not meant to be run as programs.

@@ -1,0 +1,69 @@
+================================================================================
+                            LEVEL 2 - EXERCISE 1
+                    "Adding x to Owner Only" - Targeted Changes
+================================================================================
+
+Welcome to Level 2!
+
+You've learned `chmod +x` which adds execute permission for everyone. Now
+let's learn to be more specific - adding execute permission only to the
+owner using `chmod u+x`.
+
+EXERCISE:
+---------
+Learn to add execute permission only to the owner, not everyone.
+
+INSTRUCTIONS:
+-------------
+1. Navigate to the scripts/broken directory:
+   cd ../../scripts/broken
+
+2. Check permissions of private_script.sh:
+   ls -l private_script.sh
+
+3. Notice the current permissions (should be -rw-------)
+
+4. Add execute permission ONLY to the owner:
+   chmod u+x private_script.sh
+
+5. Check permissions again:
+   ls -l private_script.sh
+
+6. Notice that only the owner (first 3 characters) has 'x'
+
+7. Try running the script:
+   ./private_script.sh
+
+COMMANDS TO USE:
+----------------
+- ls -l private_script.sh
+- chmod u+x private_script.sh
+- ls -l private_script.sh (verify)
+- ./private_script.sh
+
+UNDERSTANDING:
+-------------
+- `chmod u+x` = Add execute permission to USER (owner) only
+- `chmod +x` = Add execute permission to everyone (owner, group, others)
+
+The 'u' stands for "user" (owner). You can also use:
+- 'g' for group
+- 'o' for others
+- 'a' for all (same as no letter)
+
+COMPARISON:
+-----------
+Before: -rw------- (owner: rw, no execute)
+After:  -rwx------ (owner: rwx, has execute)
+
+Only the owner can run this script now!
+
+WRITE YOUR ANSWER:
+------------------
+After completing the exercise, write in my_answers.txt:
+- What were the permissions before chmod u+x?
+- What were the permissions after chmod u+x?
+- What is the difference between 'chmod u+x' and 'chmod +x'?
+- When would you use 'chmod u+x' instead of 'chmod +x'?
+
+Next: clue2.txt

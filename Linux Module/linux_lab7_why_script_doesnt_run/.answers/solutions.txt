@@ -1,0 +1,428 @@
+================================================================================
+                    LAB SOLUTIONS - INSTRUCTOR COPY
+================================================================================
+
+This file contains all answers to the Why Script Doesn't Run Lab.
+Keep this file secure and do not share with students.
+
+================================================================================
+                            LEVEL 1 SOLUTIONS
+================================================================================
+
+EXERCISE 1 - The Script That Won't Run
+----------------------------------------
+Location: scripts/broken/
+Commands:
+1. cd ../../scripts/broken
+2. ./hello.sh (will fail)
+3. ls -l hello.sh
+4. chmod +x hello.sh
+5. ./hello.sh (will work)
+
+Expected Error Output (first attempt):
+bash: ./hello.sh: Permission denied
+
+Expected Permissions Before:
+-rw-r--r-- 1 user group 123 Jan 27 10:00 hello.sh
+
+Expected Permissions After:
+-rwxr-xr-x 1 user group 123 Jan 27 10:00 hello.sh
+
+Expected Output (after fix):
+Hello, World!
+This script is now working!
+You successfully added execute permission with chmod +x
+
+Answers:
+- Error message: "Permission denied" or "bash: ./hello.sh: Permission denied"
+- Permissions before: -rw-r--r-- (no execute permission)
+- Permissions after: -rwxr-xr-x (execute permission added)
+- Script output: "Hello, World!" and success messages
+
+Key Learning: Scripts need execute permission (x) to run. The chmod +x
+command adds execute permission for everyone (owner, group, others).
+
+EXERCISE 2 - Reading Before Changing
+-------------------------------------
+Location: scripts/broken/
+Commands:
+1. ls -l
+2. chmod +x backup.sh
+3. chmod +x deploy.sh
+4. chmod +x cleanup.sh
+5. Test each script
+
+Expected Scripts to Fix:
+- backup.sh: -rw-r--r-- → -rwxr-xr-x
+- deploy.sh: -rw-r--r-- → -rwxr-xr-x
+- cleanup.sh: -rw------- → -rwx------
+
+Answers:
+- Scripts missing 'x': backup.sh, deploy.sh, cleanup.sh
+- Permissions of backup.sh before: -rw-r--r-- (owner: rw, group: r, others: r)
+- Permissions of backup.sh after: -rwxr-xr-x (owner: rwx, group: rx, others: rx)
+- Importance: Always check permissions first to understand what you're changing
+  and why. This prevents mistakes and helps you learn.
+
+Key Learning: The pattern: Read (ls -l) → Identify (missing x) → Fix (chmod)
+→ Verify (ls -l) → Test (./script.sh). This is the correct workflow.
+
+EXERCISE 3 - Understanding the x Permission
+--------------------------------------------
+Location: scripts/broken/ vs scripts/fixed/
+Commands:
+1. ls -l scripts/broken/
+2. ls -l scripts/fixed/
+3. Compare permissions
+4. Try running scripts
+
+Expected Comparison:
+Broken scripts: -rw-r--r-- (no x)
+Fixed scripts:  -rwxr-xr-x (has x)
+
+Answers:
+- Main difference: Broken scripts don't have 'x', fixed scripts do
+- What 'x' means: Execute permission - allows the file to be run as a program
+- Why scripts need 'x': Without execute permission, Linux won't allow the file
+  to be executed, even if it's a valid script
+- What happens without 'x': "Permission denied" error when trying to run
+
+Key Learning: The execute permission (x) is required to run files as programs.
+Scripts without 'x' cannot be executed directly with ./script.sh.
+
+================================================================================
+                            LEVEL 2 SOLUTIONS
+================================================================================
+
+EXERCISE 1 - Adding x to Owner Only
+-------------------------------------
+Location: scripts/broken/
+Commands:
+1. ls -l private_script.sh
+2. chmod u+x private_script.sh
+3. ls -l private_script.sh
+4. ./private_script.sh
+
+Expected Permissions Before:
+-rw------- 1 user group 256 Jan 27 10:00 private_script.sh
+
+Expected Permissions After:
+-rwx------ 1 user group 256 Jan 27 10:00 private_script.sh
+
+Answers:
+- Permissions before: -rw------- (owner: rw, no execute)
+- Permissions after: -rwx------ (owner: rwx, has execute)
+- Difference between chmod u+x and chmod +x:
+  * chmod u+x = Add execute only to owner (user)
+  * chmod +x = Add execute to everyone (owner, group, others)
+- When to use chmod u+x: When you want only the owner to be able to run
+  the script, keeping it private
+
+Key Learning: chmod u+x adds execute permission only to the owner, providing
+more security than chmod +x which adds it to everyone.
+
+EXERCISE 2 - Group Execute Permissions
+---------------------------------------
+Location: scripts/broken/
+Commands:
+1. ls -l team_script.sh
+2. chmod g+x team_script.sh
+3. ls -l team_script.sh
+4. ./team_script.sh
+5. chmod g+x shared_tool.sh
+6. ./shared_tool.sh
+
+Expected Permissions Before:
+-rw-rw-r-- 1 user group 256 Jan 27 10:00 team_script.sh
+
+Expected Permissions After:
+-rw-rwxr-- 1 user group 256 Jan 27 10:00 team_script.sh
+
+Answers:
+- Permissions before: -rw-rw-r-- (group: rw, no execute)
+- Permissions after: -rw-rwxr-- (group: rwx, has execute)
+- Difference between chmod g+x and chmod u+x:
+  * chmod g+x = Add execute to group only
+  * chmod u+x = Add execute to owner only
+- When to use chmod g+x: When you want team members (group) to be able to
+  run the script, but not everyone
+
+Key Learning: chmod g+x allows group members to execute the script while
+keeping it restricted from others.
+
+EXERCISE 3 - Combining Permissions
+------------------------------------
+Location: scripts/broken/
+Commands:
+1. ls -l
+2. chmod u+x,g+x team_script.sh
+3. ls -l team_script.sh
+4. Compare with chmod +x
+
+Expected Permissions:
+chmod u+x,g+x: -rw-rwxr-- (owner and group have x, others don't)
+chmod +x:      -rwxr-xr-x (owner, group, and others all have x)
+
+Answers:
+- Difference between chmod u+x,g+x and chmod +x:
+  * chmod u+x,g+x = Owner and group get x, others don't
+  * chmod +x = Owner, group, AND others all get x
+- When to use chmod u+x,g+x: When you want owner and group to run it, but
+  not others (more secure)
+- Permissions for owner-only script: chmod u+x (only owner can run)
+- Permissions for team script: chmod g+x or chmod u+x,g+x (team members can run)
+
+Key Learning: You can combine permission changes. chmod u+x,g+x is more
+restrictive than chmod +x, providing better security for team scripts.
+
+================================================================================
+                            LEVEL 3 SOLUTIONS
+================================================================================
+
+EXERCISE 1 - The Broken Project
+---------------------------------
+Location: projects/web_app/
+Commands:
+1. cd ../../projects/web_app
+2. ls -l
+3. chmod +x start.sh
+4. chmod +x stop.sh
+5. chmod g+x deploy.sh (or chmod u+x,g+x deploy.sh)
+6. Test each script
+
+Expected Scripts to Fix:
+- start.sh: -rw-r--r-- → -rwxr-xr-x (chmod +x)
+- stop.sh: -rw-r--r-- → -rwxr-xr-x (chmod +x)
+- deploy.sh: -rw-rw-r-- → -rw-rwxr-- (chmod g+x) or -rw-rwxr-- (chmod u+x,g+x)
+- config.sh: -rw------- → -rw------- (DO NOT add x - it's a config file!)
+
+Answers:
+- Scripts fixed: start.sh, stop.sh, deploy.sh
+- Permissions added:
+  * start.sh: chmod +x (public script, everyone should run)
+  * stop.sh: chmod +x (public script, everyone should run)
+  * deploy.sh: chmod g+x or chmod u+x,g+x (team script)
+- Why config.sh doesn't need x: It's a configuration file, not a script.
+  Config files are read by other programs, not executed directly.
+
+Key Learning: Not all .sh files are scripts. Some are config files that
+should be sourced, not executed. Always check the file content.
+
+EXERCISE 2 - When x is NOT Needed
+-----------------------------------
+Location: data/configs/ and projects/web_app/
+Commands:
+1. ls -l data/configs/
+2. Try ./app.conf (will fail - expected!)
+3. Compare with scripts
+4. Fix scripts in projects/automation/
+
+Expected Results:
+- Config files: -rw-r--r-- (no x, correct!)
+- Data files: -rw-r--r-- (no x, correct!)
+- Scripts: Need x to run
+
+Answers:
+- Files that need execute permission: Scripts (.sh, .py, .pl), binary
+  executables, programs meant to be run
+- Files that don't need execute permission: Config files (.conf, .json,
+  .yaml), data files (.txt, .log, .csv), documentation (.md), source code
+- Why config files don't need x: They are read by applications, not executed.
+  They contain data/configuration, not executable code.
+- What happens if you try to "run" a config file: Error or the file is
+  treated as a script (which usually fails)
+
+Key Learning: Only files meant to be executed need execute permission.
+Config files, data files, and documentation should NOT have execute permission.
+
+EXERCISE 3 - The Complete Fix
+-------------------------------
+Location: Entire lab directory structure
+
+Expected Scripts to Fix:
+scripts/broken/:
+- hello.sh: chmod +x
+- backup.sh: chmod +x
+- deploy.sh: chmod +x
+- cleanup.sh: chmod u+x (private)
+- private_script.sh: chmod u+x (private)
+- team_script.sh: chmod g+x or chmod u+x,g+x (team)
+- shared_tool.sh: chmod g+x or chmod u+x,g+x (team)
+
+projects/web_app/:
+- start.sh: chmod +x
+- stop.sh: chmod +x
+- deploy.sh: chmod g+x or chmod u+x,g+x
+- config.sh: NO x (config file)
+
+projects/automation/:
+- daily_backup.sh: chmod +x
+- weekly_report.sh: chmod +x
+- cleanup_old_files.sh: chmod u+x (private)
+
+Files that should NOT have x:
+- data/configs/app.conf (config file)
+- data/configs/settings.json (config file)
+- data/logs/system.log (log file)
+- projects/web_app/config.sh (config file)
+
+Answers (example):
+1. Scripts fixed:
+   - hello.sh: chmod +x (public script)
+   - private_script.sh: chmod u+x (private, owner only)
+   - team_script.sh: chmod g+x (team script)
+   - start.sh: chmod +x (public)
+   - deploy.sh: chmod g+x (team)
+
+2. Files checked but NOT given execute:
+   - app.conf: Config file, read by applications
+   - settings.json: Config file, read by applications
+   - config.sh: Config file, sourced by scripts
+
+3. Reflection: Students should demonstrate understanding of when files
+   need execute permission and when they don't, and how to use chmod
+   appropriately.
+
+Key Learning: Students should demonstrate mastery of:
+- Reading permissions before changing
+- Understanding when x is needed
+- Using appropriate chmod commands (u+x, g+x, +x)
+- Recognizing files that don't need x
+
+================================================================================
+                        COMPLETE ANSWERS SUMMARY
+================================================================================
+
+LEVEL 1:
+--------
+1. Exercise 1: Scripts need x to run, use chmod +x to fix
+2. Exercise 2: Always read permissions (ls -l) before changing
+3. Exercise 3: x permission is required to execute files
+
+LEVEL 2:
+--------
+1. Exercise 1: chmod u+x adds x to owner only
+2. Exercise 2: chmod g+x adds x to group only
+3. Exercise 3: chmod u+x,g+x combines changes, more restrictive than chmod +x
+
+LEVEL 3:
+--------
+1. Exercise 1: Fix multiple scripts in a project, understand config files
+2. Exercise 2: Understand when x is NOT needed (configs, data files)
+3. Exercise 3: Complete fix across entire lab structure
+
+================================================================================
+                        COMMANDS STUDENTS SHOULD USE
+================================================================================
+
+Reading Permissions:
+- ls -l (detailed file listing with permissions)
+- ls -la (all files including hidden, with permissions)
+
+Changing Permissions:
+- chmod +x <file> (add execute for everyone)
+- chmod u+x <file> (add execute for owner only)
+- chmod g+x <file> (add execute for group only)
+- chmod u+x,g+x <file> (add execute for owner and group)
+
+Running Scripts:
+- ./script.sh (run script - requires x permission)
+- bash script.sh (run with bash - doesn't require x)
+
+Navigation:
+- cd <directory> (change directory)
+- pwd (show current location)
+
+================================================================================
+                        PERMISSION PATTERNS IN LAB
+================================================================================
+
+Scripts in scripts/broken/ (before fixing):
+- hello.sh: -rw-r--r-- → -rwxr-xr-x (chmod +x)
+- backup.sh: -rw-r--r-- → -rwxr-xr-x (chmod +x)
+- deploy.sh: -rw-r--r-- → -rwxr-xr-x (chmod +x)
+- cleanup.sh: -rw------- → -rwx------ (chmod u+x)
+- private_script.sh: -rw------- → -rwx------ (chmod u+x)
+- team_script.sh: -rw-rw-r-- → -rw-rwxr-- (chmod g+x)
+- shared_tool.sh: -rw-rw-r-- → -rw-rwxr-- (chmod g+x)
+
+Scripts in scripts/fixed/ (already fixed):
+- example.sh: -rwxr-xr-x (reference)
+- reference.sh: -rwxr-xr-x (reference)
+
+Scripts in projects/web_app/:
+- start.sh: -rw-r--r-- → -rwxr-xr-x (chmod +x)
+- stop.sh: -rw-r--r-- → -rwxr-xr-x (chmod +x)
+- deploy.sh: -rw-rw-r-- → -rw-rwxr-- (chmod g+x)
+- config.sh: -rw------- → -rw------- (NO x - config file!)
+
+Scripts in projects/automation/:
+- daily_backup.sh: -rw-r--r-- → -rwxr-xr-x (chmod +x)
+- weekly_report.sh: -rw-r--r-- → -rwxr-xr-x (chmod +x)
+- cleanup_old_files.sh: -rw------- → -rwx------ (chmod u+x)
+
+Config/Data Files (should NOT have x):
+- data/configs/app.conf: -rw-r--r-- (no x, correct)
+- data/configs/settings.json: -rw-r--r-- (no x, correct)
+- data/logs/system.log: -rw-r--r-- (no x, correct)
+
+================================================================================
+                        GRADING RUBRIC (SUGGESTION)
+================================================================================
+
+Level 1 - First Encounter (30 points)
+- Exercise 1: Understanding why script doesn't run (10 points)
+- Exercise 2: Reading before changing (10 points)
+- Exercise 3: Understanding x permission (10 points)
+
+Level 2 - Targeted Changes (30 points)
+- Exercise 1: chmod u+x (10 points)
+- Exercise 2: chmod g+x (10 points)
+- Exercise 3: Combining permissions (10 points)
+
+Level 3 - Real-World Scenarios (30 points)
+- Exercise 1: Fixing broken project (10 points)
+- Exercise 2: Understanding when x is not needed (10 points)
+- Exercise 3: Complete fix challenge (10 points)
+
+Documentation (10 points)
+- Created my_answers.txt
+- Provided clear, complete answers
+- Showed understanding of concepts
+- Demonstrated reflection on learning
+
+TOTAL: 100 points
+
+================================================================================
+                        NOTES FOR INSTRUCTOR
+================================================================================
+
+Common Student Mistakes:
+1. Adding x to config files (remind: configs don't need x)
+2. Using chmod +x for everything (teach: use u+x or g+x when appropriate)
+3. Not checking permissions before changing (emphasize: always ls -l first)
+4. Confusing read (r) with execute (x) permissions
+5. Trying to run scripts without fixing permissions first
+
+Tips for Helping Students:
+- Emphasize the pattern: Read → Identify → Fix → Verify → Test
+- Show the difference between chmod +x, u+x, g+x
+- Explain when files need x and when they don't
+- Use real examples from the lab to illustrate concepts
+- Remind students that config files should NOT have execute permission
+
+Typical Completion Time:
+- Fast students: 45-60 minutes
+- Average students: 60-75 minutes
+- Struggling students: 75-90 minutes
+
+Important Reminders:
+- This lab is about FIXING permissions, not just reading them
+- Students should use chmod to add execute permissions
+- The goal is understanding why scripts don't run and how to fix them
+- Always emphasize reading permissions before changing
+
+This lab builds on Lab 6 (Permission Encounter) where students learned to
+read permissions. Now they learn to change them appropriately.
+
+================================================================================

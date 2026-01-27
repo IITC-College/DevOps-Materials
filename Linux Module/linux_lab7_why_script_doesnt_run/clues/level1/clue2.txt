@@ -1,0 +1,63 @@
+================================================================================
+                            LEVEL 1 - EXERCISE 2
+                    "Reading Before Changing" - The Important Habit
+================================================================================
+
+Welcome to Exercise 2!
+
+This exercise reinforces the most important habit: ALWAYS check permissions
+with `ls -l` before using `chmod`. This helps you understand what you're
+changing and why.
+
+EXERCISE:
+---------
+Practice the "read before change" pattern with multiple scripts.
+
+INSTRUCTIONS:
+-------------
+1. Make sure you're in the scripts/broken directory:
+   cd ../../scripts/broken
+   (or use: pwd to check your location)
+
+2. FIRST, check the permissions of all scripts:
+   ls -l
+
+3. Look at the output. Identify which scripts are missing the 'x' permission
+
+4. For each script missing 'x', add execute permission:
+   chmod +x backup.sh
+   chmod +x deploy.sh
+   chmod +x cleanup.sh
+
+5. Verify the changes:
+   ls -l
+
+6. Try running each script to confirm they work:
+   ./backup.sh
+   ./deploy.sh
+   ./cleanup.sh
+
+COMMANDS TO USE:
+----------------
+- ls -l (check permissions first!)
+- chmod +x <script> (for each script)
+- ./<script> (test after fixing)
+
+WHAT TO LEARN:
+--------------
+The pattern you should always follow:
+1. Read permissions (ls -l)
+2. Identify what's missing (no 'x')
+3. Fix permissions (chmod +x)
+4. Verify the fix (ls -l again)
+5. Test the script (./script.sh)
+
+WRITE YOUR ANSWER:
+------------------
+After fixing all scripts, write in my_answers.txt:
+- List all the scripts you found that were missing 'x'
+- What were the permissions of backup.sh before fixing?
+- What were the permissions of backup.sh after fixing?
+- Why is it important to check permissions before changing them?
+
+Next: clue3.txt

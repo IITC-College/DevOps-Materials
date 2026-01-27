@@ -1,0 +1,74 @@
+================================================================================
+                            LEVEL 1 - EXERCISE 3
+                    "Understanding the x Permission" - Why It Matters
+================================================================================
+
+Welcome to Exercise 3!
+
+Now let's understand WHY the execute permission is needed and compare
+scripts with and without it.
+
+EXERCISE:
+---------
+Compare scripts with and without execute permission to understand the difference.
+
+INSTRUCTIONS:
+-------------
+1. Check permissions in the broken scripts directory:
+   cd ../../scripts/broken
+   ls -l
+
+2. Check permissions in the fixed scripts directory:
+   cd ../fixed
+   ls -l
+
+3. Compare the permissions:
+   - What's different between broken and fixed scripts?
+   - Notice the 'x' in the permission strings
+
+4. Try running a script from the broken directory (if you haven't fixed it):
+   cd ../broken
+   ./hello.sh (if not fixed yet, will fail)
+
+5. Try running a script from the fixed directory:
+   cd ../fixed
+   ./example.sh (should work!)
+
+6. Go back and fix the broken scripts if needed:
+   cd ../broken
+   chmod +x hello.sh
+   ./hello.sh
+
+COMMANDS TO USE:
+----------------
+- ls -l (in both directories)
+- Compare permission strings
+- ./script.sh (try running)
+
+UNDERSTANDING PERMISSIONS:
+--------------------------
+Permission string format: -rwxr-xr-x
+                          │ ││ ││ ││
+                          │ ││ ││ │└─ Others: execute
+                          │ ││ ││ └── Others: write
+                          │ ││ │└──── Others: read
+                          │ ││ └───── Group: execute
+                          │ │└─────── Group: write
+                          │ └──────── Group: read
+                          └────────── Owner: execute
+
+A script WITHOUT x: -rw-r--r-- (cannot be executed)
+A script WITH x:    -rwxr-xr-x (can be executed)
+
+WRITE YOUR ANSWER:
+------------------
+After comparing the directories, write in my_answers.txt:
+- What is the main difference between broken and fixed scripts?
+- What does 'x' in permissions mean?
+- Why do scripts need 'x' permission to run?
+- What happens when you try to run a script without 'x'?
+
+Congratulations! You've completed Level 1!
+
+Now proceed to Level 2: cd ../../clues/level2
+Read clue1.txt to learn about targeted permission changes.

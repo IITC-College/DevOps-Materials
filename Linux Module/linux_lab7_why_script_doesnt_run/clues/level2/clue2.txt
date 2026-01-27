@@ -1,0 +1,71 @@
+================================================================================
+                            LEVEL 2 - EXERCISE 2
+                    "Group Execute Permissions" - Team Scripts
+================================================================================
+
+Welcome to Exercise 2!
+
+Sometimes you want team members (group) to be able to run a script, but not
+everyone. That's where `chmod g+x` comes in.
+
+EXERCISE:
+---------
+Learn to add execute permission to the group so team members can run scripts.
+
+INSTRUCTIONS:
+-------------
+1. Navigate to the scripts/broken directory:
+   cd ../../scripts/broken
+
+2. Check permissions of team_script.sh:
+   ls -l team_script.sh
+
+3. Notice the current permissions (should be -rw-rw-r--)
+
+4. Add execute permission to the GROUP:
+   chmod g+x team_script.sh
+
+5. Check permissions again:
+   ls -l team_script.sh
+
+6. Notice that the group (middle 3 characters) now has 'x'
+
+7. Try running the script:
+   ./team_script.sh
+
+8. Also check shared_tool.sh and fix it:
+   ls -l shared_tool.sh
+   chmod g+x shared_tool.sh
+   ./shared_tool.sh
+
+COMMANDS TO USE:
+----------------
+- ls -l team_script.sh
+- chmod g+x team_script.sh
+- ls -l team_script.sh (verify)
+- ./team_script.sh
+- chmod g+x shared_tool.sh
+- ./shared_tool.sh
+
+UNDERSTANDING:
+-------------
+- `chmod g+x` = Add execute permission to GROUP only
+- This allows group members to run the script
+- Others (non-group members) still cannot run it
+
+COMPARISON:
+-----------
+Before: -rw-rw-r-- (group: rw, no execute)
+After:  -rw-rwxr-- (group: rwx, has execute)
+
+Group members can now run this script!
+
+WRITE YOUR ANSWER:
+------------------
+After completing the exercise, write in my_answers.txt:
+- What were the permissions of team_script.sh before chmod g+x?
+- What were the permissions after chmod g+x?
+- What is the difference between 'chmod g+x' and 'chmod u+x'?
+- When would you use 'chmod g+x'?
+
+Next: clue3.txt

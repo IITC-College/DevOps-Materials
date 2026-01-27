@@ -1,0 +1,75 @@
+================================================================================
+                            LEVEL 1 - EXERCISE 1
+                    "The Script That Won't Run" - Your First Fix
+================================================================================
+
+Welcome to Level 1!
+
+Your first exercise: Encountering a script that won't run and fixing it.
+
+BACKGROUND:
+-----------
+In Linux, scripts need the execute permission (x) to run. When you try to
+run a script without execute permission, you'll get "Permission denied".
+This is different from reading a file - you need special permission to
+execute (run) a file as a program.
+
+EXERCISE:
+---------
+Try to run a script and see what happens. Then fix it!
+
+INSTRUCTIONS:
+-------------
+1. Navigate to the scripts/broken directory:
+   cd ../../scripts/broken
+
+2. Try to run the hello.sh script:
+   ./hello.sh
+
+3. Look at the error message - what does it say?
+
+4. Check the permissions of the script:
+   ls -l hello.sh
+
+5. Notice that the permissions don't have 'x' (execute)
+
+6. Add execute permission:
+   chmod +x hello.sh
+
+7. Check the permissions again:
+   ls -l hello.sh
+
+8. Now try running it again:
+   ./hello.sh
+
+COMMANDS TO USE:
+----------------
+- cd ../../scripts/broken
+- ./hello.sh (will fail first time)
+- ls -l hello.sh
+- chmod +x hello.sh
+- ./hello.sh (should work now!)
+
+WHAT TO OBSERVE:
+----------------
+- What error message appears when you try to run the script?
+- What are the permissions before adding x?
+- What are the permissions after adding x?
+- Does the script run successfully after fixing?
+
+UNDERSTANDING:
+-------------
+The `chmod +x` command adds execute permission for everyone (owner, group,
+and others). This allows the file to be run as a program.
+
+WRITE YOUR ANSWER:
+------------------
+After completing the exercise, write in my_answers.txt:
+- What error message did you see when trying to run hello.sh?
+- What were the permissions before chmod +x?
+- What were the permissions after chmod +x?
+- What did the script output when it ran successfully?
+
+Then proceed to the next exercise: clue2.txt in this same directory.
+
+Hint: The key is understanding that scripts need 'x' to run!

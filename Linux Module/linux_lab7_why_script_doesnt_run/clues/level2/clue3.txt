@@ -1,0 +1,74 @@
+================================================================================
+                            LEVEL 2 - EXERCISE 3
+                    "Combining Permissions" - Multiple Changes at Once
+================================================================================
+
+Welcome to Exercise 3!
+
+You can combine multiple permission changes in a single `chmod` command.
+This is useful when you want to add execute permission to both owner and
+group at the same time.
+
+EXERCISE:
+---------
+Learn to add execute permission to multiple users in one command.
+
+INSTRUCTIONS:
+-------------
+1. Navigate to the scripts/broken directory:
+   cd ../../scripts/broken
+
+2. Find a script that needs both owner and group execute:
+   ls -l
+
+3. Add execute permission to BOTH owner and group:
+   chmod u+x,g+x team_script.sh
+   (or use a script that needs this)
+
+4. Check the result:
+   ls -l team_script.sh
+
+5. Notice that both owner and group have 'x'
+
+6. Compare with using chmod +x:
+   chmod +x another_script.sh
+   ls -l another_script.sh
+
+7. Notice the difference:
+   - chmod u+x,g+x = owner AND group get x (others don't)
+   - chmod +x = owner, group, AND others all get x
+
+COMMANDS TO USE:
+----------------
+- ls -l
+- chmod u+x,g+x <script>
+- chmod +x <script>
+- Compare the results with ls -l
+
+UNDERSTANDING:
+-------------
+You can combine multiple changes:
+- `chmod u+x,g+x` = Add x to owner AND group
+- `chmod u+x,o+x` = Add x to owner AND others
+- `chmod g+x,o+x` = Add x to group AND others
+- `chmod +x` = Add x to everyone (same as u+x,g+x,o+x)
+
+WHEN TO USE:
+------------
+- `chmod u+x` = Only owner should run it (private script)
+- `chmod g+x` = Owner and group should run it (team script)
+- `chmod u+x,g+x` = Owner and group, but not others (team script)
+- `chmod +x` = Everyone should run it (public script)
+
+WRITE YOUR ANSWER:
+------------------
+After completing the exercise, write in my_answers.txt:
+- What is the difference between 'chmod u+x,g+x' and 'chmod +x'?
+- When would you use 'chmod u+x,g+x' instead of 'chmod +x'?
+- What permissions would you use for a script that only the owner should run?
+- What permissions would you use for a script that the whole team should run?
+
+Congratulations! You've completed Level 2!
+
+Now proceed to Level 3: cd ../../clues/level3
+Read clue1.txt for real-world scenarios.

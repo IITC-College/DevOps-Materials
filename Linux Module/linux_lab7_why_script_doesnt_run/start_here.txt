@@ -1,0 +1,85 @@
+================================================================================
+    WELCOME TO THE WHY SCRIPT DOESN'T RUN LAB!
+================================================================================
+
+Hello, Linux Explorer!
+
+This lab is designed to teach you how to fix scripts that won't run. You will
+encounter scripts with "Permission denied" errors, learn why they don't run,
+and fix them using the `chmod` command.
+
+IMPORTANT: In this lab, you WILL fix permissions. This is different from the
+previous lab where you only read permissions. Now you'll learn to change them!
+
+================================================================================
+    YOUR FIRST TASK
+================================================================================
+
+1. Check where you are right now:
+   Run: pwd
+
+2. List all files in the current directory:
+   Run: ls -la
+
+3. Navigate to the first level of clues:
+   Run: cd clues/level1
+
+4. Read the first exercise:
+   Run: cat clue1.txt
+
+================================================================================
+    WHAT TO EXPECT
+================================================================================
+
+- You WILL see "Permission denied" when trying to run scripts - this is normal!
+- You will learn to check permissions with `ls -l` before fixing
+- You will use `chmod` to add execute permissions
+- You will understand why scripts need the `x` permission to run
+- You will fix broken scripts in real project scenarios
+
+Remember: The key is to READ permissions first (ls -l), then FIX them (chmod).
+
+================================================================================
+    IMPORTANT REMINDERS
+================================================================================
+
+* ALWAYS use 'ls -l' BEFORE using 'chmod' - read before you change!
+* Scripts need 'x' (execute) permission to run
+* Use 'chmod +x' to add execute permission for everyone
+* Use 'chmod u+x' to add execute permission for owner only
+* Use 'chmod g+x' to add execute permission for group only
+* Test your changes by running the script with './script.sh'
+* Not all files need x - only scripts need execute permission
+* Take notes as you progress through the exercises
+
+================================================================================
+    COMMANDS YOU'LL USE
+================================================================================
+
+Reading Permissions:
+- ls -l          (detailed file listing with permissions)
+- ls -la         (all files including hidden, with permissions)
+
+Changing Permissions:
+- chmod +x <file>     (add execute for everyone)
+- chmod u+x <file>    (add execute for owner only)
+- chmod g+x <file>    (add execute for group only)
+- chmod u+x,g+x <file> (add execute for owner and group)
+
+Running Scripts:
+- ./script.sh    (run script - requires x permission)
+- bash script.sh (run with bash - doesn't require x)
+
+Navigation:
+- cd <directory> (change directory)
+- pwd            (show current location)
+
+================================================================================
+    READY? LET'S BEGIN!
+================================================================================
+
+Your first destination: clues/level1/clue1.txt
+
+Navigate there and read the file to begin fixing your first broken script!
+
+Good luck, and remember: Read permissions first, then fix them!

@@ -1,0 +1,75 @@
+================================================================================
+                            LEVEL 3 - EXERCISE 2
+                    "When x is NOT Needed" - Understanding File Types
+================================================================================
+
+Welcome to Exercise 2!
+
+Not all files need execute permission. Let's understand which files need
+'x' and which don't.
+
+EXERCISE:
+---------
+Compare different file types and understand when execute permission is needed.
+
+INSTRUCTIONS:
+-------------
+1. Navigate to the data/configs directory:
+   cd ../../data/configs
+
+2. Check permissions of config files:
+   ls -l
+
+3. Notice that these files don't have 'x' - and they shouldn't!
+
+4. Try to "run" a config file (it will fail, which is correct):
+   ./app.conf (will fail - config files aren't executable)
+
+5. Now check scripts in projects/web_app:
+   cd ../../projects/web_app
+   ls -l
+
+6. Compare:
+   - Scripts (.sh files meant to run) → need x
+   - Config files (.conf, .json) → don't need x
+   - Data files (.txt, .log) → don't need x
+
+7. Go to projects/automation and check those scripts:
+   cd ../automation
+   ls -l
+
+8. Fix any scripts that need execute permission
+
+COMMANDS TO USE:
+----------------
+- cd ../../data/configs
+- ls -l
+- ./app.conf (will fail - this is expected!)
+- cd ../../projects/web_app
+- ls -l (compare)
+- cd ../automation
+- ls -l
+- Fix scripts as needed
+
+UNDERSTANDING:
+-------------
+Files that NEED execute permission (x):
+- Scripts (.sh, .py, .pl, etc.) that are meant to be run
+- Binary executables
+- Programs
+
+Files that DON'T need execute permission:
+- Configuration files (.conf, .json, .yaml, .ini)
+- Data files (.txt, .log, .csv)
+- Documentation (.md, .txt)
+- Source code files (.c, .java, .js) - unless they're scripts
+
+WRITE YOUR ANSWER:
+------------------
+After exploring different file types, write in my_answers.txt:
+- What types of files need execute permission?
+- What types of files don't need execute permission?
+- Why don't config files need 'x'?
+- What happens if you try to "run" a config file?
+
+Next: clue3.txt

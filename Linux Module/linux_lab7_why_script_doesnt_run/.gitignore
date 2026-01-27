@@ -1,0 +1,7 @@
+# Ignore student answers
+my_answers.txt
+
+# Ignore any temporary files
+*.tmp
+*.bak
+*~

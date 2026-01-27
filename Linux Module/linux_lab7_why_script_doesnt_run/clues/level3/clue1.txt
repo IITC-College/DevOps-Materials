@@ -1,0 +1,63 @@
+================================================================================
+                            LEVEL 3 - EXERCISE 1
+                    "The Broken Project" - Real-World Fix
+================================================================================
+
+Welcome to Level 3!
+
+You're now ready for real-world scenarios! This exercise simulates fixing
+a broken project where multiple scripts need execute permissions.
+
+EXERCISE:
+---------
+Fix all broken scripts in a web application project.
+
+INSTRUCTIONS:
+-------------
+1. Navigate to the web application project:
+   cd ../../projects/web_app
+
+2. List all files and check their permissions:
+   ls -l
+
+3. Identify which files are scripts (end with .sh) and which are missing 'x'
+
+4. For each script missing execute permission, add it appropriately:
+   - start.sh and stop.sh: These should be runnable by everyone (chmod +x)
+   - deploy.sh: This is for the team (chmod g+x or chmod u+x,g+x)
+   - config.sh: This is a config file, NOT a script - it doesn't need x!
+
+5. After fixing, try running each script:
+   ./start.sh
+   ./stop.sh
+   ./deploy.sh
+
+6. Verify that config.sh does NOT need x (it's not meant to be executed)
+
+COMMANDS TO USE:
+----------------
+- cd ../../projects/web_app
+- ls -l
+- chmod +x start.sh
+- chmod +x stop.sh
+- chmod g+x deploy.sh (or chmod u+x,g+x deploy.sh)
+- ./start.sh (test)
+- ./stop.sh (test)
+- ./deploy.sh (test)
+
+UNDERSTANDING:
+-------------
+Not all .sh files are meant to be executed:
+- Scripts that should run → need x
+- Config files with .sh extension → don't need x
+- Always check the file content to understand its purpose
+
+WRITE YOUR ANSWER:
+------------------
+After fixing the project, write in my_answers.txt:
+- Which scripts did you fix?
+- What permissions did you add to each script and why?
+- Why doesn't config.sh need execute permission?
+- What did each script output when you ran it?
+
+Next: clue2.txt

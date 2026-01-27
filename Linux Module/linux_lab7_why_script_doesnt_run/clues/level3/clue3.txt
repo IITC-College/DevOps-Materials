@@ -1,0 +1,91 @@
+================================================================================
+                            LEVEL 3 - EXERCISE 3
+                    "The Complete Fix" - Master Challenge
+================================================================================
+
+Welcome to the Final Exercise!
+
+This is your chance to demonstrate everything you've learned. Fix all
+broken scripts across multiple directories!
+
+EXERCISE:
+---------
+Scan the entire lab and fix all scripts that need execute permission.
+
+INSTRUCTIONS:
+-------------
+1. Start from the lab root directory:
+   cd ../../..
+
+2. Scan each directory for scripts:
+   - scripts/broken/
+   - projects/web_app/
+   - projects/automation/
+   - Any other directories with scripts
+
+3. For each directory:
+   a. Run `ls -l` to see all files
+   b. Identify scripts (files ending in .sh that should be executable)
+   c. Check if they have 'x' permission
+   d. Add appropriate execute permission using:
+      - chmod +x (for public scripts)
+      - chmod u+x (for private scripts)
+      - chmod g+x (for team scripts)
+      - chmod u+x,g+x (for owner and group)
+
+4. Test each fixed script:
+   ./script.sh
+
+5. Verify that non-script files (configs, data) don't have x
+
+COMMANDS TO USE:
+----------------
+- ls -l (in each directory)
+- chmod +x, chmod u+x, chmod g+x, chmod u+x,g+x (as appropriate)
+- ./script.sh (test after fixing)
+
+FINAL CHECKLIST:
+----------------
+- [ ] All scripts in scripts/broken/ have execute permission
+- [ ] All scripts in projects/web_app/ have execute permission
+- [ ] All scripts in projects/automation/ have execute permission
+- [ ] All scripts run successfully when executed
+- [ ] Config files do NOT have execute permission (correct!)
+- [ ] Data files do NOT have execute permission (correct!)
+
+WRITE YOUR ANSWER:
+------------------
+After fixing everything, write in my_answers.txt:
+
+1. List all the scripts you fixed:
+   - Script name
+   - What permission you added (chmod +x, u+x, g+x, etc.)
+   - Why you chose that permission
+
+2. List any files you checked but did NOT add execute to:
+   - File name
+   - Why it doesn't need execute permission
+
+3. Reflection: Write 2-3 sentences about what you learned in this lab.
+
+================================================================================
+                            CONGRATULATIONS!
+================================================================================
+
+You've completed the Why Script Doesn't Run Lab!
+
+You've learned:
+✓ Why scripts need execute permission (x) to run
+✓ How to check permissions with ls -l before changing
+✓ How to add execute permission with chmod
+✓ How to target specific users (u+x, g+x, +x)
+✓ When files need execute permission and when they don't
+✓ How to fix broken scripts in real projects
+
+Most importantly, you've developed the habit of READING permissions BEFORE
+changing them, and understanding WHAT you're changing and WHY.
+
+In the next labs, you'll learn about ownership (chown) and other permission
+concepts. But remember: always READ before you CHANGE!
+
+Well done! 🎉

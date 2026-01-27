@@ -1,0 +1,18 @@
+{
+  "application": {
+    "name": "My Application",
+    "version": "1.0.0",
+    "environment": "production"
+  },
+  "server": {
+    "host": "localhost",
+    "port": 8080,
+    "timeout": 30
+  },
+  "database": {
+    "host": "db.example.com",
+    "name": "appdb",
+    "user": "appuser"
+  },
+  "note": "This is a configuration file, not a script. It does NOT need execute permission."
+}
