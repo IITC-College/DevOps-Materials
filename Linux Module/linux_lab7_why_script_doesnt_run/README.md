@@ -12,6 +12,21 @@ tar -xzf lab.tar.gz
 cd linux_lab7_why_script_doesnt_run
 ```
 
+## Instructor Setup (Required Before Lab)
+
+**IMPORTANT**: Before students start the lab, instructors must run the environment setup script:
+
+```bash
+sudo ./setup_environment.sh
+```
+
+This script will:
+- Remove execute permissions from broken scripts (as intended for the lab)
+- Set up file permissions for all exercises
+- Ensure the lab environment is properly configured
+
+**Note**: This lab does not require special users or groups - it works with any user.
+
 ## Lab Objective
 
 In this lab you will learn to fix scripts that won't run by understanding and modifying file permissions:

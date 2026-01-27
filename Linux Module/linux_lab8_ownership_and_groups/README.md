@@ -12,6 +12,33 @@ tar -xzf lab.tar.gz
 cd linux_lab8_ownership_and_groups
 ```
 
+## Instructor Setup (Required Before Lab)
+
+**CRITICAL**: This lab **REQUIRES** environment setup before students can start. Instructors must run:
+
+```bash
+sudo ./setup_environment.sh
+```
+
+This script will:
+- Create the `developers` group (if it doesn't exist)
+- Add the student user to the `developers` group
+- Create/verify service users (`www-data`, `mysql`) if needed
+- Set up file ownership for all exercises:
+  - `data/files/root_file.txt` → owned by root
+  - `data/files/user_file.txt` → owned by student user
+  - `data/files/group_file.txt` → owned by student:developers
+  - `projects/web_app/*` → owned by www-data:www-data
+  - `projects/database/*` → owned by mysql:mysql
+  - `projects/shared_team/*` → owned by student:developers
+
+**Important Notes**:
+- The script identifies the student user from `$SUDO_USER` (who ran sudo)
+- Students may need to log out and back in (or run `newgrp developers`) for group membership to take effect
+- Students can verify group membership with: `groups`
+
+**Without running this setup script, the lab exercises will not work correctly!**
+
 ## Lab Objective
 
 In this lab you will learn about file ownership and groups in Linux:

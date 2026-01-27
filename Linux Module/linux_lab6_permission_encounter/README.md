@@ -12,6 +12,20 @@ tar -xzf lab.tar.gz
 cd linux_lab6_permission_encounter
 ```
 
+## Instructor Setup (Required Before Lab)
+
+**IMPORTANT**: Before students start the lab, instructors must run the environment setup script:
+
+```bash
+sudo ./setup_environment.sh
+```
+
+This script will:
+- Set up file permissions for all exercises
+- Ensure the lab environment is properly configured
+
+**Note**: This lab does not require special users or groups - it works with any user.
+
 ## Lab Objective
 
 In this lab you will encounter Linux permissions for the first time and learn to understand them **without fixing anything**:

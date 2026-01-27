@@ -12,6 +12,27 @@ tar -xzf lab.tar.gz
 cd linux_lab11_debug_mindset
 ```
 
+## Instructor Setup (Required Before Lab)
+
+**IMPORTANT**: Before students start the lab, instructors must run the environment setup script:
+
+```bash
+sudo ./setup_environment.sh
+```
+
+This script will:
+- Set up deliberately broken scenarios for students to debug:
+  - Scenario 1: Read permission removed
+  - Scenario 2: Execute permission missing
+  - Scenario 3: Write permission removed from directory
+  - Scenario 4: File owned by root (ownership mismatch) - **requires root ownership**
+  - Scenario 5: Hidden file with no access
+  - Scenario 6: Multiple combined issues
+- Set root ownership for `scenario4_ownership_mess/important.txt` (critical for ownership exercise)
+- Ensure the lab environment is properly configured
+
+**Note**: The broken scenarios are intentional - students will use the 4-step debug methodology to fix them.
+
 ## Lab Objective
 
 In this lab you will learn a **systematic debugging methodology** that applies to ANY Linux problem:

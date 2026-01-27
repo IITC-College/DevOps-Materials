@@ -12,6 +12,24 @@ tar -xzf lab.tar.gz
 cd linux_lab10_default_permissions
 ```
 
+## Instructor Setup (Required Before Lab)
+
+**IMPORTANT**: Before students start the lab, instructors must run the environment setup script:
+
+```bash
+sudo ./setup_environment.sh
+```
+
+This script will:
+- Set up example files with permissions matching different umask values:
+  - `umask_022/example_file.txt` → 644 (rw-r--r--)
+  - `umask_027/example_file.txt` → 640 (rw-r-----)
+  - `umask_077/example_file.txt` → 600 (rw-------)
+- Set up directory permissions to match umask values
+- Ensure the lab environment is properly configured
+
+**Note**: This lab does not require special users or groups - it focuses on umask and default permissions.
+
 ## Lab Objective
 
 In this lab you will learn about umask and default file permissions:

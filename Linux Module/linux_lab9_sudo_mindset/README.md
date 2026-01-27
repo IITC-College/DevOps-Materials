@@ -12,6 +12,22 @@ tar -xzf lab.tar.gz
 cd linux_lab9_sudo_mindset
 ```
 
+## Instructor Setup (Required Before Lab)
+
+**IMPORTANT**: Before students start the lab, instructors must run the environment setup script:
+
+```bash
+sudo ./setup_environment.sh
+```
+
+This script will:
+- Set up protected system files owned by root (to demonstrate when sudo is needed)
+- Configure user app files with root ownership (simulating common ownership problems)
+- Set up file permissions for all exercises
+- Ensure the lab environment is properly configured
+
+**Note**: This lab requires root ownership on some files to demonstrate sudo usage scenarios.
+
 ## Lab Objective
 
 In this lab you will learn to use sudo responsibly and understand when it's actually needed:
