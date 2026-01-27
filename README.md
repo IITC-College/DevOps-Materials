@@ -64,6 +64,27 @@ Labs are numbered in the order they should be completed, following the course st
   - **Duration**: 1-2 hours
   - **Download**: See `Linux Module/STUDENT_COMMAND.txt`
 
+- **Lab 6**: Permission Encounter
+  - **Version**: v2.5
+  - **Lab ID**: `linux_lab6_permission_encounter`
+  - **Focus**: Introduction to Linux permissions - Reading and understanding permissions
+  - **Duration**: 60-75 minutes
+  - **Download**: See `Linux Module/STUDENT_COMMAND.txt`
+
+- **Lab 7**: Why Script Doesn't Run
+  - **Version**: v2.6
+  - **Lab ID**: `linux_lab7_why_script_doesnt_run`
+  - **Focus**: Understanding chmod and execute permissions - Fixing scripts that won't run
+  - **Duration**: 60-75 minutes
+  - **Download**: See `Linux Module/STUDENT_COMMAND.txt`
+
+- **Lab 8**: Understanding sudo - When and Why
+  - **Version**: v2.7
+  - **Lab ID**: `linux_lab8_sudo_mindset`
+  - **Focus**: Understanding sudo - When to use it, when not to, and understanding audit logging
+  - **Duration**: 60-75 minutes
+  - **Download**: See `Linux Module/STUDENT_COMMAND.txt`
+
 ---
 
 ## 👨‍🎓 For Students
@@ -233,7 +254,7 @@ Every lab must meet these criteria:
 
 | Module | Labs | Total Files | Total Size |
 |--------|------|-------------|------------|
-| Linux  | 5    | 109         | ~60KB      |
+| Linux  | 8    | 135+        | ~85KB      |
 | Docker | -    | -           | -          |
 | K8s    | -    | -           | -          |
 
