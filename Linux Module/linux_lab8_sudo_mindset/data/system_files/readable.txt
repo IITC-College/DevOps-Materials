@@ -1,0 +1,14 @@
+This is a readable file that doesn't require sudo.
+
+It's owned by a regular user and has standard permissions that allow
+anyone to read it. This demonstrates that not all files require sudo
+to access.
+
+Key points:
+- This file has standard permissions (644 typically)
+- It's owned by a regular user, not root
+- You can read it without sudo
+- This is the normal case for user files
+
+Remember: If you can read a file without sudo, that's usually the
+correct way to do it!

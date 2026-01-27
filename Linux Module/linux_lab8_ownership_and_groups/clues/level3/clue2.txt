@@ -1,0 +1,98 @@
+================================================================================
+                            LEVEL 3 - EXERCISE 2
+    "Team Projects and Shared Groups" - Collaboration Through Groups
+================================================================================
+
+Welcome to Level 3, Exercise 2!
+
+Your task: Understand how teams use groups to share files in collaborative projects.
+
+BACKGROUND:
+-----------
+In team environments, files are often shared through groups:
+- Individual files are owned by team members (owner=person who created it)
+- Files belong to a shared group (group=team name, like "developers")
+- Group permissions allow all team members to access files
+- This enables collaboration without making files world-readable
+
+This is the standard pattern: owner=individual, group=team, permissions=group access.
+
+EXERCISE:
+---------
+Examine a shared team project and understand the ownership pattern.
+
+INSTRUCTIONS:
+-------------
+1. Navigate to the shared team project:
+   
+   cd ../shared_team
+
+2. List files with detailed information:
+   
+   ls -l
+
+3. Check who owns each file:
+   - Look at the owner column
+   - Look at the group column
+
+4. Check which groups you belong to:
+   
+   groups
+
+5. Determine:
+   - Are you a member of the project's group?
+   - What are the group permissions?
+   - Can you access files based on group membership?
+
+6. Read one of the team files:
+   
+   cat team_notes.txt
+
+COMMANDS TO USE:
+----------------
+- cd ../shared_team
+- ls -l
+- groups
+- cat team_notes.txt
+
+WHAT TO OBSERVE:
+----------------
+- Who owns the files in shared_team?
+- What group do the files belong to?
+- Are you a member of that group? (check with `groups`)
+- What are the group permissions?
+- Can you read/write files based on group membership?
+- How does this enable team collaboration?
+
+UNDERSTANDING:
+-------------
+Team collaboration pattern:
+- Owner: Individual team member who created/modified the file
+- Group: Shared team group (e.g., "developers", "team-alpha")
+- Permissions: Group has read/write access (e.g., `rwxrwx---`)
+
+This pattern enables:
+- Team members can read/write shared files (via group permissions)
+- Files aren't world-readable (security)
+- Individual ownership is tracked (who created/modified)
+- New team members join the group to get access
+
+Example:
+- File: `-rwxrwx--- alice developers project.txt`
+- Alice owns it, developers group has access
+- Any member of "developers" group can read/write
+- Others cannot access (other permissions are `---`)
+
+WRITE YOUR ANSWER:
+------------------
+After examining the shared team project, write in my_answers.txt:
+- What is the ownership pattern for team files? (owner:group format)
+- How do groups enable team collaboration?
+- Why is this better than making files world-readable?
+- In your own words, explain the pattern: owner=individual, group=team.
+- How would a new team member get access to these files?
+
+Then proceed to the next exercise: clue3.txt in this same directory.
+
+Hint: Groups are the key to team collaboration! Files owned by the team group
+allow all team members to access them, while keeping files secure from others.

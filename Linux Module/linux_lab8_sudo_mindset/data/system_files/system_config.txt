@@ -1,0 +1,25 @@
+This is a system configuration file that requires sudo to read.
+
+System configuration files are typically located in /etc/ and contain
+settings that affect the entire system. These files are protected
+because modifying them incorrectly could break the system.
+
+Examples of system config files:
+- /etc/hosts - Hostname resolution
+- /etc/passwd - User account information
+- /etc/nginx/nginx.conf - Web server configuration
+- /etc/ssh/sshd_config - SSH server configuration
+
+Key points:
+- System config files are owned by root
+- They have restrictive permissions
+- They require sudo to read or modify
+- This is legitimate sudo use
+
+When is it appropriate to use sudo for system configs?
+- Reading for administrative purposes
+- Modifying system settings
+- Troubleshooting system issues
+- One-time administrative tasks
+
+Remember: Always backup system configs before modifying them!

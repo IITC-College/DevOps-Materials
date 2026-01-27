@@ -1,0 +1,15 @@
+# User Application Configuration
+
+This is a configuration file for a user application.
+
+It should be owned by the user, not root. Currently it's owned by root
+(by design for the lab exercise), but in a real scenario, this would
+be a design problem.
+
+Key points:
+- User applications should be owned by the user
+- You shouldn't need sudo to read your own config files
+- If you need sudo repeatedly, fix the ownership instead
+
+After fixing ownership with `sudo chown $USER:$USER config.txt`, you
+can read this file normally without sudo.

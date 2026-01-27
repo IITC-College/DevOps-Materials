@@ -1,0 +1,20 @@
+This is a protected system file that requires sudo to read.
+
+It contains sensitive system information that should only be accessible
+to administrators. This file is owned by root and has restrictive
+permissions (typically 600 or 640).
+
+Key points:
+- This file is owned by root
+- It has restrictive permissions
+- Regular users cannot read it without sudo
+- This is intentional for security
+
+This type of file requires sudo because:
+1. It contains sensitive information
+2. It's part of system configuration
+3. Only administrators should access it
+4. It's protected by design
+
+Remember: When you use sudo to read this file, your action is logged
+in the audit trail!

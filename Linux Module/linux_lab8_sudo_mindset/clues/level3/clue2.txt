@@ -1,0 +1,107 @@
+================================================================================
+                            LEVEL 3 - EXERCISE 2
+                    "Complete sudo Audit Challenge: Who Did What?"
+================================================================================
+
+Welcome to Exercise 2!
+
+Now you'll put your audit log reading skills to the test! You'll analyze
+a simulated scenario where someone used sudo to modify a critical file,
+and you need to find out WHO did it and WHAT they did.
+
+BACKGROUND:
+-----------
+In real-world system administration, you often need to:
+- Investigate security incidents
+- Find who made changes to critical files
+- Review sudo usage for compliance
+- Troubleshoot permission issues
+
+Being able to read and analyze audit logs is a critical skill.
+
+EXERCISE:
+---------
+You'll analyze a simulated audit log to find specific sudo activity.
+
+INSTRUCTIONS:
+-------------
+1. Read the simulated audit log:
+   cat ../../data/logs/sudo_example.log
+
+2. Your mission: Find evidence of suspicious sudo activity
+
+3. Look for entries that show:
+   - Someone modified a critical file
+   - Unusual sudo usage patterns
+   - Commands that might be problematic
+
+4. Use grep to search for specific patterns:
+   grep "COMMAND" ../../data/logs/sudo_example.log
+   grep "root" ../../data/logs/sudo_example.log
+   grep "etc" ../../data/logs/sudo_example.log
+
+5. Answer these questions:
+   - Who used sudo to modify /etc/hosts?
+   - When did this happen?
+   - What command was executed?
+   - Can you identify the terminal/session?
+
+6. Practice reading log entries:
+   - Identify timestamps
+   - Extract usernames
+   - Find commands executed
+   - Understand the context
+
+COMMANDS TO USE:
+----------------
+- cat ../../data/logs/sudo_example.log (read the log)
+- grep "COMMAND" ../../data/logs/sudo_example.log (find commands)
+- grep "root" ../../data/logs/sudo_example.log (find root operations)
+- grep "etc" ../../data/logs/sudo_example.log (find system file modifications)
+- less ../../data/logs/sudo_example.log (page through the log)
+
+WHAT TO OBSERVE:
+----------------
+- What patterns do you see in the log?
+- Who used sudo most frequently?
+- What types of commands were executed?
+- Can you identify suspicious activity?
+- What information is available in each entry?
+
+UNDERSTANDING:
+-------------
+Real-world audit log analysis involves:
+- **Timeline analysis**: When did events occur?
+- **User identification**: Who performed actions?
+- **Command analysis**: What was executed?
+- **Pattern recognition**: Unusual activity?
+- **Context understanding**: Why was sudo needed?
+
+Common audit scenarios:
+- Security incident investigation
+- Compliance review
+- Troubleshooting permission issues
+- Monitoring privileged access
+- Identifying unauthorized changes
+
+Skills needed:
+- Reading log formats
+- Using grep and other text tools
+- Understanding system events
+- Correlating different log entries
+- Drawing conclusions from evidence
+
+WRITE YOUR ANSWER:
+------------------
+After completing the exercise, write in my_answers.txt:
+- Who used sudo to modify /etc/hosts? (if found in log)
+- When did this happen? (timestamp)
+- What command was executed?
+- What patterns did you notice in the sudo usage?
+- Why is being able to analyze audit logs important?
+- What would you do if you found suspicious sudo activity?
+
+Then proceed to the final exercise: clue3.txt in this same directory.
+
+Hint: Audit logs tell a story. Learn to read them to understand what
+happened on the system!

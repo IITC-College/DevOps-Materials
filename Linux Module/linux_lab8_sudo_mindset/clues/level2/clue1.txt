@@ -1,0 +1,109 @@
+================================================================================
+                            LEVEL 2 - EXERCISE 1
+                    "Discovering sudo Alternatives: Fix, Don't Work Around"
+================================================================================
+
+Welcome to Level 2!
+
+Now you'll learn an important lesson: sudo should be used to FIX problems,
+not to work around them repeatedly. If you find yourself using sudo for the
+same file over and over, there's probably a better solution!
+
+BACKGROUND:
+-----------
+Many people use `sudo cat` or `sudo vim` every time they need to access a
+file. But if you need regular access to a file, it's better to fix the
+ownership or permissions ONCE, rather than using sudo repeatedly.
+
+The principle: Use sudo to FIX the problem (change ownership/permissions),
+not to work around it (using sudo every time).
+
+EXERCISE:
+---------
+You'll encounter files that are owned by root but should belong to you.
+Instead of using sudo every time, you'll fix the ownership once.
+
+INSTRUCTIONS:
+-------------
+1. Navigate to the projects/user_app directory:
+   cd ../../projects/user_app
+
+2. Try to read the config.txt file:
+   cat config.txt
+
+3. You'll get "Permission denied" - check why:
+   ls -l config.txt
+
+4. Notice: The file is owned by root, but it's YOUR application config!
+   This is a design problem - it should be owned by you.
+
+5. Instead of using `sudo cat config.txt` every time, let's FIX it:
+   sudo chown $USER:$USER config.txt
+
+6. Check the ownership now:
+   ls -l config.txt
+
+7. Now try to read it WITHOUT sudo:
+   cat config.txt
+
+8. It works! You fixed the problem once, now you don't need sudo anymore.
+
+9. Try the same with install.sh:
+   ls -l install.sh
+   sudo chown $USER:$USER install.sh
+   cat install.sh
+
+COMMANDS TO USE:
+----------------
+- cd ../../projects/user_app
+- cat config.txt (will fail first time)
+- ls -l config.txt
+- sudo chown $USER:$USER config.txt (fix ownership)
+- ls -l config.txt (verify change)
+- cat config.txt (should work now without sudo!)
+- ls -l install.sh
+- sudo chown $USER:$USER install.sh
+- cat install.sh
+
+WHAT TO OBSERVE:
+----------------
+- Why did you get "Permission denied" initially?
+- Who owned the file before fixing?
+- What command fixed the ownership?
+- Can you read it now without sudo?
+- What's the difference between fixing ownership vs using sudo repeatedly?
+
+UNDERSTANDING:
+-------------
+The key principle:
+- **BAD**: Using `sudo cat file.txt` every time you need to read it
+- **GOOD**: Using `sudo chown user:user file.txt` ONCE, then reading it normally
+
+Why is this better?
+- You only need sudo once (to fix the problem)
+- After that, you can work normally without sudo
+- It's more secure (less privilege elevation)
+- It's the correct solution (fix the root cause)
+
+When to use this approach:
+- Files that should belong to you but are owned by root
+- Files you need to access regularly
+- User application files (not system files!)
+
+When NOT to use this approach:
+- System files that should be owned by root
+- Files that are intentionally protected
+- Files that multiple users need to access
+
+WRITE YOUR ANSWER:
+------------------
+After completing the exercise, write in my_answers.txt:
+- Why did you get "Permission denied" for config.txt?
+- What command fixed the ownership?
+- What's the difference between using sudo repeatedly vs fixing ownership once?
+- When should you fix ownership instead of using sudo repeatedly?
+- When should you NOT change ownership?
+
+Then proceed to the next exercise: clue2.txt in this same directory.
+
+Hint: The key is to FIX the problem once, not work around it repeatedly!

@@ -1,0 +1,9 @@
+This is a file owned by the current user.
+
+When you run `ls -l` on this file, you should see that you are the owner.
+
+This file demonstrates owner permissions - since you own it, the owner
+permission set applies to you.
+
+File created: 2026-01-27
+Purpose: Demonstrate file ownership

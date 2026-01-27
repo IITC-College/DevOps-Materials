@@ -1,0 +1,13 @@
+This file is owned by root.
+
+This file demonstrates how ownership can block access even when permissions
+might seem to allow it.
+
+If you're not root and not in root's group, you only get "other" permissions
+for this file.
+
+File created: 2026-01-27
+Purpose: Demonstrate ownership blocking access
+
+Note: In a real lab environment, this file would be owned by root. For the
+lab exercise, students will see how ownership affects access.

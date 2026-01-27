@@ -1,0 +1,111 @@
+================================================================================
+                            LEVEL 3 - EXERCISE 3
+        "Complete Ownership Challenge" - Putting It All Together
+================================================================================
+
+Welcome to Level 3, Exercise 3 - The Final Challenge!
+
+Your task: Apply everything you've learned to fix ownership issues in a
+complex scenario.
+
+BACKGROUND:
+-----------
+In real DevOps work, you'll encounter files with various ownership issues:
+- Files owned by wrong users
+- Files in wrong groups
+- Files that need ownership changes for services
+- Mixed ownership in project directories
+
+Your job is to analyze, understand, and fix these issues using chown.
+
+EXERCISE:
+---------
+Navigate through multiple directories, identify ownership issues, and fix them.
+
+INSTRUCTIONS:
+-------------
+1. Check who you are:
+   
+   whoami
+
+2. Check your groups:
+   
+   groups
+
+3. Navigate to the database project:
+   
+   cd ../database
+
+4. List files and examine ownership:
+   
+   ls -l
+
+5. For each file, determine:
+   - Who owns it?
+   - What group does it belong to?
+   - Should it be owned differently? (read README if available)
+   - Do you have access? Why or why not?
+
+6. If ownership needs to be fixed, use chown:
+   
+   sudo chown mysql:mysql backup.sql
+
+7. Verify the change:
+   
+   ls -l backup.sql
+
+8. Navigate to other project directories and repeat the analysis:
+   
+   cd ../web_app
+   ls -l
+   # Analyze and fix as needed
+   
+   cd ../shared_team
+   ls -l
+   # Analyze and fix as needed
+
+9. Document your findings and fixes
+
+COMMANDS TO USE:
+----------------
+- whoami
+- groups
+- cd ../database (and other directories)
+- ls -l
+- sudo chown user:group filename (as needed)
+- cat README.md (if available)
+
+WHAT TO OBSERVE:
+----------------
+- What ownership issues do you find?
+- Which files should be owned by service users (mysql, www-data)?
+- Which files should be owned by you?
+- Which files should be in shared groups?
+- After fixing ownership, can you access files correctly?
+- Did the ownership changes solve access problems?
+
+UNDERSTANDING:
+-------------
+Ownership fixes follow patterns:
+- Service files → owned by service user (mysql:mysql, www-data:www-data)
+- Personal files → owned by you (youruser:yourgroup)
+- Team files → owned by team member, group=team (alice:developers)
+- Config files → owned by service that needs them
+
+Always verify with `ls -l` after chown!
+
+WRITE YOUR ANSWER:
+------------------
+After completing the challenge, write in my_answers.txt:
+- List 3 ownership issues you found and fixed
+- For each fix, explain WHY the ownership needed to change
+- What pattern did you notice for service files (web, database)?
+- What pattern did you notice for team files?
+- In your own words, summarize when and why you would use chown in real work.
+- What is the most important thing you learned about ownership in this lab?
+
+Congratulations! You've completed the Ownership and Groups lab!
+
+Hint: Ownership is about WHO can access files. Understanding ownership helps
+you fix access problems, secure systems, and enable collaboration. Always
+check ownership with `ls -l` before and after using chown!

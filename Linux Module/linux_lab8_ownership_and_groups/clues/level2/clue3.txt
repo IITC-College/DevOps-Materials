@@ -1,0 +1,103 @@
+================================================================================
+                            LEVEL 2 - EXERCISE 3
+            "Changing Ownership" - Using chown to Fix Ownership
+================================================================================
+
+Welcome to Level 2, Exercise 3!
+
+Your task: Learn to change file ownership using the `chown` command.
+
+BACKGROUND:
+-----------
+Sometimes you need to change who owns a file. For example:
+- A file was created by root but should be owned by you
+- A file needs to be transferred to another user
+- You're fixing ownership after a deployment
+
+The command is `chown`, but it requires `sudo` because only root can change
+ownership. This is a security feature - regular users can't steal ownership
+of files!
+
+EXERCISE:
+---------
+Try to change ownership without sudo (it will fail), then use sudo to change it.
+
+INSTRUCTIONS:
+-------------
+1. Check who you are:
+   
+   whoami
+
+2. Navigate to the scripts directory:
+   
+   cd ../../scripts
+
+3. List files to see their current ownership:
+   
+   ls -l
+
+4. Try to change ownership WITHOUT sudo (this will fail):
+   
+   chown $(whoami):$(whoami) check_owner.sh
+
+5. Observe the error message - what does it say?
+
+6. Now use sudo to change ownership:
+   
+   sudo chown $(whoami):$(whoami) check_owner.sh
+
+7. Verify the change worked:
+   
+   ls -l check_owner.sh
+
+8. Notice that the owner changed to your username!
+
+COMMANDS TO USE:
+----------------
+- whoami
+- cd ../../scripts
+- ls -l
+- chown $(whoami):$(whoami) check_owner.sh (will fail)
+- sudo chown $(whoami):$(whoami) check_owner.sh
+- ls -l check_owner.sh
+
+WHAT TO OBSERVE:
+----------------
+- What error message do you get when trying chown without sudo?
+- Why do you think chown requires sudo?
+- After using sudo chown, who owns the file now?
+- What does the format `user:group` mean in chown?
+- What does `$(whoami)` do? (It runs the whoami command and uses the result)
+
+UNDERSTANDING:
+-------------
+The `chown` command changes file ownership:
+- Format: `chown user:group filename`
+- `user` is the new owner (username or UID)
+- `group` is the new group (groupname or GID)
+- Requires `sudo` because only root can change ownership (security!)
+
+Why sudo is required:
+- Prevents users from stealing ownership of files
+- Prevents users from giving away files they don't own
+- Only root (or users with sudo) can change ownership
+
+The `$(whoami)` syntax:
+- Runs the `whoami` command
+- Uses the output (your username) in the chown command
+- Equivalent to typing your username directly
+
+WRITE YOUR ANSWER:
+------------------
+After completing the exercise, write in my_answers.txt:
+- What error message did you get when trying chown without sudo?
+- Why do you think chown requires sudo? (security reason)
+- Who owned check_owner.sh before chown?
+- Who owns it after chown?
+- What does the format `user:group` mean in chown?
+- In your own words, explain when you might need to use chown in real work.
+
+Then proceed to Level 3: cd ../../clues/level3
+
+Hint: chown is powerful but requires sudo for security. Always verify ownership
+changes with `ls -l` after using chown!

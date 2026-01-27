@@ -1,0 +1,11 @@
+This file belongs to a group.
+
+If you're a member of the file's group, you get group permissions.
+
+This demonstrates how groups enable file sharing among team members.
+
+File created: 2026-01-27
+Purpose: Demonstrate group-based access
+
+Group ownership allows multiple users to access files without making them
+world-readable.

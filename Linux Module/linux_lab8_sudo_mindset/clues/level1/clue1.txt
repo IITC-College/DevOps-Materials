@@ -1,0 +1,87 @@
+================================================================================
+                            LEVEL 1 - EXERCISE 1
+                    "Permission Denied: To sudo or Not to sudo?"
+================================================================================
+
+Welcome to Level 1!
+
+Your first exercise: Encountering a "Permission denied" error and learning
+when sudo is actually appropriate.
+
+BACKGROUND:
+-----------
+In Linux, when you get "Permission denied", your first instinct might be to
+use sudo. But that's not always the right solution! Sometimes the problem is
+that you need to fix permissions or ownership, not elevate privileges.
+
+The key is to UNDERSTAND why you got "Permission denied" before deciding
+what to do about it.
+
+EXERCISE:
+---------
+You'll encounter a protected file and learn to analyze the situation before
+using sudo.
+
+INSTRUCTIONS:
+-------------
+1. Navigate to the data/system_files directory:
+   cd ../../data/system_files
+
+2. Try to read the protected.txt file:
+   cat protected.txt
+
+3. You'll get "Permission denied" - this is expected!
+
+4. Check the file permissions to understand WHY:
+   ls -l protected.txt
+
+5. Notice:
+   - Who owns the file? (Look at the owner column)
+   - What are the permissions? (Look at the permission string)
+   - Why can't you read it?
+
+6. Now use sudo to read it (this is appropriate here):
+   sudo cat protected.txt
+
+7. Observe the difference - sudo allows you to read it because it elevates
+   your privileges to root level.
+
+COMMANDS TO USE:
+----------------
+- cd ../../data/system_files
+- cat protected.txt (will fail first time)
+- ls -l protected.txt
+- sudo cat protected.txt (should work!)
+
+WHAT TO OBSERVE:
+----------------
+- What error message appears when you try to read without sudo?
+- Who owns the protected.txt file?
+- What are the file permissions?
+- Why can't you read it without sudo?
+- What happens when you use sudo cat?
+
+UNDERSTANDING:
+-------------
+In this case, sudo is appropriate because:
+- The file is owned by root (system file)
+- It contains system information that requires elevated privileges
+- You're reading it, not modifying it
+- This is a legitimate administrative operation
+
+However, remember: Not every "Permission denied" requires sudo. Sometimes
+the solution is to fix ownership or permissions instead!
+
+WRITE YOUR ANSWER:
+------------------
+After completing the exercise, write in my_answers.txt:
+- What error message did you see when trying to read protected.txt?
+- Who owns the protected.txt file?
+- What are the file permissions?
+- Why was sudo needed in this case?
+- What did the file contain?
+
+Then proceed to the next exercise: clue2.txt in this same directory.
+
+Hint: The key is understanding WHY you got "Permission denied" before
+deciding whether sudo is the right solution!

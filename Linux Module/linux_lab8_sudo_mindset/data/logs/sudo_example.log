@@ -1,0 +1,41 @@
+Jan 27 10:00:15 server sudo: alice : TTY=pts/0 ; PWD=/home/alice ; USER=root ; COMMAND=/usr/bin/ls /root
+Jan 27 10:00:15 server sudo: pam_unix(sudo:session): session opened for user root by alice(uid=1000)
+Jan 27 10:00:15 server sudo: pam_unix(sudo:session): session closed for user root
+
+Jan 27 10:05:32 server sudo: bob : TTY=pts/1 ; PWD=/home/bob ; USER=root ; COMMAND=/usr/bin/cat /etc/shadow
+Jan 27 10:05:32 server sudo: pam_unix(sudo:session): session opened for user root by bob(uid=1001)
+Jan 27 10:05:33 server sudo: pam_unix(sudo:session): session closed for user root
+
+Jan 27 10:12:45 server sudo: charlie : TTY=pts/2 ; PWD=/var/www ; USER=root ; COMMAND=/usr/bin/chown www-data:www-data /var/www/html/index.html
+Jan 27 10:12:45 server sudo: pam_unix(sudo:session): session opened for user root by charlie(uid=1002)
+Jan 27 10:12:46 server sudo: pam_unix(sudo:session): session closed for user root
+
+Jan 27 10:18:20 server sudo: alice : TTY=pts/0 ; PWD=/home/alice/projects ; USER=root ; COMMAND=/usr/bin/apt install nginx
+Jan 27 10:18:20 server sudo: pam_unix(sudo:session): session opened for user root by alice(uid=1000)
+Jan 27 10:18:25 server sudo: pam_unix(sudo:session): session closed for user root
+
+Jan 27 10:25:10 server sudo: bob : TTY=pts/1 ; PWD=/etc ; USER=root ; COMMAND=/usr/bin/nano /etc/hosts
+Jan 27 10:25:10 server sudo: pam_unix(sudo:session): session opened for user root by bob(uid=1001)
+Jan 27 10:25:15 server sudo: pam_unix(sudo:session): session closed for user root
+
+Jan 27 10:30:00 server sudo: david : TTY=pts/3 ; PWD=/home/david ; USER=root ; COMMAND=/usr/bin/systemctl restart apache2
+Jan 27 10:30:00 server sudo: pam_unix(sudo:session): session opened for user root by david(uid=1003)
+Jan 27 10:30:02 server sudo: pam_unix(sudo:session): session closed for user root
+
+This is a simulated authentication log showing sudo usage. In a real
+system, this would be in /var/log/auth.log (Debian/Ubuntu) or
+/var/log/secure (RHEL/CentOS).
+
+Log entry format:
+- Timestamp: When the command was executed
+- Username: Who ran the command (alice, bob, charlie, etc.)
+- TTY: Terminal/session information
+- PWD: Current working directory
+- USER: User the command runs as (usually root)
+- COMMAND: The actual command executed
+
+Key observations:
+- Every sudo command is logged
+- You can see who did what and when
+- This provides accountability
+- System administrators use these logs for security monitoring

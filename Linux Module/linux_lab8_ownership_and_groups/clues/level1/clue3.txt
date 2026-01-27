@@ -1,0 +1,90 @@
+================================================================================
+                            LEVEL 1 - EXERCISE 3
+            "Owner vs Group vs Other" - Which Permissions Apply?
+================================================================================
+
+Welcome to Level 1, Exercise 3!
+
+Your task: Understand when owner, group, or other permissions apply to you.
+
+BACKGROUND:
+-----------
+Linux has three sets of permissions for every file:
+- Owner permissions (what the owner can do)
+- Group permissions (what group members can do)
+- Other permissions (what everyone else can do)
+
+But which set applies to YOU? It depends on:
+1. Are you the owner? → Owner permissions apply
+2. Are you in the group? → Group permissions apply
+3. Otherwise → Other permissions apply
+
+Only ONE set applies - Linux checks in this order!
+
+EXERCISE:
+---------
+Examine files with different permission patterns and understand which set applies.
+
+INSTRUCTIONS:
+-------------
+1. First, check who you are:
+   
+   whoami
+
+2. Check which groups you belong to:
+   
+   groups
+
+3. Navigate to the data/files directory:
+   
+   cd ../../data/files
+
+4. List files with detailed information:
+   
+   ls -l
+
+5. For each file, determine:
+   - Are you the owner? (compare to your username from `whoami`)
+   - Are you in the group? (compare to your groups from `groups`)
+   - Which permission set applies to you?
+
+COMMANDS TO USE:
+----------------
+- whoami
+- groups
+- cd ../../data/files
+- ls -l
+
+WHAT TO OBSERVE:
+----------------
+- Which files are you the owner of?
+- Which files have groups you belong to?
+- For files you own: which permission set applies? (owner/group/other)
+- For files in your groups: which permission set applies?
+- For files you don't own and aren't in the group: which permission set applies?
+
+UNDERSTANDING:
+-------------
+Linux checks permissions in this order:
+1. Are you the owner? → Use owner permissions (rwx)
+2. Are you in the group? → Use group permissions (rwx)
+3. Otherwise → Use other permissions (rwx)
+
+Example:
+- File: `-rwxr-x--- user1 developers file.txt`
+- If you ARE `user1` → You get `rwx` (owner permissions)
+- If you're IN `developers` group → You get `r-x` (group permissions)
+- Otherwise → You get `---` (other permissions = no access!)
+
+WRITE YOUR ANSWER:
+------------------
+After examining the files, write in my_answers.txt:
+- For a file you own: which permission set applies to you? Why?
+- For a file in a group you belong to: which permission set applies? Why?
+- For a file you don't own and aren't in the group: which permission set applies? Why?
+- In your own words, explain the order Linux checks permissions (owner → group → other)
+
+Then proceed to Level 2: cd ../../clues/level2
+
+Hint: Remember - Linux checks owner FIRST, then group, then other. Only ONE
+set of permissions applies to you, based on your relationship to the file!

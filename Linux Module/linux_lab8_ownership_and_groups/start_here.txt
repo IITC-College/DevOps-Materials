@@ -1,0 +1,96 @@
+================================================================================
+    WELCOME TO THE OWNERSHIP AND GROUPS LAB!
+================================================================================
+
+Hello, Linux Explorer!
+
+This lab is designed to teach you about file ownership and groups in Linux. You
+will learn who you are in the system, how to read file ownership, and why
+ownership matters for file access. You will also learn to change ownership when
+needed using the `chown` command.
+
+IMPORTANT: In this lab, you will learn that permissions are only HALF the
+story. Ownership is the other half. A file might have `rwx` permissions, but
+if you're not the owner (and not in the group), those permissions might not
+apply to you!
+
+================================================================================
+    YOUR FIRST TASK
+================================================================================
+
+1. Check where you are right now:
+   Run: pwd
+
+2. Discover who you are in Linux:
+   Run: whoami
+
+3. Get detailed information about your identity:
+   Run: id
+
+4. See which groups you belong to:
+   Run: groups
+
+5. Navigate to the first level of clues:
+   Run: cd clues/level1
+
+6. Read the first exercise:
+   Run: cat clue1.txt
+
+================================================================================
+    WHAT TO EXPECT
+================================================================================
+
+- You will learn to identify yourself with `whoami`, `id`, and `groups`
+- You will learn to read file ownership from `ls -l` output
+- You will understand when ownership blocks access (even with permissions)
+- You will use `sudo chown` to change file ownership
+- You will see how ownership works in real DevOps scenarios (web servers, teams)
+
+Remember: Ownership determines WHICH permission set applies to you:
+- If you ARE the owner → owner permissions apply
+- If you're IN the group → group permissions apply
+- Otherwise → other permissions apply
+
+================================================================================
+    IMPORTANT REMINDERS
+================================================================================
+
+* ALWAYS know who you are - Use 'whoami' and 'id' to understand your identity
+* READ ownership first - Use 'ls -l' to see owner:group before accessing files
+* Ownership matters - Even with rwx, ownership determines which permissions apply
+* chown requires sudo - Only root can change ownership (this is by design!)
+* Groups enable sharing - Files with group ownership allow team collaboration
+* Take notes as you progress through the exercises
+* Don't worry about making mistakes - that's how you learn!
+
+================================================================================
+    COMMANDS YOU'LL USE
+================================================================================
+
+Identity Commands:
+- whoami          (show your username)
+- id              (show your user ID, group ID, and groups)
+- groups          (list groups you belong to)
+
+Reading Ownership:
+- ls -l           (detailed file listing with permissions and ownership)
+- ls -la          (all files including hidden, with ownership)
+
+Changing Ownership:
+- chown user:group <file>     (change ownership - requires sudo)
+- sudo chown user:user <file> (change ownership to yourself)
+- sudo chown user:group <file> (change both owner and group)
+
+Navigation:
+- cd <directory>  (change directory)
+- pwd            (show current location)
+
+================================================================================
+    READY? LET'S BEGIN!
+================================================================================
+
+Your first destination: clues/level1/clue1.txt
+
+Navigate there and read the file to begin discovering your identity in Linux!
+
+Good luck, and remember: Know yourself first, then understand what you own!

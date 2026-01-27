@@ -1,0 +1,89 @@
+================================================================================
+                            LEVEL 2 - EXERCISE 1
+            "Ownership Blocking Access" - When Owner Matters More
+================================================================================
+
+Welcome to Level 2!
+
+Your task: Understand how ownership can block access, even when permissions
+seem to allow it.
+
+BACKGROUND:
+-----------
+Sometimes a file has permissions that look like they should allow access, but
+you still can't access it. Why? Because ownership matters! Even if a file has
+`rwx` permissions, if you're not the owner AND not in the group, you only get
+the "other" permissions - which might be `---` (no access).
+
+EXERCISE:
+---------
+Try to access a file owned by root and understand why access is blocked.
+
+INSTRUCTIONS:
+-------------
+1. Check who you are:
+   
+   whoami
+
+2. Navigate to the data/files directory:
+   
+   cd ../../data/files
+
+3. List files with detailed information:
+   
+   ls -l
+
+4. Look for a file that might be owned by root or another user
+
+5. Try to read that file:
+   
+   cat root_file.txt
+
+6. Observe what happens - do you get "Permission denied"?
+
+7. Check the permissions and ownership:
+   
+   ls -l root_file.txt
+
+COMMANDS TO USE:
+----------------
+- whoami
+- cd ../../data/files
+- ls -l
+- cat root_file.txt (may fail)
+- ls -l root_file.txt
+
+WHAT TO OBSERVE:
+----------------
+- Who owns root_file.txt? (check ls -l output)
+- Are you the owner? (compare to your username)
+- What are the permissions? (rwxrwxrwx format)
+- What are the "other" permissions? (the last rwx)
+- Can you read the file? Why or why not?
+
+UNDERSTANDING:
+-------------
+Even if a file has permissions like `-rw-r--r--`, the ownership determines
+which permission set applies to you:
+
+- If file is owned by `root` and you're `student`:
+  - You're NOT the owner → owner permissions don't apply
+  - You're NOT in root's group → group permissions don't apply
+  - You get "other" permissions → which might be `r--` (read only) or `---` (no access)
+
+This is why ownership is so important - it's the first check Linux makes!
+
+WRITE YOUR ANSWER:
+------------------
+After examining the file, write in my_answers.txt:
+- Who owns root_file.txt?
+- Are you the owner? (yes/no)
+- What are the "other" permissions for this file?
+- Can you read the file? Why or why not?
+- In your own words, explain why ownership can block access even when permissions
+  seem to allow it.
+
+Then proceed to the next exercise: clue2.txt in this same directory.
+
+Hint: Ownership is the FIRST check - Linux asks "Are you the owner?" before
+checking permissions. If you're not the owner, you only get "other" permissions!

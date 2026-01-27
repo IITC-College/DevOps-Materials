@@ -1,0 +1,32 @@
+TEAM PROJECT NOTES
+==================
+
+Project: Shared Development Environment
+Team: developers
+Date: 2026-01-27
+
+Team Members:
+- Alice (project lead)
+- Bob (backend developer)
+- Charlie (frontend developer)
+
+Current Status:
+- Database setup: Complete
+- API endpoints: In progress
+- Frontend: Planning phase
+
+Next Steps:
+1. Complete API documentation
+2. Set up CI/CD pipeline
+3. Deploy to staging environment
+
+Notes:
+- All team members should have access to these files
+- Files are owned by individual team members
+- Group is set to "developers" for team access
+- This enables collaboration without making files world-readable
+
+This file demonstrates the team collaboration pattern:
+- Owner: Individual team member (who created/modified)
+- Group: Shared team group (developers)
+- Permissions: Group has read/write access

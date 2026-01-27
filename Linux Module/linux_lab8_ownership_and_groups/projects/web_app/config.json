@@ -1,0 +1,16 @@
+{
+  "server": {
+    "host": "0.0.0.0",
+    "port": 8080,
+    "timeout": 30
+  },
+  "database": {
+    "host": "localhost",
+    "port": 3306,
+    "name": "webapp_db"
+  },
+  "logging": {
+    "level": "info",
+    "file": "/var/log/webapp/app.log"
+  }
+}

@@ -1,0 +1,123 @@
+================================================================================
+                            LEVEL 3 - EXERCISE 1
+                    "Critical Thinking: sudo or Design Problem?"
+================================================================================
+
+Welcome to Level 3!
+
+Now you'll develop critical thinking skills about sudo usage. The key question:
+"Is this really a sudo problem, or is it a design problem?"
+
+BACKGROUND:
+-----------
+Many "Permission denied" errors that seem to require sudo are actually
+design problems. The solution isn't to use sudo - it's to fix the design!
+
+Examples of design problems:
+- Script needs to write to /var/log/myapp.log → Should run as service user
+- Can't read your own file → Fix ownership, don't use sudo
+- Application needs root to start → Should run as service with proper user
+
+Examples of legitimate sudo use:
+- Installing system packages (apt install, yum install)
+- Modifying system configuration files (/etc/hosts, /etc/nginx/nginx.conf)
+- Managing system services (systemctl start/stop)
+- Reading protected system files for administration
+
+EXERCISE:
+---------
+You'll analyze different scenarios and determine if sudo is needed or if
+it's a design problem that should be fixed differently.
+
+INSTRUCTIONS:
+-------------
+1. Navigate to the projects directory:
+   cd ../../projects
+
+2. Read the README files in both project directories:
+   cat user_app/README.md
+   cat system_service/README.md
+
+3. Analyze each scenario:
+
+   SCENARIO 1: User Application
+   - Location: projects/user_app/
+   - Problem: Files are owned by root, but it's YOUR application
+   - Question: Should you use sudo every time, or fix ownership?
+   - Answer: FIX OWNERSHIP! Use sudo chown once, then work normally.
+
+   SCENARIO 2: System Service
+   - Location: projects/system_service/
+   - Problem: Service needs to modify system configuration
+   - Question: Should this require sudo?
+   - Answer: YES - This is a legitimate system service that needs sudo.
+
+   SCENARIO 3: Script Writing to /var/log
+   - Problem: Your script needs to write to /var/log/myapp.log
+   - Question: Should you use sudo in the script?
+   - Answer: DESIGN PROBLEM! The script should run as a service user
+            with proper permissions, not use sudo.
+
+   SCENARIO 4: Can't Read Your Own File
+   - Problem: You created a file but can't read it
+   - Question: Should you use sudo?
+   - Answer: DESIGN PROBLEM! Fix ownership/permissions, don't use sudo.
+
+4. For each scenario, write your analysis:
+   - Is sudo needed? (Yes/No)
+   - Why or why not?
+   - What's the correct solution?
+
+COMMANDS TO USE:
+----------------
+- cd ../../projects
+- cat user_app/README.md
+- cat system_service/README.md
+- ls -l user_app/
+- ls -l system_service/
+- Think about each scenario!
+
+WHAT TO OBSERVE:
+----------------
+- What's the difference between user_app and system_service?
+- When is sudo legitimate?
+- When is it a design problem?
+- What's the correct solution for each scenario?
+- How do you distinguish between the two?
+
+UNDERSTANDING:
+-------------
+The key distinction:
+
+**Legitimate sudo use:**
+- System administration tasks
+- Installing/modifying system software
+- Managing system services
+- Reading protected system files for admin purposes
+- One-time fixes (like chown to fix ownership)
+
+**Design problems (don't use sudo):**
+- Files that should belong to you but are owned by root
+- Scripts that need regular access to protected locations
+- Applications that require sudo to run (should run as service)
+- Repeated sudo usage for the same file/operation
+
+The principle:
+- If you need sudo repeatedly for the same thing → It's a design problem
+- If it's a one-time administrative task → sudo is appropriate
+- If it's your own application → Fix ownership/permissions
+- If it's a system service → sudo may be legitimate
+
+WRITE YOUR ANSWER:
+------------------
+After completing the exercise, write in my_answers.txt:
+- Scenario 1 (user_app): Is sudo needed? Why? What's the solution?
+- Scenario 2 (system_service): Is sudo needed? Why? What's the solution?
+- Scenario 3 (script writing to /var/log): Is sudo needed? Why? What's the solution?
+- Scenario 4 (can't read own file): Is sudo needed? Why? What's the solution?
+- What's the key question to ask before using sudo?
+
+Then proceed to the next exercise: clue2.txt in this same directory.
+
+Hint: The key is asking "Is this really an administrative task, or is there
+a better way to solve this?"

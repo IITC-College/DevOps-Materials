@@ -1,0 +1,88 @@
+================================================================================
+                            LEVEL 3 - EXERCISE 1
+        "Web Server Files" - Ownership in Production Systems
+================================================================================
+
+Welcome to Level 3!
+
+Your task: Understand how ownership works in real DevOps scenarios - web servers.
+
+BACKGROUND:
+-----------
+In production systems, different services run as different users for security.
+For example:
+- Web servers (nginx, Apache) run as `www-data` or `nginx` user
+- Database servers run as `mysql` or `postgres` user
+- Application files need correct ownership for the service to access them
+
+This is a security best practice: services run with minimal privileges, not as root!
+
+EXERCISE:
+---------
+Examine a web application project and understand why ownership matters for deployment.
+
+INSTRUCTIONS:
+-------------
+1. Navigate to the web application project:
+   
+   cd ../../projects/web_app
+
+2. List files with detailed information:
+   
+   ls -l
+
+3. Check who owns the files:
+   - Look at the owner column
+   - Look at the group column
+
+4. Read the README to understand the deployment scenario:
+   
+   cat README.md
+
+5. Try to understand why certain files have specific ownership
+
+6. If needed, use chown to fix ownership for deployment:
+   
+   sudo chown www-data:www-data config.json
+
+COMMANDS TO USE:
+----------------
+- cd ../../projects/web_app
+- ls -l
+- cat README.md
+- sudo chown www-data:www-data config.json (if needed)
+
+WHAT TO OBSERVE:
+----------------
+- Who owns the files in the web_app directory?
+- What groups do the files belong to?
+- Why do you think web server files are owned by www-data?
+- What happens if a web server file is owned by root?
+- What happens if a web server file is owned by a regular user?
+
+UNDERSTANDING:
+-------------
+Web servers run as specific users (like `www-data` or `nginx`) for security:
+- The web server process runs as that user
+- Files the web server needs to read must be accessible to that user
+- This means files should be owned by the web server user (or group)
+- This is called "principle of least privilege" - services get only what they need
+
+Common ownership patterns:
+- Web files: `www-data:www-data` or `nginx:nginx`
+- Config files: `www-data:www-data` (readable by web server)
+- Log files: `www-data:www-data` (writable by web server)
+
+WRITE YOUR ANSWER:
+------------------
+After examining the web app, write in my_answers.txt:
+- Who should own web server files? Why?
+- What is the "principle of least privilege"?
+- Why don't web servers run as root?
+- In your own words, explain why ownership matters for web server deployment.
+- What would happen if config.json was owned by root instead of www-data?
+
+Then proceed to the next exercise: clue2.txt in this same directory.
+
+Hint: Services run as specific users for security. Files those services need
+must be owned by (or accessible to) those service users!

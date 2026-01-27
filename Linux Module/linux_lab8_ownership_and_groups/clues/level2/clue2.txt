@@ -1,0 +1,91 @@
+================================================================================
+                            LEVEL 2 - EXERCISE 2
+        "Group Membership Matters" - How Groups Enable Access
+================================================================================
+
+Welcome to Level 2, Exercise 2!
+
+Your task: Understand how group membership affects file access.
+
+BACKGROUND:
+-----------
+Groups are a way to share access to files among multiple users. If a file is
+owned by a group you belong to, you get the GROUP permissions (not the "other"
+permissions). This is how teams share files in Linux.
+
+EXERCISE:
+---------
+Examine files with group ownership and see how your group membership affects
+access.
+
+INSTRUCTIONS:
+-------------
+1. Check which groups you belong to:
+   
+   groups
+
+2. Navigate to the data/files directory:
+   
+   cd ../../data/files
+
+3. List files with detailed information:
+   
+   ls -l
+
+4. Look for files with group ownership (check the group column)
+
+5. For each file, determine:
+   - What group owns it?
+   - Are you a member of that group? (check with `groups`)
+   - What are the group permissions?
+   - Can you access the file based on group permissions?
+
+6. Try to read a file owned by a group you belong to:
+   
+   cat group_file.txt
+
+COMMANDS TO USE:
+----------------
+- groups
+- cd ../../data/files
+- ls -l
+- cat group_file.txt
+
+WHAT TO OBSERVE:
+----------------
+- What groups do files belong to?
+- Are you a member of any of those groups? (check with `groups`)
+- What are the group permissions for files in your groups?
+- Can you access files based on group membership?
+- What happens if a file's group is one you DON'T belong to?
+
+UNDERSTANDING:
+-------------
+Group membership is checked SECOND (after owner check):
+
+1. Are you the owner? → Use owner permissions
+2. Are you in the group? → Use group permissions
+3. Otherwise → Use other permissions
+
+Example:
+- File: `-rwxr-x--- user1 developers file.txt`
+- Group permissions: `r-x` (read and execute)
+- If you're in `developers` group → You get `r-x` access
+- If you're NOT in `developers` group → You get `---` (other permissions = no access)
+
+This is how teams share files: owner=individual, group=team, group permissions=shared access!
+
+WRITE YOUR ANSWER:
+------------------
+After examining the files, write in my_answers.txt:
+- List the groups that files belong to in data/files/
+- Which of those groups are you a member of? (check with `groups`)
+- For a file in a group you belong to: what permissions do you get?
+- For a file in a group you DON'T belong to: what permissions do you get?
+- In your own words, explain how groups enable file sharing in teams.
+
+Then proceed to the next exercise: clue3.txt in this same directory.
+
+Hint: Groups are the key to collaboration! Files owned by your group give you
+group permissions, enabling team members to share access without making files
+world-readable.

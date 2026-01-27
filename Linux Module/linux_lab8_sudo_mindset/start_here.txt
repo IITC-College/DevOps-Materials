@@ -1,0 +1,110 @@
+================================================================================
+    WELCOME TO THE UNDERSTANDING SUDO LAB!
+================================================================================
+
+Hello, Linux Explorer!
+
+This lab is designed to teach you when sudo is actually needed and how to use
+it responsibly. You will learn to break the "sudo all the things" reflex and
+understand that sudo usage is logged and monitored for security.
+
+IMPORTANT: This lab is about developing critical thinking about privilege
+elevation. Not every "Permission denied" requires sudo - sometimes the solution
+is to fix permissions or ownership instead of using sudo repeatedly.
+
+================================================================================
+    WHAT YOU'LL LEARN
+================================================================================
+
+- When sudo is actually needed vs when it's not
+- How to analyze "Permission denied" errors before reaching for sudo
+- That sudo usage is logged and audited
+- How to fix root causes (ownership/permissions) instead of working around them
+- Critical thinking about when privilege elevation is appropriate
+
+================================================================================
+    YOUR FIRST TASK
+================================================================================
+
+1. Check where you are right now:
+   Run: pwd
+
+2. List all files in the current directory:
+   Run: ls -la
+
+3. Navigate to the first level of clues:
+   Run: cd clues/level1
+
+4. Read the first exercise:
+   Run: cat clue1.txt
+
+================================================================================
+    WHAT TO EXPECT
+================================================================================
+
+- You WILL encounter "Permission denied" messages - analyze them first!
+- You will learn when sudo is appropriate and when it's not
+- You will discover that sudo is logged for security audit
+- You will learn alternatives to using sudo repeatedly
+- You will develop critical thinking about privilege elevation
+- You will understand the responsibility that comes with sudo
+
+Remember: "Permission denied" doesn't automatically mean "use sudo". Think
+first, analyze the situation, and choose the appropriate solution.
+
+================================================================================
+    IMPORTANT REMINDERS
+================================================================================
+
+* "Permission denied" ≠ "Use sudo" - Analyze first, then decide
+* sudo is for administrative tasks - Not for working around bad design
+* sudo is logged - You are accountable for what you do with elevated privileges
+* Fix the root cause - Change ownership/permissions instead of using sudo repeatedly
+* Think before sudo - Ask: "Is this really an administrative operation?"
+* Read permissions first - Use 'ls -l' to understand why access is denied
+* Consider alternatives - Can you fix ownership/permissions instead?
+* Remember accountability - Your sudo usage is tracked in audit logs
+* Take notes as you progress through the exercises
+* Don't worry about making mistakes - that's how you learn!
+
+================================================================================
+    COMMANDS YOU'LL USE
+================================================================================
+
+Privilege Elevation:
+- sudo <command>     (run command with elevated privileges)
+- sudo -l            (list commands you can run with sudo)
+- id                 (show your user ID and groups)
+- whoami             (show current username)
+
+Reading Permissions:
+- ls -l              (detailed file listing with permissions)
+- ls -la             (all files including hidden, with permissions)
+
+Changing Ownership/Permissions:
+- sudo chown <user>:<group> <file>  (change file ownership)
+- chmod <permissions> <file>        (change file permissions)
+
+Reading Files:
+- cat <file>         (display file contents)
+- less <file>       (view file page by page)
+- sudo cat <file>   (read files requiring elevated privileges)
+
+Audit Logs:
+- sudo cat /var/log/auth.log  (view authentication log - Debian/Ubuntu)
+- sudo cat /var/log/secure    (view authentication log - RHEL/CentOS)
+- grep sudo <logfile>         (search for sudo entries)
+
+Navigation:
+- cd <directory>    (change directory)
+- pwd               (show current location)
+
+================================================================================
+    READY? LET'S BEGIN!
+================================================================================
+
+Your first destination: clues/level1/clue1.txt
+
+Navigate there and read the file to begin your journey into understanding sudo!
+
+Good luck, and remember: Think before you sudo!

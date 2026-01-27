@@ -1,0 +1,101 @@
+================================================================================
+                            LEVEL 1 - EXERCISE 2
+                    "When is sudo Actually Needed?"
+================================================================================
+
+Welcome to Exercise 2!
+
+Now you'll learn to identify when sudo is actually needed versus when it's not.
+This is crucial for developing good Linux habits!
+
+BACKGROUND:
+-----------
+Many beginners use sudo for everything when they get "Permission denied". But
+sudo should only be used for ADMINISTRATIVE OPERATIONS - tasks that require
+system-level privileges.
+
+The key question: "Is this really an administrative task, or is there a better
+way to solve this?"
+
+EXERCISE:
+---------
+You'll analyze different scenarios and determine when sudo is needed.
+
+INSTRUCTIONS:
+-------------
+1. Stay in the data/system_files directory (or navigate there):
+   cd ../../data/system_files
+
+2. Read the readable.txt file (no sudo needed):
+   cat readable.txt
+
+3. Notice: This file doesn't require sudo. Why? Check its permissions:
+   ls -l readable.txt
+
+4. Now try to read the system_config.txt file:
+   cat system_config.txt
+
+5. You'll get "Permission denied" - check why:
+   ls -l system_config.txt
+
+6. Use sudo to read it:
+   sudo cat system_config.txt
+
+7. Now analyze the three scenarios:
+
+   SCENARIO A: Reading your own file in your home directory
+   - Would you need sudo? NO
+   - Why? You own the file, you have permissions
+
+   SCENARIO B: Installing a system package (like nginx)
+   - Would you need sudo? YES
+   - Why? Installing packages modifies system-wide configuration
+
+   SCENARIO C: Creating a file in /tmp directory
+   - Would you need sudo? NO
+   - Why? /tmp is designed for temporary files, accessible to all users
+
+COMMANDS TO USE:
+----------------
+- cat readable.txt (should work without sudo)
+- ls -l readable.txt
+- cat system_config.txt (will fail)
+- ls -l system_config.txt
+- sudo cat system_config.txt (should work)
+
+WHAT TO OBSERVE:
+----------------
+- What's the difference between readable.txt and system_config.txt?
+- Who owns each file?
+- What are the permission differences?
+- When is sudo actually needed?
+- When is sudo NOT needed?
+
+UNDERSTANDING:
+-------------
+sudo is needed for:
+- System administration tasks (installing packages, modifying system configs)
+- Reading system-protected files (like /etc/shadow)
+- Modifying system directories (like /etc, /usr, /var)
+- Services that affect the entire system
+
+sudo is NOT needed for:
+- Working with your own files in your home directory
+- Creating files in /tmp
+- Running your own scripts (if they have proper permissions)
+- Reading files you have permission to read
+
+The key: Ask yourself "Is this a system-level operation or a user-level operation?"
+
+WRITE YOUR ANSWER:
+------------------
+After completing the exercise, write in my_answers.txt:
+- What's the difference between readable.txt and system_config.txt?
+- When is sudo actually needed? (Give 3 examples)
+- When is sudo NOT needed? (Give 3 examples)
+- What's the key question to ask before using sudo?
+
+Then proceed to the next exercise: clue3.txt in this same directory.
+
+Hint: Think about whether the operation affects the entire system or just
+your user account!

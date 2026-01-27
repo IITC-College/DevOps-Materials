@@ -1,0 +1,6 @@
+# Exclude solutions from student downloads
+.answers/
+
+# Exclude student work files
+my_answers.txt
+*.log

@@ -1,0 +1,121 @@
+================================================================================
+                            LEVEL 1 - EXERCISE 3
+                    "Reading System Files: When sudo is Required"
+================================================================================
+
+Welcome to Exercise 3!
+
+Now you'll encounter a real system file that requires sudo. This will help
+you understand why certain files are protected and when sudo is legitimate.
+
+BACKGROUND:
+-----------
+Linux protects certain system files because they contain sensitive information
+or control critical system behavior. These files are owned by root and have
+restrictive permissions.
+
+Examples of protected system files:
+- /etc/shadow - Contains encrypted passwords
+- /etc/sudoers - Controls sudo access
+- /root - Root user's home directory
+- /etc/passwd - User account information
+
+These files require sudo to read because they contain sensitive system data.
+
+EXERCISE:
+---------
+You'll try to read a system file and understand why sudo is required.
+
+INSTRUCTIONS:
+-------------
+1. Try to read the /etc/shadow file (this will fail):
+   cat /etc/shadow
+
+2. You'll get "Permission denied" - this is expected and CORRECT!
+
+3. Check the file permissions:
+   ls -l /etc/shadow
+
+4. Notice:
+   - Who owns this file? (root)
+   - What are the permissions? (Very restrictive - only root can read)
+   - Why is this file protected? (Contains encrypted passwords)
+
+5. Now use sudo to read it (this is legitimate for learning):
+   sudo cat /etc/shadow
+
+6. Observe the file contents - notice it contains encrypted password hashes.
+   This is why it's protected!
+
+7. Also try to list the /root directory:
+   ls /root
+
+8. You'll get "Permission denied" - check why:
+   ls -l /root
+
+9. Use sudo to list it:
+   sudo ls /root
+
+COMMANDS TO USE:
+----------------
+- cat /etc/shadow (will fail - expected!)
+- ls -l /etc/shadow
+- sudo cat /etc/shadow (should work)
+- ls /root (will fail)
+- ls -l /root
+- sudo ls /root (should work)
+
+WHAT TO OBSERVE:
+----------------
+- Why is /etc/shadow protected?
+- What information does it contain?
+- Why can't regular users read it?
+- What happens when you use sudo?
+- Why is /root directory protected?
+
+UNDERSTANDING:
+-------------
+System files are protected because:
+- They contain sensitive information (passwords, system configs)
+- They control critical system behavior
+- Unauthorized access could compromise system security
+- They should only be accessed by administrators
+
+sudo is legitimate here because:
+- You're reading system files for educational purposes
+- You're not modifying anything
+- This is a controlled learning environment
+- Understanding system files is part of Linux administration
+
+However, in production:
+- Be very careful with sudo
+- Only use it when absolutely necessary
+- Understand what you're doing
+- Remember: sudo usage is logged!
+
+WRITE YOUR ANSWER:
+------------------
+After completing the exercise, write in my_answers.txt:
+- Why is /etc/shadow protected?
+- What type of information does /etc/shadow contain?
+- Why can't regular users read /root directory?
+- When is it legitimate to use sudo to read system files?
+- What's the security reason for protecting these files?
+
+Then proceed to Level 2: cd ../level2
+
+Hint: System files are protected for good reasons - security! sudo allows
+administrators to access them when needed, but this access is logged and
+monitored.
+
+================================================================================
+                    LEVEL 1 COMPLETE - CONGRATULATIONS!
+================================================================================
+
+You've learned:
+- How to analyze "Permission denied" errors
+- When sudo is actually needed
+- Why system files are protected
+- The difference between user-level and system-level operations
+
+Now move on to Level 2 to learn about alternatives to sudo and audit logging!

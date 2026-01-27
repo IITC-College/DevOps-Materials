@@ -1,0 +1,77 @@
+================================================================================
+                            LEVEL 1 - EXERCISE 2
+                    "Reading Ownership" - Understanding ls -l Output
+================================================================================
+
+Welcome to Level 1, Exercise 2!
+
+Your task: Learn to read file ownership from `ls -l` output.
+
+BACKGROUND:
+-----------
+When you run `ls -l`, you see a lot of information. One of the most important
+pieces is WHO OWNS each file. Every file in Linux has:
+- An owner (a user)
+- A group (a group that the file belongs to)
+
+The format in `ls -l` output is: owner:group
+
+EXERCISE:
+---------
+Navigate to a directory with files and read their ownership information.
+
+INSTRUCTIONS:
+-------------
+1. Navigate to the data/files directory:
+   
+   cd ../../data/files
+
+2. List files with detailed information:
+   
+   ls -l
+
+3. Look carefully at the output - find the owner and group columns
+
+4. Compare the ownership of different files
+
+COMMANDS TO USE:
+----------------
+- cd ../../data/files
+- ls -l
+
+WHAT TO OBSERVE:
+----------------
+- What is the format of the ownership information? (owner:group)
+- Who owns the first file you see?
+- What group does that file belong to?
+- Do all files have the same owner?
+- Do all files have the same group?
+
+UNDERSTANDING:
+-------------
+The `ls -l` output shows ownership in this format:
+```
+-rw-r--r-- 1 username groupname 1234 Jan 27 10:00 filename.txt
+          ^         ^      ^
+          |         |      |
+    permissions  owner  group
+```
+
+- The owner is the user who created the file (or who it was assigned to)
+- The group is the group the file belongs to
+- Both owner and group affect which permissions apply to you
+- The format is always: owner:group (when shown separately)
+
+WRITE YOUR ANSWER:
+------------------
+After examining the files, write in my_answers.txt:
+- What is the format for showing ownership in ls -l? (e.g., "username:groupname")
+- Who owns the files in data/files/?
+- What groups do these files belong to?
+- In your own words, what does "owner" mean for a file?
+- In your own words, what does "group" mean for a file?
+
+Then proceed to the next exercise: clue3.txt in this same directory.
+
+Hint: The owner:group format tells you TWO important things: who owns the file,
+and which group the file belongs to. Both matter for access control!

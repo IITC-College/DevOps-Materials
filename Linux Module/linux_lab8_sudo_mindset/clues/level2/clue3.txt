@@ -1,0 +1,119 @@
+================================================================================
+                            LEVEL 2 - EXERCISE 3
+                    "Reading the Audit Log: Finding Your sudo Usage"
+================================================================================
+
+Welcome to Exercise 3!
+
+Now you'll practice reading audit logs to find specific sudo commands. This
+is a valuable skill for system administrators and security professionals.
+
+BACKGROUND:
+-----------
+Being able to read and understand audit logs is crucial for:
+- Security monitoring
+- Troubleshooting issues
+- Compliance requirements
+- Understanding system activity
+
+The log format can be complex, but with practice you can find what you need.
+
+EXERCISE:
+---------
+You'll run some sudo commands and then find them in the audit log.
+
+INSTRUCTIONS:
+-------------
+1. Run a few sudo commands to create log entries:
+   sudo whoami
+   sudo id
+   sudo ls -la /root | head -5
+
+2. Now read the simulated audit log in the lab:
+   cat ../../data/logs/sudo_example.log
+
+3. Study the log entries. Each entry shows:
+   - Timestamp: When the command was run
+   - Username: Who ran the command
+   - Command: What was executed
+   - Terminal: Where it was run from
+
+4. Try to find specific entries using grep:
+   grep "sudo" ../../data/logs/sudo_example.log
+   grep "root" ../../data/logs/sudo_example.log
+   grep "COMMAND" ../../data/logs/sudo_example.log
+
+5. On a real system, you would do:
+   sudo grep "sudo" /var/log/auth.log | tail -10
+   sudo grep "$USER" /var/log/auth.log | tail -10
+
+6. Practice reading the log format:
+   - Look for patterns
+   - Identify different types of entries
+   - Understand the timestamp format
+   - Notice the command details
+
+COMMANDS TO USE:
+----------------
+- sudo whoami (create log entry)
+- sudo id (create log entry)
+- sudo ls -la /root | head -5 (create log entry)
+- cat ../../data/logs/sudo_example.log (read example log)
+- grep "sudo" ../../data/logs/sudo_example.log (search for sudo entries)
+- sudo grep "$USER" /var/log/auth.log | tail -10 (find your entries on real system)
+
+WHAT TO OBSERVE:
+----------------
+- What does a sudo log entry look like?
+- What information is included in each entry?
+- How can you search for specific entries?
+- Can you identify when a command was run?
+- What patterns do you notice in the log?
+
+UNDERSTANDING:
+-------------
+Log entry format typically includes:
+- **Timestamp**: When the event occurred
+- **Hostname**: Which system it was on
+- **Service**: Which service logged it (sudo)
+- **Username**: Who ran the command
+- **Command**: What was executed
+- **Terminal**: Session information
+
+Common log search patterns:
+- `grep sudo /var/log/auth.log` - All sudo entries
+- `grep $USER /var/log/auth.log` - Your sudo usage
+- `grep "COMMAND" /var/log/auth.log` - Command details
+- `tail -f /var/log/auth.log` - Real-time monitoring
+
+Why this matters:
+- System administrators use logs to monitor security
+- Compliance requirements often mandate log review
+- Logs help identify unauthorized access
+- They provide accountability for actions
+
+WRITE YOUR ANSWER:
+------------------
+After completing the exercise, write in my_answers.txt:
+- What information is included in a sudo log entry?
+- How can you search for your own sudo usage in the log?
+- What command would you use to monitor sudo usage in real-time?
+- Why is being able to read audit logs important?
+- What patterns did you notice in the log entries?
+
+Then proceed to Level 3: cd ../level3
+
+Hint: Understanding audit logs helps you understand accountability. Every
+sudo command you run is tracked - use it responsibly!
+
+================================================================================
+                    LEVEL 2 COMPLETE - CONGRATULATIONS!
+================================================================================
+
+You've learned:
+- How to fix ownership instead of using sudo repeatedly
+- That sudo usage is logged for security and accountability
+- How to read and search audit logs
+- The importance of audit trails
+
+Now move on to Level 3 for critical thinking about sudo usage!

@@ -1,0 +1,74 @@
+================================================================================
+                            LEVEL 1 - EXERCISE 1
+                    "Who Am I?" - Discovering Your Identity
+================================================================================
+
+Welcome to Level 1!
+
+Your first exercise: Discovering who you are in the Linux system.
+
+BACKGROUND:
+-----------
+In Linux, every action you take is associated with your user identity. Before
+you can understand file ownership, you need to know who YOU are. Linux tracks
+your identity in multiple ways: username, user ID (UID), group ID (GID), and
+group memberships.
+
+EXERCISE:
+---------
+Discover your identity using three different commands.
+
+INSTRUCTIONS:
+-------------
+1. Find out your username:
+   
+   whoami
+
+2. Get detailed information about your identity:
+   
+   id
+
+3. See which groups you belong to:
+   
+   groups
+
+4. Look at the output of each command carefully
+
+COMMANDS TO USE:
+----------------
+- whoami
+- id
+- groups
+
+WHAT TO OBSERVE:
+----------------
+- What is your username? (from `whoami`)
+- What is your user ID (uid)? (from `id`)
+- What is your primary group ID (gid)? (from `id`)
+- What groups are you a member of? (from `groups`)
+- How many groups do you belong to?
+
+UNDERSTANDING:
+-------------
+- `whoami` shows your username - the simple answer to "who am I?"
+- `id` shows your numeric IDs (uid, gid) and all your group memberships
+- `groups` shows just the group names you belong to
+- Your primary group (gid) is the default group for new files you create
+- Additional groups give you access to resources owned by those groups
+
+WRITE YOUR ANSWER:
+------------------
+After running the commands, write in my_answers.txt:
+- What is your username?
+- What is your user ID (uid)?
+- What is your primary group ID (gid)?
+- List at least 3 groups you belong to
+- Why do you think Linux tracks identity in multiple ways (username, uid, groups)?
+
+You can write your answer in a file called my_answers.txt in the main lab
+directory (go back with: cd ../../..)
+
+Then proceed to the next exercise: clue2.txt in this same directory.
+
+Hint: Your identity in Linux is more than just a username - it includes your
+user ID, primary group, and all group memberships!
