@@ -1,0 +1,23 @@
+# Student work files
+my_answers.txt
+*.txt.bak
+*.log
+
+# Temporary files
+*.tmp
+*.swp
+*~
+.DS_Store
+
+# Editor files
+.vscode/
+.idea/
+*.sublime-*
+
+# Do not ignore the lab structure
+!README.md
+!start_here.txt
+!clues/
+!data/
+!projects/
+!.answers/
