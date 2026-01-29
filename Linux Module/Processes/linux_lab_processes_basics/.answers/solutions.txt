@@ -1,0 +1,250 @@
+================================================================================
+                    SOLUTIONS - Processes Basics Lab
+                    (Instructor use only)
+================================================================================
+
+GENERAL:
+  Before each clue: run ../../scripts/setup_X_Y.sh (from clues/levelX/)
+  After each clue: run ../../scripts/cleanup_X_Y.sh (from clues/levelX/)
+  This starts and stops dummy processes per-clue (not throughout the lab).
+
+================================================================================
+
+LEVEL 1 - CLUE 1: "What is a Process?" - Your First Process List
+-----------------------------------------------------------------
+
+SETUP (from clues/level1/):
+  ../../scripts/setup_1_1.sh
+  Starts 1 dummy CPU eater for this clue.
+
+STEP 1 – List processes in simple form, then with detail
+  Command:  ps
+  Explanation: Shows a short list (often only current terminal).
+  
+  Command:  ps aux
+  Explanation: Shows all processes with PID, USER, %CPU, %MEM, COMMAND. Each
+  line is one process. Students see many processes and identify where columns are.
+
+STEP 2 – Observe
+  Look at the output. Count roughly how many lines (processes).
+
+STEP 3 – Document
+  Write in my_answers.txt: one sentence – how many processes?
+
+CLEANUP (from clues/level1/):
+  ../../scripts/cleanup_1_1.sh
+  Stops the dummy processes from this clue.
+
+EXAMPLE ANSWER: "ps aux showed roughly 100–200 processes."
+
+================================================================================
+
+LEVEL 1 - CLUE 2: "Where to Look" - PID, User, and Command
+----------------------------------------------------------
+
+SETUP (from clues/level1/):
+  ../../scripts/setup_1_2.sh
+  Starts 1 dummy CPU eater for this clue.
+
+STEP 1 – List all processes with user and command
+  Command:  ps aux
+  Explanation: First line is column headers. PID (usually column 2), USER
+  (column 1), COMMAND (at the end, may be truncated).
+
+STEP 2 – Identify columns and pick one process
+  Pick any process (e.g. bash, sshd). Write in my_answers.txt: PID, USER, COMMAND.
+
+CLEANUP (from clues/level1/):
+  ../../scripts/cleanup_1_2.sh
+  Stops the dummy processes from this clue.
+
+EXAMPLE ANSWER: "PID 1234, USER student, COMMAND bash"
+
+================================================================================
+
+LEVEL 1 - CLUE 3: "Many Processes, One User" - Filtering by User
+-----------------------------------------------------------------
+
+SETUP (from clues/level1/):
+  ../../scripts/setup_1_3.sh
+  Starts 1 dummy CPU eater.
+
+STEP 1 – Find your username
+  Command:  whoami
+
+STEP 2 – List only your processes
+  Command:  ps aux | grep $USER
+  Explanation: Filters to show only your processes. Fewer lines than full ps aux.
+
+STEP 3 – Document
+  Write in my_answers.txt: roughly how many processes belong to your user?
+
+CLEANUP (from clues/level1/):
+  ../../scripts/cleanup_1_3.sh
+
+EXAMPLE ANSWER: "About 5–15 processes for my user."
+
+================================================================================
+
+LEVEL 2 - CLUE 1: "Live View" - Opening top and Knowing Where to Look
+---------------------------------------------------------------------
+
+SETUP (from clues/level2/):
+  ../../scripts/setup_2_1.sh
+  Ensures dummy processes are running (2 CPU eaters, 1 RAM eater) so they show
+  in top as heavy by CPU or by memory.
+
+STEP 1 – Start the live process viewer
+  Command:  top
+  Explanation: Shows a live-updating list of processes (refreshes every few
+  seconds). Unlike ps (snapshot), top shows CPU and memory usage changing.
+
+STEP 2 – Where to look
+  Header (top of screen): load average, tasks (total, running, sleeping).
+  Process list below: PID, USER, %CPU, %MEM, COMMAND. Numbers update in
+  real time.
+
+STEP 3 – Exit
+  Action:  press q
+  Explanation: Quits top and returns to the shell. Students must exit
+  correctly (q, not Ctrl+C as primary habit).
+
+STEP 4 (optional) – Document
+  Write in my_answers.txt: one sentence – what did you see in the header and
+  in the process list?
+
+EXAMPLE ANSWER: "Header showed load and tasks; process list showed PID,
+USER, %CPU, %MEM, COMMAND. I exited with q."
+
+================================================================================
+
+LEVEL 2 - CLUE 2: "Heavy Process" - Finding What Uses CPU or RAM
+-----------------------------------------------------------------
+
+SETUP (from clues/level2/):
+  ../../scripts/setup_2_2.sh
+  Starts 2 CPU eaters + 1 RAM eater.
+
+STEP 1 – Open the live viewer
+  Command:  top
+
+STEP 2 – Sort by CPU or memory and find a dummy process
+  Action:  inside top, press P (CPU) or M (memory)
+  Explanation: Dummy processes appear near top. dummy_cpu_eater = high %CPU,
+  dummy_ram_eater = high %MEM.
+
+STEP 3 – Document
+  Write in my_answers.txt: PID, USER, %CPU or %MEM.
+
+STEP 4 – Exit
+  Action:  press q
+
+CLEANUP (from clues/level2/):
+  ../../scripts/cleanup_2_2.sh
+
+EXAMPLE ANSWER: "PID 5678, USER student, %CPU 95 (dummy_cpu_eater)" or "PID 5679, USER student, %MEM 3 (dummy_ram_eater)"
+
+================================================================================
+
+LEVEL 2 - CLUE 3: "htop" - Same Idea, Different Tool (Optional)
+-----------------------------------------------------------------
+
+SETUP (from clues/level2/):
+  ../../scripts/setup_2_3.sh
+  Starts 2 CPU eaters + 1 RAM eater.
+
+STEP 1 – Try htop
+  Command:  htop (or skip if not installed)
+
+STEP 2 – If htop runs
+  Find one with high CPU or memory. Note PID and USER. Press q to quit.
+
+CLEANUP (from clues/level2/):
+  ../../scripts/cleanup_2_3.sh
+
+EXAMPLE ANSWER: "Used htop; found PID 1234, USER student." Or "htop not installed, skipped."
+
+================================================================================
+
+LEVEL 3 - CLUE 1: "Parent and Child" - Processes Have a Parent (PPID)
+---------------------------------------------------------------------
+
+SETUP (from clues/level3/):
+  ../../scripts/setup_3_1.sh
+  Starts 2 CPU eaters + 1 RAM eater.
+
+STEP 1 – List processes with parent PID
+  Command:  ps -ef
+  Explanation: Shows PID and PPID (Parent Process ID). PPID = the PID of the
+  parent process. Process 1 has no parent.
+
+STEP 2 – Find one parent/child pair
+  Pick one process. Note PID and PPID. Find the row where PID = that PPID (the parent).
+
+STEP 3 – Document
+  Write in my_answers.txt: one parent/child example.
+
+CLEANUP (from clues/level3/):
+  ../../scripts/cleanup_3_1.sh
+
+EXAMPLE ANSWER: "PID 1234 has PPID 567; parent is bash."
+
+================================================================================
+
+LEVEL 3 - CLUE 2: "Why a Process Can Eat CPU or RAM"
+-----------------------------------------------------
+
+SETUP (from clues/level3/):
+  ../../scripts/setup_3_2.sh
+  Starts 2 CPU eaters + 1 RAM eater.
+
+STEP 1 – Open top
+  Command:  top
+
+STEP 2 – Sort and find a heavy process
+  Action:  press P (CPU) or M (memory)
+  Explanation: dummy_cpu_eater = high %CPU, dummy_ram_eater = high %MEM.
+
+STEP 3 – Document
+  Write: PID and %CPU or %MEM.
+
+STEP 4 – Exit
+  Action:  press q
+
+CLEANUP (from clues/level3/):
+  ../../scripts/cleanup_3_2.sh
+
+EXAMPLE ANSWER: "dummy_cpu_eater (PID 1234) had %CPU 95."
+
+================================================================================
+
+LEVEL 3 - CLUE 3 (FINAL): "Summary Task" - Put It All Together
+----------------------------------------------------------------
+
+SETUP (from clues/level3/):
+  ../../scripts/setup_3_3.sh
+  Starts 2 CPU eaters + 1 RAM eater.
+
+STEP 1 – Open top and sort by CPU
+  Command:  top
+  Action:  press P
+
+STEP 2 – Document the top process
+  Write in my_answers.txt: "Top CPU process: PID ___, USER ___, %CPU ___, COMMAND ___"
+
+STEP 3 – Exit
+  Action:  press q
+
+STEP 4 (optional) – Verify with snapshot
+  Command:  ps aux --sort=-%cpu | head -5
+
+CLEANUP (from clues/level3/):
+  ../../scripts/cleanup_3_3.sh
+  Stops the dummy processes from this clue. No end_lab.sh needed; each clue
+  cleans up after itself.
+
+EXAMPLE ANSWER: "Top CPU process: PID 1234, USER student, %CPU 95, COMMAND dummy_cpu_eater.sh."
+
+================================================================================
+END OF SOLUTIONS
+================================================================================

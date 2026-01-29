@@ -1,0 +1,39 @@
+================================================================================
+                    LEVEL 3 - CLUE 2
+            "Why a Process Can Eat CPU or RAM"
+================================================================================
+
+* SETUP: Run first (from this folder):  ../../scripts/setup_3_2.sh
+
+--------------------------------------------------------------------------------
+WHAT YOU'RE DOING
+--------------------------------------------------------------------------------
+When we say a process "eats" CPU or RAM, we mean it uses a lot of that
+resource. In the live view you see this as high %CPU or high %MEM. Our dummy
+processes (dummy_cpu_eater = high CPU, dummy_ram_eater = high MEM) do this on
+purpose. Your job: open the live view, find a process with high CPU or high
+memory, and relate what you see to "this process is consuming a lot of that
+resource."
+
+--------------------------------------------------------------------------------
+INSTRUCTIONS
+--------------------------------------------------------------------------------
+1. Open the live process viewer. Hint: top.
+
+2. Sort by CPU or by memory so the heaviest process is at the top. Find one
+   with high %CPU or high %MEM (e.g. dummy_cpu_eater). Hint: P = sort by CPU,
+   M = sort by memory inside top.
+
+3. Think: "This process is using a lot of CPU (or RAM) – that's what we mean
+   by a process 'eating' that resource."
+
+4. Write in my_answers.txt: which process had the highest CPU or memory when
+   you looked? Give its PID and approximate %CPU or %MEM.
+
+5. Exit the viewer. Hint: press q.
+
+--------------------------------------------------------------------------------
+CLEANUP (run when done with this clue):  ../../scripts/cleanup_3_2.sh
+--------------------------------------------------------------------------------
+    NEXT STEP:  cat clue3.txt
+================================================================================

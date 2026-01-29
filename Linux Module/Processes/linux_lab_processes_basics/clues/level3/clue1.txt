@@ -1,0 +1,32 @@
+================================================================================
+                    LEVEL 3 - CLUE 1
+            "Parent and Child" - Processes Have a Parent (PPID)
+================================================================================
+
+* SETUP: Run first (from this folder):  ../../scripts/setup_3_1.sh
+
+--------------------------------------------------------------------------------
+WHAT YOU'RE DOING
+--------------------------------------------------------------------------------
+Every process (except the first one) was started by another process. The one
+that started it is the parent; its PID is stored as PPID (Parent Process ID).
+Your job: list processes with PPID, pick one process, and identify its parent.
+
+--------------------------------------------------------------------------------
+INSTRUCTIONS
+--------------------------------------------------------------------------------
+1. List processes so you can see PID and PPID. Hint: ps -ef (PPID column).
+   Process 1 (systemd or init) has no parent – it's the first process.
+
+2. Pick one process. Note its PID and its PPID. Find the other process whose
+   PID equals that PPID – that's the parent. What command is the parent
+   running?
+
+3. Write in my_answers.txt: one parent/child example. Example: "PID 1234 has
+   PPID 567; parent is bash (PID 567)."
+
+--------------------------------------------------------------------------------
+CLEANUP (run when done with this clue):  ../../scripts/cleanup_3_1.sh
+--------------------------------------------------------------------------------
+    NEXT STEP:  cat clue2.txt
+================================================================================

@@ -1,0 +1,34 @@
+================================================================================
+                    LEVEL 2 - CLUE 2
+            "Heavy Process" - Finding What Uses CPU or RAM
+================================================================================
+
+* SETUP: Run first (from this folder):  ../../scripts/setup_2_2.sh
+
+--------------------------------------------------------------------------------
+WHAT YOU'RE DOING
+--------------------------------------------------------------------------------
+We started dummy processes for this lab: two that use CPU (dummy_cpu_eater,
+dummy_cpu_eater2) and one that uses RAM (dummy_ram_eater). Your job: find one
+of the CPU-heavy or RAM-heavy dummy processes and write down its PID, user,
+and which resource is high (%CPU or %MEM) and by how much.
+
+--------------------------------------------------------------------------------
+INSTRUCTIONS
+--------------------------------------------------------------------------------
+1. Open the live process viewer. Hint: top.
+
+2. Sort by CPU (P) or by memory (M). Find a process whose command contains
+   "dummy_cpu_eater" (high %CPU) or "dummy_ram_eater" (high %MEM). Hint: inside
+   top, press P to sort by CPU, M to sort by memory.
+
+3. For that process, write in my_answers.txt: its PID, USER, and %CPU or %MEM
+   (approx), and which one is high (CPU or RAM).
+
+4. Exit the viewer. Hint: press q.
+
+--------------------------------------------------------------------------------
+CLEANUP (run when done with this clue):  ../../scripts/cleanup_2_2.sh
+--------------------------------------------------------------------------------
+    NEXT STEP:  cat clue3.txt
+================================================================================

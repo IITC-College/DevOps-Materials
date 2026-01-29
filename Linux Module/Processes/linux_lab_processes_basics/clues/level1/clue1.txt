@@ -1,0 +1,31 @@
+================================================================================
+                    LEVEL 1 - CLUE 1
+            "What is a Process?" - Your First Process List
+================================================================================
+
+* SETUP: Run first (from this folder):  ../../scripts/setup_1_1.sh
+
+--------------------------------------------------------------------------------
+WHAT YOU'RE DOING
+--------------------------------------------------------------------------------
+A process is a program running in memory. Linux gives each process a unique
+number (PID). Your job: list processes and see how many are running. You don't
+need to understand every column – just know where to look (PID, USER, COMMAND).
+
+--------------------------------------------------------------------------------
+INSTRUCTIONS
+--------------------------------------------------------------------------------
+1. List processes in a simple form. Then list them again with more detail
+   (user, PID, command). Hint: ps, then ps aux.
+
+2. Look at the output. How many processes (roughly) do you see? Each line
+   is one process.
+
+3. Write in my_answers.txt (lab root: cd ../../..): one sentence – how many
+   processes did you see?
+
+--------------------------------------------------------------------------------
+CLEANUP (run when done with this clue):  ../../scripts/cleanup_1_1.sh
+--------------------------------------------------------------------------------
+    NEXT STEP:  cat clue2.txt
+================================================================================

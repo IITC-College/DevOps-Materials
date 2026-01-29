@@ -1,0 +1,31 @@
+================================================================================
+                    LEVEL 1 - CLUE 2
+            "Where to Look" - PID, User, and Command
+================================================================================
+
+* SETUP: Run first (from this folder):  ../../scripts/setup_1_2.sh
+
+--------------------------------------------------------------------------------
+WHAT YOU'RE DOING
+--------------------------------------------------------------------------------
+When you list processes, the important columns are: PID (process ID), USER
+(who runs it), and COMMAND (the program). Your job: pick one process and
+identify these three things.
+
+--------------------------------------------------------------------------------
+INSTRUCTIONS
+--------------------------------------------------------------------------------
+1. List all processes with user and command info. Hint: ps aux.
+
+2. Look at the first line (column headers). Find which column is PID, which
+   is USER, and which is COMMAND (or CMD).
+
+3. Pick one process from the list (e.g. bash, sshd). Write in my_answers.txt:
+   that process's PID, USER, and COMMAND. Example: "PID 1234, USER student,
+   COMMAND bash"
+
+--------------------------------------------------------------------------------
+CLEANUP (run when done with this clue):  ../../scripts/cleanup_1_2.sh
+--------------------------------------------------------------------------------
+    NEXT STEP:  cat clue3.txt
+================================================================================

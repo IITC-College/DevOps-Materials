@@ -71,6 +71,14 @@ LAB 11: Debug Mindset - 4-Step Debug Flow (v2.8.4)
 curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v2.8.4/linux_lab11_debug_mindset.tar.gz | tar -xz && cd linux_lab11_debug_mindset && cat start_here.txt
 
 ========================================================
+LAB 12: Processes Basics - What is a Process (v1.0)
+========================================================
+
+curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v1.0/linux_lab_processes_basics.tar.gz | tar -xz && cd linux_lab_processes_basics && cd clues/level1 && cat clue1.txt
+
+(No start_here.txt – this lab starts at the first clue. Run the setup script when the clue asks you to.)
+
+========================================================
 
 📚 Resources:
 
@@ -93,6 +101,6 @@ All Releases: https://github.com/IITC-College/DevOps-Jan26/releases
 - Make sure you have curl and tar installed
 - Run the command in a directory where you want the lab extracted
 - Each lab is self-contained and can be completed independently
-- Follow the instructions in start_here.txt after extraction
+- Follow the instructions in start_here.txt after extraction (or in the first clue for labs that start at clue1)
 
 ========================================================

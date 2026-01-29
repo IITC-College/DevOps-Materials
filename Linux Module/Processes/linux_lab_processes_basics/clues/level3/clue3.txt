@@ -1,0 +1,33 @@
+================================================================================
+                    LEVEL 3 - CLUE 3 (FINAL)
+            "Summary Task" - Put It All Together
+================================================================================
+
+* SETUP: Run first (from this folder):  ../../scripts/setup_3_3.sh
+
+--------------------------------------------------------------------------------
+WHAT YOU'RE DOING
+--------------------------------------------------------------------------------
+Last clue. Combine what you learned: use the live view to find the process
+using the most CPU right now (often dummy_cpu_eater) or the most memory
+(dummy_ram_eater), and report its PID, user, %CPU or %MEM, and command.
+
+--------------------------------------------------------------------------------
+INSTRUCTIONS
+--------------------------------------------------------------------------------
+1. Open the live process viewer and sort by CPU. Hint: top, then press P.
+
+2. The top process (after sorting by P or M) is the heaviest. Write in
+   my_answers.txt: "Top process: PID ___, USER ___, %CPU or %MEM ___, COMMAND ___"
+   (fill in from what you see – CPU-heavy or RAM-heavy).
+
+3. Exit the viewer. Hint: press q.
+
+4. Optional: take a snapshot of the top 5 processes by CPU to confirm.
+   Hint: ps aux --sort=-%cpu | head -5
+
+--------------------------------------------------------------------------------
+CLEANUP (run when done with this clue):  ../../scripts/cleanup_3_3.sh
+--------------------------------------------------------------------------------
+    Lab complete. Well done.
+================================================================================

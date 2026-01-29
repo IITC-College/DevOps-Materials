@@ -1,0 +1,35 @@
+================================================================================
+                    LEVEL 2 - CLUE 1
+            "Live View" - Opening top and Knowing Where to Look
+================================================================================
+
+* SETUP: Run first (from this folder):  ../../scripts/setup_2_1.sh
+
+--------------------------------------------------------------------------------
+WHAT YOU'RE DOING
+--------------------------------------------------------------------------------
+So far you used a snapshot of processes (ps). Now you'll use a live view that
+updates every few seconds – so you can see CPU and memory usage change. The lab
+also started dummy processes: two that use CPU (dummy_cpu_eater) and one that
+uses RAM (dummy_ram_eater). You'll find them in the next clues. Your job here: open the live view, see where to
+look (header + process list), and exit correctly.
+
+--------------------------------------------------------------------------------
+INSTRUCTIONS
+--------------------------------------------------------------------------------
+1. Start the live process viewer. Hint: top.
+
+2. Look at the top of the screen (header): load average, tasks (total, running,
+   sleeping). Then look at the process list below: PID, USER, %CPU, %MEM,
+   COMMAND. The numbers update – that's live data.
+
+3. Exit the viewer and return to the shell. Hint: press q.
+
+4. Optionally write in my_answers.txt: one sentence – what did you see in the
+   header and in the process list?
+
+--------------------------------------------------------------------------------
+CLEANUP (run when done with this clue):  ../../scripts/cleanup_2_1.sh
+--------------------------------------------------------------------------------
+    NEXT STEP:  cat clue2.txt
+================================================================================

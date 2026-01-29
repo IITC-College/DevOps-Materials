@@ -1,0 +1,32 @@
+================================================================================
+                    LEVEL 2 - CLUE 3
+            "htop" - Same Idea, Different Tool (Optional)
+================================================================================
+
+* SETUP: Run first (from this folder):  ../../scripts/setup_2_3.sh
+
+--------------------------------------------------------------------------------
+WHAT YOU'RE DOING
+--------------------------------------------------------------------------------
+htop is like top but with a nicer layout. Same idea: live view, same columns
+(PID, USER, %CPU, %MEM, COMMAND). Find a heavy process (high CPU or high
+memory – dummy_cpu_eater or dummy_ram_eater), exit with q. If htop is not
+installed, skip to Level 3.
+
+--------------------------------------------------------------------------------
+INSTRUCTIONS
+--------------------------------------------------------------------------------
+1. Try to start htop. If you get "command not found", skip to NEXT STEP below.
+
+2. If htop runs: look at the process list, find one with high CPU or high
+   memory (dummy_cpu_eater or dummy_ram_eater). Note its PID and USER.
+   Exit with q.
+
+3. Optionally write in my_answers.txt: one sentence – did you find a heavy
+   process? What was its PID?
+
+--------------------------------------------------------------------------------
+CLEANUP (run when done with this clue):  ../../scripts/cleanup_2_3.sh
+--------------------------------------------------------------------------------
+    NEXT STEP:  cd ../level3  then  cat clue1.txt
+================================================================================
