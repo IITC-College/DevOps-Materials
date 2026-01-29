@@ -1,0 +1,107 @@
+================================================================================
+                    LEVEL 2 - CLUE 1
+================================================================================
+
+****************************************************************************
+*  STOP! Before starting this clue, run:                                   *
+*                                                                          *
+*      sudo ./scripts/setup_2_1.sh                                         *
+*                                                                          *
+*  Wait for the script to complete, then continue below.                   *
+****************************************************************************
+
+================================================================================
+    THE PROBLEM
+================================================================================
+
+You can ping IP addresses (like 8.8.8.8), but you CANNOT reach hostnames
+(like google.com). Domain name resolution is broken.
+
+================================================================================
+    YOUR MISSION
+================================================================================
+
+STEP 1: OBSERVE
+- Test ping by IP:    ping -c 2 8.8.8.8      (should work)
+- Test ping by name:  ping -c 2 google.com   (should FAIL)
+- The error will be something like "Name or service not known" or
+  "Temporary failure in name resolution".
+
+STEP 2: INSPECT
+- Check what DNS servers are configured:
+    cat /etc/resolv.conf
+- Look at the "nameserver" lines.
+- Are they valid DNS servers? Common valid ones:
+    8.8.8.8 (Google)
+    8.8.4.4 (Google)
+    1.1.1.1 (Cloudflare)
+    Your router's IP
+- If you see invalid IPs like 192.0.2.x or 198.51.100.x, those are
+  reserved/documentation addresses that don't actually work.
+
+STEP 3: DIAGNOSE
+- Network connectivity: OK (ping by IP works)
+- DNS resolution: BROKEN (invalid nameservers configured)
+- The system can't translate hostnames to IP addresses.
+
+STEP 4: RESOLVE
+- Edit /etc/resolv.conf and replace bad nameservers with valid ones:
+    sudo nano /etc/resolv.conf
+  OR
+    echo "nameserver 8.8.8.8" | sudo tee /etc/resolv.conf
+
+================================================================================
+    VERIFY YOUR FIX
+================================================================================
+
+1. Check the updated resolv.conf:
+   cat /etc/resolv.conf
+
+2. Test DNS resolution:
+   ping -c 2 google.com
+   nslookup google.com
+   host google.com
+
+================================================================================
+    COMMANDS REFERENCE
+================================================================================
+
+- cat /etc/resolv.conf              # View DNS configuration
+- sudo nano /etc/resolv.conf        # Edit DNS configuration
+- nslookup <hostname>               # Query DNS for hostname
+- host <hostname>                   # Another DNS lookup tool
+- dig <hostname>                    # Detailed DNS query
+- getent hosts <hostname>           # Check name resolution
+
+================================================================================
+    UNDERSTANDING /etc/resolv.conf
+================================================================================
+
+Format:
+  nameserver <ip>        # DNS server to query (can have multiple)
+  search <domain>        # Default domain suffix for short names
+  domain <domain>        # Local domain name
+
+Example valid configuration:
+  nameserver 8.8.8.8
+  nameserver 8.8.4.4
+
+================================================================================
+    DOCUMENT YOUR WORK
+================================================================================
+
+Write down:
+1. What did you OBSERVE (ping by IP vs by name)?
+2. What did /etc/resolv.conf show during INSPECT?
+3. What was your DIAGNOSIS?
+4. What nameserver(s) did you configure to RESOLVE?
+5. How did you VERIFY DNS now works?
+
+================================================================================
+    NEXT CLUE
+================================================================================
+
+Once fixed and documented, proceed to clue2.txt
+(Instructor runs: sudo ./setup_environment.sh 2 2)
+
+================================================================================

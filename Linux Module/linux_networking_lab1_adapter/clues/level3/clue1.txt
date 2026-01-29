@@ -1,0 +1,114 @@
+================================================================================
+                    LEVEL 3 - CLUE 1
+================================================================================
+
+****************************************************************************
+*  STOP! Before starting this clue, run:                                   *
+*                                                                          *
+*      sudo ./scripts/setup_3_1.sh                                         *
+*                                                                          *
+*  Wait for the script to complete, then continue below.                   *
+****************************************************************************
+
+================================================================================
+    THE PROBLEM
+================================================================================
+
+Basic connectivity seems to work - small pings succeed. But larger data
+transfers fail, websites load partially or timeout, and SSH might feel
+sluggish or drop. The MTU (Maximum Transmission Unit) is set too low.
+
+================================================================================
+    YOUR MISSION
+================================================================================
+
+STEP 1: OBSERVE
+- Test small ping:   ping -c 2 8.8.8.8                 (works)
+- Test large ping:   ping -c 2 -s 1000 8.8.8.8         (fails or times out)
+  (The -s flag sets packet size in bytes)
+- Try loading a website with curl - may hang or be very slow.
+
+STEP 2: INSPECT
+- Check the MTU setting on your interface:
+    ip link show <interface_name>
+    ip -d link show <interface_name>
+- Look for "mtu" value. Normal Ethernet MTU is 1500.
+- If it's set to something low like 500, that's the problem.
+
+You can also check with:
+    cat /sys/class/net/<interface_name>/mtu
+
+STEP 3: DIAGNOSE
+- MTU is set too low (e.g., 500 instead of 1500)
+- Small packets fit within the MTU and work fine
+- Large packets exceed the MTU and get dropped/fragmented
+- This causes timeouts on large transfers, partial page loads, etc.
+
+STEP 4: RESOLVE
+- Set the MTU to the correct value (usually 1500 for Ethernet):
+    sudo ip link set <interface_name> mtu 1500
+
+================================================================================
+    VERIFY YOUR FIX
+================================================================================
+
+1. Check the MTU is now 1500:
+   ip link show <interface_name>
+
+2. Test large packets:
+   ping -c 2 -s 1000 8.8.8.8    (should now work)
+
+3. Test web traffic:
+   curl -I https://google.com   (should work quickly)
+
+================================================================================
+    COMMANDS REFERENCE
+================================================================================
+
+- ip link show <iface>              # Show interface details including MTU
+- ip -d link show <iface>           # Detailed link info
+- sudo ip link set <iface> mtu <n>  # Set MTU
+- ping -s <size> <host>             # Ping with specific packet size
+- ping -M do -s 1472 <host>         # Ping with "don't fragment" flag
+
+================================================================================
+    UNDERSTANDING MTU
+================================================================================
+
+MTU = Maximum Transmission Unit
+- The largest packet size (in bytes) that can be sent on a link
+- Standard Ethernet MTU: 1500 bytes
+- Jumbo frames: 9000 bytes (for high-performance networks)
+- PPPoE typically uses: 1492 bytes
+- VPN tunnels may need lower MTU due to overhead
+
+Why wrong MTU causes problems:
+- If MTU is too low, large packets are fragmented or dropped
+- TCP tries to adapt, but some packets just won't fit
+- Results in partial transfers, timeouts, and "black holes"
+
+Symptoms of MTU problems:
+- Small pings work, large pings fail
+- SSH connects but then hangs
+- Web pages load partially
+- Downloads start but stall
+
+================================================================================
+    DOCUMENT YOUR WORK
+================================================================================
+
+Write down:
+1. What did you OBSERVE (small vs large ping)?
+2. What MTU value did you find during INSPECT?
+3. What was your DIAGNOSIS?
+4. What MTU did you set to RESOLVE?
+5. How did you VERIFY large packets now work?
+
+================================================================================
+    NEXT CLUE
+================================================================================
+
+Once fixed and documented, proceed to clue2.txt
+(Instructor runs: sudo ./setup_environment.sh 3 2)
+
+================================================================================

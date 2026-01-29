@@ -1,0 +1,46 @@
+================================================================================
+              LINUX NETWORKING DEBUG LAB
+================================================================================
+
+This lab contains 9 networking problems for you to diagnose and fix.
+3 levels, 3 clues each.
+
+================================================================================
+    HOW IT WORKS
+================================================================================
+
+1. Before each clue, run the setup script:
+   
+   sudo ./scripts/setup_X_Y.sh
+   
+   (Replace X with level number, Y with clue number)
+
+2. Read the clue file in clues/levelX/clueY.txt
+
+3. Debug and fix the problem
+
+4. Move to the next clue
+
+================================================================================
+    THE 4-STEP METHOD
+================================================================================
+
+For every problem:
+
+1. OBSERVE  - What's the error/symptom?
+2. INSPECT  - Gather evidence with commands
+3. DIAGNOSE - What's the root cause?
+4. RESOLVE  - Fix it and verify
+
+================================================================================
+    START NOW
+================================================================================
+
+1. Run:  sudo ./scripts/setup_1_1.sh
+2. Run:  cd clues/level1
+3. Run:  cat clue1.txt
+4. Follow the instructions
+
+Good luck!
+
+================================================================================

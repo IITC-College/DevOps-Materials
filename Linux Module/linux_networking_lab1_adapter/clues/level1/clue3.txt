@@ -1,0 +1,96 @@
+================================================================================
+                    LEVEL 1 - CLUE 3
+================================================================================
+
+****************************************************************************
+*  STOP! Before starting this clue, run:                                   *
+*                                                                          *
+*      sudo ./scripts/setup_1_3.sh                                         *
+*                                                                          *
+*  Wait for the script to complete, then continue below.                   *
+****************************************************************************
+
+================================================================================
+    THE PROBLEM
+================================================================================
+
+Your interface is UP and has an IP address, but you can only reach devices on
+your local network. Anything outside (like 8.8.8.8) is unreachable.
+
+================================================================================
+    YOUR MISSION
+================================================================================
+
+STEP 1: OBSERVE
+- Try pinging your gateway or a local IP (if known): might work.
+- Try pinging an external IP: ping 8.8.8.8
+- You'll get "Network is unreachable" for external addresses.
+
+STEP 2: INSPECT
+- Confirm interface is UP and has an IP:
+    ip addr show
+- Check your routing table:
+    ip route
+    ip route show
+- Look for a line starting with "default via" - this is your default gateway.
+- If there's NO "default" line, you have no gateway configured.
+
+STEP 3: DIAGNOSE
+- Interface: UP ✓
+- IP address: Assigned ✓
+- Default gateway: MISSING ✗
+- Without a default gateway, the system doesn't know where to send packets
+  destined for networks outside your local subnet.
+
+STEP 4: RESOLVE
+- Add a default gateway:
+    sudo ip route add default via <gateway_ip>
+- Replace <gateway_ip> with your router's IP (commonly 192.168.1.1, 10.0.2.2,
+  or similar - check your network documentation).
+
+================================================================================
+    VERIFY YOUR FIX
+================================================================================
+
+1. Check the routing table:
+   ip route
+   You should see a "default via <gateway_ip>" line.
+
+2. Test external connectivity:
+   ping -c 3 8.8.8.8
+
+================================================================================
+    COMMANDS REFERENCE
+================================================================================
+
+- ip route                          # Show routing table
+- ip route show                     # Same as above
+- ip route get 8.8.8.8              # Show route to specific destination
+- sudo ip route add default via <gw>           # Add default gateway
+- sudo ip route del default                    # Remove default gateway
+- sudo ip route add <net>/<mask> via <gw>      # Add specific route
+
+================================================================================
+    DOCUMENT YOUR WORK
+================================================================================
+
+Write down:
+1. What did you OBSERVE when pinging local vs external?
+2. What did "ip route" reveal during INSPECT?
+3. What was your DIAGNOSIS?
+4. What gateway IP did you use to RESOLVE?
+5. How did you VERIFY external connectivity?
+
+================================================================================
+    NEXT LEVEL
+================================================================================
+
+Level 1 complete! You've mastered basic link-layer troubleshooting:
+- Interface state (UP/DOWN)
+- IP addressing
+- Default gateway/routing
+
+Proceed to Level 2 for service and firewall issues.
+(Instructor runs: sudo ./setup_environment.sh 2 1)
+
+================================================================================

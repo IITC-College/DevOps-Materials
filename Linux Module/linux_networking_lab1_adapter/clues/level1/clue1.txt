@@ -1,0 +1,83 @@
+================================================================================
+                    LEVEL 1 - CLUE 1
+================================================================================
+
+****************************************************************************
+*  STOP! Before starting this clue, run:                                   *
+*                                                                          *
+*      sudo ./scripts/setup_1_1.sh                                         *
+*                                                                          *
+*  Wait for the script to complete, then continue below.                   *
+****************************************************************************
+
+================================================================================
+    THE PROBLEM
+================================================================================
+
+You have lost all network connectivity. SSH dropped, ping fails, nothing works.
+Something is fundamentally broken at the network adapter level.
+
+================================================================================
+    YOUR MISSION
+================================================================================
+
+STEP 1: OBSERVE
+- What happens when you try to ping? (e.g., ping 8.8.8.8)
+- Note the error message or behavior.
+
+STEP 2: INSPECT
+- List all network interfaces and their state:
+    ip link show
+- Identify your main interface (often enp0s3, eth0, or ens33).
+- Look at the state: is it UP or DOWN?
+- The state appears in angle brackets, e.g., <BROADCAST,MULTICAST,UP> means UP.
+- If you see <BROADCAST,MULTICAST> without "UP", the interface is DOWN.
+
+STEP 3: DIAGNOSE
+- If the interface is DOWN, that's why nothing works.
+- The link layer is disabled - no packets can be sent or received.
+
+STEP 4: RESOLVE
+- Bring the interface up:
+    sudo ip link set <interface_name> up
+- Replace <interface_name> with your actual interface (e.g., enp0s3).
+
+================================================================================
+    VERIFY YOUR FIX
+================================================================================
+
+1. Check the interface state again:
+   ip link show <interface_name>
+   You should see "UP" in the state flags.
+
+2. Test connectivity:
+   ping -c 3 8.8.8.8
+
+================================================================================
+    COMMANDS REFERENCE
+================================================================================
+
+- ip link show                    # List all interfaces and state
+- ip link show <iface>            # Show specific interface
+- sudo ip link set <iface> up     # Bring interface up
+- sudo ip link set <iface> down   # Bring interface down
+
+================================================================================
+    DOCUMENT YOUR WORK
+================================================================================
+
+Write down:
+1. What error/behavior did you OBSERVE?
+2. What did "ip link show" reveal during INSPECT?
+3. What was your DIAGNOSIS?
+4. What command did you use to RESOLVE?
+5. How did you VERIFY the fix worked?
+
+================================================================================
+    NEXT CLUE
+================================================================================
+
+Once fixed and documented, proceed to clue2.txt
+(Instructor runs: sudo ./setup_environment.sh 1 2)
+
+================================================================================
