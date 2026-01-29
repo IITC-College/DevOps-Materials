@@ -1,0 +1,151 @@
+================================================================================
+                    LEVEL 3 - CLUE 3
+================================================================================
+
+****************************************************************************
+*  STOP! Before starting this clue, run:                                   *
+*                                                                          *
+*      sudo ./scripts/setup_3_3.sh                                         *
+*                                                                          *
+*  Wait for the script to complete, then continue below.                   *
+****************************************************************************
+
+================================================================================
+    THE PROBLEM
+================================================================================
+
+DNS seems to work for most sites, but ONE specific hostname resolves to
+the WRONG IP address. For example, "google.com" might resolve to 127.0.0.1
+instead of Google's real IP. The /etc/hosts file is overriding DNS.
+
+================================================================================
+    YOUR MISSION
+================================================================================
+
+STEP 1: OBSERVE
+- Test name resolution:
+    ping google.com
+- Look at the IP it's trying to ping - is it 127.0.0.1 or localhost?
+- Compare with what DNS says:
+    nslookup google.com
+    dig google.com +short
+- If ping goes to 127.0.0.1 but nslookup shows a real IP, something is
+  overriding DNS resolution.
+
+STEP 2: INSPECT
+- Check /etc/hosts:
+    cat /etc/hosts
+- Look for entries that map hostnames to wrong IPs.
+- A line like "127.0.0.1 google.com" would cause this problem.
+
+- You can also use getent to see the final resolution:
+    getent hosts google.com
+- This shows what the system actually resolves, including /etc/hosts.
+
+STEP 3: DIAGNOSE
+- /etc/hosts has an entry for the affected hostname
+- /etc/hosts is checked BEFORE DNS (in most configurations)
+- The bad entry overrides real DNS resolution
+- Traffic goes to the wrong IP
+
+STEP 4: RESOLVE
+- Edit /etc/hosts and remove or comment out the bad entry:
+    sudo nano /etc/hosts
+- Find the line with the wrong hostname mapping and delete it
+  OR comment it out by adding # at the beginning
+
+================================================================================
+    VERIFY YOUR FIX
+================================================================================
+
+1. Check /etc/hosts no longer has the bad entry:
+   cat /etc/hosts
+
+2. Test resolution:
+   getent hosts google.com    (should show real IP)
+   ping -c 2 google.com       (should go to real IP)
+
+3. Compare with DNS:
+   nslookup google.com
+   The IPs should now match.
+
+================================================================================
+    COMMANDS REFERENCE
+================================================================================
+
+- cat /etc/hosts                    # View hosts file
+- sudo nano /etc/hosts              # Edit hosts file
+- getent hosts <hostname>           # Check how hostname resolves
+- nslookup <hostname>               # Query DNS directly
+- dig <hostname>                    # Detailed DNS query
+- host <hostname>                   # Another DNS query tool
+
+================================================================================
+    UNDERSTANDING /etc/hosts
+================================================================================
+
+/etc/hosts is a local file that maps hostnames to IP addresses.
+It's checked BEFORE DNS (usually - see /etc/nsswitch.conf).
+
+Format:
+  <IP address>    <hostname> [aliases...]
+
+Common legitimate entries:
+  127.0.0.1       localhost
+  127.0.1.1       myhostname
+  ::1             localhost ip6-localhost
+
+Why /etc/hosts exists:
+- Faster than DNS for frequently used names
+- Works when DNS is down
+- Override DNS for testing/development
+- Block sites by pointing them to 127.0.0.1
+
+Why it can cause problems:
+- Forgotten test entries
+- Malware adding malicious entries
+- Typos or outdated entries
+- Overriding legitimate DNS
+
+Resolution order (usually):
+1. /etc/hosts
+2. DNS
+3. Other sources (NIS, LDAP, etc.)
+
+Controlled by: /etc/nsswitch.conf (hosts: files dns)
+
+================================================================================
+    DOCUMENT YOUR WORK
+================================================================================
+
+Write down:
+1. What did you OBSERVE (where did ping try to connect)?
+2. What bad entry did you find in /etc/hosts during INSPECT?
+3. What was your DIAGNOSIS?
+4. How did you RESOLVE (edit /etc/hosts)?
+5. How did you VERIFY the hostname now resolves correctly?
+
+================================================================================
+    LAB COMPLETE!
+================================================================================
+
+Congratulations! You've completed all 9 networking debug scenarios!
+
+Level 1 - Basic (Link layer):
+  [x] Interface DOWN
+  [x] No IP address
+  [x] Missing gateway
+
+Level 2 - Intermediate (Services/Firewall):
+  [x] DNS misconfigured
+  [x] UFW blocking incoming SSH
+  [x] UFW blocking outgoing HTTP/HTTPS
+
+Level 3 - Advanced (Complex):
+  [x] Wrong MTU
+  [x] Bad static route
+  [x] /etc/hosts override
+
+You now have practical experience debugging real-world networking issues!
+
+================================================================================

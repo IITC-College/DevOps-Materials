@@ -1,0 +1,114 @@
+================================================================================
+                    LEVEL 2 - CLUE 2
+================================================================================
+
+****************************************************************************
+*  STOP! Before starting this clue, run:                                   *
+*                                                                          *
+*      sudo ./scripts/setup_2_2.sh                                         *
+*                                                                          *
+*  WARNING: This may drop your SSH connection! Use VM console if needed.   *
+*  Wait for the script to complete, then continue below.                   *
+****************************************************************************
+
+================================================================================
+    THE PROBLEM
+================================================================================
+
+You (or someone else) cannot SSH into this machine. The connection times out
+or is refused. The firewall is blocking incoming connections on port 22.
+
+================================================================================
+    YOUR MISSION
+================================================================================
+
+STEP 1: OBSERVE
+- From another machine, try to SSH in - it fails.
+- On this machine, outgoing connections work fine.
+- This suggests incoming traffic is being blocked.
+
+STEP 2: INSPECT
+- Check if UFW (Uncomplicated Firewall) is active:
+    sudo ufw status
+    sudo ufw status verbose
+- Look at the output:
+    - Is UFW "active"?
+    - What is the default policy for incoming? (deny?)
+    - Is there an ALLOW rule for port 22 or "SSH"?
+- If incoming is denied by default and there's no SSH allow rule,
+  that's why SSH is blocked.
+
+STEP 3: DIAGNOSE
+- UFW is active
+- Default incoming policy: DENY
+- No rule allowing port 22/SSH
+- Result: All incoming SSH connections are dropped
+
+STEP 4: RESOLVE
+- Allow SSH through the firewall:
+    sudo ufw allow ssh
+  OR
+    sudo ufw allow 22/tcp
+  OR (more specific):
+    sudo ufw allow from any to any port 22 proto tcp
+
+================================================================================
+    VERIFY YOUR FIX
+================================================================================
+
+1. Check UFW status:
+   sudo ufw status
+   You should see "22/tcp ALLOW" or "OpenSSH ALLOW"
+
+2. Test SSH from another machine or verify the rule is in place.
+
+================================================================================
+    COMMANDS REFERENCE
+================================================================================
+
+- sudo ufw status                   # Show firewall status and rules
+- sudo ufw status verbose           # Show with default policies
+- sudo ufw status numbered          # Show rules with numbers
+- sudo ufw allow ssh                # Allow SSH (port 22)
+- sudo ufw allow 22/tcp             # Allow TCP port 22
+- sudo ufw deny 22/tcp              # Deny TCP port 22
+- sudo ufw delete allow ssh         # Remove SSH allow rule
+- sudo ufw enable                   # Enable firewall
+- sudo ufw disable                  # Disable firewall
+- sudo ufw reset                    # Reset to defaults
+
+================================================================================
+    UNDERSTANDING UFW
+================================================================================
+
+UFW = Uncomplicated Firewall (frontend for iptables)
+
+Key concepts:
+- Default policies: What to do with traffic that doesn't match any rule
+    ufw default deny incoming   # Block all incoming unless allowed
+    ufw default allow outgoing  # Allow all outgoing unless denied
+
+- Rules: Specific allow/deny for ports, IPs, or services
+    ufw allow <port>            # Allow port
+    ufw allow <service>         # Allow by service name (ssh, http, etc.)
+    ufw allow from <ip>         # Allow from specific IP
+
+================================================================================
+    DOCUMENT YOUR WORK
+================================================================================
+
+Write down:
+1. What did you OBSERVE (SSH connection behavior)?
+2. What did "ufw status" show during INSPECT?
+3. What was your DIAGNOSIS (why was SSH blocked)?
+4. What command did you use to RESOLVE?
+5. How did you VERIFY SSH is now allowed?
+
+================================================================================
+    NEXT CLUE
+================================================================================
+
+Once fixed and documented, proceed to clue3.txt
+(Instructor runs: sudo ./setup_environment.sh 2 3)
+
+================================================================================

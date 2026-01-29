@@ -1,0 +1,124 @@
+================================================================================
+                    LEVEL 3 - CLUE 2
+================================================================================
+
+****************************************************************************
+*  STOP! Before starting this clue, run:                                   *
+*                                                                          *
+*      sudo ./scripts/setup_3_2.sh                                         *
+*                                                                          *
+*  Wait for the script to complete, then continue below.                   *
+****************************************************************************
+
+================================================================================
+    THE PROBLEM
+================================================================================
+
+Most network destinations work fine, but ONE specific destination is
+unreachable. For example, you can ping 1.1.1.1 but NOT 8.8.8.8. A bad
+static route is sending traffic for that destination to the wrong place.
+
+================================================================================
+    YOUR MISSION
+================================================================================
+
+STEP 1: OBSERVE
+- Test connectivity to different IPs:
+    ping -c 2 1.1.1.1       (Cloudflare DNS - should work)
+    ping -c 2 8.8.8.8       (Google DNS - should FAIL)
+- One works, one doesn't. This is suspicious!
+- If default gateway was missing, BOTH would fail.
+
+STEP 2: INSPECT
+- Examine the routing table:
+    ip route
+    ip route show
+- Look for any unusual routes, especially to the failing destination.
+- Check for routes that point to strange places like 127.0.0.1 (localhost)
+  or "blackhole" routes.
+- A route like "8.8.8.0/24 via 127.0.0.1" would break Google DNS.
+
+You can also trace the route decision:
+    ip route get 8.8.8.8
+
+STEP 3: DIAGNOSE
+- There's a specific route for the broken destination
+- It points to the wrong next-hop (e.g., localhost or blackhole)
+- This overrides the default route for that specific subnet
+- Traffic to that subnet goes nowhere
+
+STEP 4: RESOLVE
+- Delete the bad route:
+    sudo ip route del 8.8.8.0/24
+  OR if it's a blackhole:
+    sudo ip route del blackhole 8.8.8.0/24
+
+- Optionally, add a correct route if needed:
+    sudo ip route add 8.8.8.0/24 via <your_gateway>
+
+================================================================================
+    VERIFY YOUR FIX
+================================================================================
+
+1. Check the routing table:
+   ip route
+   The bad route should be gone.
+
+2. Test connectivity:
+   ping -c 2 8.8.8.8   (should now work)
+
+3. Verify routing decision:
+   ip route get 8.8.8.8
+   Should show it goes via your default gateway.
+
+================================================================================
+    COMMANDS REFERENCE
+================================================================================
+
+- ip route                          # Show routing table
+- ip route show                     # Same as above
+- ip route get <ip>                 # Show how a specific IP would be routed
+- sudo ip route add <net> via <gw>  # Add route
+- sudo ip route del <net>           # Delete route
+- sudo ip route del blackhole <net> # Delete blackhole route
+- traceroute <ip>                   # Trace path to destination
+- mtr <ip>                          # Interactive traceroute
+
+================================================================================
+    UNDERSTANDING ROUTING
+================================================================================
+
+The routing table tells the system where to send packets:
+- Each entry matches a destination network/prefix
+- Most specific match wins (longer prefix = more specific)
+- "default" (0.0.0.0/0) is the least specific - used when nothing else matches
+
+Example routing table:
+  default via 192.168.1.1 dev eth0       # Default gateway
+  192.168.1.0/24 dev eth0                # Local network (direct)
+  8.8.8.0/24 via 127.0.0.1               # BAD! Sends Google DNS to localhost
+
+Route types:
+- via <gateway>   : Forward to another router
+- dev <interface> : Send directly out interface
+- blackhole       : Drop packets silently
+
+================================================================================
+    DOCUMENT YOUR WORK
+================================================================================
+
+Write down:
+1. What did you OBSERVE (which IPs worked vs failed)?
+2. What did "ip route" show during INSPECT? What was the bad route?
+3. What was your DIAGNOSIS?
+4. What command did you use to RESOLVE (delete the route)?
+5. How did you VERIFY the destination is now reachable?
+
+================================================================================
+    NEXT CLUE
+================================================================================
+
+Once fixed and documented, proceed to clue3.txt
+(Instructor runs: sudo ./setup_environment.sh 3 3)
+
+================================================================================

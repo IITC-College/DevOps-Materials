@@ -1,0 +1,117 @@
+================================================================================
+                    LEVEL 2 - CLUE 3
+================================================================================
+
+****************************************************************************
+*  STOP! Before starting this clue, run:                                   *
+*                                                                          *
+*      sudo ./scripts/setup_2_3.sh                                         *
+*                                                                          *
+*  Wait for the script to complete, then continue below.                   *
+****************************************************************************
+
+================================================================================
+    THE PROBLEM
+================================================================================
+
+You can ping external hosts and SSH works, but you CANNOT browse the web or
+use curl/wget. HTTP (port 80) and HTTPS (port 443) traffic is blocked.
+
+================================================================================
+    YOUR MISSION
+================================================================================
+
+STEP 1: OBSERVE
+- Test basic connectivity:  ping -c 2 8.8.8.8        (should work)
+- Test HTTP:               curl http://example.com   (should FAIL/timeout)
+- Test HTTPS:              curl https://google.com   (should FAIL/timeout)
+- The curl commands hang or show connection refused/timeout.
+
+STEP 2: INSPECT
+- Check UFW status:
+    sudo ufw status verbose
+- Look at:
+    - Default policy for OUTGOING - is it "deny"?
+    - Are there any ALLOW OUT rules for ports 80 and 443?
+- If outgoing is denied by default and 80/443 aren't allowed,
+  that's why web traffic is blocked.
+
+STEP 3: DIAGNOSE
+- UFW is active
+- Default outgoing policy: DENY
+- Ports 80 (HTTP) and 443 (HTTPS) are NOT in the allow list
+- Result: All outgoing web traffic is dropped
+
+STEP 4: RESOLVE
+- Allow outgoing HTTP and HTTPS:
+    sudo ufw allow out 80/tcp
+    sudo ufw allow out 443/tcp
+  OR using service names:
+    sudo ufw allow out http
+    sudo ufw allow out https
+
+================================================================================
+    VERIFY YOUR FIX
+================================================================================
+
+1. Check UFW status:
+   sudo ufw status verbose
+   You should see "80/tcp ALLOW OUT" and "443/tcp ALLOW OUT"
+
+2. Test web connectivity:
+   curl -I http://example.com
+   curl -I https://google.com
+
+================================================================================
+    COMMANDS REFERENCE
+================================================================================
+
+- sudo ufw status verbose           # Show status with default policies
+- sudo ufw allow out <port>/tcp     # Allow outgoing TCP port
+- sudo ufw allow out http           # Allow outgoing HTTP (80)
+- sudo ufw allow out https          # Allow outgoing HTTPS (443)
+- sudo ufw deny out <port>/tcp      # Deny outgoing TCP port
+- sudo ufw default allow outgoing   # Change default outgoing policy
+- curl -I <url>                     # HTTP HEAD request (quick test)
+- wget --spider <url>               # Test URL without downloading
+
+================================================================================
+    UNDERSTANDING OUTGOING RULES
+================================================================================
+
+Most firewalls default to:
+- Deny incoming (protect from outside attacks)
+- Allow outgoing (let users access the internet)
+
+But sometimes outgoing is restricted to:
+- Prevent malware from "phoning home"
+- Control what services users can access
+- Comply with security policies
+
+When outgoing is denied by default, you must explicitly allow each
+port/service you need.
+
+================================================================================
+    DOCUMENT YOUR WORK
+================================================================================
+
+Write down:
+1. What did you OBSERVE (ping vs curl behavior)?
+2. What did "ufw status verbose" show during INSPECT?
+3. What was your DIAGNOSIS (why was web traffic blocked)?
+4. What commands did you use to RESOLVE?
+5. How did you VERIFY web access now works?
+
+================================================================================
+    NEXT LEVEL
+================================================================================
+
+Level 2 complete! You've mastered service/firewall troubleshooting:
+- DNS configuration (/etc/resolv.conf)
+- Incoming firewall rules (SSH)
+- Outgoing firewall rules (HTTP/HTTPS)
+
+Proceed to Level 3 for advanced scenarios.
+(Instructor runs: sudo ./setup_environment.sh 3 1)
+
+================================================================================

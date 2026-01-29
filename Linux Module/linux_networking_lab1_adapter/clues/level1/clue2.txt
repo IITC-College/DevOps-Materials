@@ -1,0 +1,92 @@
+================================================================================
+                    LEVEL 1 - CLUE 2
+================================================================================
+
+****************************************************************************
+*  STOP! Before starting this clue, run:                                   *
+*                                                                          *
+*      sudo ./scripts/setup_1_2.sh                                         *
+*                                                                          *
+*  Wait for the script to complete, then continue below.                   *
+****************************************************************************
+
+================================================================================
+    THE PROBLEM
+================================================================================
+
+Your network interface is UP, but you still can't reach anything. Ping fails
+with "Network is unreachable" or similar. The link is working, but something
+else is missing.
+
+================================================================================
+    YOUR MISSION
+================================================================================
+
+STEP 1: OBSERVE
+- Try: ping 8.8.8.8
+- Note the exact error message.
+- "Network is unreachable" suggests a higher-level issue than link state.
+
+STEP 2: INSPECT
+- First, confirm the interface is UP:
+    ip link show
+- Then check if the interface has an IP address:
+    ip addr show
+    ip addr show <interface_name>
+- Look for "inet" lines - these show IPv4 addresses.
+- If there's no "inet" line for your interface, you have no IP address.
+
+STEP 3: DIAGNOSE
+- Interface is UP (link layer OK).
+- But no IP address assigned (network layer broken).
+- Without an IP, you can't participate in IP networking.
+
+STEP 4: RESOLVE
+Option A - Use DHCP to get an address automatically:
+    sudo dhclient <interface_name>
+
+Option B - Assign a static IP manually (if you know your network):
+    sudo ip addr add 192.168.1.100/24 dev <interface_name>
+    (Use appropriate IP and subnet for your network)
+
+================================================================================
+    VERIFY YOUR FIX
+================================================================================
+
+1. Check the interface now has an IP:
+   ip addr show <interface_name>
+   You should see an "inet" line with your IP address.
+
+2. Test connectivity:
+   ping -c 3 8.8.8.8
+
+================================================================================
+    COMMANDS REFERENCE
+================================================================================
+
+- ip addr show                      # Show all interfaces with addresses
+- ip addr show <iface>              # Show specific interface addresses
+- sudo dhclient <iface>             # Request IP via DHCP
+- sudo ip addr add <ip>/<mask> dev <iface>   # Add static IP
+- sudo ip addr del <ip>/<mask> dev <iface>   # Remove IP
+- sudo ip addr flush dev <iface>    # Remove all IPs from interface
+
+================================================================================
+    DOCUMENT YOUR WORK
+================================================================================
+
+Write down:
+1. What error did you OBSERVE when pinging?
+2. What did "ip addr show" reveal during INSPECT?
+3. What was your DIAGNOSIS (why couldn't you reach the network)?
+4. What command did you use to RESOLVE (DHCP or static)?
+5. How did you VERIFY the fix worked?
+
+================================================================================
+    NEXT CLUE
+================================================================================
+
+Once fixed and documented, proceed to clue3.txt
+(Instructor runs: sudo ./setup_environment.sh 1 3)
+
+================================================================================

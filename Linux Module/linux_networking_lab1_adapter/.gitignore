@@ -1,0 +1,17 @@
+# Student work files
+my_answers.txt
+my_notes.txt
+*.log
+
+# Backup files created by setup script
+data/backups/
+data/logs/*.txt
+
+# Temporary files
+*.tmp
+*.swp
+*~
+
+# OS files
+.DS_Store
+Thumbs.db

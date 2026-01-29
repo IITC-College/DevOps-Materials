@@ -1,0 +1,258 @@
+================================================================================
+            LINUX NETWORKING DEBUG LAB - SOLUTIONS
+================================================================================
+
+INSTRUCTOR REFERENCE - Do not share with students until after lab completion.
+
+================================================================================
+    LEVEL 1: BASIC (LINK LAYER)
+================================================================================
+
+-------------------------------------------------------------------------------
+CLUE 1-1: Interface DOWN
+-------------------------------------------------------------------------------
+
+Setup: sudo ./setup_environment.sh 1 1
+Bug: Interface is brought down with "ip link set <iface> down"
+
+Diagnosis:
+  - ip link show
+  - Look for interface without "UP" in state flags
+
+Solution:
+  sudo ip link set <interface> up
+  # Example: sudo ip link set enp0s3 up
+
+Verification:
+  ip link show <interface>    # Should show "UP" in flags
+  ping -c 2 8.8.8.8           # Should work
+
+-------------------------------------------------------------------------------
+CLUE 1-2: No IP Address
+-------------------------------------------------------------------------------
+
+Setup: sudo ./setup_environment.sh 1 2
+Bug: IP addresses flushed with "ip addr flush dev <iface>"
+
+Diagnosis:
+  - ip addr show
+  - Interface has no "inet" line (no IPv4 address)
+
+Solution (Option A - DHCP):
+  sudo dhclient <interface>
+  # Example: sudo dhclient enp0s3
+
+Solution (Option B - Static):
+  sudo ip addr add 192.168.1.100/24 dev <interface>
+  # Use appropriate IP for your network
+
+Verification:
+  ip addr show <interface>    # Should show "inet" with IP
+  ping -c 2 8.8.8.8           # Should work
+
+-------------------------------------------------------------------------------
+CLUE 1-3: Missing Default Gateway
+-------------------------------------------------------------------------------
+
+Setup: sudo ./setup_environment.sh 1 3
+Bug: Default route removed with "ip route del default"
+
+Diagnosis:
+  - ip route
+  - No "default via" line in routing table
+
+Solution:
+  sudo ip route add default via <gateway_ip>
+  # Example: sudo ip route add default via 192.168.1.1
+  # Common gateways: 192.168.1.1, 10.0.2.2, etc.
+
+Verification:
+  ip route                    # Should show "default via <gw>"
+  ping -c 2 8.8.8.8           # Should work
+
+
+================================================================================
+    LEVEL 2: INTERMEDIATE (SERVICES/FIREWALL)
+================================================================================
+
+-------------------------------------------------------------------------------
+CLUE 2-1: DNS Misconfigured
+-------------------------------------------------------------------------------
+
+Setup: sudo ./setup_environment.sh 2 1
+Bug: /etc/resolv.conf set to invalid nameservers (192.0.2.1, 198.51.100.1)
+
+Diagnosis:
+  - cat /etc/resolv.conf
+  - Shows invalid/documentation IP addresses
+  - ping 8.8.8.8 works, ping google.com fails
+
+Solution:
+  echo "nameserver 8.8.8.8" | sudo tee /etc/resolv.conf
+  # OR
+  sudo nano /etc/resolv.conf
+  # Change to: nameserver 8.8.8.8
+
+Valid DNS servers:
+  - 8.8.8.8 (Google)
+  - 8.8.4.4 (Google)
+  - 1.1.1.1 (Cloudflare)
+  - 9.9.9.9 (Quad9)
+
+Verification:
+  cat /etc/resolv.conf        # Should show valid nameserver
+  ping -c 2 google.com        # Should resolve and ping
+  nslookup google.com         # Should return real IP
+
+-------------------------------------------------------------------------------
+CLUE 2-2: UFW Blocking Incoming SSH
+-------------------------------------------------------------------------------
+
+Setup: sudo ./setup_environment.sh 2 2
+Bug: UFW enabled with deny incoming, no SSH allow rule
+
+Diagnosis:
+  - sudo ufw status verbose
+  - Shows "Default: deny (incoming)"
+  - No rule allowing port 22 or SSH
+
+Solution:
+  sudo ufw allow ssh
+  # OR
+  sudo ufw allow 22/tcp
+
+Verification:
+  sudo ufw status             # Should show "22/tcp ALLOW"
+  # SSH from another machine should work
+
+-------------------------------------------------------------------------------
+CLUE 2-3: UFW Blocking Outgoing HTTP/HTTPS
+-------------------------------------------------------------------------------
+
+Setup: sudo ./setup_environment.sh 2 3
+Bug: UFW with deny outgoing, ports 80/443 not allowed
+
+Diagnosis:
+  - sudo ufw status verbose
+  - Shows "Default: deny (outgoing)"
+  - No ALLOW OUT rules for 80 or 443
+  - curl/wget to websites fails
+
+Solution:
+  sudo ufw allow out 80/tcp
+  sudo ufw allow out 443/tcp
+  # OR
+  sudo ufw allow out http
+  sudo ufw allow out https
+
+Verification:
+  sudo ufw status verbose     # Should show 80/443 ALLOW OUT
+  curl -I http://example.com  # Should work
+  curl -I https://google.com  # Should work
+
+
+================================================================================
+    LEVEL 3: ADVANCED (COMPLEX)
+================================================================================
+
+-------------------------------------------------------------------------------
+CLUE 3-1: Wrong MTU
+-------------------------------------------------------------------------------
+
+Setup: sudo ./setup_environment.sh 3 1
+Bug: MTU set to 500 with "ip link set <iface> mtu 500"
+
+Diagnosis:
+  - ip link show <interface>
+  - Shows "mtu 500" instead of 1500
+  - Small pings work, large pings fail
+  - ping -s 1000 8.8.8.8 times out
+
+Solution:
+  sudo ip link set <interface> mtu 1500
+  # Example: sudo ip link set enp0s3 mtu 1500
+
+Verification:
+  ip link show <interface>    # Should show "mtu 1500"
+  ping -c 2 -s 1000 8.8.8.8   # Should work
+
+-------------------------------------------------------------------------------
+CLUE 3-2: Bad Static Route
+-------------------------------------------------------------------------------
+
+Setup: sudo ./setup_environment.sh 3 2
+Bug: Route for 8.8.8.0/24 points to localhost or blackhole
+
+Diagnosis:
+  - ip route
+  - Shows "8.8.8.0/24 via 127.0.0.1" or "blackhole 8.8.8.0/24"
+  - ping 1.1.1.1 works, ping 8.8.8.8 fails
+
+Solution:
+  sudo ip route del 8.8.8.0/24
+  # OR if blackhole:
+  sudo ip route del blackhole 8.8.8.0/24
+
+Verification:
+  ip route                    # Bad route should be gone
+  ip route get 8.8.8.8        # Should use default gateway
+  ping -c 2 8.8.8.8           # Should work
+
+-------------------------------------------------------------------------------
+CLUE 3-3: /etc/hosts Override
+-------------------------------------------------------------------------------
+
+Setup: sudo ./setup_environment.sh 3 3
+Bug: /etc/hosts maps google.com to 127.0.0.1
+
+Diagnosis:
+  - cat /etc/hosts
+  - Shows "127.0.0.1 google.com www.google.com"
+  - getent hosts google.com returns 127.0.0.1
+  - nslookup google.com returns real IP (DNS works)
+
+Solution:
+  sudo nano /etc/hosts
+  # Delete or comment out the line: 127.0.0.1 google.com www.google.com
+  # OR
+  sudo sed -i '/google.com/d' /etc/hosts
+
+Verification:
+  cat /etc/hosts              # Bad line should be gone
+  getent hosts google.com     # Should show real IP
+  ping -c 2 google.com        # Should go to real IP
+
+
+================================================================================
+    QUICK REFERENCE: ALL SOLUTIONS
+================================================================================
+
+1-1: sudo ip link set <iface> up
+1-2: sudo dhclient <iface>
+1-3: sudo ip route add default via <gateway>
+2-1: echo "nameserver 8.8.8.8" | sudo tee /etc/resolv.conf
+2-2: sudo ufw allow ssh
+2-3: sudo ufw allow out 80/tcp && sudo ufw allow out 443/tcp
+3-1: sudo ip link set <iface> mtu 1500
+3-2: sudo ip route del 8.8.8.0/24
+3-3: Remove google.com line from /etc/hosts
+
+================================================================================
+    RESTORING SYSTEM AFTER LAB
+================================================================================
+
+# Full restoration:
+sudo ip link set <iface> up
+sudo dhclient <iface>
+sudo ip link set <iface> mtu 1500
+sudo ip route del 8.8.8.0/24 2>/dev/null
+sudo ip route del blackhole 8.8.8.0/24 2>/dev/null
+sudo sed -i '/google.com/d' /etc/hosts
+echo "nameserver 8.8.8.8" | sudo tee /etc/resolv.conf
+sudo ufw --force reset
+sudo ufw default allow outgoing
+sudo ufw default deny incoming
+sudo ufw allow ssh
+sudo ufw --force enable
+
+================================================================================
