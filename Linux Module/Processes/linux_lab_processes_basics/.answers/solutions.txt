@@ -39,31 +39,35 @@ EXAMPLE ANSWER: "ps aux showed roughly 100–200 processes."
 
 ================================================================================
 
-LEVEL 1 - CLUE 2: "Where to Look" - PID, User, and Command
-----------------------------------------------------------
+LEVEL 1 - CLUE 2: "Finding a Specific Process" - Searching by Name
+-------------------------------------------------------------------
 
 SETUP (from clues/level1/):
   ../../scripts/setup_1_2.sh
   Starts 1 dummy CPU eater for this clue.
 
-STEP 1 – List all processes with user and command
+STEP 1 – List all processes
   Command:  ps aux
-  Explanation: First line is column headers. PID (usually column 2), USER
-  (column 1), COMMAND (at the end, may be truncated).
+  Explanation: Shows all processes - too many to read easily.
 
-STEP 2 – Identify columns and pick one process
-  Pick any process (e.g. bash, sshd). Write in my_answers.txt: PID, USER, COMMAND.
+STEP 2 – Filter to find only bash processes
+  Command:  ps aux | grep bash
+  Explanation: The pipe (|) sends ps output to grep, which filters to show
+  only lines containing "bash". You'll see your bash shell and the grep
+  command itself.
+
+STEP 3 – Document
+  Write in my_answers.txt: the PID of one bash process you found.
 
 CLEANUP (from clues/level1/):
   ../../scripts/cleanup_1_2.sh
-  Stops the dummy processes from this clue.
 
-EXAMPLE ANSWER: "PID 1234, USER student, COMMAND bash"
+EXAMPLE ANSWER: "bash PID: 1234"
 
 ================================================================================
 
-LEVEL 1 - CLUE 3: "Many Processes, One User" - Filtering by User
------------------------------------------------------------------
+LEVEL 1 - CLUE 3: "Who Owns What?" - Understanding Process Ownership
+---------------------------------------------------------------------
 
 SETUP (from clues/level1/):
   ../../scripts/setup_1_3.sh
@@ -72,17 +76,22 @@ SETUP (from clues/level1/):
 STEP 1 – Find your username
   Command:  whoami
 
-STEP 2 – List only your processes
+STEP 2 – Count your processes
   Command:  ps aux | grep $USER
-  Explanation: Filters to show only your processes. Fewer lines than full ps aux.
+  Explanation: Shows only processes owned by you. Count the lines (roughly).
 
-STEP 3 – Document
-  Write in my_answers.txt: roughly how many processes belong to your user?
+STEP 3 – Count root's processes
+  Command:  ps aux | grep root
+  Explanation: Shows processes owned by root (system). Root typically has
+  many more processes - system services, daemons, etc.
+
+STEP 4 – Document
+  Write in my_answers.txt: rough comparison of your processes vs. root's.
 
 CLEANUP (from clues/level1/):
   ../../scripts/cleanup_1_3.sh
 
-EXAMPLE ANSWER: "About 5–15 processes for my user."
+EXAMPLE ANSWER: "My processes: ~10, root processes: ~80" (numbers vary by system)
 
 ================================================================================
 

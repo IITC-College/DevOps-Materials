@@ -1,6 +1,6 @@
 ================================================================================
                     LEVEL 1 - CLUE 3
-            "Many Processes, One User" - Filtering by User
+            "Who Owns What?" - Understanding Process Ownership
 ================================================================================
 
 * SETUP: Run first (from this folder):  ../../scripts/setup_1_3.sh
@@ -8,19 +8,23 @@
 --------------------------------------------------------------------------------
 WHAT YOU'RE DOING
 --------------------------------------------------------------------------------
-Each process belongs to a user (or root for system tasks). Your job: show only
-the processes that belong to you, and see how many you have.
+Every process has an owner (a user). Some are owned by root (system), others
+by regular users. Your job: compare how many processes YOU own vs. how many
+root owns. This helps you understand the difference between user and system
+processes.
 
 --------------------------------------------------------------------------------
 INSTRUCTIONS
 --------------------------------------------------------------------------------
 1. Find your username. Hint: whoami.
 
-2. List all processes, then filter so you see only processes owned by your
-   user. You should see fewer lines. Hint: ps aux and filter by your username
-   (e.g. ps aux | grep $USER).
+2. Count roughly how many processes belong to YOU. Hint: ps aux | grep $USER
+   and count the lines (or just estimate).
 
-3. Write in my_answers.txt: roughly how many processes belong to your user?
+3. Count roughly how many processes belong to ROOT. Hint: ps aux | grep root.
+
+4. Write in my_answers.txt: "My processes: ~X, root processes: ~Y" (rough
+   numbers are fine - you'll notice root has MANY more)
 
 --------------------------------------------------------------------------------
 CLEANUP (run when done with this clue):  ../../scripts/cleanup_1_3.sh

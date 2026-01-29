@@ -1,6 +1,6 @@
 ================================================================================
                     LEVEL 1 - CLUE 2
-            "Where to Look" - PID, User, and Command
+            "Finding a Specific Process" - Searching by Name
 ================================================================================
 
 * SETUP: Run first (from this folder):  ../../scripts/setup_1_2.sh
@@ -8,21 +8,21 @@
 --------------------------------------------------------------------------------
 WHAT YOU'RE DOING
 --------------------------------------------------------------------------------
-When you list processes, the important columns are: PID (process ID), USER
-(who runs it), and COMMAND (the program). Your job: pick one process and
-identify these three things.
+Sometimes you need to find one specific process in a huge list. Instead of
+scrolling through hundreds of lines, you can search for it by name. Your job:
+find your bash shell process.
 
 --------------------------------------------------------------------------------
 INSTRUCTIONS
 --------------------------------------------------------------------------------
-1. List all processes with user and command info. Hint: ps aux.
+1. List all processes. Hint: ps aux.
 
-2. Look at the first line (column headers). Find which column is PID, which
-   is USER, and which is COMMAND (or CMD).
+2. There are too many lines. Let's find only "bash" processes. Filter the
+   list to show only lines containing "bash". Hint: ps aux | grep bash.
 
-3. Pick one process from the list (e.g. bash, sshd). Write in my_answers.txt:
-   that process's PID, USER, and COMMAND. Example: "PID 1234, USER student,
-   COMMAND bash"
+3. Look at the result. You should see your bash shell (and the grep command).
+   Write in my_answers.txt: the PID of one bash process you found. Example:
+   "bash PID: 1234"
 
 --------------------------------------------------------------------------------
 CLEANUP (run when done with this clue):  ../../scripts/cleanup_1_2.sh
