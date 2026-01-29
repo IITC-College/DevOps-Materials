@@ -1,0 +1,201 @@
+# Troubleshooting Flow Lab – Instructor Solutions (Broken Service Investigation)
+
+Use this for grading investigation_report.txt or when students are stuck. Each clue: flow, commands, and expected 4-field report block (status, log line, action, conclusion).
+
+--------------------------------------------------------------------------------
+LEVEL 1 - CLUE 1: "lab-helper" Not Running
+--------------------------------------------------------------------------------
+Flow:
+  - What's not working? lab-helper is down.
+  - Process or service? Process (no systemd unit; would show in ps).
+  - Status? Process not in process list.
+  - Logs? data/logs/lab_helper.log says "expected but not running".
+  - Next action? Start the process (run scripts/dummy_worker.sh in background) or report "process not running, start it".
+
+Commands:
+  ps aux | grep lab-helper
+  ps aux | grep dummy_worker
+  cat ../../data/logs/lab_helper.log   (from clues/level1/)
+  # Optional: LAB_ROOT="$(cd ../../.. && pwd)" ; "$LAB_ROOT/scripts/dummy_worker.sh" &
+
+Report (expected 4-field block):
+  - Service/Process name: lab-helper (or dummy_worker)
+  - Status: process not found
+  - Relevant log line: e.g. "[...] lab-helper expected but not running – no process found."
+  - Action performed: checked status (ps), read logs (lab_helper.log)
+  - Short conclusion: Process is not running; next action is to start it (or report that it is down).
+
+--------------------------------------------------------------------------------
+LEVEL 1 - CLUE 2: "lab-worker" High CPU / Stuck
+--------------------------------------------------------------------------------
+Flow:
+  - What's not working? lab-worker high CPU.
+  - Process or service? Process.
+  - Status? Process running, high %CPU (dummy_cpu_eater.sh).
+  - Logs? Not required; status is enough.
+  - Next action? Kill the process.
+
+Commands:
+  ps aux | grep dummy_cpu_eater
+  kill <PID>
+
+Report (expected 4-field block):
+  - Service/Process name: lab-worker (or dummy_cpu_eater)
+  - Status: running, high %CPU
+  - Relevant log line: N/A (status alone is enough)
+  - Action performed: checked status (ps), optionally killed process
+  - Short conclusion: High-CPU process identified; next action is to kill it.
+
+--------------------------------------------------------------------------------
+LEVEL 1 - CLUE 3: Process "Disappeared"
+--------------------------------------------------------------------------------
+Flow:
+  - What's not working? lab-helper was running, now gone.
+  - Process or service? Process.
+  - Status? Not in ps (disappeared).
+  - Logs? data/logs/lab_helper.log – "was running, then exited".
+  - Next action? Restart or report (e.g. "process exited; check logs and restart").
+
+Commands:
+  ps aux | grep dummy_worker
+  cat ../../data/logs/lab_helper.log
+  tail ../../data/logs/lab_helper.log
+
+Report (expected 4-field block):
+  - Service/Process name: lab-helper (or dummy_worker)
+  - Status: process not found (disappeared)
+  - Relevant log line: e.g. line in lab_helper.log about "was running, then exited"
+  - Action performed: checked status (ps), read logs
+  - Short conclusion: Process exited; next action is to restart or report based on logs.
+
+--------------------------------------------------------------------------------
+LEVEL 2 - CLUE 1: lab-troubleshoot Service Stopped
+--------------------------------------------------------------------------------
+Flow:
+  - What's not working? lab-troubleshoot down.
+  - Process or service? Service (systemd).
+  - Status? systemctl --user status lab-troubleshoot → inactive (stopped).
+  - Logs? journalctl --user -u lab-troubleshoot -n 20 (optional).
+  - Next action? Start the service.
+
+Commands:
+  systemctl --user status lab-troubleshoot
+  journalctl --user -u lab-troubleshoot -n 20
+  systemctl --user start lab-troubleshoot
+
+Report (expected 4-field block):
+  - Service/Process name: lab-troubleshoot
+  - Status: inactive (stopped)
+  - Relevant log line: N/A or empty (never started)
+  - Action performed: checked status, optionally read journal
+  - Short conclusion: Service is stopped; next action is to start it.
+
+--------------------------------------------------------------------------------
+LEVEL 2 - CLUE 2: lab-troubleshoot Service Failed
+--------------------------------------------------------------------------------
+Flow:
+  - What's not working? lab-troubleshoot not working.
+  - Process or service? Service.
+  - Status? systemctl --user status lab-troubleshoot → failed / inactive (dead), exit code 1.
+  - Logs? journalctl --user -u lab-troubleshoot -n 20 – daemon printed "exiting with error".
+  - Next action? Fix cause or restart (here: document "check logs, fix script or restart").
+
+Commands:
+  systemctl --user status lab-troubleshoot
+  journalctl --user -u lab-troubleshoot -n 20
+  systemctl --user start lab-troubleshoot   (will fail again until script is fixed)
+
+Report (expected 4-field block):
+  - Service/Process name: lab-troubleshoot
+  - Status: failed / inactive (dead), exit code 1
+  - Relevant log line: e.g. "lab-troubleshoot: starting then exiting with error (simulated failure)"
+  - Action performed: checked status, read journal
+  - Short conclusion: Service failed; logs show daemon exited with error; next action is to fix script or investigate cause.
+
+--------------------------------------------------------------------------------
+LEVEL 2 - CLUE 3: Service Running but App Not Responding
+--------------------------------------------------------------------------------
+Flow:
+  - What's not working? App not responding (service "running").
+  - Process or service? Service.
+  - Status? systemctl --user status lab-troubleshoot → active (running).
+  - Logs? journalctl --user -u lab-troubleshoot -n 30 – ERROR / WARN lines.
+  - Next action? Restart and monitor, or investigate (e.g. "restart and watch logs").
+
+Commands:
+  systemctl --user status lab-troubleshoot
+  journalctl --user -u lab-troubleshoot -n 30
+  systemctl --user restart lab-troubleshoot
+
+Report (expected 4-field block):
+  - Service/Process name: lab-troubleshoot
+  - Status: active (running)
+  - Relevant log line: e.g. "ERROR: Application not responding – connection refused to backend" or "WARN: health check failing"
+  - Action performed: checked status, read journal, restart
+  - Short conclusion: Service is running but logs show errors; next action is restart and monitor or investigate.
+
+--------------------------------------------------------------------------------
+LEVEL 3 - CLUE 1: Combined – Process-Only
+--------------------------------------------------------------------------------
+Flow:
+  - What's not working? lab-helper down.
+  - Process or service? Process (no systemd; check ps).
+  - Status? ps aux | grep dummy_worker – not found.
+  - Logs? data/logs/lab_helper.log.
+  - Next action? Start process or report.
+
+Commands:
+  ps aux | grep lab-helper
+  ps aux | grep dummy_worker
+  cat ../../data/logs/lab_helper.log
+  (start dummy_worker.sh if desired)
+
+Report (expected 4-field block):
+  - Service/Process name: lab-helper (or dummy_worker)
+  - Status: process not found
+  - Relevant log line: from lab_helper.log as applicable
+  - Action performed: checked ps, read logs
+  - Short conclusion: Process is down; next action is to start it or report.
+
+--------------------------------------------------------------------------------
+LEVEL 3 - CLUE 2: Combined – Service-Only
+--------------------------------------------------------------------------------
+Flow:
+  - What's not working? lab-troubleshoot down.
+  - Process or service? Service.
+  - Status? systemctl --user status lab-troubleshoot → inactive.
+  - Logs? journalctl --user -u lab-troubleshoot -n 20.
+  - Next action? systemctl --user start lab-troubleshoot
+
+Commands:
+  systemctl --user status lab-troubleshoot
+  systemctl --user start lab-troubleshoot
+
+Report (expected 4-field block):
+  - Service/Process name: lab-troubleshoot
+  - Status: inactive (stopped)
+  - Relevant log line: as in journal if any
+  - Action performed: checked status, start service
+  - Short conclusion: Service was stopped; next action is to start it.
+
+--------------------------------------------------------------------------------
+LEVEL 3 - CLUE 3: Logs Tell You Which
+--------------------------------------------------------------------------------
+Flow:
+  - What's not working? Read log first.
+  - Log: data/logs/troubleshoot_hint.log says "lab-troubleshoot SERVICE should be running".
+  - Process or service? Service (log says so).
+  - Status? systemctl --user status lab-troubleshoot → inactive.
+  - Next action? systemctl --user start lab-troubleshoot
+
+Commands:
+  cat ../../data/logs/troubleshoot_hint.log
+  systemctl --user status lab-troubleshoot
+  systemctl --user start lab-troubleshoot
+
+Report (expected 4-field block):
+  - Service/Process name: lab-troubleshoot
+  - Status: inactive (stopped)
+  - Relevant log line: from troubleshoot_hint.log (e.g. "lab-troubleshoot SERVICE should be running")
+  - Action performed: read hint log, checked status, start service
+  - Short conclusion: Log indicated service; service was stopped; next action is to start it.

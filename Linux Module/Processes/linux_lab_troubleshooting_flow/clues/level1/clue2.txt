@@ -1,0 +1,38 @@
+================================================================================
+                    LEVEL 1 - CLUE 2
+            "lab-worker" High CPU / Stuck
+================================================================================
+
+* SETUP: Run first (from this folder):  ../../scripts/setup_1_2.sh
+
+--------------------------------------------------------------------------------
+WHAT YOU'RE DOING
+--------------------------------------------------------------------------------
+Users report that "lab-worker" is using too much CPU and the system feels
+slow. Apply the flow: process or service? status? logs? next action?
+
+--------------------------------------------------------------------------------
+INSTRUCTIONS
+--------------------------------------------------------------------------------
+1. Apply the flow. Is lab-worker a process or a service? (In this scenario
+   it is a process.)
+
+2. Check status. Find the process. Hint: ps aux | grep dummy_cpu_eater
+   (or grep for sleep – the script runs a loop with sleep). Look at the %CPU
+   column.
+
+3. What do the logs say? (For this clue the "symptom" is high CPU; you may not
+   need a log file – the status already tells you.)
+
+4. Decide the next action. Should you stop the process? Hint: kill <PID>
+
+5. Add one block to your investigation report (investigation_report.txt at lab
+   root). Use the template in the README: Service/Process name, Status,
+   Relevant log line (or "N/A" if status alone is enough), Action performed,
+   Short conclusion.
+
+--------------------------------------------------------------------------------
+CLEANUP (run when done with this clue):  ../../scripts/cleanup_1_2.sh
+--------------------------------------------------------------------------------
+    NEXT STEP:  cat clue3.txt
+================================================================================

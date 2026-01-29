@@ -1,0 +1,32 @@
+================================================================================
+                    LEVEL 2 - CLUE 1
+            "Loop Over Tiers and Call a Function"
+================================================================================
+
+--------------------------------------------------------------------------------
+WHAT YOU'RE DOING
+--------------------------------------------------------------------------------
+Instead of calling deploy_tier frontend, deploy_tier api, deploy_tier worker
+on separate lines, you can loop over a list and call the function with the
+current item as $1. One loop replaces three (or more) repeated calls.
+
+--------------------------------------------------------------------------------
+INSTRUCTIONS
+--------------------------------------------------------------------------------
+1. Edit deploy_step2.sh (or create deploy_loop.sh in projects/). Define the
+   same deploy_tier function (echo "Deploying $1...", echo "  $1: deployed").
+   Then add a for loop: for TIER in frontend api worker; do deploy_tier "$TIER"; done
+   Save and exit.
+
+2. Make it executable and run from projects/: ./deploy_loop.sh
+   (or ./deploy_step2.sh if you edited that). You should see the same three
+   blocks as before, but now the list of tiers is in one place (the for
+   list). Adding a new tier (e.g. cache) only requires adding it to the list.
+
+3. Write in my_answers.txt (lab root): one sentence – what is $1 inside
+   deploy_tier when you call deploy_tier "$TIER" from the loop? (Answer: $1
+   is the value of TIER for that iteration – frontend, then api, then worker.)
+
+--------------------------------------------------------------------------------
+    NEXT STEP:  cat clue2.txt
+================================================================================

@@ -1,0 +1,34 @@
+================================================================================
+                    LEVEL 1 - CLUE 1
+            "Your First Script" - Create a Deployment Script
+================================================================================
+
+--------------------------------------------------------------------------------
+WHAT YOU'RE DOING
+--------------------------------------------------------------------------------
+A bash script is just a text file containing Linux commands. In DevOps we use
+scripts to automate tasks like deployments. Your first task: create a simple
+script that prints deployment steps. No magic – just commands in a file.
+
+--------------------------------------------------------------------------------
+INSTRUCTIONS
+--------------------------------------------------------------------------------
+1. Go to the lab's projects folder. From clues/level1, that is ../../projects.
+   Create a new file there named first_deploy.sh. Hint: nano ../../projects/first_deploy.sh
+   (or use any editor you prefer).
+
+2. Type these lines (nothing else yet – no shebang in this clue):
+   echo "Deploy started..."
+   echo "Stopping old service..."
+   echo "Copying files..."
+   echo "Starting new service..."
+   echo "Deploy complete."
+   Save and exit.
+
+3. Run the script. Hint: from projects/, you can run bash first_deploy.sh
+   (we use "bash" to run it without making it executable yet). You should see
+   all five lines printed. That's your first script running.
+
+--------------------------------------------------------------------------------
+    NEXT STEP:  cat clue2.txt
+================================================================================

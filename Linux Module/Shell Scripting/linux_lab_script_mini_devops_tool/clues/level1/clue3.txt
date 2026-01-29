@@ -1,0 +1,41 @@
+================================================================================
+                    LEVEL 1 - CLUE 3
+            "check_services()" - for Loop Over Service Names
+================================================================================
+
+--------------------------------------------------------------------------------
+WHAT YOU'RE DOING
+--------------------------------------------------------------------------------
+Replace the stub check_services with a real implementation: a for loop over
+service names (e.g. nginx, app, db). Inside the loop echo "Checking $SVC..."
+and a simulated OK/fail line (e.g. "  nginx: OK"). Call this from the check
+branch. So the tool has at least one loop.
+
+--------------------------------------------------------------------------------
+INSTRUCTIONS
+--------------------------------------------------------------------------------
+1. Edit ops_tool.sh. Replace check_services with:
+   check_services() {
+     echo "[$(date '+%H:%M:%S')] Health check..."
+     for SVC in nginx app db; do
+       echo "  Checking $SVC..."
+       echo "    $SVC: OK"
+     done
+     echo "[$(date '+%H:%M:%S')] All services OK."
+   }
+   Save and exit. (You can later make the "OK" line conditional or simulated
+   – for now a simple loop is enough.)
+
+2. Run from projects/: ./ops_tool.sh and type check
+   You should see "Health check...", then for each of nginx, app, db: "Checking ..."
+   and "  ...: OK", then "All services OK." So the script now has: case menu,
+   show_status with real commands, and check_services with a for loop.
+
+3. Write in my_answers.txt (lab root: ../../my_answers.txt from clues/level1):
+   one sentence – what would you change to make check_services "real" in
+   production? (e.g. "Run a real check per service – curl /health, or
+   systemctl is-active $SVC – and echo OK or FAIL based on the result.")
+
+--------------------------------------------------------------------------------
+    NEXT STEP:  cd ../level2  then  cat clue1.txt
+================================================================================

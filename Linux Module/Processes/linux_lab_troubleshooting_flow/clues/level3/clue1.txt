@@ -1,0 +1,38 @@
+================================================================================
+                    LEVEL 3 - CLUE 1
+            Combined: Process-Only Scenario
+================================================================================
+
+* SETUP: Run first (from this folder):  ../../scripts/setup_3_1.sh
+
+--------------------------------------------------------------------------------
+WHAT YOU'RE DOING
+--------------------------------------------------------------------------------
+In this level you apply the flow without being told "process" or "service" –
+you must decide. This clue is a PROCESS-only scenario: something that would
+show up in ps, not in systemctl. lab-helper is not running.
+
+--------------------------------------------------------------------------------
+INSTRUCTIONS
+--------------------------------------------------------------------------------
+1. Apply the flow. What is not working? (lab-helper is down.)
+   Is it a process or a service? (You must decide – no hint this time.)
+   Check: would it appear in ps or in systemctl --user list-units?
+
+2. Check status. If it is a process: ps aux | grep lab-helper or dummy_worker.
+   If it is a service: systemctl --user status lab-troubleshoot.
+   Choose the right one.
+
+3. Check the logs. data/logs/ in the lab root may have a hint.
+
+4. Decide the next action.
+
+5. Add one block to your investigation report (investigation_report.txt at lab
+   root): Service/Process name, Status, Relevant log line, Action performed,
+   Short conclusion.
+
+--------------------------------------------------------------------------------
+CLEANUP (run when done with this clue):  ../../scripts/cleanup_3_1.sh
+--------------------------------------------------------------------------------
+    NEXT STEP:  cat clue2.txt
+================================================================================

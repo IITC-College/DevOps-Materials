@@ -1,0 +1,30 @@
+================================================================================
+                    LEVEL 1 - CLUE 2
+            "Check if Directory Exists" - [ -d "$DIR" ]
+================================================================================
+
+--------------------------------------------------------------------------------
+WHAT YOU'RE DOING
+--------------------------------------------------------------------------------
+Before copying files we often check if the target directory exists. In bash
+you use [ -d "$DIR" ] to test if a path exists and is a directory. Use it
+inside an if: if [ -d "$DIR" ]; then ...
+
+--------------------------------------------------------------------------------
+INSTRUCTIONS
+--------------------------------------------------------------------------------
+1. From lab root, list the environment directories: ls data/environments/
+   You should see prod and staging (or similar). These are the deploy targets.
+
+2. Edit check_config.sh (or create check_dir.sh in projects/). Add a variable:
+   DEPLOY_DIR="../data/environments/prod"
+   Then add an if that checks [ -d "$DEPLOY_DIR" ] and echoes "Deploy directory
+   exists." or "Deploy directory not found." Run the script from projects/.
+   You should see "Deploy directory exists."
+
+3. Change DEPLOY_DIR to a non-existent path (e.g. ../data/environments/missing).
+   Run again. You should see "Deploy directory not found."
+
+--------------------------------------------------------------------------------
+    NEXT STEP:  cat clue3.txt
+================================================================================

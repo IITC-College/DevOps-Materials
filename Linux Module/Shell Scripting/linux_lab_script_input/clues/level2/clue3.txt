@@ -1,0 +1,35 @@
+================================================================================
+                    LEVEL 2 - CLUE 3
+            "Document Your Findings" - What Happens with Empty Input?
+================================================================================
+
+--------------------------------------------------------------------------------
+WHAT YOU'RE DOING
+--------------------------------------------------------------------------------
+You've seen that read stores whatever the user types – including nothing.
+When they press Enter without typing, the variable is empty. Documenting
+this helps you remember why validation is needed later.
+
+--------------------------------------------------------------------------------
+INSTRUCTIONS
+--------------------------------------------------------------------------------
+1. In my_answers.txt (lab root), add a short summary (2–3 sentences) under
+   a heading "Empty input findings":
+   - What did the script print when you entered nothing?
+   - What would you want the script to do instead? (e.g. print "Error: service
+     name cannot be empty" and exit – you'll learn how in the conditionals lab.)
+
+2. Run check_service.sh one more time with a real service name (e.g. web).
+   Confirm it still works when input is provided. That's the behavior we want
+   to keep – and add a check for empty input in a later lab.
+
+3. You've completed the Input lab. You can use read and read -p, echo back
+   input, and you understand why empty input is a problem.
+
+--------------------------------------------------------------------------------
+================================================================================
+                    LAB COMPLETE
+================================================================================
+Congratulations! You've completed the Script Input lab. You can read user
+input, use read -p for prompts, and you understand why validation matters.
+================================================================================

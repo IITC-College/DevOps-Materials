@@ -1,0 +1,39 @@
+================================================================================
+                    LEVEL 2 - CLUE 3
+            "Complete Backup Script" - Variables and Output Together
+================================================================================
+
+--------------------------------------------------------------------------------
+WHAT YOU'RE DOING
+--------------------------------------------------------------------------------
+Combine what you learned: variables for app name, version, date, and backup
+filename; echo statements for clear user messages. A good backup script
+tells the user what it's doing at each step.
+
+--------------------------------------------------------------------------------
+INSTRUCTIONS
+--------------------------------------------------------------------------------
+1. Create a script in projects/: backup_full.sh
+   Shebang, then variables: APP_NAME="webapp", VERSION="1.0",
+   DATE=$(date +%Y-%m-%d), BACKUP_NAME="backup_${APP_NAME}_${DATE}.log"
+
+2. Add echo statements that use these variables:
+   - "Backup started for $APP_NAME version $VERSION"
+   - "Date: $DATE"
+   - "Backup file: $BACKUP_NAME"
+   - "Backing up..."
+   - "Backup complete."
+
+3. Make it executable and run it. Then write in my_answers.txt (lab root):
+   one sentence – how would you change the script to backup a different app
+   without editing five places? (Answer: change only APP_NAME and/or VERSION
+   at the top; the rest follows.)
+
+--------------------------------------------------------------------------------
+================================================================================
+                    LAB COMPLETE
+================================================================================
+Congratulations! You've completed the Script Variables lab. You can use
+variables, command substitution for dates, and build backup scripts with
+clear, dynamic output.
+================================================================================

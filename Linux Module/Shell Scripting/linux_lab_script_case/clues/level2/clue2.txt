@@ -1,0 +1,39 @@
+================================================================================
+                    LEVEL 2 - CLUE 2
+            "case + Functions" - Wrap Each Action
+================================================================================
+
+--------------------------------------------------------------------------------
+WHAT YOU'RE DOING
+--------------------------------------------------------------------------------
+Instead of putting df or uptime directly in the case branch, you can wrap
+each action in a function (e.g. show_disk, show_uptime) and call the function
+from the case branch. That keeps the case short and the logic in one place
+per action.
+
+--------------------------------------------------------------------------------
+INSTRUCTIONS
+--------------------------------------------------------------------------------
+1. Edit menu_ops.sh (or create menu_ops_functions.sh). Define:
+   show_disk() {
+     echo "=== Disk usage (current dir) ==="
+     df -h .
+   }
+   show_uptime() {
+     echo "=== Uptime ==="
+     uptime
+   }
+   Then in the case: 1) show_disk ;; 2) show_uptime ;; 3) echo "Exiting."; exit 0 ;; *) echo "Invalid option."; exit 1 ;;
+   Save and exit.
+
+2. Run from projects/. Type 1 – you should see the header "=== Disk usage ==="
+   then the output of df -h . Type 2 – header "=== Uptime ===" then uptime.
+   The case block is short; each action is in its own function.
+
+3. Add a fourth option (e.g. 4 = status) that calls a function show_status
+   that echoes "Hostname: $(hostname)" and "Date: $(date)". Add 4) show_status ;;
+   to the case. Run and type 4 – you should see hostname and date.
+
+--------------------------------------------------------------------------------
+    NEXT STEP:  cat clue3.txt
+================================================================================

@@ -1,0 +1,88 @@
+================================================================================
+                    SOLUTIONS - Ops Helper Lab
+                    (Instructor use only)
+================================================================================
+
+Level 1: setup_1_1.sh before starting, cleanup_1_1.sh when done with Level 1.
+Setup creates data/ops_env/logs and data/ops_env/configs.
+
+================================================================================
+
+LEVEL 1 - CLUE 1: "Action Choice"
+---------------------------------
+
+SETUP (from clues/level1/): ../../scripts/setup_1_1.sh
+Creates data/ops_env/ with logs and configs.
+
+STEP 1 – ls data/ops_env/ (from lab root) – see logs, configs
+
+STEP 2 – projects/ops_helper.sh:
+  #!/bin/bash
+  echo "=== Ops Helper ==="
+  read -p "Action (deploy/check/backup): " ACTION
+  echo "You chose: $ACTION"
+  chmod +x, run from projects/. Type deploy → "You chose: deploy."
+
+STEP 3 – Type restart → "You chose: restart."
+
+CLEANUP (when done with Level 1): ../../scripts/cleanup_1_1.sh
+
+================================================================================
+
+LEVEL 1 - CLUE 2: "Handle Each Action"
+--------------------------------------
+
+STEP 1 – Replace "You chose: $ACTION" with if/elif/else:
+  if [ "$ACTION" = "deploy" ]; then echo "Deploying..."; echo "App deployed."
+  elif [ "$ACTION" = "check" ]; then echo "Checking services..."; echo "Status: OK"
+  elif [ "$ACTION" = "backup" ]; then echo "Backing up..."; echo "Backup finished."
+  else echo "Unknown action. Use deploy, check, or backup."
+  fi
+
+STEP 2 – deploy → "Deploying..." "App deployed."; check → "Checking services..." "Status: OK"; backup → "Backing up..." "Backup finished."; restart → "Unknown action..."
+
+STEP 3 – my_answers.txt: e.g. "The else branch handles any input that is not deploy, check, or backup."
+
+================================================================================
+
+LEVEL 1 - CLUE 3: "Input Validation"
+-------------------------------------
+
+STEP 1 – Add empty check first: if [ -z "$ACTION" ]; then echo "Error: action cannot be empty."; elif [ "$ACTION" = "deploy" ]; then ... (rest unchanged). Add echo ""; echo "Done." at end.
+
+STEP 2 – Empty input → "Error: action cannot be empty."; deploy → "Deploying..." "App deployed."
+
+================================================================================
+
+LEVEL 2 - CLUE 1: "Variables for App and Paths"
+------------------------------------------------
+
+STEP 1 – Add at top: APP_NAME="webapp", LOG_DIR="../data/ops_env/logs", CONFIG_DIR="../data/ops_env/configs". In deploy: "Deploying $APP_NAME..."; check: "Checking $APP_NAME..."; backup: "Backing up logs from $LOG_DIR..." (or similar).
+
+STEP 2 – my_answers.txt: e.g. "So we change one place to use a different app or path; the rest of the script stays the same."
+
+================================================================================
+
+LEVEL 2 - CLUE 2: "Confirmation for Dangerous Operations"
+---------------------------------------------------------
+
+STEP 1 – In deploy branch: read -p "Are you sure you want to deploy? (yes/no): " CONFIRM; if [ "$CONFIRM" != "yes" ]; then echo "Deploy cancelled."; else echo "Deploying $APP_NAME..."; echo "App deployed."; fi
+
+STEP 2 – deploy + no (or Enter) → "Deploy cancelled."; deploy + yes → "Deploying webapp..." "App deployed."
+
+STEP 3 – my_answers.txt: e.g. "To avoid deploying by mistake; deploy can overwrite production."
+
+================================================================================
+
+LEVEL 2 - CLUE 3: "Complete Ops Helper v1"
+------------------------------------------
+
+STEP 1 – Full script: shebang, comment, APP_NAME/LOG_DIR/CONFIG_DIR, read ACTION, [ -z "$ACTION" ], elif deploy (with confirmation), elif check, elif backup, else unknown, fi, echo ""; echo "Done."
+
+STEP 2 – Run deploy (yes), check, backup – all work. Empty input → error; restart → unknown.
+
+STEP 3 – my_answers.txt: e.g. "v2: loops to retry, functions to avoid repeating code, actual file operations instead of echo."
+
+================================================================================
+END OF SOLUTIONS
+================================================================================

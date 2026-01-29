@@ -1,0 +1,67 @@
+================================================================================
+                    SOLUTIONS - Script Exit Codes Lab
+                    (Instructor use only)
+================================================================================
+
+This lab is static. Students create scripts in projects/. data/environments/project1
+and data/configs/app.conf exist so checks pass with default paths.
+
+================================================================================
+
+LEVEL 1 - CLUE 1: "exit 0 and exit 1"
+---------------------------------------
+
+STEP 1 – check_dir_exit.sh: TARGET="${1:-../data/environments/project1}"; if [ -d "$TARGET" ]; then echo "OK"; exit 0; else echo "FAIL"; exit 1; fi
+
+STEP 2 – Run ./check_dir_exit.sh → "OK"; echo $? → 0. Run ./check_dir_exit.sh ../data/missing → "FAIL"; echo $? → 1.
+
+================================================================================
+
+LEVEL 1 - CLUE 2: "Check Config File"
+--------------------------------------
+
+STEP 1 – check_config_exit.sh: CONFIG="${1:-../data/configs/app.conf}"; if [ -f "$CONFIG" ]; then echo "Config found."; exit 0; else echo "Config not found."; exit 1; fi
+
+STEP 2 – Valid path → "Config found." and 0. Invalid path → "Config not found." and 1.
+
+STEP 3 – my_answers.txt: "Valid path: exit code 0. Invalid path: exit code 1."
+
+================================================================================
+
+LEVEL 1 - CLUE 3: "&& and ||"
+-----------------------------
+
+STEP 1 – ./check_config_exit.sh && echo "Success" || echo "Failed" – valid path → "Config found." "Success"; invalid → "Config not found." "Failed".
+
+STEP 2 – my_answers.txt: e.g. "The exit code of the script drives && and ||: 0 means run the next command after &&, non-zero means run the command after ||."
+
+================================================================================
+
+LEVEL 2 - CLUE 1: "Chain Two Steps"
+------------------------------------
+
+STEP 1 – chain_steps.sh: run check_dir_exit.sh ../data/environments/project1; CODE1=$?; if [ $CODE1 -ne 0 ]; then echo "Step 1 failed."; exit 1; fi; run check_config_exit.sh ../data/configs/app.conf; CODE2=$?; if [ $CODE2 -ne 0 ]; then echo "Step 2 failed."; exit 1; fi; echo "All steps passed."; exit 0
+
+STEP 2 – Run → "OK", "Config found.", "All steps passed.", 0. Break step 1 → "FAIL", "Step 1 failed.", 1 – step 2 never runs.
+
+================================================================================
+
+LEVEL 2 - CLUE 2: "Wrapper Pass-Through"
+-----------------------------------------
+
+STEP 1 – wrapper.sh: ./check_config_exit.sh ../data/configs/app.conf; CODE=$?; echo "Exit code: $CODE"; exit $CODE. With valid path → "Config found.", "Exit code: 0", echo $? → 0. With missing path → "Config not found.", "Exit code: 1", echo $? → 1.
+
+================================================================================
+
+LEVEL 2 - CLUE 3: "Pipeline and CI/CD"
+---------------------------------------
+
+STEP 1 – pipeline_simple.sh: echo "Step 1: Validate..."; check_dir_exit, check_config_exit; if either fails exit 1; echo "Step 2: Deploy (simulated)..."; echo "Deploy complete."; exit 0
+
+STEP 2 – Break validation → "Validate failed. Abort.", exit 1 – deploy never runs.
+
+STEP 3 – my_answers.txt: e.g. "CI/CD uses exit codes to show green/red and to abort the pipeline on failure; non-zero means do not run next step."
+
+================================================================================
+END OF SOLUTIONS
+================================================================================

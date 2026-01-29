@@ -1,0 +1,31 @@
+================================================================================
+                    LEVEL 2 - CLUE 2
+            "Create Directory Only if Missing" - mkdir -p
+================================================================================
+
+--------------------------------------------------------------------------------
+WHAT YOU'RE DOING
+--------------------------------------------------------------------------------
+Sometimes we need a directory to exist before writing files. You can check
+[ -d "$DIR" ] and only then run mkdir, or use mkdir -p which creates the
+directory (and parents) and does nothing if it already exists. mkdir -p is
+often simpler and idempotent (safe to run multiple times).
+
+--------------------------------------------------------------------------------
+INSTRUCTIONS
+--------------------------------------------------------------------------------
+1. Create a script in projects/: ensure_dir.sh
+   Shebang, then: TARGET="../data/environments/backup"
+   Add: if [ ! -d "$TARGET" ]; then mkdir -p "$TARGET"; echo "Created $TARGET"; else echo "$TARGET already exists."; fi
+   Run from projects/. First run: "Created ..." or "already exists." (depending
+   on whether backup/ exists). Second run: "already exists." (idempotent).
+
+2. Alternatively use mkdir -p "$TARGET" without the if – it creates the dir
+   if missing and does nothing if it exists. Try: mkdir -p ../data/environments/backup
+   from projects/ – no error if backup/ already exists.
+
+3. Write in my_answers.txt: one sentence – when would you use "if [ ! -d ... ]; then mkdir" instead of just "mkdir -p"? (e.g. "When you want to print a message only when you create the dir, or when you want to do more than mkdir.")
+
+--------------------------------------------------------------------------------
+    NEXT STEP:  cat clue3.txt
+================================================================================

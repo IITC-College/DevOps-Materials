@@ -1,0 +1,42 @@
+================================================================================
+                    LEVEL 1 - CLUE 2
+            "Handle Each Action" - if/elif/else
+================================================================================
+
+--------------------------------------------------------------------------------
+WHAT YOU'RE DOING
+--------------------------------------------------------------------------------
+Instead of just echoing the choice, you'll do something for each action. Use
+if/elif/else: if [ "$ACTION" = "deploy" ]; then ... elif [ "$ACTION" = "check" ];
+then ... elif [ "$ACTION" = "backup" ]; then ... else ... fi. Each branch can
+echo a short message (e.g. "Deploying...").
+
+--------------------------------------------------------------------------------
+INSTRUCTIONS
+--------------------------------------------------------------------------------
+1. Edit ops_helper.sh. After reading ACTION, remove the line "You chose: $ACTION".
+   Add:
+   if [ "$ACTION" = "deploy" ]; then
+     echo "Deploying..."
+     echo "App deployed."
+   elif [ "$ACTION" = "check" ]; then
+     echo "Checking services..."
+     echo "Status: OK"
+   elif [ "$ACTION" = "backup" ]; then
+     echo "Backing up..."
+     echo "Backup finished."
+   else
+     echo "Unknown action. Use deploy, check, or backup."
+   fi
+
+2. Save and run. Type deploy → "Deploying..." and "App deployed."
+   Type check → "Checking services..." and "Status: OK."
+   Type backup → "Backing up..." and "Backup finished."
+   Type restart → "Unknown action. Use deploy, check, or backup."
+
+3. Write in my_answers.txt (lab root): one sentence – what does the else
+   branch handle? (e.g. "Any input that is not deploy, check, or backup.")
+
+--------------------------------------------------------------------------------
+    NEXT STEP:  cat clue3.txt
+================================================================================

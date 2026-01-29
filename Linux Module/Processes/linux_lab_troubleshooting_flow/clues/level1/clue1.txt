@@ -1,0 +1,38 @@
+================================================================================
+                    LEVEL 1 - CLUE 1
+            "lab-helper" Not Running
+================================================================================
+
+* SETUP: Run first (from this folder):  ../../scripts/setup_1_1.sh
+
+--------------------------------------------------------------------------------
+WHAT YOU'RE DOING
+--------------------------------------------------------------------------------
+Users report that "lab-helper" is down. Apply the troubleshooting flow: What is
+not working? Is it a process or a service? What is the status? What do the
+logs say? What is the next action?
+
+--------------------------------------------------------------------------------
+INSTRUCTIONS
+--------------------------------------------------------------------------------
+1. Apply the flow. First: Is lab-helper a process or a service? (Hint: in this
+   lab it is a process – something that would show up in a process list.)
+
+2. Check status. Is the process running? Hint: ps aux | grep lab-helper
+   (Or grep for dummy_worker – the script that implements lab-helper.)
+
+3. Check the logs. Where might the lab write? Hint: data/logs/ in the lab root
+   (cd ../../.. from here). Read the log and see what it says.
+
+4. Decide the next action. Based on status and logs: should you start it,
+   report it, or something else?
+
+5. Add one block to your investigation report (investigation_report.txt at lab
+   root). Use the template in the README or submission_template.txt: Service/Process
+   name, Status, Relevant log line, Action performed, Short conclusion.
+
+--------------------------------------------------------------------------------
+CLEANUP (run when done with this clue):  ../../scripts/cleanup_1_1.sh
+--------------------------------------------------------------------------------
+    NEXT STEP:  cat clue2.txt
+================================================================================

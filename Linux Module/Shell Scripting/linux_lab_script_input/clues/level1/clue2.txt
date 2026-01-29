@@ -1,0 +1,36 @@
+================================================================================
+                    LEVEL 1 - CLUE 2
+            "Better Prompts" - read -p
+================================================================================
+
+* SETUP: Run first (from this folder):  ../../scripts/setup_1_2.sh
+
+--------------------------------------------------------------------------------
+WHAT YOU'RE DOING
+--------------------------------------------------------------------------------
+read -p "prompt" VAR shows the prompt and reads the answer in one line. The
+lab has started a dummy "web" service so you have something to "check." Your
+job: run your check script and enter "web" when prompted; then confirm the
+script echoed it back.
+
+--------------------------------------------------------------------------------
+INSTRUCTIONS
+--------------------------------------------------------------------------------
+1. Run the setup script: ../../scripts/setup_1_2.sh
+   It starts a dummy web service (you don't need to find it – we're practicing
+   read and echo). The script just needs a service name from the user.
+
+2. From projects/, run: ./check_service.sh
+   When prompted "Enter service name:", type: web
+   You should see: "Checking service: web"
+
+3. Run the script again and type a different name (e.g. api). The script
+   should echo back whatever you typed. Write in my_answers.txt (lab root:
+   ../../my_answers.txt): one sentence – what does read -p do that plain read
+   doesn't? (Answer: shows a prompt on the same line before reading.)
+
+--------------------------------------------------------------------------------
+CLEANUP (run when done with this clue):  ../../scripts/cleanup_1_2.sh
+--------------------------------------------------------------------------------
+    NEXT STEP:  cat clue3.txt
+================================================================================

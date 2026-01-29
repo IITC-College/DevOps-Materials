@@ -1,0 +1,39 @@
+================================================================================
+                    LEVEL 2 - CLUE 1
+            lab-troubleshoot Service Stopped
+================================================================================
+
+* SETUP: Run first (from this folder):  ../../scripts/setup_2_1.sh
+
+--------------------------------------------------------------------------------
+WHAT YOU'RE DOING
+--------------------------------------------------------------------------------
+Users report that "lab-troubleshoot" is down. Apply the flow: Is it a process
+or a service? (Here it is a service – managed by systemd.) What is the status?
+What do the logs say? What is the next action?
+
+--------------------------------------------------------------------------------
+INSTRUCTIONS
+--------------------------------------------------------------------------------
+1. Apply the flow. Is lab-troubleshoot a process or a service? (Service –
+   systemd manages it.)
+
+2. Check status. Hint: systemctl --user status lab-troubleshoot
+   You should see it inactive (stopped).
+
+3. Check the logs. For a service, systemd captures output. Hint: journalctl
+   --user -u lab-troubleshoot -n 20
+   (If it was never started, logs may be empty – status already tells you.)
+
+4. Decide the next action. Should you start it? Hint: systemctl --user start
+   lab-troubleshoot
+
+5. Add one block to your investigation report (investigation_report.txt at lab
+   root): Service/Process name, Status, Relevant log line (or "N/A" if never
+   started), Action performed, Short conclusion.
+
+--------------------------------------------------------------------------------
+CLEANUP (run when done with this clue):  ../../scripts/cleanup_2_1.sh
+--------------------------------------------------------------------------------
+    NEXT STEP:  cat clue2.txt
+================================================================================

@@ -1,0 +1,36 @@
+================================================================================
+                    LEVEL 2 - CLUE 2
+            "Wrapper Script" - Pass Through Exit Code
+================================================================================
+
+--------------------------------------------------------------------------------
+WHAT YOU'RE DOING
+--------------------------------------------------------------------------------
+A wrapper script runs another script and then exits with the same exit code
+(pass-through). So the caller sees the same success/failure. Pattern: run
+the inner script; CODE=$?; echo "Exit code: $CODE"; exit $CODE.
+
+--------------------------------------------------------------------------------
+INSTRUCTIONS
+--------------------------------------------------------------------------------
+1. Create a script in projects/: wrapper.sh. Shebang, then:
+   ./check_config_exit.sh ../data/configs/app.conf
+   CODE=$?
+   echo "Exit code: $CODE"
+   exit $CODE
+   Save and exit. (wrapper.sh runs check_config_exit.sh from the same directory.)
+
+2. Run from projects/: ./wrapper.sh; echo $?
+   You should see "Config found.", "Exit code: 0", and then 0 (the second
+   echo $? is the wrapper's exit code – same as the inner script).
+
+3. Run: ./check_config_exit.sh ../data/configs/missing.conf; echo $?
+   Now change wrapper.sh to run check_config_exit.sh with the missing path.
+   Run: ./wrapper.sh; echo $?
+   You should see "Config not found.", "Exit code: 1", and then 1. So the
+   wrapper passes through the inner script's exit code – callers get the
+   same result.
+
+--------------------------------------------------------------------------------
+    NEXT STEP:  cat clue3.txt
+================================================================================

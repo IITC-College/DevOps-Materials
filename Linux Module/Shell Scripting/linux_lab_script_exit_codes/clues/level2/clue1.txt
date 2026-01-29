@@ -1,0 +1,35 @@
+================================================================================
+                    LEVEL 2 - CLUE 1
+            "Chain Two Steps" - Fail Fast
+================================================================================
+
+--------------------------------------------------------------------------------
+WHAT YOU'RE DOING
+--------------------------------------------------------------------------------
+In a pipeline you often run step 1, then step 2. If step 1 fails (exit 1),
+you should not run step 2 – fail fast. So: run step 1; if it failed (check $?),
+exit 1; else run step 2; if that failed, exit 1; else exit 0.
+
+--------------------------------------------------------------------------------
+INSTRUCTIONS
+--------------------------------------------------------------------------------
+1. Create a script in projects/: chain_steps.sh. Shebang, then:
+   Step 1: run your check_dir_exit.sh with a valid path (e.g. ../data/environments/project1).
+   Capture the code: ./check_dir_exit.sh ../data/environments/project1; CODE1=$?
+   If CODE1 is not 0, echo "Step 1 failed."; exit 1; fi
+   Step 2: run your check_config_exit.sh with a valid path (e.g. ../data/configs/app.conf).
+   ./check_config_exit.sh ../data/configs/app.conf; CODE2=$?
+   If CODE2 is not 0, echo "Step 2 failed."; exit 1; fi
+   echo "All steps passed."; exit 0
+   Save and exit. (Assume check_dir_exit.sh and check_config_exit.sh are in
+   the same directory – run from projects/.)
+
+2. Run from projects/: ./chain_steps.sh; echo $?
+   You should see "OK", "Config found.", "All steps passed.", and 0.
+
+3. Temporarily break step 1 (e.g. pass a missing dir). Run again. You should
+   see "FAIL", "Step 1 failed.", and 1 – step 2 never runs. That's fail fast.
+
+--------------------------------------------------------------------------------
+    NEXT STEP:  cat clue2.txt
+================================================================================

@@ -1,0 +1,39 @@
+================================================================================
+                    LEVEL 2 - CLUE 3
+            "Complete CI Script" - Multiple Bugs in One Script
+================================================================================
+
+--------------------------------------------------------------------------------
+WHAT YOU'RE DOING
+--------------------------------------------------------------------------------
+Real scripts often have more than one bug. You'll fix a CI script that
+combines several mistakes: wrong assignment, missing quotes, wrong path,
+missing then or fi. Find and fix all of them so the script runs correctly.
+
+--------------------------------------------------------------------------------
+INSTRUCTIONS
+--------------------------------------------------------------------------------
+1. From scripts/, run: bash ci_full_broken.sh
+   Note every error message (or wrong output). The script is supposed to:
+   set APP_NAME, check for a config file, and echo "CI build complete."
+
+2. Open ci_full_broken.sh. Fix each bug you find:
+   - Spaces in variable assignment (APP_NAME = "myapp" → APP_NAME="myapp")
+   - Missing quotes in [ -f $CONFIG ] → [ -f "$CONFIG" ]
+   - Wrong path: CONFIG should point to ../data/configs/ci_config.txt
+   - Missing "then" after if [ ... ]
+   - Missing "fi" to close the if
+   Save after each fix and run until the script runs without errors and
+   prints "CI build complete."
+
+3. Write in my_answers.txt: a short list of the bugs you found and how you
+   fixed them (one line per bug).
+
+--------------------------------------------------------------------------------
+================================================================================
+                    LAB COMPLETE
+================================================================================
+Congratulations! You've completed the Script Debugging lab. You can find and
+fix common bash errors: spaces in assignment, missing quotes, missing then/fi,
+and wrong paths.
+================================================================================

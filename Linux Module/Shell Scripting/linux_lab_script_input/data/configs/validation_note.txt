@@ -1,0 +1,7 @@
+Why validate input in scripts?
+
+- Users may press Enter without typing (empty input).
+- Users may type wrong data (e.g. typo in environment name).
+- In production we don't assume "the user will behave nicely."
+- Validation (e.g. check if input is empty, or if it's one of allowed values) prevents broken behavior and confusing errors.
+- You'll learn how to add these checks in the conditionals lab (if, [ -z "$VAR" ], etc.).

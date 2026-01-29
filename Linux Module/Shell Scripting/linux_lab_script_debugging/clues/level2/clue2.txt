@@ -1,0 +1,30 @@
+================================================================================
+                    LEVEL 2 - CLUE 2
+            "Missing fi" - Unclosed if Statement
+================================================================================
+
+--------------------------------------------------------------------------------
+WHAT YOU'RE DOING
+--------------------------------------------------------------------------------
+Every if must be closed with fi. If you forget fi, bash will report a syntax
+error (e.g. "unexpected end of file" or "fi" expected). Your job: find the
+missing fi in a broken script and add it.
+
+--------------------------------------------------------------------------------
+INSTRUCTIONS
+--------------------------------------------------------------------------------
+1. From scripts/, run: bash pipeline_broken.sh
+   You should see a syntax error about "fi" or "unexpected end of file."
+
+2. Open pipeline_broken.sh. Count the if statements. Each if needs a matching
+   fi. Find where one fi is missing (usually at the end of the script before
+   the last echo). Add fi in the right place. Save and run again.
+   The script should run and print pipeline steps.
+
+3. Write in my_answers.txt: one sentence – how many if/fi pairs did the
+   script have, and where did you add the missing fi? (e.g. "Two if statements;
+   the second if was missing its fi at the end.")
+
+--------------------------------------------------------------------------------
+    NEXT STEP:  cat clue3.txt
+================================================================================

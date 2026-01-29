@@ -1,0 +1,75 @@
+================================================================================
+                    SOLUTIONS - Script Functions Lab
+                    (Instructor use only)
+================================================================================
+
+This lab is static. Students create scripts in projects/. data/environments/project1
+exists so check_dir ../data/environments/project1 from projects/ returns "exists".
+
+================================================================================
+
+LEVEL 1 - CLUE 1: "Define a Function and Use $1"
+-------------------------------------------------
+
+STEP 1 – projects/check_step1.sh:
+  #!/bin/bash
+  check_dir() {
+    if [ -d "$1" ]; then echo "Directory $1 exists"; else echo "Directory $1 missing"; fi
+  }
+  check_dir logs
+  check_dir ../data/environments/project1
+
+STEP 2 – Run from projects/ → "exists" or "missing" per path. data/environments/project1 exists.
+
+================================================================================
+
+LEVEL 1 - CLUE 2: "Function That Echoes a Status Line"
+------------------------------------------------------
+
+STEP 1 – deploy_step2.sh: deploy_tier() { echo "Deploying $1..."; echo "  $1: deployed"; }
+  deploy_tier frontend; deploy_tier api; deploy_tier worker; deploy_tier cache
+
+STEP 2 – Run → four blocks. Same function, different $1.
+
+================================================================================
+
+LEVEL 1 - CLUE 3: "Uniform Status Header"
+------------------------------------------
+
+STEP 1 – status_header.sh: log_header() { echo "[$(date '+%H:%M:%S')] $1"; }
+  log_header "Deploy started."; echo "  Stopping..."; echo "  Copying..."; log_header "Deploy complete."
+
+STEP 2 – my_answers.txt: e.g. "One place to change the format; if you switch timestamp style, change only the function."
+
+================================================================================
+
+LEVEL 2 - CLUE 1: "Loop Over Tiers and Call a Function"
+--------------------------------------------------------
+
+STEP 1 – deploy_loop.sh: deploy_tier() { ... }; for TIER in frontend api worker; do deploy_tier "$TIER"; done
+
+STEP 2 – Run → three blocks. $1 inside deploy_tier is the current TIER (frontend, api, worker).
+
+STEP 3 – my_answers.txt: e.g. "$1 is the value of TIER for that iteration – frontend, then api, then worker."
+
+================================================================================
+
+LEVEL 2 - CLUE 2: "Function with Two Steps"
+--------------------------------------------
+
+STEP 1 – deploy_twostep.sh: deploy_tier() { echo "  Stopping $1..."; echo "  Starting $1..."; echo "  $1: deployed"; }; for TIER in frontend api worker; do deploy_tier "$TIER"; done
+
+STEP 2 – Run → three blocks, each with stop + start + deployed. No duplication.
+
+================================================================================
+
+LEVEL 2 - CLUE 3: "Deploy Tiers Script"
+----------------------------------------
+
+STEP 1 – deploy_tiers.sh: log_header, deploy_tier (stop, deploy from /opt/releases/$1, start, deployed), log_header "Deploying tiers...", for TIER in frontend api worker; do deploy_tier "$TIER"; done, log_header "All tiers up. Running smoke tests..."
+
+STEP 2 – my_answers.txt: e.g. "One place to change the deploy logic; adding or changing a step only requires editing the function, not every tier."
+
+================================================================================
+END OF SOLUTIONS
+================================================================================

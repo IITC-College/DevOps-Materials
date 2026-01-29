@@ -1,0 +1,37 @@
+================================================================================
+                    LEVEL 1 - CLUE 2
+            "case on a String" - disk, uptime, exit
+================================================================================
+
+--------------------------------------------------------------------------------
+WHAT YOU'RE DOING
+--------------------------------------------------------------------------------
+You can case on words instead of numbers. Same syntax: case "$VAR" in
+disk) ... ;; uptime) ... ;; exit) ... ;; *) ... ;; esac. The user types
+a word (e.g. disk) and the script runs the matching branch. Useful for
+ops menus: "disk" = disk check, "uptime" = uptime, "exit" = quit.
+
+--------------------------------------------------------------------------------
+INSTRUCTIONS
+--------------------------------------------------------------------------------
+1. Edit menu_step1.sh (or create menu_step2.sh). Change the prompt to:
+   read -p "Enter option (disk / uptime / exit): " CHOICE
+   Then case on CHOICE:
+   case "$CHOICE" in
+     disk)   echo "Option: disk check" ;;
+     uptime) echo "Option: uptime" ;;
+     exit)   echo "Exiting." ;;
+     *)      echo "Invalid option" ;;
+   esac
+   Save and exit.
+
+2. Run from projects/. Type disk – "Option: disk check". Type uptime –
+   "Option: uptime". Type exit – "Exiting." Type restart – "Invalid option".
+
+3. Write in my_answers.txt (lab root: ../../my_answers.txt from clues/level1):
+   one sentence – what does the *) branch match? (Answer: any value that
+   did not match the other branches – the default.)
+
+--------------------------------------------------------------------------------
+    NEXT STEP:  cat clue3.txt
+================================================================================

@@ -1,0 +1,29 @@
+================================================================================
+                    LEVEL 1 - CLUE 3
+            "Variables in Output" - Mixing Text and Variables
+================================================================================
+
+--------------------------------------------------------------------------------
+WHAT YOU'RE DOING
+--------------------------------------------------------------------------------
+You can mix plain text and variables in the same echo. Use double quotes so
+$VAR is expanded: echo "Backing up $APP_NAME". Without quotes, or with single
+quotes, $APP_NAME might not expand (single quotes prevent expansion).
+
+--------------------------------------------------------------------------------
+INSTRUCTIONS
+--------------------------------------------------------------------------------
+1. Edit backup_step2.sh (or create backup_step3.sh). Add one more variable:
+   BACKUP_DIR="backups"
+   Then add a line that uses it: echo "Target directory: $BACKUP_DIR"
+
+2. Run the script. You should see the new line with "backups" in the output.
+
+3. Try changing BACKUP_DIR to "backups/$(date +%Y-%m-%d)" – wait, that's
+   command substitution. We'll do that in Level 2. For now, write in
+   my_answers.txt (lab root: ../../my_answers.txt): one sentence – what
+   happens if you put a space in the assignment, e.g. APP_NAME = "myapp"?
+
+--------------------------------------------------------------------------------
+    NEXT STEP:  cd ../level2  then  cat clue1.txt
+================================================================================

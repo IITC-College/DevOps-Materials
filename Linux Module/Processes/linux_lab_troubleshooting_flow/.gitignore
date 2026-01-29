@@ -1,0 +1,6 @@
+.lab_pids_*
+.lab_*_service
+my_answers.txt
+investigation_report.txt
+data/logs/*.log
+!data/logs/.gitkeep

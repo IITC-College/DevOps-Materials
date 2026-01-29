@@ -1,6 +1,8 @@
-# Linux Lab – Troubleshooting Flow
+# Linux Lab – Troubleshooting Flow (Broken Service Investigation)
 
-A lab that reinforces a **repeating troubleshooting methodology** through simulated failure scenarios. Each clue has **setup** (run first) and **cleanup** (run when done) so the scenario is realistic and isolated.
+A **home lab** that reinforces a **repeating troubleshooting methodology** through simulated failure scenarios. You receive a "broken" service or process, apply the 5-step flow, and **submit a diagnosis** – no code, no fix scripts. Only correct diagnosis: status, relevant log line, action performed, short conclusion.
+
+Each clue has **setup** (run first) and **cleanup** (run when done) so the scenario is realistic and isolated.
 
 ## The 5-Step Flow (for the board)
 
@@ -12,7 +14,21 @@ Use this flow for every failure scenario:
 4. **What do the logs say?** (e.g. `data/logs/` or `journalctl --user -u UNIT -n 20`.)
 5. **What is the next action?** (Start, restart, kill, fix config, report.)
 
-## Pair Practice
+## Submission (Home Lab Deliverable)
+
+Your deliverable is an **investigation report**, not code. For each scenario (each clue), add **one block** to your report using the template below. Save your report at the lab root as **`investigation_report.txt`**.
+
+**Template (repeat one block per scenario):**
+
+- **Service/Process name**: (e.g. lab-troubleshoot or lab-helper)
+- **Status**: (e.g. active (running), failed, inactive, or process not found)
+- **Relevant log line**: (one line from journalctl or a log file that explains the problem)
+- **Action performed**: (e.g. checked status, read logs, restarted service, reported config error)
+- **Short conclusion**: (one sentence: what was wrong and what you did)
+
+A copy-paste template is in `submission_template.txt` at the lab root.
+
+## Pair Practice (Optional)
 
 - Each clue is a **short failure scenario**.
 - **One person** analyzes: apply the flow and say what to check (process or service? status? logs?).
@@ -24,6 +40,7 @@ Use this flow for every failure scenario:
 
 - **SETUP**: Before each clue, run the setup script for that clue (from the clue folder: `../../scripts/setup_X_Y.sh`). It creates the failure scenario (e.g. process not running, service stopped).
 - **CLEANUP**: When done with a clue, run the cleanup script (`../../scripts/cleanup_X_Y.sh`) so the next clue starts in a clean state.
+- **REPORT**: After each scenario, add one block (status, log line, action, conclusion) to your `investigation_report.txt`.
 
 ## Direct Entry
 

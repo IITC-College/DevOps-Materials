@@ -1,0 +1,3 @@
+# CI build config
+BUILD_TYPE=release
+VERSION=1.0

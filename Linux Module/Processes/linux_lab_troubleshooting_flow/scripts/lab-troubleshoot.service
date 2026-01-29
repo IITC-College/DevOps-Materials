@@ -1,0 +1,19 @@
+# Template for lab-troubleshoot user service.
+# Setup scripts (setup_2_1.sh, setup_2_2.sh, setup_2_3.sh) copy this format to
+# ~/.config/systemd/user/lab-troubleshoot.service and set ExecStart per clue:
+#   - Clue 2-1: dummy_daemon.sh (stopped)
+#   - Clue 2-2: dummy_daemon_fail.sh (failed)
+#   - Clue 2-3: dummy_daemon_error_log.sh (running but error in logs)
+# Replace REPLACE_WITH_LAB_ROOT with the actual lab root path at install time.
+
+[Unit]
+Description=Lab troubleshooting demo service
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=REPLACE_WITH_LAB_ROOT/scripts/dummy_daemon.sh
+Restart=no
+
+[Install]
+WantedBy=default.target

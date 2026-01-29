@@ -1,0 +1,37 @@
+================================================================================
+                    LEVEL 2 - CLUE 1
+            "Validate Environment Name" - Only prod or staging
+================================================================================
+
+--------------------------------------------------------------------------------
+WHAT YOU'RE DOING
+--------------------------------------------------------------------------------
+In deployment we often allow only certain values (e.g. prod or staging).
+You can use if/elif/else to check: if [ "$ENV" = "prod" ]; then ... elif
+[ "$ENV" = "staging" ]; then ... else echo "Unknown environment."; fi
+
+--------------------------------------------------------------------------------
+INSTRUCTIONS
+--------------------------------------------------------------------------------
+1. Edit validate_input.sh (or create validate_env.sh in projects/). After
+   reading ENV and checking [ -z "$ENV" ], add:
+   if [ "$ENV" = "prod" ]; then
+     echo "Deploying to PRODUCTION."
+   elif [ "$ENV" = "staging" ]; then
+     echo "Deploying to STAGING."
+   else
+     echo "Error: environment must be prod or staging."
+     exit 1
+   fi
+   Save and exit.
+
+2. Run the script and enter: prod → "Deploying to PRODUCTION."
+   Run again and enter: staging → "Deploying to STAGING."
+   Run again and enter: dev → "Error: environment must be prod or staging." and exit 1.
+
+3. Write in my_answers.txt: one sentence – why do we restrict to prod/staging?
+   (e.g. "To avoid deploying to the wrong environment by typo or mistake.")
+
+--------------------------------------------------------------------------------
+    NEXT STEP:  cat clue2.txt
+================================================================================

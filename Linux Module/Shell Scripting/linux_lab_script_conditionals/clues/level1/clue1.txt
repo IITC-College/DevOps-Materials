@@ -1,0 +1,37 @@
+================================================================================
+                    LEVEL 1 - CLUE 1
+            "Check if File Exists" - [ -f "$FILE" ]
+================================================================================
+
+--------------------------------------------------------------------------------
+WHAT YOU'RE DOING
+--------------------------------------------------------------------------------
+Before deploying, we often check if a config file exists. In bash you use
+[ -f "$FILE" ] to test if a file exists and is a regular file. The spaces
+around the brackets are required. Use it inside an if: if [ -f "$FILE" ]; then ...
+
+--------------------------------------------------------------------------------
+INSTRUCTIONS
+--------------------------------------------------------------------------------
+1. Go to the lab root (from clues/level1: cd ../..). List the environment
+   configs: ls data/configs/
+   You should see .env.prod and .env.staging (or similar). These are the files
+   we'll check in scripts.
+
+2. Create a script in projects/: check_config.sh
+   Shebang, then set a variable: CONFIG="../data/configs/.env.prod"
+   (relative to projects/ – or use a path from lab root). Then add:
+   if [ -f "$CONFIG" ]; then
+     echo "Config file exists."
+   else
+     echo "Config file not found."
+   fi
+   Save and exit. Run from projects/: ./check_config.sh
+   You should see "Config file exists." (the file is there).
+
+3. Change CONFIG to a non-existent file (e.g. CONFIG="../data/configs/.env.missing")
+   Run again. You should see "Config file not found."
+
+--------------------------------------------------------------------------------
+    NEXT STEP:  cat clue2.txt
+================================================================================

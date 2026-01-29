@@ -1,0 +1,40 @@
+================================================================================
+                    LEVEL 2 - CLUE 3
+            "Two Ways to Run" - ./script.sh vs bash script.sh
+================================================================================
+
+--------------------------------------------------------------------------------
+WHAT YOU'RE DOING
+--------------------------------------------------------------------------------
+You can run a script in two ways: (1) ./script.sh – the kernel uses the
+shebang to choose the interpreter; (2) bash script.sh – you explicitly run
+bash and pass the script as an argument. Both execute the same commands;
+the first requires execute permission, the second does not.
+
+--------------------------------------------------------------------------------
+INSTRUCTIONS
+--------------------------------------------------------------------------------
+1. From projects/, run the script both ways:
+   ./first_deploy.sh
+   bash first_deploy.sh
+   The output should be the same. The first way uses the shebang and file
+   permission; the second ignores the shebang and uses bash explicitly.
+
+2. Remove execute permission: chmod -x first_deploy.sh
+   Now try ./first_deploy.sh again – you get "Permission denied". Then run
+   bash first_deploy.sh – it still works, because bash is executable and
+   the script is just a file argument.
+
+3. Restore execute permission: chmod +x first_deploy.sh
+   Write in my_answers.txt: one sentence – when would you use ./script.sh
+   and when bash script.sh? (e.g. "./ when you want it to behave like a
+   program; bash when you want to force the interpreter or script has no x.")
+
+--------------------------------------------------------------------------------
+================================================================================
+                    LAB COMPLETE
+================================================================================
+Congratulations! You've completed the Script Basics lab. You can create
+scripts, add a shebang, set execute permission with chmod +x, and run them
+with ./script.sh or bash script.sh.
+================================================================================

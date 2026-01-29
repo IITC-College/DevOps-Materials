@@ -1,0 +1,31 @@
+================================================================================
+                    LEVEL 1 - CLUE 3
+            "Echo Confirmation" - Display Input Back to User
+================================================================================
+
+--------------------------------------------------------------------------------
+WHAT YOU'RE DOING
+--------------------------------------------------------------------------------
+After reading input, it's good practice to show the user what you got (echo
+confirmation). That way they see the script understood them. Your job: add
+one more echo that uses the variable in a full sentence.
+
+--------------------------------------------------------------------------------
+INSTRUCTIONS
+--------------------------------------------------------------------------------
+1. Edit check_service.sh. After the line that echoes "Checking service: $SERVICE",
+   add: echo "Will check status of $SERVICE now."
+   Save and exit.
+
+2. Run the script and enter a service name (e.g. database).
+   You should see two lines: "Checking service: database" and
+   "Will check status of database now."
+
+3. Run the script again and press Enter without typing anything (empty input).
+   What does the script print for $SERVICE? Write in my_answers.txt (lab root):
+   one sentence – what happened when you pressed Enter without typing? (e.g.
+   "The script echoed an empty value; SERVICE was empty.")
+
+--------------------------------------------------------------------------------
+    NEXT STEP:  cd ../level2  then  cat clue1.txt
+================================================================================

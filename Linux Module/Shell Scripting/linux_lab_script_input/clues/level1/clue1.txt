@@ -1,0 +1,30 @@
+================================================================================
+                    LEVEL 1 - CLUE 1
+            "Getting Input" - Using read
+================================================================================
+
+--------------------------------------------------------------------------------
+WHAT YOU'RE DOING
+--------------------------------------------------------------------------------
+In DevOps, scripts often need to ask the user for something (e.g. service name,
+environment). The read command reads one line of input and stores it in a
+variable. Your first step: create a script that asks for a service name and
+stores it in a variable.
+
+--------------------------------------------------------------------------------
+INSTRUCTIONS
+--------------------------------------------------------------------------------
+1. Go to the lab's projects folder (from clues/level1: ../../projects).
+   Create a file check_service.sh. Add shebang: #!/bin/bash
+
+2. Add a line that prompts and reads: read -p "Enter service name: " SERVICE
+   Then echo it back: echo "Checking service: $SERVICE"
+   Save and exit.
+
+3. Make it executable and run: ./check_service.sh
+   When prompted, type a service name (e.g. web or nginx) and press Enter.
+   You should see "Checking service: web" (or whatever you typed).
+
+--------------------------------------------------------------------------------
+    NEXT STEP:  cat clue2.txt
+================================================================================

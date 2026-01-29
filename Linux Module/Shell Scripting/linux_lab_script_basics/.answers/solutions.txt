@@ -1,0 +1,99 @@
+================================================================================
+                    SOLUTIONS - Script Basics Lab
+                    (Instructor use only)
+================================================================================
+
+This lab is static – no setup or cleanup scripts. Students create and edit
+scripts in projects/ and document answers in my_answers.txt at lab root.
+
+================================================================================
+
+LEVEL 1 - CLUE 1: "Your First Script" - Create a Deployment Script
+-------------------------------------------------------------------
+
+STEP 1 – Create script in projects/
+  From clues/level1/: nano ../../projects/first_deploy.sh (or cd ../../projects then nano first_deploy.sh)
+  Content (no shebang yet):
+    echo "Deploy started..."
+    echo "Stopping old service..."
+    echo "Copying files..."
+    echo "Starting new service..."
+    echo "Deploy complete."
+
+STEP 2 – Save and exit (nano: Ctrl+O, Enter, Ctrl+X).
+
+STEP 3 – Run with bash
+  From projects/: bash first_deploy.sh
+  Expected: all five lines printed.
+
+EXAMPLE ANSWER (my_answers.txt): N/A for this clue.
+
+================================================================================
+
+LEVEL 1 - CLUE 2: "The Shebang Line"
+-------------------------------------
+
+STEP 1 – Open first_deploy.sh, add as first line: #!/bin/bash
+
+STEP 2 – Save. Try ./first_deploy.sh from projects/
+  Expected: "Permission denied" (no execute permission yet).
+
+EXAMPLE ANSWER: N/A for this clue.
+
+================================================================================
+
+LEVEL 1 - CLUE 3: "Why It Didn't Run"
+--------------------------------------
+
+STEP 1 – ls -l first_deploy.sh (from projects/)
+  Typical output: -rw-r--r-- 1 user group size date first_deploy.sh
+  No "x" in permissions.
+
+STEP 2 – bash first_deploy.sh still works (bash is executable; script is input).
+
+STEP 3 – Document in my_answers.txt: e.g. "ls -l showed -rw-r--r-- (no x).
+  ./first_deploy.sh failed because the file did not have execute permission."
+
+================================================================================
+
+LEVEL 2 - CLUE 1: "Checking Permissions"
+-----------------------------------------
+
+STEP 1 – ls -l first_deploy.sh (from projects/)
+  Permission string before chmod: typically -rw-r--r--
+
+STEP 2 – ls -l ../data/configs/sample_script.sh (from projects/)
+  sample_script.sh should have -rwxr-xr-x or similar (has x).
+
+STEP 3 – my_answers.txt: e.g. "first_deploy.sh had -rw-r--r-- before chmod."
+
+================================================================================
+
+LEVEL 2 - CLUE 2: "Making the Script Executable"
+-------------------------------------------------
+
+STEP 1 – chmod +x first_deploy.sh
+
+STEP 2 – ls -l first_deploy.sh → should show -rwxr-xr-x or -rwxr--r--
+
+STEP 3 – ./first_deploy.sh → all five echo lines printed.
+
+EXAMPLE ANSWER: N/A for this clue.
+
+================================================================================
+
+LEVEL 2 - CLUE 3: "Two Ways to Run"
+------------------------------------
+
+STEP 1 – ./first_deploy.sh and bash first_deploy.sh → same output.
+
+STEP 2 – chmod -x first_deploy.sh → ./first_deploy.sh fails; bash first_deploy.sh still works.
+
+STEP 3 – chmod +x first_deploy.sh. my_answers.txt: e.g. "Use ./script.sh when the
+  script is a program you want to run directly (needs shebang + chmod +x). Use
+  bash script.sh when you want to force the interpreter or the script has no
+  execute permission."
+
+================================================================================
+END OF SOLUTIONS
+================================================================================

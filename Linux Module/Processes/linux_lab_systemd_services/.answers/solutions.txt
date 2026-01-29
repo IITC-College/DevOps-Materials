@@ -5,9 +5,8 @@
 
 GENERAL:
   Level 1: No scripts. Students use systemctl status on system services.
-  Level 2: SETUP before clue 1 (../../scripts/setup_lab_demo.sh); CLEANUP
-  after clue 3 (../../scripts/cleanup_lab_demo.sh).
-  Level 3: SETUP again if they ran CLEANUP; CLEANUP at end of clue 3.
+  Level 2–3: Each clue that uses lab-demo has its own SETUP and CLEANUP:
+  setup_X_Y.sh / cleanup_X_Y.sh (e.g. setup_2_1.sh, cleanup_2_1.sh).
   Direct entry: cd clues/level1 && cat clue1.txt
 
 ================================================================================
@@ -68,11 +67,12 @@ LEVEL 2 - CLUE 1: "Lab Demo Service"
 -------------------------------------
 
 SETUP (from clues/level2/):
-  ../../scripts/setup_lab_demo.sh
+  ../../scripts/setup_2_1.sh
   Installs user service lab-demo under ~/.config/systemd/user/, starts it.
+CLEANUP when done: ../../scripts/cleanup_2_1.sh
 
 STEP 1 – Run setup
-  ../../scripts/setup_lab_demo.sh
+  ../../scripts/setup_2_1.sh
 
 STEP 2 – Check status
   Command:  systemctl --user status lab-demo
@@ -87,7 +87,9 @@ STEP 3 – Note Main PID
 LEVEL 2 - CLUE 2: "Stop and Start"
 -----------------------------------
 
-STEP 1 – Status first
+SETUP: ../../scripts/setup_2_2.sh  CLEANUP: ../../scripts/cleanup_2_2.sh
+
+STEP 1 – Run setup if needed, then status first
   systemctl --user status lab-demo  (active)
 
 STEP 2 – Stop
@@ -134,9 +136,9 @@ CLEANUP (from clues/level2/):
 LEVEL 3 - CLUE 1: "systemctl restart"
 -------------------------------------
 
-SETUP: If CLEANUP was run, ../../scripts/setup_lab_demo.sh again.
+SETUP: ../../scripts/setup_3_1.sh  CLEANUP: ../../scripts/cleanup_3_1.sh
 
-STEP 1 – Status first
+STEP 1 – Run setup, then status first
   systemctl --user status lab-demo  → note Main PID.
 
 STEP 2 – Restart
@@ -180,8 +182,8 @@ STEP 2 – Document
   first to see why (active, failed, error message). Service running =
   unit active; process running = Main PID present."
 
-CLEANUP (from clues/level3/):
-  ../../scripts/cleanup_lab_demo.sh if not done yet.
+CLEANUP (from clues/level3/ when done with lab):
+  ../../scripts/cleanup_3_3.sh
 
 ================================================================================
 

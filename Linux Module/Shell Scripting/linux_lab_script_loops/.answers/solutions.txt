@@ -1,0 +1,81 @@
+================================================================================
+                    SOLUTIONS - Script Loops Lab
+                    (Instructor use only)
+================================================================================
+
+This lab is static. Students create scripts in projects/ and use
+data/environments/ (project1, logs exist; project2 does not) and
+data/configs/paths.txt (logs, config, backup).
+
+================================================================================
+
+LEVEL 1 - CLUE 1: "for Loop Over a List"
+-----------------------------------------
+
+STEP 1 – projects/check_dirs_step1.sh:
+  #!/bin/bash
+  for DIR in project1 project2 logs; do
+    echo "Checking $DIR"
+  done
+
+STEP 2 – chmod +x, run from projects/ → "Checking project1", "Checking project2", "Checking logs".
+
+================================================================================
+
+LEVEL 1 - CLUE 2: "Loop Over Directories and Check Existence"
+--------------------------------------------------------------
+
+STEP 1 – DIR_PATH="../data/environments/$DIR"; if [ -d "$DIR_PATH" ]; then echo "  $DIR: exists"; else echo "  $DIR: missing"; fi inside the loop.
+  From projects/, ../ is lab root. data/environments/ has project1 and logs; project2 is missing.
+
+STEP 2 – Run from projects/ → project1: exists, project2: missing, logs: exists (or as per actual dirs).
+
+STEP 3 – ls data/environments/ from lab root – confirm project1, logs; no project2.
+
+================================================================================
+
+LEVEL 1 - CLUE 3: "Loop Over a List from a File"
+-------------------------------------------------
+
+STEP 1 – cat data/configs/paths.txt (or data/configs/paths.txt) – logs, config, backup (one per line).
+
+STEP 2 – process_paths.sh: for PATHNAME in $(cat ../data/configs/paths.txt); do echo "Processing $PATHNAME"; done
+
+STEP 3 – my_answers.txt: e.g. "If you put the list in a variable PATHS=\"logs config backup\" and use for P in $PATHS; do ... the variable expands to the words – same as a fixed list."
+
+================================================================================
+
+LEVEL 2 - CLUE 1: "while Loop with a Counter"
+----------------------------------------------
+
+STEP 1 – run_count.sh: COUNT=1; while [ $COUNT -le 3 ]; do echo "Run $COUNT"; COUNT=$((COUNT+1)); done; echo "Done."
+  Run → "Run 1", "Run 2", "Run 3", "Done."
+
+STEP 2 – Change -le 5 → five "Run N" lines.
+
+STEP 3 – my_answers.txt: e.g. "$((COUNT+1)) does arithmetic – adds 1 to COUNT; the result is assigned back to COUNT."
+
+================================================================================
+
+LEVEL 2 - CLUE 2: "Retry Pattern"
+----------------------------------
+
+STEP 1 – retry_check.sh: MAX=3, ATTEMPT=1; while [ $ATTEMPT -le $MAX ]; do echo "Attempt $ATTEMPT..."; if [ $ATTEMPT -eq 2 ]; then echo "  OK – check passed."; break; fi; echo "  Not ready – retrying..."; ATTEMPT=$((ATTEMPT+1)); done; echo "Done."
+  Run → attempt 1 "Not ready", attempt 2 "OK", loop stops (break).
+
+STEP 2 – Remove break → all three attempts run.
+
+================================================================================
+
+LEVEL 2 - CLUE 3: "Combine for and while"
+-----------------------------------------
+
+STEP 1 – Option A: check_dirs_retry.sh with for DIR in project1 project2; do ...; while [ $ATTEMPT -le 2 ]; do ...; if [ -d "../data/environments/$DIR" ]; then echo "  Found."; break; fi; ATTEMPT=$((ATTEMPT+1)); done; done
+
+STEP 2 – Option B: my_answers.txt – "To combine: for over dirs; inside it, while retry check [ -d \"../data/environments/$DIR\" ] until success or max; break on success."
+
+STEP 3 – my_answers.txt: e.g. "Use a retry loop when waiting for a service to become healthy after deploy, or for a file to appear, with a max wait time."
+
+================================================================================
+END OF SOLUTIONS
+================================================================================

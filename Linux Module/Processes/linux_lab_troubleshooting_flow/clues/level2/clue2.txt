@@ -1,0 +1,38 @@
+================================================================================
+                    LEVEL 2 - CLUE 2
+            lab-troubleshoot Service Failed
+================================================================================
+
+* SETUP: Run first (from this folder):  ../../scripts/setup_2_2.sh
+
+--------------------------------------------------------------------------------
+WHAT YOU'RE DOING
+--------------------------------------------------------------------------------
+Users report that lab-troubleshoot is not working. Apply the flow: process or
+service? status? logs? next action? This time the service was started but the
+daemon exited with an error (failed state).
+
+--------------------------------------------------------------------------------
+INSTRUCTIONS
+--------------------------------------------------------------------------------
+1. Apply the flow. Is it a process or a service? (Service.)
+
+2. Check status. Hint: systemctl --user status lab-troubleshoot
+   You should see "failed" or "inactive (dead)" and an exit code.
+
+3. Check the logs. What did the daemon print before exiting? Hint: journalctl
+   --user -u lab-troubleshoot -n 20
+   Read the last lines – they explain why it failed.
+
+4. Decide the next action. Based on the log: fix the script? restart anyway?
+   report? (In a real scenario you might fix the cause; here documenting is enough.)
+
+5. Add one block to your investigation report (investigation_report.txt at lab
+   root): Service/Process name, Status, Relevant log line (from journalctl),
+   Action performed, Short conclusion.
+
+--------------------------------------------------------------------------------
+CLEANUP (run when done with this clue):  ../../scripts/cleanup_2_2.sh
+--------------------------------------------------------------------------------
+    NEXT STEP:  cat clue3.txt
+================================================================================

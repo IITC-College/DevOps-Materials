@@ -1,0 +1,69 @@
+================================================================================
+                    SOLUTIONS - Mini DevOps Tool Lab (Capstone)
+                    (Instructor use only)
+================================================================================
+
+This lab is static. Students build one script ops_tool.sh in projects/ that
+combines: case menu, functions (check_services with for loop, show_status
+with date/uptime/df/free, backup_now, run_pipeline), exit 0 on success,
+exit 1 on invalid input.
+
+================================================================================
+
+LEVEL 1 - CLUE 1: "case Menu"
+------------------------------
+
+STEP 1 – ops_tool.sh: stub functions check_services, show_status, backup_now, run_pipeline (each echoes one line). echo "=== Mini DevOps Tool ==="; echo "  check | status | backup | pipeline | exit"; read -p "Action: " ACTION; case "$ACTION" in check) check_services ;; status) show_status ;; backup) backup_now ;; pipeline) run_pipeline ;; exit) echo "Exiting."; exit 0 ;; *) echo "Error: use check, status, backup, pipeline, or exit."; exit 1 ;; esac
+
+STEP 2 – Run with check → "Running health check..."; with status → "Showing system status..."; with restart → "Error: ..." and exit 1.
+
+================================================================================
+
+LEVEL 1 - CLUE 2: "show_status()"
+----------------------------------
+
+STEP 1 – show_status() { echo "[$(date '+%Y-%m-%d %H:%M:%S')] === System status ==="; echo ""; echo "Date: $(date)"; echo "Uptime: $(uptime -p 2>/dev/null || uptime)"; echo ""; echo "Disk usage (current dir):"; df -h . 2>/dev/null || echo "  (df not available)"; echo ""; echo "Memory:"; free -h 2>/dev/null | grep Mem || echo "  (free not available)"; echo ""; }
+
+STEP 2 – Run with status → timestamp, Date, Uptime, df output, Memory line. exit and invalid still work.
+
+================================================================================
+
+LEVEL 1 - CLUE 3: "check_services()"
+-------------------------------------
+
+STEP 1 – check_services() { echo "[$(date '+%H:%M:%S')] Health check..."; for SVC in nginx app db; do echo "  Checking $SVC..."; echo "    $SVC: OK"; done; echo "[$(date '+%H:%M:%S')] All services OK."; }
+
+STEP 2 – Run with check → Health check, then for nginx/app/db: Checking ... and ...: OK, then All services OK.
+
+STEP 3 – my_answers.txt: e.g. "Run a real check per service – curl /health or systemctl is-active $SVC – and echo OK or FAIL based on the result."
+
+================================================================================
+
+LEVEL 2 - CLUE 1: "backup_now() and exit 0"
+--------------------------------------------
+
+STEP 1 – backup_now() { echo "[$(date '+%H:%M:%S')] Backup started..."; echo "  Backup dir: /backup/$(date +%Y-%m-%d-%H%M)"; echo "  Backing up logs..."; echo "  Backing up configs..."; echo "[$(date '+%H:%M:%S')] Backup done."; } In case: check) check_services; exit 0 ;; status) show_status; exit 0 ;; backup) backup_now; exit 0 ;; pipeline) run_pipeline; exit 0 ;; exit) echo "Exiting."; exit 0 ;; *) echo "Error: ..."; exit 1 ;;
+
+STEP 2 – Run with backup → backup messages, echo $? → 0. Run with invalid → error, echo $? → 1.
+
+================================================================================
+
+LEVEL 2 - CLUE 2: "run_pipeline()"
+------------------------------------
+
+STEP 1 – run_pipeline() { echo "[$(date '+%H:%M:%S')] === Pipeline (validate -> build -> test -> deploy) ==="; echo "  [validate] Config OK, disk OK"; echo "  [build] Artifact built"; echo "  [test] Unit + integration passed"; echo "  [deploy] Deployed to staging"; echo "[$(date '+%H:%M:%S')] Pipeline complete."; }
+
+STEP 2 – Run with pipeline → pipeline header, four steps, "Pipeline complete.", exit 0.
+
+================================================================================
+
+LEVEL 2 - CLUE 3: "Final Checklist"
+-------------------------------------
+
+STEP 1 – Confirm: one loop (for in check_services), multiple functions, one case, clear output, exit 0 after valid action, exit 1 in *) branch.
+
+STEP 2 – my_answers.txt: e.g. "Real health checks (curl or systemctl), real backup paths and tar/cp, real pipeline steps that run build/test scripts and check their exit codes."
+
+================================================================================
+END OF SOLUTIONS
+================================================================================

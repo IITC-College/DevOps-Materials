@@ -5,15 +5,15 @@ A hands-on lab for basic reading and management of services with systemctl: stat
 ## How This Lab Works
 
 - **Level 1:** No scripts. You read status of system services (active, inactive, failed) and learn the rule: **status first** before changing anything.
-- **Level 2–3:** You use a **user-level** demo service (`lab-demo`). Run the SETUP script before Level 2 clue 1; run CLEANUP when done with Level 2 (or at the end of Level 3). Level 3 uses the same service (SETUP again if you ran CLEANUP).
+- **Level 2–3:** You use a **user-level** demo service (`lab-demo`). **Each clue that uses the service has its own SETUP and CLEANUP.** Run the SETUP script at the start of that clue; run CLEANUP when done with that clue. Clues are isolated so you can do them in any order or repeat them.
 
 Example (you are in `clues/level2/`):
 
 ```bash
-../../scripts/setup_lab_demo.sh    # BEFORE: install and start lab-demo service
-cat clue1.txt                       # READ: the clue and do the exercise
-# ... do clues 2 and 3 ...
-../../scripts/cleanup_lab_demo.sh  # AFTER: stop and remove lab-demo
+../../scripts/setup_2_1.sh    # BEFORE clue 1: install and start lab-demo
+cat clue1.txt                 # READ the clue and do the exercise
+../../scripts/cleanup_2_1.sh  # AFTER clue 1: stop and remove lab-demo
+# Same pattern for clue 2 (setup_2_2.sh / cleanup_2_2.sh) and clue 3 (setup_2_3.sh / cleanup_2_3.sh)
 ```
 
 ## Direct Entry

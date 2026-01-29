@@ -1,0 +1,35 @@
+================================================================================
+                    LEVEL 1 - CLUE 1
+            "case on a Number" - 1, 2, 3
+================================================================================
+
+--------------------------------------------------------------------------------
+WHAT YOU'RE DOING
+--------------------------------------------------------------------------------
+When you have many options (e.g. a menu), case is clearer than a long chain
+of if/elif. Syntax: case "$VAR" in 1) ... ;; 2) ... ;; *) ... ;; esac. Each
+branch ends with ;;. The *) branch is the default (anything else).
+
+--------------------------------------------------------------------------------
+INSTRUCTIONS
+--------------------------------------------------------------------------------
+1. Go to the lab's projects folder (from clues/level1: ../../projects).
+   Create a script menu_step1.sh. Shebang: #!/bin/bash
+
+2. Add: read -p "Enter option (1/2/3): " CHOICE
+   Then a case on CHOICE:
+   case "$CHOICE" in
+     1) echo "Option 1" ;;
+     2) echo "Option 2" ;;
+     3) echo "Option 3" ;;
+     *) echo "Invalid option" ;;
+   esac
+   Save and exit.
+
+3. Make it executable and run from projects/: ./menu_step1.sh
+   When prompted, type 1 – you should see "Option 1". Run again and type 2 –
+   "Option 2". Run again and type 9 – "Invalid option" (the *) branch).
+
+--------------------------------------------------------------------------------
+    NEXT STEP:  cat clue2.txt
+================================================================================

@@ -1,0 +1,38 @@
+================================================================================
+                    LEVEL 1 - CLUE 3
+            Process "Disappeared"
+================================================================================
+
+* SETUP: Run first (from this folder):  ../../scripts/setup_1_3.sh
+
+--------------------------------------------------------------------------------
+WHAT YOU'RE DOING
+--------------------------------------------------------------------------------
+Someone says lab-helper was running but now it is gone. Apply the flow: process
+or service? status? logs? next action?
+
+--------------------------------------------------------------------------------
+INSTRUCTIONS
+--------------------------------------------------------------------------------
+1. Apply the flow. Is this a process or a service? (Process.)
+
+2. Check status. Is the process running now? Hint: ps aux | grep lab-helper
+   or grep dummy_worker. You should not find it – it "disappeared."
+
+3. Check the logs. Where might the lab record what happened? Hint: data/logs/
+   in the lab root. Read lab_helper.log (e.g. tail or cat). What does it say
+   about lab-helper exiting?
+
+4. Decide the next action. Based on "process disappeared" and what the log
+   says: restart it? report?
+
+5. Add one block to your investigation report (investigation_report.txt at lab
+   root): Service/Process name, Status, Relevant log line, Action performed,
+   Short conclusion.
+
+--------------------------------------------------------------------------------
+CLEANUP (run when done with this clue):  ../../scripts/cleanup_1_3.sh
+--------------------------------------------------------------------------------
+    NEXT STEP:  cd ../level2
+                cat clue1.txt
+================================================================================

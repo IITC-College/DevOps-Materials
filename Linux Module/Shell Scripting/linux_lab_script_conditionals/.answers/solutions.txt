@@ -1,0 +1,84 @@
+================================================================================
+                    SOLUTIONS - Script Conditionals Lab
+                    (Instructor use only)
+================================================================================
+
+This lab is static. Students create scripts in projects/ and use
+data/configs/ (.env.prod, .env.staging) and data/environments/ (prod, staging).
+
+================================================================================
+
+LEVEL 1 - CLUE 1: "Check if File Exists"
+----------------------------------------
+
+STEP 1 – ls data/configs/ (from lab root) – see .env.prod, .env.staging
+
+STEP 2 – projects/check_config.sh:
+  #!/bin/bash
+  CONFIG="../data/configs/.env.prod"
+  if [ -f "$CONFIG" ]; then echo "Config file exists."; else echo "Config file not found."; fi
+  Run from projects/ → "Config file exists."
+
+STEP 3 – CONFIG="../data/configs/.env.missing" → "Config file not found."
+
+================================================================================
+
+LEVEL 1 - CLUE 2: "Check if Directory Exists"
+---------------------------------------------
+
+STEP 1 – ls data/environments/ – see prod, staging
+
+STEP 2 – DEPLOY_DIR="../data/environments/prod"
+  if [ -d "$DEPLOY_DIR" ]; then echo "Deploy directory exists."; else echo "Deploy directory not found."; fi
+  Run → "Deploy directory exists."
+
+STEP 3 – DEPLOY_DIR="../data/environments/missing" → "Deploy directory not found."
+
+================================================================================
+
+LEVEL 1 - CLUE 3: "Check if Input is Empty"
+-------------------------------------------
+
+STEP 1 – validate_input.sh:
+  #!/bin/bash
+  read -p "Enter environment (prod or staging): " ENV
+  if [ -z "$ENV" ]; then echo "Error: environment cannot be empty."; exit 1; fi
+  echo "Environment: $ENV"
+  Run with "prod" → "Environment: prod."
+
+STEP 2 – Run with Enter (empty) → "Error: environment cannot be empty." and exit 1.
+
+STEP 3 – my_answers.txt: e.g. "[ -z \"$VAR\" ] tests whether the variable is empty (zero length)."
+
+================================================================================
+
+LEVEL 2 - CLUE 1: "Validate Environment Name"
+----------------------------------------------
+
+STEP 1 – Add if/elif/else for prod/staging/else. Run with prod → "Deploying to PRODUCTION."; staging → "Deploying to STAGING."; dev → "Error: environment must be prod or staging." and exit 1.
+
+STEP 2 – my_answers.txt: e.g. "To avoid deploying to the wrong environment by typo or mistake."
+
+================================================================================
+
+LEVEL 2 - CLUE 2: "Create Directory Only if Missing"
+-----------------------------------------------------
+
+STEP 1 – ensure_dir.sh with TARGET="../data/environments/backup", if [ ! -d "$TARGET" ]; then mkdir -p "$TARGET"; echo "Created $TARGET"; else echo "$TARGET already exists."; fi. Or just mkdir -p.
+
+STEP 2 – my_answers.txt: e.g. "When you want to print a message only when creating the dir, or do more than mkdir."
+
+================================================================================
+
+LEVEL 2 - CLUE 3: "Pre-Deployment Validation Script"
+-----------------------------------------------------
+
+STEP 1 – pre_deploy_validate.sh: read ENV, [ -z ], [ "$ENV" != "prod" ] && [ "$ENV" != "staging" ], CONFIG="../data/configs/.env.$ENV", DEPLOY_DIR="../data/environments/$ENV", [ -f "$CONFIG" ], [ -d "$DEPLOY_DIR" ], echo "Validation passed."
+
+STEP 2 – Run with prod/staging → "Validation passed."; empty → "Error: environment required."; dev → "Error: must be prod or staging."
+
+STEP 3 – my_answers.txt: e.g. "Copy files to $DEPLOY_DIR, restart service, run smoke tests."
+
+================================================================================
+END OF SOLUTIONS
+================================================================================

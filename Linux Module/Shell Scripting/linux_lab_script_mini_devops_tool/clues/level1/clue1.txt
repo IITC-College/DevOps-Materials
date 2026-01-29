@@ -1,0 +1,45 @@
+================================================================================
+                    LEVEL 1 - CLUE 1
+            "case Menu" - check, status, backup, pipeline, exit
+================================================================================
+
+--------------------------------------------------------------------------------
+WHAT YOU'RE DOING
+--------------------------------------------------------------------------------
+You'll build a Mini DevOps Tool: one script with a case menu. Each action
+(check, status, backup, pipeline, exit) will be a branch that calls a
+function. For now, each function only echoes what it would do (e.g. "Running
+health check...", "Showing status..."). You'll implement the logic in later clues.
+
+--------------------------------------------------------------------------------
+INSTRUCTIONS
+--------------------------------------------------------------------------------
+1. Go to the lab's projects folder (from clues/level1: ../../projects).
+   Create a script ops_tool.sh. Shebang: #!/bin/bash
+
+2. Define stub functions that only echo a message:
+   check_services() { echo "Running health check..."; }
+   show_status() { echo "Showing system status..."; }
+   backup_now() { echo "Running backup..."; }
+   run_pipeline() { echo "Running pipeline (validate -> build -> test -> deploy)..."; }
+   Then add: echo "=== Mini DevOps Tool ==="; echo "  check | status | backup | pipeline | exit"; echo ""
+   read -p "Action: " ACTION
+   case "$ACTION" in
+     check)   check_services ;;
+     status)  show_status ;;
+     backup)  backup_now ;;
+     pipeline) run_pipeline ;;
+     exit)    echo "Exiting."; exit 0 ;;
+     *)      echo "Error: use check, status, backup, pipeline, or exit."; exit 1 ;;
+   esac
+   Save and exit.
+
+3. Make it executable and run from projects/: ./ops_tool.sh
+   When prompted, type check – you should see "Running health check...".
+   Run again and type status – "Showing system status...". Type restart –
+   "Error: use check, status, backup, pipeline, or exit." and the script
+   should exit with code 1 (echo $? after running to confirm).
+
+--------------------------------------------------------------------------------
+    NEXT STEP:  cat clue2.txt
+================================================================================

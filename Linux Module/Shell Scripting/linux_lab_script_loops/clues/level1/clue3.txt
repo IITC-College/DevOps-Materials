@@ -1,0 +1,33 @@
+================================================================================
+                    LEVEL 1 - CLUE 3
+            "Loop Over a List from a File or Fixed List"
+================================================================================
+
+--------------------------------------------------------------------------------
+WHAT YOU'RE DOING
+--------------------------------------------------------------------------------
+Sometimes the list of items comes from a file (one item per line) or a
+variable. You can use: for ITEM in $(cat path/to/file); do ... done, or
+for ITEM in $LIST; do ... done. Here you'll loop over paths from the lab's
+data so one command runs per item.
+
+--------------------------------------------------------------------------------
+INSTRUCTIONS
+--------------------------------------------------------------------------------
+1. From lab root, look at the list of paths: cat data/configs/paths.txt
+   (or data/paths.txt – the clue uses the path the lab provides). It contains
+   a few path names, one per line (e.g. logs, config, backup).
+
+2. Create a script in projects/: process_paths.sh. Shebang, then add a for
+   loop that reads from that file: for PATHNAME in $(cat ../data/configs/paths.txt); do echo "Processing $PATHNAME"; done
+   (Adjust the path if your lab has paths.txt elsewhere.) Save and run from
+   projects/. You should see one line per line in the file.
+
+3. Write in my_answers.txt (lab root: ../../my_answers.txt from clues/level1):
+   one sentence – what happens if you put the list in a variable
+   PATHS="logs config backup" and then use for P in $PATHS; do ...? (Answer:
+   same as a fixed list – the variable expands to the words.)
+
+--------------------------------------------------------------------------------
+    NEXT STEP:  cd ../level2  then  cat clue1.txt
+================================================================================

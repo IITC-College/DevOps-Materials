@@ -1,0 +1,42 @@
+================================================================================
+                    LEVEL 2 - CLUE 3
+            "Pipeline and CI/CD" - Why Exit Codes Matter
+================================================================================
+
+--------------------------------------------------------------------------------
+WHAT YOU'RE DOING
+--------------------------------------------------------------------------------
+You'll build a simple "pipeline" of two steps: validate (e.g. check dir and
+config), then deploy-simulate (e.g. echo "Deploying..."). The first step must
+exit 0 for the second to run. Then document why CI/CD cares about exit codes.
+
+--------------------------------------------------------------------------------
+INSTRUCTIONS
+--------------------------------------------------------------------------------
+1. Create a script in projects/: pipeline_simple.sh. Shebang, then:
+   echo "Step 1: Validate..."
+   ./check_dir_exit.sh ../data/environments/project1; CODE=$?
+   if [ $CODE -ne 0 ]; then echo "Validate failed. Abort."; exit 1; fi
+   ./check_config_exit.sh ../data/configs/app.conf; CODE=$?
+   if [ $CODE -ne 0 ]; then echo "Validate failed. Abort."; exit 1; fi
+   echo "Step 2: Deploy (simulated)..."
+   echo "Deploy complete."
+   exit 0
+   Save and exit. Run from projects/. You should see validate steps, then
+   "Deploy (simulated)...", "Deploy complete.", and exit 0.
+
+2. Break validation (e.g. use a missing path in the first check). Run again.
+   You should see "FAIL", "Validate failed. Abort.", and exit 1 – deploy
+   step never runs. So: first step must exit 0 for second to run.
+
+3. Write in my_answers.txt (lab root): one sentence – why does CI/CD care
+   about exit codes? (e.g. "CI/CD uses exit codes to show green/red and to
+   abort the pipeline on failure; non-zero means 'do not run next step'.")
+
+--------------------------------------------------------------------------------
+================================================================================
+                    LAB COMPLETE
+================================================================================
+Congratulations! You've completed the Script Exit Codes lab. You can use
+exit 0/1, check $?, chain steps with fail fast, and pass through exit codes.
+================================================================================

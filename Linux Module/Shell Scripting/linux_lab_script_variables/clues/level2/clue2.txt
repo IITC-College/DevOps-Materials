@@ -1,0 +1,30 @@
+================================================================================
+                    LEVEL 2 - CLUE 2
+            "Timestamped Filenames" - Using Variables in Names
+================================================================================
+
+--------------------------------------------------------------------------------
+WHAT YOU'RE DOING
+--------------------------------------------------------------------------------
+A common DevOps pattern is naming backup files with a timestamp so they don't
+overwrite each other. Example: backup_2026-01-29.log. You already know
+DATE=$(date +%Y-%m-%d). Now use that variable in a filename.
+
+--------------------------------------------------------------------------------
+INSTRUCTIONS
+--------------------------------------------------------------------------------
+1. Create (or edit) a script in projects/: backup_timestamped.sh
+   Set DATE=$(date +%Y-%m-%d). Then set a variable for the backup filename:
+   BACKUP_FILE="backup_${DATE}.log"
+   (The curly braces help when the variable is followed by more text, e.g. _date.)
+
+2. Echo the filename: echo "Backup file will be: $BACKUP_FILE"
+   Run the script. You should see something like "Backup file will be: backup_2026-01-29.log"
+   (with today's date).
+
+3. Optionally echo a full path, e.g. echo "Full path: ../data/backups/$BACKUP_FILE"
+   (if you had a backups directory – we're just practicing variable use in names here).
+
+--------------------------------------------------------------------------------
+    NEXT STEP:  cat clue3.txt
+================================================================================

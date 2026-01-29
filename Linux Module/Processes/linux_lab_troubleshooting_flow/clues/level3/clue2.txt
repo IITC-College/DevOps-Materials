@@ -1,0 +1,36 @@
+================================================================================
+                    LEVEL 3 - CLUE 2
+            Combined: Service-Only Scenario
+================================================================================
+
+* SETUP: Run first (from this folder):  ../../scripts/setup_3_2.sh
+
+--------------------------------------------------------------------------------
+WHAT YOU'RE DOING
+--------------------------------------------------------------------------------
+This clue is a SERVICE-only scenario: lab-troubleshoot is managed by systemd.
+It is stopped. You must decide it is a service (not a raw process) and check
+systemctl and journalctl.
+
+--------------------------------------------------------------------------------
+INSTRUCTIONS
+--------------------------------------------------------------------------------
+1. Apply the flow. What is not working? (lab-troubleshoot is down.)
+   Is it a process or a service? (Service – systemd.)
+
+2. Check status. Hint: systemctl --user status lab-troubleshoot
+   You should see inactive (stopped).
+
+3. Check the logs if needed. journalctl --user -u lab-troubleshoot -n 20
+
+4. Decide the next action (e.g. start the service).
+
+5. Add one block to your investigation report (investigation_report.txt at lab
+   root): Service/Process name, Status, Relevant log line, Action performed,
+   Short conclusion.
+
+--------------------------------------------------------------------------------
+CLEANUP (run when done with this clue):  ../../scripts/cleanup_3_2.sh
+--------------------------------------------------------------------------------
+    NEXT STEP:  cat clue3.txt
+================================================================================

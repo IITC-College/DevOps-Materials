@@ -1,0 +1,23 @@
+# Investigation Report – Copy one block per scenario into investigation_report.txt
+# Replace the placeholders with your findings.
+
+--------------------------------------------------------------------------------
+Scenario: [e.g. Level 1 Clue 1 – lab-helper not running]
+--------------------------------------------------------------------------------
+- **Service/Process name**:
+- **Status**:
+- **Relevant log line**:
+- **Action performed**:
+- **Short conclusion**:
+
+--------------------------------------------------------------------------------
+Scenario: [e.g. Level 1 Clue 2 – lab-worker high CPU]
+--------------------------------------------------------------------------------
+- **Service/Process name**:
+- **Status**:
+- **Relevant log line**:
+- **Action performed**:
+- **Short conclusion**:
+
+--------------------------------------------------------------------------------
+(Repeat the block above for each clue. One block per scenario.)

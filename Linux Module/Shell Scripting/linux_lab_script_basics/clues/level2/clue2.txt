@@ -1,0 +1,29 @@
+================================================================================
+                    LEVEL 2 - CLUE 2
+            "Making the Script Executable" - chmod +x
+================================================================================
+
+--------------------------------------------------------------------------------
+WHAT YOU'RE DOING
+--------------------------------------------------------------------------------
+To run a script with ./script.sh, you must give it execute permission. The
+command chmod +x filename adds execute permission for the owner (and often for
+everyone). After that, ./script.sh will work.
+
+--------------------------------------------------------------------------------
+INSTRUCTIONS
+--------------------------------------------------------------------------------
+1. From projects/, add execute permission to first_deploy.sh.
+   Hint: chmod +x first_deploy.sh
+
+2. Check the permissions again. Hint: ls -l first_deploy.sh
+   You should now see an "x" in the permission string (e.g. -rwxr-xr-x or
+   -rwxr--r--).
+
+3. Run the script as a program: ./first_deploy.sh
+   You should see all five echo lines. If you are not in projects/, either
+   cd there first or use the full path to the script.
+
+--------------------------------------------------------------------------------
+    NEXT STEP:  cat clue3.txt
+================================================================================

@@ -1,0 +1,44 @@
+================================================================================
+                    LEVEL 3 - CLUE 3
+            Logs Tell You Which (Process or Service?)
+================================================================================
+
+* SETUP: Run first (from this folder):  ../../scripts/setup_3_3.sh
+
+--------------------------------------------------------------------------------
+WHAT YOU'RE DOING
+--------------------------------------------------------------------------------
+Someone left a note in the logs about what is broken. You must READ the log
+first to know whether to check a process or a service – then apply the full
+flow (status, logs, next action).
+
+--------------------------------------------------------------------------------
+INSTRUCTIONS
+--------------------------------------------------------------------------------
+1. Apply the flow. What is not working? You don't know yet – check the logs
+   first. Hint: data/logs/troubleshoot_hint.log in the lab root. Read it.
+   The log tells you what to check (process or service? which name?).
+
+2. Based on the log: Is it a process or a service? Then check status with the
+   right tool (ps vs systemctl --user status).
+
+3. Decide the next action (e.g. start the service if it says lab-troubleshoot
+   should be running).
+
+4. Add one block to your investigation report (investigation_report.txt at lab
+   root): Service/Process name, Status, Relevant log line (from
+   troubleshoot_hint.log or journal), Action performed, Short conclusion.
+
+--------------------------------------------------------------------------------
+CLEANUP (run when done with this clue):  ../../scripts/cleanup_3_3.sh
+--------------------------------------------------------------------------------
+    NEXT STEP
+================================================================================
+
+Congratulations! You have completed the Troubleshooting Flow lab.
+
+You practiced the 5-step flow on process-only, service-only, and "logs tell you
+which" scenarios. Keep using: What's broken? Process or service? Status? Logs?
+Next action?
+
+================================================================================

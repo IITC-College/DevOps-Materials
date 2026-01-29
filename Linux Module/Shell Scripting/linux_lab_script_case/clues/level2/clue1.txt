@@ -1,0 +1,35 @@
+================================================================================
+                    LEVEL 2 - CLUE 1
+            "case + Real Commands" - df, uptime
+================================================================================
+
+--------------------------------------------------------------------------------
+WHAT YOU'RE DOING
+--------------------------------------------------------------------------------
+Each case branch can run real commands. Option 1 (or "disk") runs df -h .
+to show disk usage; option 2 (or "uptime") runs uptime; option 3 (or "exit")
+exits. Use case to choose which command to run.
+
+--------------------------------------------------------------------------------
+INSTRUCTIONS
+--------------------------------------------------------------------------------
+1. Create a script in projects/: menu_ops.sh. Shebang, then read CHOICE
+   (e.g. prompt "1=disk 2=uptime 3=exit"). Then case "$CHOICE" in:
+   1) df -h . ;;
+   2) uptime ;;
+   3) echo "Exiting."; exit 0 ;;
+   *) echo "Invalid option."; exit 1 ;;
+   esac
+   Save and exit.
+
+2. Make it executable and run from projects/. Type 1 – you should see the
+   output of df -h . (disk usage for current directory). Type 2 – you
+   should see uptime. Type 3 – "Exiting." and script ends. Type 9 –
+   "Invalid option." and exit 1.
+
+3. Run with 1 and then echo $? – you should see 0 (df succeeded). Run with
+   9 and echo $? – you should see 1.
+
+--------------------------------------------------------------------------------
+    NEXT STEP:  cat clue2.txt
+================================================================================

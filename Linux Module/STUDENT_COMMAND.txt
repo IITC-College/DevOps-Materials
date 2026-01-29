@@ -2,7 +2,36 @@
             Linux Labs - Student Download Commands
 ========================================================
 
-📚 Available Labs - Copy and paste the command for your lab:
+📚 QUICK REFERENCE – All labs and release links
+========================================================
+
+| #  | Lab Name                              | Release Tag           | Direct Download URL
+|----|----------------------------------------|------------------------|----------------------------------------------------------------------
+| 1  | Navigation Basics                      | v2.0                   | https://github.com/IITC-College/DevOps-Jan26/releases/download/v2.0/linux_lab1_navigation_basics.tar.gz
+| 2  | File and Directory Management          | v2.1                   | https://github.com/IITC-College/DevOps-Jan26/releases/download/v2.1/linux_lab2_file_management.tar.gz
+| 3  | Reading Files                          | v2.2                   | https://github.com/IITC-College/DevOps-Jan26/releases/download/v2.2/linux_lab3_reading_files.tar.gz
+| 4  | Search Basics                          | v2.3                   | https://github.com/IITC-College/DevOps-Jan26/releases/download/v2.3/linux_lab4_search_basics.tar.gz
+| 5  | File System Scavenger Hunt             | v2.4                   | https://github.com/IITC-College/DevOps-Jan26/releases/download/v2.4/linux_lab5_scavenger_hunt.tar.gz
+| 6  | Permission Encounter                   | v2.5.4                 | https://github.com/IITC-College/DevOps-Jan26/releases/download/v2.5.4/linux_lab6_permission_encounter.tar.gz
+| 7  | Why Script Doesn't Run                 | v2.6.4                 | https://github.com/IITC-College/DevOps-Jan26/releases/download/v2.6.4/linux_lab7_why_script_doesnt_run.tar.gz
+| 8  | Ownership and Groups                   | v2.7.4                 | https://github.com/IITC-College/DevOps-Jan26/releases/download/v2.7.4/linux_lab8_ownership_and_groups.tar.gz
+| 9  | Sudo Mindset                           | v3.0.4                 | https://github.com/IITC-College/DevOps-Jan26/releases/download/v3.0.4/linux_lab9_sudo_mindset.tar.gz
+| 10 | Default Permissions (umask)            | v2.9.4                 | https://github.com/IITC-College/DevOps-Jan26/releases/download/v2.9.4/linux_lab10_default_permissions.tar.gz
+| 11 | Debug Mindset - 4-Step Debug Flow      | v2.8.4                 | https://github.com/IITC-College/DevOps-Jan26/releases/download/v2.8.4/linux_lab11_debug_mindset.tar.gz
+| 12 | Processes Basics - What is a Process    | lab12-processes-basics| https://github.com/IITC-College/DevOps-Jan26/releases/download/lab12-processes-basics/linux_lab_processes_basics.tar.gz
+| 13 | Process Management (kill)              | lab13-processes-kill  | https://github.com/IITC-College/DevOps-Jan26/releases/download/lab13-processes-kill/linux_lab_processes_kill.tar.gz
+| 14 | Process vs Service                     | lab14-processes-vs-service | https://github.com/IITC-College/DevOps-Jan26/releases/download/lab14-processes-vs-service/linux_lab_processes_vs_service.tar.gz
+| 15 | systemd and Services                   | lab15-systemd-services | https://github.com/IITC-College/DevOps-Jan26/releases/download/lab15-systemd-services/linux_lab_systemd_services.tar.gz
+| 16 | journalctl – Logs First               | lab16-journalctl-logs-first | https://github.com/IITC-College/DevOps-Jan26/releases/download/lab16-journalctl-logs-first/linux_lab_journalctl_logs_first.tar.gz
+| 17 | Troubleshooting Flow                   | lab17-troubleshooting-flow | https://github.com/IITC-College/DevOps-Jan26/releases/download/lab17-troubleshooting-flow/linux_lab_troubleshooting_flow.tar.gz
+| 18 | Networking – Adapter & Debug           | lab18-networking-adapter | https://github.com/IITC-College/DevOps-Jan26/releases/download/lab18-networking-adapter/linux_networking_lab1_adapter.tar.gz
+
+All releases: https://github.com/IITC-College/DevOps-Jan26/releases
+
+========================================================
+📚 COPY-PASTE COMMANDS (by lab)
+========================================================
+
 
 ========================================================
 LAB 1: Navigation Basics (v2.0)
@@ -71,60 +100,85 @@ LAB 11: Debug Mindset - 4-Step Debug Flow (v2.8.4)
 curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v2.8.4/linux_lab11_debug_mindset.tar.gz | tar -xz && cd linux_lab11_debug_mindset && cat start_here.txt
 
 ========================================================
-LAB 12: Processes Basics - What is a Process (v1.0)
+LAB 12: Processes Basics - What is a Process (lab12-processes-basics)
 ========================================================
 
 curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/lab12-processes-basics/linux_lab_processes_basics.tar.gz | tar -xz && cd linux_lab_processes_basics && cd clues/level1 && cat clue1.txt
 
-(No start_here.txt – this lab starts at the first clue. Run the setup/cleanup scripts as indicated in each clue.)
+(No start_here.txt – start at the first clue. Run setup/cleanup scripts as indicated in each clue.)
 
 ========================================================
-LAB 13: Process Management (kill) (v1.0)
+LAB 13: Process Management (kill) (lab13-processes-kill)
 ========================================================
 
 curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/lab13-processes-kill/linux_lab_processes_kill.tar.gz | tar -xz && cd linux_lab_processes_kill && cd clues/level1 && cat clue1.txt
 
-(No start_here.txt – start directly at the first clue. Run setup/cleanup scripts as indicated in each clue.)
+(No start_here.txt – start at the first clue. Run setup/cleanup scripts as indicated in each clue.)
 
 ========================================================
-LAB 14: Process vs Service (v1.0)
+LAB 14: Process vs Service (lab14-processes-vs-service)
 ========================================================
 
 curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/lab14-processes-vs-service/linux_lab_processes_vs_service.tar.gz | tar -xz && cd linux_lab_processes_vs_service && cd clues/level1 && cat clue1.txt
 
-(No start_here.txt – start directly at the first clue. No setup/cleanup scripts – observation only.)
+(No start_here.txt – start at the first clue. No setup/cleanup scripts – observation only.)
 
 ========================================================
-LAB 15: systemd and Services (v1.0)
+LAB 15: systemd and Services (lab15-systemd-services)
 ========================================================
 
 curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/lab15-systemd-services/linux_lab_systemd_services.tar.gz | tar -xz && cd linux_lab_systemd_services && cd clues/level1 && cat clue1.txt
 
-(No start_here.txt – start directly at the first clue. Level 2–3: run setup/cleanup scripts as indicated in clues.)
+(No start_here.txt – start at the first clue. Level 2–3: run setup/cleanup scripts as indicated in clues.)
+
+========================================================
+LAB 16: journalctl – Logs First (lab16-journalctl-logs-first)
+========================================================
+
+curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/lab16-journalctl-logs-first/linux_lab_journalctl_logs_first.tar.gz | tar -xz && cd linux_lab_journalctl_logs_first && cd clues/level1 && cat clue1.txt
+
+(No start_here.txt – start at the first clue. Run setup/cleanup scripts before and after each clue as indicated.)
+
+========================================================
+LAB 17: Troubleshooting Flow (lab17-troubleshooting-flow)
+========================================================
+
+curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/lab17-troubleshooting-flow/linux_lab_troubleshooting_flow.tar.gz | tar -xz && cd linux_lab_troubleshooting_flow && cd clues/level1 && cat clue1.txt
+
+(No start_here.txt – start at the first clue. Run setup/cleanup scripts as indicated. Submit investigation_report.txt.)
+
+========================================================
+LAB 18: Networking – Adapter & Debug (lab18-networking-adapter)
+========================================================
+
+curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/lab18-networking-adapter/linux_networking_lab1_adapter.tar.gz | tar -xz && cd linux_networking_lab1_adapter && cat start_here.txt
 
 ========================================================
 
-📚 Resources:
+📚 Resources
+========================================================
 
-Repository: https://github.com/IITC-College/DevOps-Jan26
+Repository:  https://github.com/IITC-College/DevOps-Jan26
 All Releases: https://github.com/IITC-College/DevOps-Jan26/releases
 
 ========================================================
 
-📝 What Each Command Does:
+📝 What each command does
+========================================================
 
 1. Downloads the lab archive from GitHub
 2. Extracts all files
 3. Navigates into the lab directory
-4. Displays the starting instructions
+4. Displays the starting instructions (start_here.txt or clue1.txt)
 
 ========================================================
 
-💡 Tips:
+💡 Tips
+========================================================
 
-- Make sure you have curl and tar installed
-- Run the command in a directory where you want the lab extracted
-- Each lab is self-contained and can be completed independently
-- Follow the instructions in start_here.txt after extraction (or in the first clue for labs that start at clue1)
+- Ensure curl and tar are installed
+- Run the command in the directory where you want the lab extracted
+- Labs are self-contained and can be done in any order
+- Use start_here.txt after extraction (or clues/level1/clue1.txt for clue-based labs)
 
 ========================================================

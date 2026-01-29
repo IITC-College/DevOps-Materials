@@ -1,0 +1,181 @@
+================================================================================
+                    SOLUTIONS - Logs-First: journalctl Lab
+                    (Instructor use only)
+================================================================================
+
+GENERAL:
+  Before each clue: run ../../scripts/setup_X_Y.sh (from clues/levelX/)
+  After each clue: run ../../scripts/cleanup_X_Y.sh (from clues/levelX/)
+  Lab services run under the user (journalctl --user). No sudo needed.
+
+================================================================================
+
+LEVEL 1 - CLUE 1: "What Are Logs?" - Your First Look at journalctl
+-------------------------------------------------------------------
+
+SETUP (from clues/level1/):
+  ../../scripts/setup_1_1.sh
+  Starts lab-logger-ok.service (user service) for this clue.
+
+STEP 1 – View the system journal
+  Command:  journalctl
+  Or:      journalctl -n 50   (last 50 lines only)
+  Explanation: Shows system journal. Output is paged (Space to scroll, q to quit).
+  Each line has timestamp, hostname, unit (service) name, and message.
+
+STEP 2 – Observe
+  Notice the structure: logs are the system's "memory" of what happened.
+
+STEP 3 – Document
+  Write in my_answers.txt: one sentence – what is a log, and why is it useful?
+
+CLEANUP (from clues/level1/):
+  ../../scripts/cleanup_1_1.sh
+
+EXAMPLE ANSWER: "A log is a record of what the system and services did. It is
+the most reliable source when something goes wrong – before guessing, check
+the logs."
+
+================================================================================
+
+LEVEL 1 - CLUE 2: "Filter the Noise" - Logs for One Service
+------------------------------------------------------------
+
+SETUP (from clues/level1/):
+  ../../scripts/setup_1_2.sh
+  Starts lab-logger-ok.service.
+
+STEP 1 – View logs for the lab service only
+  Command:  journalctl --user -u lab-logger-ok.service
+  Or:      journalctl --user -u lab-logger-ok
+  Explanation: -u filters by unit (service). --user shows user session journal.
+  Students see only that service's messages – much less noise.
+
+STEP 2 – Observe
+  Notice timestamps and the heartbeat messages.
+
+STEP 3 – Document
+  Write in my_answers.txt: what does -u do, and why is it useful?
+
+CLEANUP (from clues/level1/):
+  ../../scripts/cleanup_1_2.sh
+
+EXAMPLE ANSWER: "-u filters logs to one service (unit). It is useful when
+troubleshooting one service so you don't get lost in the full journal."
+
+================================================================================
+
+LEVEL 1 - CLUE 3: "Find the Error" - First Error Hunt
+------------------------------------------------------
+
+SETUP (from clues/level1/):
+  ../../scripts/setup_1_3.sh
+  Starts lab-logger-fail.service (it fails on purpose – script exits with 1).
+
+STEP 1 – View logs for the fail service
+  Command:  journalctl --user -u lab-logger-fail.service
+  Or:      journalctl --user -u lab-logger-fail.service -n 20
+
+STEP 2 – Find the error line
+  Look for: "[ERROR] lab-logger-fail: simulated failure - config file not found"
+  Or:       "failed" / "exit code" in systemd messages.
+  Note WHAT failed and WHEN (timestamp).
+
+STEP 3 – Document (problem description, not raw error)
+  Write 2–3 sentences: which service failed, what happened, when.
+
+CLEANUP (from clues/level1/):
+  ../../scripts/cleanup_1_3.sh
+
+EXAMPLE ANSWER: "The lab-logger-fail service failed shortly after start. The
+log shows an ERROR message: simulated failure - config file not found. The
+service exited with code 1, so it is not running."
+
+================================================================================
+
+LEVEL 2 - CLUE 1: "Recent Errors" - journalctl -xe
+--------------------------------------------------
+
+SETUP (from clues/level2/):
+  ../../scripts/setup_2_1.sh
+  Starts lab-logger-fail.service (fails on purpose).
+
+STEP 1 – View recent log entries with explanations
+  Command:  journalctl --user -xe
+  Explanation: -x adds short explanations; -e jumps to end of journal (most
+  recent). Students find the lab-logger-fail failure near the end.
+
+STEP 2 – Find the failure
+  Look for lab-logger-fail.service and the error/exit message.
+
+STEP 3 – Document
+  Write: what did -xe show that plain journalctl didn't?
+
+CLEANUP (from clues/level2/):
+  ../../scripts/cleanup_2_1.sh
+
+EXAMPLE ANSWER: "-xe showed the most recent entries and short explanations
+for the failure, so I could see why lab-logger-fail failed without scrolling
+through the whole journal."
+
+================================================================================
+
+LEVEL 2 - CLUE 2: "When Did It Break?" - Time and Priority
+---------------------------------------------------------
+
+SETUP (from clues/level2/):
+  ../../scripts/setup_2_2.sh
+  Starts lab-logger-fail.service (fails immediately).
+
+STEP 1 – View logs since 10 minutes ago
+  Command:  journalctl --user -u lab-logger-fail.service --since "10 minutes ago"
+
+STEP 2 – Filter by error priority
+  Command:  journalctl --user -u lab-logger-fail.service -p err -n 20
+  Explanation: -p err shows only error priority (reduces noise).
+
+STEP 3 – Document
+  Write: approximate time of failure, and what -p err does.
+
+CLEANUP (from clues/level2/):
+  ../../scripts/cleanup_2_2.sh
+
+EXAMPLE ANSWER: "The failure happened at [timestamp from log]. -p err
+filters the log to show only error-priority messages, so I see only the
+failure line, not INFO or WARNING."
+
+================================================================================
+
+LEVEL 2 - CLUE 3: "Describe Like a DevOps" - Full Problem Description
+---------------------------------------------------------------------
+
+SETUP (from clues/level2/):
+  ../../scripts/setup_2_3.sh
+  Starts lab-logger-warn.service (runs) and lab-logger-fail.service (fails).
+
+STEP 1 – View logs for both services
+  Commands:  journalctl --user -u lab-logger-warn.service
+            journalctl --user -u lab-logger-fail.service
+  Or:       journalctl --user -xe   to see recent failures
+
+STEP 2 – Trace the failure
+  lab-logger-fail shows: [ERROR] simulated failure - config file not found, exit 1.
+  lab-logger-warn may show warnings; the key failure is lab-logger-fail.
+
+STEP 3 – Write professional problem description (3–4 sentences)
+  Include: which service failed, when, root cause, impact.
+
+CLEANUP (from clues/level2/):
+  ../../scripts/cleanup_2_3.sh
+
+EXAMPLE ANSWER (professional description):
+"The lab-logger-fail service failed to start. The journal shows it ran
+scripts/dummy_logger_fail.sh, which logged '[ERROR] simulated failure -
+config file not found' and exited with code 1. The root cause is that the
+script simulates a missing config file. The impact is that the service does
+not run and would need a fix (e.g. create the config or fix the path) before
+it could start successfully."
+
+================================================================================
+                    END OF SOLUTIONS
+================================================================================

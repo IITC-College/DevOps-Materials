@@ -1,0 +1,5 @@
+# Lab runtime - PIDs of dummy services
+.lab_pids_*
+
+# Student answers (optional)
+my_answers.txt

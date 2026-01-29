@@ -1,0 +1,33 @@
+================================================================================
+                    LEVEL 1 - CLUE 3
+            "Default Branch and exit 1"
+================================================================================
+
+--------------------------------------------------------------------------------
+WHAT YOU'RE DOING
+--------------------------------------------------------------------------------
+For invalid input we often echo an error and exit with a non-zero code so
+callers (or CI) know the script failed. In the *) branch add: echo "Invalid
+option"; exit 1. Then run the script with invalid input and check the exit
+code with echo $? – you should see 1.
+
+--------------------------------------------------------------------------------
+INSTRUCTIONS
+--------------------------------------------------------------------------------
+1. Edit menu_step2.sh (or the script with disk/uptime/exit). In the *)
+   branch, change to: echo "Invalid option"; exit 1
+   Save and exit.
+
+2. Run the script and type restart (invalid). You should see "Invalid option".
+   Then run: ./menu_step2.sh; echo $?
+   Type restart again and press Enter. After the script exits, you should see
+   the number 1 printed (the exit code). So the script "failed" from the
+   system's point of view.
+
+3. Run the script and type disk (valid). Then run: ./menu_step2.sh; echo $?
+   Type disk and press Enter. After the script exits, you should see 0 (success).
+   So: valid input → exit 0 (default when script ends normally), invalid → exit 1.
+
+--------------------------------------------------------------------------------
+    NEXT STEP:  cd ../level2  then  cat clue1.txt
+================================================================================

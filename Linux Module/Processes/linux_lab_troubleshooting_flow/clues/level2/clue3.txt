@@ -1,0 +1,40 @@
+================================================================================
+                    LEVEL 2 - CLUE 3
+            Service Running but App Not Responding
+================================================================================
+
+* SETUP: Run first (from this folder):  ../../scripts/setup_2_3.sh
+
+--------------------------------------------------------------------------------
+WHAT YOU'RE DOING
+--------------------------------------------------------------------------------
+Users report that lab-troubleshoot "is running but the app is not responding."
+Apply the flow: status says "active" but something is wrong – what do the logs
+say? What is the next action?
+
+--------------------------------------------------------------------------------
+INSTRUCTIONS
+--------------------------------------------------------------------------------
+1. Apply the flow. Is it a process or a service? (Service.)
+
+2. Check status. Hint: systemctl --user status lab-troubleshoot
+   You should see "active (running)" – so the service is up.
+
+3. Check the logs. The symptom is "app not responding" – the daemon writes
+   ERROR or WARN to the journal. Hint: journalctl --user -u lab-troubleshoot
+   -n 30
+   Look for ERROR or WARN lines.
+
+4. Decide the next action. Based on logs: restart the service? investigate
+   further?
+
+5. Add one block to your investigation report (investigation_report.txt at lab
+   root): Service/Process name, Status, Relevant log line (ERROR or WARN from
+   journal), Action performed, Short conclusion.
+
+--------------------------------------------------------------------------------
+CLEANUP (run when done with this clue):  ../../scripts/cleanup_2_3.sh
+--------------------------------------------------------------------------------
+    NEXT STEP:  cd ../level3
+                cat clue1.txt
+================================================================================
