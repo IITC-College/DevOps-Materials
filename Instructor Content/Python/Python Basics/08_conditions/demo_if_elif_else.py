@@ -1,0 +1,13 @@
+#!/usr/bin/env python3
+# Demonstrating if/elif/else statement
+
+score = 75
+
+if score >= 90:
+    print("A")
+elif score >= 80:
+    print("B")
+elif score >= 70:
+    print("C")
+else:
+    print("F")

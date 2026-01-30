@@ -1,0 +1,76 @@
+# Complete requirements.txt Workflow
+
+## Starting a New Project
+
+1. Create project directory
+   mkdir my_project
+   cd my_project
+
+2. Create virtual environment
+   python -m venv venv
+
+3. Activate virtual environment
+   # Windows:
+   venv\Scripts\activate
+   # Linux/Mac:
+   source venv/bin/activate
+
+4. Install packages as you need them
+   pip install requests
+   pip install flask
+   pip install pytest
+
+5. Generate requirements.txt
+   pip freeze > requirements.txt
+
+6. Add to version control
+   git add requirements.txt
+   git commit -m "Add requirements.txt"
+
+## Sharing Your Project
+
+1. Push code to repository (including requirements.txt)
+   git push origin main
+
+2. Team member clones repository
+   git clone https://github.com/you/project.git
+   cd project
+
+3. They create and activate venv
+   python -m venv venv
+   source venv/bin/activate  # or venv\Scripts\activate on Windows
+
+4. They install all dependencies
+   pip install -r requirements.txt
+
+5. They can now run the project!
+   python main.py
+
+## Updating Dependencies
+
+1. Install or update a package
+   pip install --upgrade requests
+
+2. Update requirements.txt
+   pip freeze > requirements.txt
+
+3. Commit the update
+   git add requirements.txt
+   git commit -m "Update requests to 2.31.0"
+
+4. Push and notify team
+   git push origin main
+
+5. Team members update their environment
+   git pull
+   pip install -r requirements.txt
+
+## Pro Tips
+
+- Always activate venv before running pip freeze
+- Review requirements.txt before committing
+- Document any special installation steps
+- Consider separating dev and prod requirements:
+  - requirements.txt (production)
+  - requirements-dev.txt (development tools)
+  - Install both: pip install -r requirements.txt -r requirements-dev.txt

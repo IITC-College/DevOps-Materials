@@ -1,0 +1,36 @@
+# Virtual Environment Commands
+
+## Creating a virtual environment
+
+# On Windows:
+python -m venv venv
+
+# On Linux/Mac:
+python3 -m venv venv
+
+## Activating the virtual environment
+
+# On Windows:
+venv\Scripts\activate
+
+# On Linux/Mac:
+source venv/bin/activate
+
+## Deactivating the virtual environment
+
+deactivate
+
+## Checking if you're in a virtual environment
+
+# Your prompt should show (venv) prefix
+# Or check with Python:
+python -c "import sys; print(sys.prefix)"
+
+## Deleting a virtual environment
+
+# Simply delete the venv folder
+# Windows:
+rmdir /s venv
+
+# Linux/Mac:
+rm -rf venv

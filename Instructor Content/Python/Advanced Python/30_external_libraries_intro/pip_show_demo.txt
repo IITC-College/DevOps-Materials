@@ -1,0 +1,49 @@
+# pip show - Package Information
+
+## Basic Usage
+
+pip show requests
+
+## Example Output
+
+Name: requests
+Version: 2.28.2
+Summary: Python HTTP for Humans.
+Home-page: https://requests.readthedocs.io
+Author: Kenneth Reitz
+Author-email: me@kennethreitz.org
+License: Apache 2.0
+Location: /usr/local/lib/python3.9/site-packages
+Requires: certifi, charset-normalizer, idna, urllib3
+Required-by: some-package
+
+## What Each Field Means
+
+- Name: Package name
+- Version: Installed version
+- Summary: Short description
+- Home-page: Project website
+- Author: Package author
+- License: Software license
+- Location: Installation directory
+- Requires: Dependencies (what this package needs)
+- Required-by: Reverse dependencies (what needs this package)
+
+## Useful Patterns
+
+# Check if package is installed
+pip show requests > /dev/null && echo "Installed" || echo "Not installed"
+
+# Get just the version
+pip show requests | grep Version
+
+# Check dependencies
+pip show requests | grep Requires
+
+# See installation location
+pip show requests | grep Location
+
+## Multiple Packages
+
+# Show info for multiple packages
+pip show requests flask pytest
