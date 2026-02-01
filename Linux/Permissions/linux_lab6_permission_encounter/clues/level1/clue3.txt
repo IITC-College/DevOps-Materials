@@ -1,67 +1,54 @@
 ================================================================================
                             LEVEL 1 - EXERCISE 3
-                    "Who Owns What?" - Identifying Owners and Groups
+                    "Who Owns What?" - Comparing Owners and Groups
 ================================================================================
 
 Welcome to Exercise 3!
 
-Now let's practice identifying file owners and groups. This is important
-because ownership affects who can access files.
+You already know where owner and group appear in ls -l (Exercise 2). Now
+use that same listing to COMPARE files: which share an owner? which share
+a group? Why does that matter for who can read or change a file?
 
 EXERCISE:
 ---------
-Practice reading `ls -l` output to identify file owners and groups.
+From the ls -l output you saw in data/files, list all the different owners
+and groups, and give one example of "files that share an owner" and one
+example of "files that share a group." Then connect this to access: the
+owner and group (with permissions) determine who can access the file.
 
 INSTRUCTIONS:
 -------------
-1. Make sure you're in the data/files directory:
-   cd ../../data/files
-   (or use: pwd to check your location)
+1. Use your ls -l output from data/files (or run again if needed:
+   cd ../../data/files && ls -l).
 
-2. List files with detailed information:
-   ls -l
+2. Scan the third column (owner) and fourth column (group). Write down:
+   - Every distinct owner name you see (e.g. alice, bob, root)
+   - Every distinct group name you see (e.g. developers, team_dev, ...)
 
-3. For each file, identify:
-   - The owner (third column)
-   - The group (fourth column)
+3. Find at least one pair (or set) of files that have the SAME owner.
+   Example: "public_data.txt and report.sh both have owner alice."
 
-4. Notice which files belong to the same owner
-5. Notice which files belong to the same group
+4. Find at least one pair (or set) of files that have the SAME group.
+   Example: "public_data.txt and report.sh both have group developers."
 
-COMMANDS TO USE:
-----------------
-- ls -l
-- pwd (to check your location)
+5. Remember: owner and group (plus the permission string) decide who can
+   read, write, or execute the file. Different owners/groups = different
+   people can access different files.
 
 WHAT TO OBSERVE:
 ----------------
-- Which files have the same owner?
-- Which files have the same group?
-- How many different owners are there? (You should see several: e.g. alice,
-  bob, root.)
-- How many different groups are there? (e.g. developers, team_dev,
-  shared_group.)
-
-UNDERSTANDING:
--------------
-In Linux, every file has:
-- An OWNER (the user who created it or was assigned ownership)
-- A GROUP (a collection of users who share certain permissions)
-- PERMISSIONS (what the owner, group, and others can do)
-
-The owner and group determine who can access the file, along with the
-permissions.
+- How many different owners? How many different groups?
+- Which files share an owner? Which share a group?
+- Why it matters: only the owner (or users in the file's group, or "others"
+  if permissions allow) can access the file accordingly.
 
 WRITE YOUR ANSWER:
 ------------------
-After examining the files, write in my_answers.txt (in the main lab directory):
-- List the owner(s) you see for files in data/files
-- List the group(s) you see for files in data/files
-- Which files belong to the same owner? (list at least one example)
-- Which files belong to the same group? (list at least one example)
-
-(You should see different owners and groups in ls -l; the goal is to
-identify them and know where to look in the output.)
+In my_answers.txt (main lab directory), write:
+- List all the owner(s) you see for files in data/files (no duplicates).
+- List all the group(s) you see (no duplicates).
+- One example: "These files have the same owner: ..."
+- One example: "These files have the same group: ..."
 
 Congratulations! You've completed Level 1!
 

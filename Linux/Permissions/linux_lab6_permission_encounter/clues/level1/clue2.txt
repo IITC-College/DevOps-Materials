@@ -1,63 +1,58 @@
 ================================================================================
                             LEVEL 1 - EXERCISE 2
-                    "Understanding ls -l" - Reading File Details
+                    "Understanding ls -l" - The Format of Each Column
 ================================================================================
 
 Welcome to Exercise 2!
 
-Now that you've seen "Permission denied", let's learn how to READ permissions
-before trying to access files. This is the key skill: READ BEFORE ACTING.
+Now that you've seen "Permission denied", let's learn how to READ the output
+of `ls -l` so you know where to find permissions, owner, and group. This is
+the key skill: READ BEFORE ACTING.
 
 EXERCISE:
 ---------
-Learn to read the detailed output of `ls -l` to understand file permissions,
-owners, and groups.
+Learn what each COLUMN in `ls -l` means (permissions, owner, group, etc.),
+then look up three specific values.
 
 INSTRUCTIONS:
 -------------
-1. Navigate to the data/files directory:
+1. Navigate to the data/files directory and list with details:
    cd ../../data/files
-
-2. List files with detailed information:
    ls -l
 
-3. Look at the output carefully. Each line shows:
-   - File permissions (like -rw-r--r--)
-   - Number of links
-   - Owner name
-   - Group name
-   - File size
-   - Date and time
-   - File name
+2. Use this diagram to match each column in your output. Each line of ls -l
+   has: file type + permissions, links, owner, group, size, date, name.
 
-4. Identify the owner of each file
+COLUMN REFERENCE (what each part of ls -l means):
+-------------------------------------------------
+-rw-r--r-- 1 alice developers 1024 Jan 27 10:00 public_data.txt
+│ │  │  │  │ │    │         │     │           │
+│ │  │  │  │ │    │         │     │           └─ File name
+│ │  │  │  │ │    │         │     └───────────── Size (bytes), date, time
+│ │  │  │  │ │    │         └─────────────────── GROUP (fourth column)
+│ │  │  │  │ │    └────────────────────────────── OWNER (third column)
+│ │  │  │  │ └─────────────────────────────────── Number of links
+│ │  │  │  └──────────────────────────────────── Permissions for "others"
+│ │  │  └─────────────────────────────────────── Permissions for "group"
+│ │  └─────────────────────────────────────────── Permissions for "owner"
+│ └────────────────────────────────────────────── File type (- = file, d = dir)
+└───────────────────────────────────────────────── (first character)
+
+3. In YOUR ls -l output, find and write down:
+   - The owner of public_data.txt (third column of that line)
+   - The owner of private_notes.txt (third column)
+   - The group of report.sh (fourth column)
 
 COMMANDS TO USE:
 ----------------
 - cd ../../data/files
 - ls -l
 
-WHAT TO LEARN:
---------------
-The `ls -l` output format (you will see different owners and groups, e.g. alice, bob, developers):
--rw-r--r-- 1 alice developers 1024 Jan 27 10:00 public_data.txt
-│ │  │  │  │ │    │         │     │           │
-│ │  │  │  │ │    │         │     │           └─ File name
-│ │  │  │  │ │    │         │     └───────────── Date and time
-│ │  │  │  │ │    │         └─────────────────── File size (bytes)
-│ │  │  │  │ │    └───────────────────────────── Group name
-│ │  │  │  │ └────────────────────────────────── Owner name
-│ │  │  │  └──────────────────────────────────── Number of links
-│ │  │  └──────────────────────────────────────── Permissions for "others"
-│ │  └─────────────────────────────────────────── Permissions for "group"
-│ └────────────────────────────────────────────── Permissions for "owner"
-└───────────────────────────────────────────────── File type (- = regular file)
-
 WRITE YOUR ANSWER:
 ------------------
-After running ls -l, write in my_answers.txt (in the main lab directory):
+In my_answers.txt (main lab directory), write:
 - What is the owner of public_data.txt?
 - What is the owner of private_notes.txt?
 - What is the group of report.sh?
 
-Next: clue3.txt
+Next: clue3.txt (you'll use the same listing to compare owners and groups.)
