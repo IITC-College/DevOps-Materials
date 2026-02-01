@@ -31,15 +31,15 @@ EXERCISE 2 - Understanding ls -l
 Location: data/files/
 Command: ls -l
 
-Expected Output (example; setup runs as root, so owner/group are root):
--rw-r--r-- 1 root root ... public_data.txt
--rw------- 1 root root ... private_notes.txt
--rwxr-xr-x 1 root root ... report.sh
+Expected Output (with users/groups setup):
+-rw-r--r-- 1 alice developers ... public_data.txt
+-rw------- 1 bob   bob       ... private_notes.txt
+-rwxr-xr-x 1 alice developers ... report.sh
 
-Answers (with default setup):
-- Owner of public_data.txt: root
-- Owner of private_notes.txt: root
-- Group of report.sh: root
+Answers:
+- Owner of public_data.txt: alice
+- Owner of private_notes.txt: bob
+- Group of report.sh: developers
 
 Key Learning: The ls -l output shows:
 - Permissions (first column)
@@ -53,26 +53,27 @@ EXERCISE 3 - Who Owns What?
 Location: data/files/
 Command: ls -l
 
-Expected Output (setup runs as root; all files owned by root:root):
--rw-r--r-- 1 root root ... public_data.txt
--rw-rw-r-- 1 root root ... team_notes.txt
--rw------- 1 root root ... private_log.txt
--rw-rw-rw- 1 root root ... shared_report.txt
--r--r--r-- 1 root root ... readonly_archive.txt
--rw------- 1 root root ... private_notes.txt
--rwxr-xr-x 1 root root ... report.sh
+Expected Output (with users/groups setup; mixed owners and groups):
+-rw-r--r-- 1 alice developers   ... public_data.txt
+-rw-rw-r-- 1 alice team_dev     ... team_notes.txt
+-rw------- 1 alice alice        ... private_log.txt
+-rw-rw-rw- 1 bob   shared_group ... shared_report.txt
+-r--r--r-- 1 root  root         ... readonly_archive.txt
+-rw------- 1 bob   bob          ... private_notes.txt
+-rwxr-xr-x 1 alice developers   ... report.sh
 
-Answers (with default setup—no special users/groups):
-- Owner(s): root (one owner for all files)
-- Group(s): root (one group for all files)
-- Files with same owner: all files (e.g. public_data.txt, team_notes.txt,
-  report.sh all owned by root)
-- Files with same group: all files (e.g. all belong to group root)
+Answers:
+- Owner(s): alice, bob, root (multiple owners)
+- Group(s): developers, team_dev, shared_group, alice, bob, root
+- Files with same owner: e.g. public_data.txt, team_notes.txt, private_log.txt,
+  report.sh (alice); shared_report.txt, private_notes.txt (bob); readonly_archive.txt (root)
+- Files with same group: e.g. public_data.txt and report.sh (developers);
+  team_notes.txt (team_dev); shared_report.txt (shared_group)
 
 Key Learning: The third column is the owner, the fourth is the group. In
-this lab setup there is one owner and one group for data/files because
-the setup script runs as root. Multiple files can share the same owner
-and group; ownership and group determine which permission set applies.
+this lab you see different owners (alice, bob, root) and groups
+(developers, team_dev, shared_group, etc.). Ownership and group determine
+which permission set applies when you try to access a file.
 
 ================================================================================
                             LEVEL 2 SOLUTIONS
@@ -142,26 +143,28 @@ Locations: projects/personal_project/, projects/team_project/, restricted/
 
 Expected Results:
 
-personal_project/:
-- my_script.sh: May or may not be readable (depends on student's user)
-- my_notes.txt: May or may not be readable (depends on student's user)
-- README.md: Should be readable (rw-r--r--)
+personal_project/ (owned by alice):
+- my_script.sh: Not readable by typical student (rwx------, owner only)
+- my_notes.txt: Not readable by typical student (rw-------, owner only)
+- README.md: Should be readable (rw-r--r--, others can read)
 
-team_project/:
-- team_script.sh: May or may not be readable (depends on student's user)
-- config.json: May or may not be readable (depends on student's user)
-- logs.txt: Should be readable (rw-rw-r--)
+team_project/ (owned by bob, group developers):
+- team_script.sh: Readable only if student is in group developers (rwxrwx---)
+- config.json: Readable only if student is in group developers (rw-rw----)
+- logs.txt: Should be readable (rw-rw-r--, others can read)
 
 restricted/:
 - secret_file.txt: Should NOT be readable (r--------, owned by root)
 - admin_config.txt: Should NOT be readable (rw-------, owned by root)
 - backup.tar.gz: Should NOT be readable (rw-------, owned by root)
 
-Answers (will vary based on student's user):
-- personal_project/: README.md should be readable because it has r-- for
-  others. Other files depend on ownership.
-- team_project/: logs.txt should be readable because it has r-- for others.
-  Other files depend on group membership.
+Answers:
+- personal_project/: README.md is readable (others has r--). my_script.sh and
+  my_notes.txt are not readable by a typical student (owned by alice, no
+  others permissions).
+- team_project/: logs.txt is readable (others has r--). team_script.sh and
+  config.json are readable only by owner (bob) or group (developers); typical
+  student is not in that group.
 - restricted/: No files should be readable because all are owned by root
   and have no permissions for others.
 
@@ -187,7 +190,7 @@ Expected Accessible Files (for typical student user):
 - projects/shared_project/shared_doc.txt (rw-rw-r--)
 
 Expected Inaccessible Files:
-- data/files/private_log.txt (rw-------, owned by bob)
+- data/files/private_log.txt (rw-------, owned by alice)
 - data/files/private_notes.txt (rw-------, owned by bob)
 - projects/personal_project/my_script.sh (rwx------, owned by alice)
 - projects/personal_project/my_notes.txt (rw-------, owned by alice)

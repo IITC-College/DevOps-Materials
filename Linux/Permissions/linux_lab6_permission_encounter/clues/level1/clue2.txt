@@ -39,7 +39,7 @@ COMMANDS TO USE:
 
 WHAT TO LEARN:
 --------------
-The `ls -l` output format (owner/group may show as root in this lab):
+The `ls -l` output format (you will see different owners and groups, e.g. alice, bob, developers):
 -rw-r--r-- 1 alice developers 1024 Jan 27 10:00 public_data.txt
 │ │  │  │  │ │    │         │     │           │
 │ │  │  │  │ │    │         │     │           └─ File name

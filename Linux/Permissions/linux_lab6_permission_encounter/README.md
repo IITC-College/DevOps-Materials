@@ -7,12 +7,12 @@ Welcome to your first Linux permissions practice lab!
 ### Method 1: Download with curl (Recommended)
 
 ```bash
-curl -L -o lab.tar.gz https://github.com/IITC-College/DevOps-Jan26/releases/download/v2.5.5/linux_lab6_permission_encounter.tar.gz
+curl -L -o lab.tar.gz https://github.com/IITC-College/DevOps-Jan26/releases/download/v2.5.6/linux_lab6_permission_encounter.tar.gz
 tar -xzf lab.tar.gz
 cd linux_lab6_permission_encounter
 ```
 
-> **Note:** If you get "not in gzip format" or a tiny download, the release v2.5.5 may not be published yet. Use Method 2 or ask the instructor for the tarball.
+> **Note:** If you get "not in gzip format" or a tiny download, the release v2.5.6 may not be published yet. Use Method 2 or ask the instructor for the tarball.
 
 ### Method 2: From the repository (if release not yet published)
 
@@ -30,12 +30,13 @@ sudo ./setup_environment.sh
 ```
 
 This single script will:
+- Create lab users (**alice**, **bob**, **charlie**) and groups (**developers**, **team_dev**, **shared_group**)
 - Create the full lab directory structure (if missing)
 - Ensure all lab files exist (data/files, projects, restricted, clues, etc.)
-- Set correct file and directory permissions for every lab part (Level 1–3)
+- Set correct file and directory permissions and **ownership** so `ls -l` shows different owners and groups (e.g. alice, bob, charlie; developers, team_dev, shared_group)
 - Set ownership of `restricted/` to root so students get "Permission denied" as intended
 
-**Note**: This lab does not require special users or groups - it works with any user.
+**Note**: Students run as their own user. They will see different file owners and groups in `ls -l` and will get "Permission denied" when trying to read files they don't own or aren't in the group for.
 
 ## Lab Objective
 
@@ -139,4 +140,4 @@ Remember: Linux permissions are there to protect the system. Learning to read th
 
 **Linux Course - Day 2**  
 **Permission Encounter Lab**  
-**Version**: v2.5.5
+**Version**: v2.5.6

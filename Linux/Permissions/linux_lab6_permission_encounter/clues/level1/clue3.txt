@@ -37,9 +37,10 @@ WHAT TO OBSERVE:
 ----------------
 - Which files have the same owner?
 - Which files have the same group?
-- How many different owners are there? (In this lab, the setup script runs
-  as root, so you may see one owner for all files—that's expected.)
-- How many different groups are there?
+- How many different owners are there? (You should see several: e.g. alice,
+  bob, root.)
+- How many different groups are there? (e.g. developers, team_dev,
+  shared_group.)
 
 UNDERSTANDING:
 -------------
@@ -59,8 +60,8 @@ After examining the files, write in my_answers.txt (in the main lab directory):
 - Which files belong to the same owner? (list at least one example)
 - Which files belong to the same group? (list at least one example)
 
-(If every file shows the same owner and group—e.g. root—that's normal for
-this lab; the goal is to know where to look in ls -l for owner and group.)
+(You should see different owners and groups in ls -l; the goal is to
+identify them and know where to look in the output.)
 
 Congratulations! You've completed Level 1!
 
