@@ -5,12 +5,16 @@
 
 Welcome to Exercise 3!
 
-Now let's understand WHY the execute permission is needed and compare
-scripts with and without it.
+Now let's understand WHY the execute permission is needed. You fixed hello.sh
+in Exercise 1 and backup/deploy/cleanup in Exercise 2 – but you have NOT fixed
+private_script.sh yet. The scripts/broken and scripts/fixed directories both
+contain private_script.sh (same script). In broken it has no 'x'; in fixed it
+has 'x'. Compare them to see the difference before you fix it.
 
 EXERCISE:
 ---------
-Compare scripts with and without execute permission to understand the difference.
+Compare private_script.sh in broken vs fixed (same script, different permissions).
+You haven't fixed private_script.sh yet, so you'll see the difference.
 
 INSTRUCTIONS:
 -------------
@@ -18,32 +22,31 @@ INSTRUCTIONS:
    cd ../../scripts/broken
    ls -l
 
-2. Check permissions in the fixed scripts directory:
+2. Check permissions in the fixed scripts directory (same script, with execute):
    cd ../fixed
    ls -l
 
-3. Compare the permissions:
-   - What's different between broken and fixed scripts?
-   - Notice the 'x' in the permission strings
+3. Compare private_script.sh in BOTH directories (don't fix it yet!):
+   - In broken: private_script.sh has no 'x' (e.g. -rw-------)
+   - In fixed: private_script.sh has 'x' (e.g. -rwxr-xr-x)
+   - Same script – the only difference is the execute bit
 
-4. Try running a script from the broken directory (if you haven't fixed it):
+4. Try running private_script.sh from the broken directory (will fail – no x):
    cd ../broken
-   ./hello.sh (if not fixed yet, will fail)
+   ./private_script.sh
 
-5. Try running a script from the fixed directory:
+5. Try running private_script.sh from the fixed directory (same script, has x, works):
    cd ../fixed
-   ./example.sh (should work!)
+   ./private_script.sh
 
-6. Go back and fix the broken scripts if needed:
-   cd ../broken
-   chmod +x hello.sh
-   ./hello.sh
+6. Do NOT fix private_script.sh in the broken directory yet! In Level 2 you will
+   learn to add execute for the owner only (chmod u+x). Leave it as-is for now.
 
 COMMANDS TO USE:
 ----------------
 - ls -l (in both directories)
-- Compare permission strings
-- ./script.sh (try running)
+- Compare private_script.sh permission strings in broken vs fixed
+- ./private_script.sh (try in broken, then in fixed – do not chmod the broken copy yet)
 
 UNDERSTANDING PERMISSIONS:
 --------------------------
@@ -70,5 +73,5 @@ After comparing the directories, write in my_answers.txt (in the main lab direct
 
 Congratulations! You've completed Level 1!
 
-Now proceed to Level 2: cd ../../clues/level2
-Read clue1.txt to learn about targeted permission changes.
+Then proceed to Level 2: cd ../../clues/level2
+Read clue1.txt – you'll fix private_script.sh there using chmod u+x (owner only).

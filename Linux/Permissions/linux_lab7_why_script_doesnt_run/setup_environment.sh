@@ -47,8 +47,8 @@ echo -e "${GREEN}[2/4] Ensuring all lab files exist (touch if missing)...${NC}"
 touch scripts/broken/hello.sh scripts/broken/backup.sh scripts/broken/deploy.sh
 touch scripts/broken/cleanup.sh scripts/broken/private_script.sh
 touch scripts/broken/team_script.sh scripts/broken/shared_tool.sh
-# scripts/fixed (Level 1 - examples with execute)
-touch scripts/fixed/example.sh scripts/fixed/reference.sh
+# scripts/fixed (Level 1 - same scripts as broken but with execute; private_script for clue 3 comparison)
+touch scripts/fixed/private_script.sh scripts/fixed/hello.sh scripts/fixed/example.sh scripts/fixed/reference.sh
 # projects/web_app (Level 3)
 touch projects/web_app/start.sh projects/web_app/stop.sh
 touch projects/web_app/deploy.sh projects/web_app/config.sh
@@ -86,7 +86,9 @@ chmod 600 scripts/broken/private_script.sh # rw------- (no x)
 chmod 664 scripts/broken/team_script.sh   # rw-rw-r-- (no x)
 chmod 664 scripts/broken/shared_tool.sh   # rw-rw-r-- (no x)
 
-# --- scripts/fixed/ (WITH execute - examples for Level 1) ---
+# --- scripts/fixed/ (WITH execute - same scripts as broken, correct permissions) ---
+chmod 755 scripts/fixed/private_script.sh  # rwxr-xr-x (for clue 3: compare with broken - not fixed in clue 1/2)
+chmod 755 scripts/fixed/hello.sh          # rwxr-xr-x
 chmod 755 scripts/fixed/example.sh         # rwxr-xr-x
 chmod 755 scripts/fixed/reference.sh       # rwxr-xr-x
 
@@ -122,7 +124,7 @@ echo -e "${GREEN}✓ Setup complete.${NC}"
 echo ""
 echo -e "${BLUE}Summary:${NC}"
 echo "  - scripts/broken/ and projects/*: scripts have NO execute (students add with chmod)"
-echo "  - scripts/fixed/: example.sh and reference.sh have execute (examples)"
+echo "  - scripts/fixed/: private_script.sh, hello.sh, example.sh, reference.sh have execute (for L1 clue 3 compare; private_script left unfixed in broken until L2 clue 1)"
 echo "  - data/configs and data/logs: no execute (correct for config/data files)"
 echo "  - All directories 755; all clue and doc files 644"
 echo ""

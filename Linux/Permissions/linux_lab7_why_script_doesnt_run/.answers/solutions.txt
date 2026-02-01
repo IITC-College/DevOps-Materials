@@ -6,6 +6,18 @@ This file contains all answers to the Why Script Doesn't Run Lab.
 Keep this file secure and do not share with students.
 
 ================================================================================
+                            FLOW OVERVIEW (9 CLUES)
+================================================================================
+scripts/broken/ – which script is fixed where (do not fix earlier than indicated):
+- L1 Clue 1: hello.sh (chmod +x)
+- L1 Clue 2: backup.sh, deploy.sh, cleanup.sh (chmod +x)
+- L1 Clue 3: Compare private_script.sh in broken vs fixed – do NOT fix it here
+- L2 Clue 1: private_script.sh (chmod u+x)  ← first time it gets fixed
+- L2 Clue 2: team_script.sh, shared_tool.sh (chmod g+x)
+- L2 Clue 3: team_script.sh (chmod u+x,g+x – adds owner x; group already has x)
+- L3: projects/web_app/, projects/automation/ (separate dirs, fix as instructed)
+
+================================================================================
                             LEVEL 1 SOLUTIONS
 ================================================================================
 
@@ -70,15 +82,17 @@ Key Learning: The pattern: Read (ls -l) → Identify (missing x) → Fix (chmod)
 EXERCISE 3 - Understanding the x Permission
 --------------------------------------------
 Location: scripts/broken/ vs scripts/fixed/
+Script used: private_script.sh (same script in both dirs; NOT fixed in L1 Clue 1 or 2).
 Commands:
 1. ls -l scripts/broken/
 2. ls -l scripts/fixed/
-3. Compare permissions
-4. Try running scripts
+3. Compare private_script.sh in both (broken: no x, fixed: has x)
+4. ./private_script.sh from broken (fails), from fixed (works)
+5. Do NOT run chmod on private_script.sh in broken – leave for Level 2 Clue 1
 
 Expected Comparison:
-Broken scripts: -rw-r--r-- (no x)
-Fixed scripts:  -rwxr-xr-x (has x)
+- broken/private_script.sh: -rw------- (no x)
+- fixed/private_script.sh:  -rwxr-xr-x (has x)
 
 Answers:
 - Main difference: Broken scripts don't have 'x', fixed scripts do
@@ -88,7 +102,7 @@ Answers:
 - What happens without 'x': "Permission denied" error when trying to run
 
 Key Learning: The execute permission (x) is required to run files as programs.
-Scripts without 'x' cannot be executed directly with ./script.sh.
+private_script.sh is fixed in Level 2 Exercise 1 with chmod u+x (owner only).
 
 ================================================================================
                             LEVEL 2 SOLUTIONS
@@ -346,7 +360,9 @@ Scripts in scripts/broken/ (before fixing):
 - team_script.sh: -rw-rw-r-- → -rw-rwxr-- (chmod g+x)
 - shared_tool.sh: -rw-rw-r-- → -rw-rwxr-- (chmod g+x)
 
-Scripts in scripts/fixed/ (already fixed):
+Scripts in scripts/fixed/ (same scripts as broken, with execute):
+- private_script.sh: -rwxr-xr-x (used in Level 1 clue 3 – compare with broken; not fixed in clue 1/2)
+- hello.sh: -rwxr-xr-x
 - example.sh: -rwxr-xr-x (reference)
 - reference.sh: -rwxr-xr-x (reference)
 

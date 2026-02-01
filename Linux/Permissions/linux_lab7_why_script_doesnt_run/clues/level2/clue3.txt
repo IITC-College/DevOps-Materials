@@ -18,23 +18,19 @@ INSTRUCTIONS:
 1. Navigate to the scripts/broken directory:
    cd ../../scripts/broken
 
-2. Find a script that needs both owner and group execute:
-   ls -l
+2. Check team_script.sh (you added g+x in Exercise 2; owner still has no x):
+   ls -l team_script.sh
 
-3. Add execute permission to BOTH owner and group:
+3. Add execute permission to BOTH owner and group in one command:
    chmod u+x,g+x team_script.sh
-   (or use a script that needs this)
 
 4. Check the result:
    ls -l team_script.sh
 
-5. Notice that both owner and group have 'x'
+5. Notice that both owner and group now have 'x' (group had x from Exercise 2;
+   this command added owner x and keeps group x)
 
-6. Compare with using chmod +x:
-   chmod +x another_script.sh
-   ls -l another_script.sh
-
-7. Notice the difference:
+6. Compare with chmod +x: If you had used chmod +x, others would also get x.
    - chmod u+x,g+x = owner AND group get x (others don't)
    - chmod +x = owner, group, AND others all get x
 

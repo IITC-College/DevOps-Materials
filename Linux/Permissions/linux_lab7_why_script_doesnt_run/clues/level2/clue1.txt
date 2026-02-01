@@ -7,7 +7,9 @@ Welcome to Level 2!
 
 You've learned `chmod +x` which adds execute permission for everyone. Now
 let's learn to be more specific - adding execute permission only to the
-owner using `chmod u+x`.
+owner using `chmod u+x`. In Level 1 Exercise 3 you compared private_script.sh
+in broken vs fixed but did not fix it – so it still has no 'x'. You'll fix it
+here with chmod u+x (owner only).
 
 EXERCISE:
 ---------
