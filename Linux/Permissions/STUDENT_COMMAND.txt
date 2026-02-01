@@ -4,14 +4,14 @@
 
 ✅ Copy and paste this command:
 
-curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v2.7/linux_lab8_ownership_and_groups.tar.gz | tar -xz && cd linux_lab8_ownership_and_groups && cat start_here.txt
+curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v2.8/linux_lab9_sudo_mindset.tar.gz | tar -xz && cd linux_lab9_sudo_mindset && cat start_here.txt
 
 ========================================================
 
 📚 Resources:
 
 Repository: https://github.com/IITC-College/DevOps-Jan26
-Release: https://github.com/IITC-College/DevOps-Jan26/releases/tag/v2.7
+Release: https://github.com/IITC-College/DevOps-Jan26/releases/tag/v2.8
 
 ========================================================
 
