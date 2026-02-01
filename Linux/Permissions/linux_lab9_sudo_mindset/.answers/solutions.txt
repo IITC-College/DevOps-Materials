@@ -6,6 +6,18 @@ This file contains all answers to the Understanding sudo: When and Why Lab.
 Keep this file secure and do not share with students.
 
 ================================================================================
+                            FLOW OVERVIEW (9 CLUES)
+================================================================================
+Level 1: data/system_files – protected.txt (sudo cat), readable vs system_config,
+         then real system files (/etc/shadow, /root).
+Level 2: projects/user_app – fix ownership (chown) instead of sudo repeatedly;
+         sudo logging (/var/log/auth.log or secure); data/logs/sudo_example.log.
+Level 3: projects/ – user_app vs system_service (design vs legitimate sudo);
+         audit challenge (who modified /etc/hosts → alice, vim); final reflection.
+
+Paths from clues/levelN: use ../../ to reach lab root, then data/..., projects/....
+
+================================================================================
                             LEVEL 1 SOLUTIONS
 ================================================================================
 
@@ -271,17 +283,17 @@ Commands:
 4. grep "etc" ../../data/logs/sudo_example.log
 5. Analyze log entries
 
-Expected Findings:
-- Multiple users used sudo (alice, bob, charlie, david)
-- Various commands executed (ls, cat, chown, apt install, nano, systemctl)
+Expected Findings (from sudo_example.log):
+- Multiple users used sudo (alice, bob, charlie)
+- Various commands executed (cat /etc/shadow, ls /root, vim /etc/hosts, tail -f syslog, cat /etc/sudoers)
 - Timestamps show when commands were executed
 - Terminal information shows where commands came from
 
-Answers (example):
-- Who modified /etc/hosts: bob (from log entry)
-- When: Jan 27 10:25:10 (from timestamp)
-- Command: /usr/bin/nano /etc/hosts
-- Terminal: pts/1
+Answers (example, from sudo_example.log):
+- Who modified /etc/hosts: alice (from log entry: COMMAND=/usr/bin/vim /etc/hosts)
+- When: Jan 27 10:18:44 (from timestamp in log)
+- Command: /usr/bin/vim /etc/hosts
+- Terminal: pts/0
 - Patterns: Different users, different commands, different times
 - Why important: Audit logs help investigate security incidents, compliance
   review, troubleshooting, monitoring privileged access
