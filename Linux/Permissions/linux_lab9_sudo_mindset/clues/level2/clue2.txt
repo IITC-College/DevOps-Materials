@@ -22,8 +22,10 @@ This audit trail is stored in:
 - `/var/log/auth.log` (Debian/Ubuntu systems)
 - `/var/log/secure` (RHEL/CentOS systems)
 
-Only root (or users with sudo) can read these logs. This is intentional -
-audit logs are sensitive and should be protected.
+On many systems only root can read these logs. On Debian/Ubuntu, the file
+is often readable by the `adm` group too – so if you're in `adm`, you may
+be able to read auth.log without sudo. Either way, the log is sensitive
+and sudo usage is tracked.
 
 EXERCISE:
 ---------
@@ -37,14 +39,18 @@ INSTRUCTIONS:
 2. Now try to read the authentication log:
    cat /var/log/auth.log
 
-3. You'll get "Permission denied" - why?
-   ls -l /var/log/auth.log
+3. Check what happened:
+   - If you got "Permission denied": the log is restricted to root (or sudo).
+   - If you could read it: you may be in the `adm` group (Debian/Ubuntu).
+   Check: ls -l /var/log/auth.log  and  groups
 
-4. The log file is protected! Only root can read it. Use sudo:
+4. View recent entries (use sudo if you got permission denied):
    sudo cat /var/log/auth.log | tail -20
+   (If you're in adm, you can use: cat /var/log/auth.log | tail -20)
 
 5. Look for entries that contain "sudo" - you should see your recent command!
-   (Use sudo grep ... since /var/log/auth.log is protected.)
+   sudo grep sudo /var/log/auth.log | tail -5
+   (Or without sudo if you're in adm and can read the file.)
 
 6. Also check the simulated log in the lab:
    cat ../../data/logs/sudo_example.log
@@ -58,15 +64,16 @@ INSTRUCTIONS:
 COMMANDS TO USE:
 ----------------
 - sudo ls /root (create a log entry)
-- cat /var/log/auth.log (will fail - protected)
+- cat /var/log/auth.log (may work if you're in adm, else permission denied)
 - ls -l /var/log/auth.log
-- sudo cat /var/log/auth.log | tail -20 (view recent entries)
-- sudo grep sudo /var/log/auth.log | tail -5 (search for sudo entries; log is protected)
+- groups (check if you're in adm)
+- sudo cat /var/log/auth.log | tail -20 (or cat ... if you're in adm)
+- sudo grep sudo /var/log/auth.log | tail -5 (or grep ... if you're in adm)
 - cat ../../data/logs/sudo_example.log (view example log)
 
 WHAT TO OBSERVE:
 ----------------
-- Why can't regular users read /var/log/auth.log?
+- Who can read /var/log/auth.log on your system? (owner, group – e.g. adm?)
 - What information is logged when you use sudo?
 - Can you find your recent sudo command in the log?
 - What does the log entry format look like?
@@ -97,7 +104,7 @@ Real-world implications:
 WRITE YOUR ANSWER:
 ------------------
 After completing the exercise, write in my_answers.txt (in the main lab directory):
-- Why can't regular users read /var/log/auth.log?
+- Could you read /var/log/auth.log without sudo? Why or why not? (e.g. are you in adm?)
 - What information is logged when you use sudo?
 - Where are sudo logs stored? (Give both Debian and RHEL locations)
 - Why is sudo logging important for security?

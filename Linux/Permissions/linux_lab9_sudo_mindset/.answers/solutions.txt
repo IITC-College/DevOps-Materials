@@ -166,16 +166,16 @@ correct solution.
 EXERCISE 2 - Understanding sudo Logging: You Are Being Watched!
 ----------------------------------------------------------------
 Location: /var/log/auth.log and data/logs/
+Note: On Debian/Ubuntu, auth.log is often root:adm with group read – users in adm can read without sudo.
 Commands:
 1. sudo ls /root (create a log entry)
-2. cat /var/log/auth.log (will fail - protected)
-3. ls -l /var/log/auth.log
+2. cat /var/log/auth.log (may work if in adm, else permission denied)
+3. ls -l /var/log/auth.log  and  groups
 4. sudo cat /var/log/auth.log | tail -20
 5. sudo grep sudo /var/log/auth.log | tail -5 (grep needs sudo – log is protected)
 6. cat ../../data/logs/sudo_example.log
 
-Expected Error Output (first attempt):
-cat: /var/log/auth.log: Permission denied
+Expected: Either "Permission denied" (if not in adm) or successful read (if in adm on Debian/Ubuntu).
 
 Expected Permissions:
 -rw-r----- 1 root adm (or similar, only root/adm can read)
@@ -184,7 +184,7 @@ Expected Log Entry Format:
 Jan 27 10:00:15 server sudo: user : TTY=pts/0 ; PWD=/home/user ; USER=root ; COMMAND=/usr/bin/ls /root
 
 Answers:
-- Why can't regular users read: Log file is protected, only root/adm can read
+- Who can read: On Debian/Ubuntu typically root and adm group; user in adm may read without sudo
 - Information logged: Username, command executed, timestamp, terminal, working directory
 - Log locations:
   * Debian/Ubuntu: /var/log/auth.log
