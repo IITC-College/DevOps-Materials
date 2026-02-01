@@ -22,6 +22,12 @@ that affect security and collaboration.
     YOUR FIRST TASK
 ================================================================================
 
+You can start the lab in either way:
+
+Option A - Direct entry (go straight to first exercise):
+   cd clues/level1 && cat clue1.txt
+
+Option B - Step by step:
 1. Check where you are right now:
    Run: pwd
 

@@ -7,7 +7,7 @@ Welcome to your Linux umask practice lab!
 ### Method 1: Download with curl (Recommended)
 
 ```bash
-curl -L -o lab.tar.gz https://github.com/IITC-College/DevOps-Jan26/releases/download/v2.9/linux_lab10_default_permissions.tar.gz
+curl -L -o lab.tar.gz https://github.com/IITC-College/DevOps-Jan26/releases/download/v2.10/linux_lab10_default_permissions.tar.gz
 tar -xzf lab.tar.gz
 cd linux_lab10_default_permissions
 ```
@@ -50,13 +50,20 @@ In this lab you will learn about umask and default file permissions:
 
 ## How to Start?
 
-1. Open the `start_here.txt` file - this is where to begin!
-2. Read the instructions carefully
-3. Follow the exercises step by step
+**Direct entry (recommended):** From the lab directory, go to the first clue:
+
+```bash
+cd clues/level1 && cat clue1.txt
+```
+
+**Alternative:** Read the welcome and overview first, then go to the first clue:
 
 ```bash
 cat start_here.txt
+cd clues/level1 && cat clue1.txt
 ```
+
+Then follow the exercises step by step; each clue ends with a "NEXT STEP" telling you where to go next.
 
 ## Exercise List
 
@@ -163,4 +170,4 @@ Remember: Default permissions are not random - they are intentional decisions. U
 
 **Linux Course - Day 2, Part 5**  
 **Default Permissions Lab (umask)**  
-**Version**: v2.9
+**Version**: v2.10

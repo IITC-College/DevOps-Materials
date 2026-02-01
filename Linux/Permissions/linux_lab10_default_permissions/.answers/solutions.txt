@@ -338,10 +338,7 @@ Challenge A: "Files readable by everyone, writable only by me"
 
 Challenge B: "Files accessible only by me, no one else"
   Required permissions: 600 (rw-------)
-  umask: 666 - 600 = 066... wait, let's recalculate
-  Actually: 666 - 077 = 600 - 11 = 589... no
-  Correct method: To get 600, we need to block group and others
-  umask should be: 077 (blocks group and others read+write+execute)
+  umask: 077 (blocks group and others read+write+execute)
   Verification: 666 - 077 = 600 ✓
   Answer: umask 077
 

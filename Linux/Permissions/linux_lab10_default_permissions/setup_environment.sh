@@ -62,7 +62,33 @@ touch .answers/solutions.txt 2>/dev/null || true
 echo -e "  ${GREEN}✓${NC} Directories and files ready"
 
 ################################################################################
+# Set permissions for other files (do this FIRST so we don't overwrite examples)
+################################################################################
+
+echo -e "${GREEN}[STEP]${NC} Setting permissions for other files..."
+
+# Clue files (all readable)
+find clues -type f -name "*.txt" -exec chmod 644 {} \; 2>/dev/null || true
+
+# Documentation
+chmod 644 README.md 2>/dev/null || true
+chmod 644 start_here.txt 2>/dev/null || true
+
+# Data files (logs, secrets) - do NOT include data/examples yet
+find data/logs -type f -name "*.log" -exec chmod 644 {} \; 2>/dev/null || true
+find data/secrets -type f -name "*.txt" -exec chmod 644 {} \; 2>/dev/null || true
+
+# Projects directories
+find projects -type f -exec chmod 644 {} \; 2>/dev/null || true
+
+# Answers
+if [ -f ".answers/solutions.txt" ]; then
+    chmod 644 .answers/solutions.txt
+fi
+
+################################################################################
 # Set up example files with permissions matching different umask values
+# (Must run AFTER other data chmods so these values are not overwritten)
 ################################################################################
 
 echo -e "${GREEN}[STEP]${NC} Setting up example files with different umask permissions..."
@@ -94,36 +120,6 @@ if [ -d "data/examples/umask_027" ]; then
 fi
 if [ -d "data/examples/umask_077" ]; then
     chmod 700 data/examples/umask_077
-fi
-
-################################################################################
-# Set permissions for other files
-################################################################################
-
-echo -e "${GREEN}[STEP]${NC} Setting permissions for other files..."
-
-# Clue files (all readable)
-find clues -type f -name "*.txt" -exec chmod 644 {} \; 2>/dev/null || true
-
-# Documentation
-chmod 644 README.md 2>/dev/null || true
-chmod 644 start_here.txt 2>/dev/null || true
-
-# Data files
-find data -type f -name "*.log" -exec chmod 644 {} \; 2>/dev/null || true
-find data -type f -name "*.txt" -exec chmod 644 {} \; 2>/dev/null || true
-
-# Projects directories
-find projects -type f -exec chmod 644 {} \; 2>/dev/null || true
-
-# Secrets
-if [ -f "data/secrets/tips.txt" ]; then
-    chmod 644 data/secrets/tips.txt
-fi
-
-# Answers
-if [ -f ".answers/solutions.txt" ]; then
-    chmod 644 .answers/solutions.txt
 fi
 
 echo ""

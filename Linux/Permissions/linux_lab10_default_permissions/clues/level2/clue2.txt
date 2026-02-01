@@ -17,6 +17,7 @@ umask values. This is a crucial skill for understanding and planning!
    - What permissions DIRECTORIES will have (777 - umask)
 
 2. Then verify your calculations by checking the actual files in data/examples/
+   (If you're in clues/level2, run: cd ../../data/examples to get there first.)
 
 ================================================================================
     CALCULATION EXERCISES
@@ -96,7 +97,10 @@ umask 002:
     NEXT STEP
 ================================================================================
 
-Once you can calculate permissions, move to understanding security:
+Once you can calculate permissions, move to understanding security.
+(If you're in data/examples/, go back to level2 first.)
+
+  cd ../../clues/level2
   cat clue3.txt
 
 Excellent progress!

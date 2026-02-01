@@ -135,8 +135,8 @@ You've completed Level 2! You now understand:
     NEXT STEP
 ================================================================================
 
-You're ready for Level 3! Navigate there:
-  cd ../level3
+You're ready for Level 3! Navigate there (from projects/ use lab root first):
+  cd ../../clues/level3
   cat clue1.txt
 
 Outstanding work!
