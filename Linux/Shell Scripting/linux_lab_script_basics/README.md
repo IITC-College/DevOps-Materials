@@ -1,52 +1,25 @@
-# Linux Lab – Script Basics (Creation, Permissions, Shebang)
+# Linux Lab – Script Basics
 
-A hands-on lab for understanding how to create, structure, and run bash scripts. You will work as a junior DevOps engineer learning to create and run deployment scripts. This lab is **static** – no setup or cleanup scripts; you create and edit scripts yourself.
+Learn to create, structure, and run bash scripts. You'll work through creating a deployment script, understanding shebangs, managing file permissions, and exploring different execution methods.
 
-## How This Lab Works
+## Learning Objectives
 
-Each clue guides you through one skill. You will create scripts, add a shebang line, fix permissions, and run them. All work is done in the lab folder (or a subfolder as instructed).
+After this lab you will be able to:
+- Create bash scripts with echo statements
+- Add and understand shebang lines (`#!/bin/bash`)
+- Check file permissions with `ls -l`
+- Make scripts executable with `chmod +x`
+- Understand the difference between `./script.sh` and `bash script.sh`
 
-## Direct Entry
+## Getting Started
 
-Start the lab with:
+Open `TASKS.md` to begin the lab exercises.
 
-```bash
-cd clues/level1 && cat clue1.txt
-```
+## Duration
 
-(Extract the lab if needed, then `cd linux_lab_script_basics` first.)
+25-35 minutes
 
 ## Prerequisites
 
 - Linux system with bash
 - A text editor (nano, vim, or any editor you prefer)
-
-## Duration
-
-25–35 minutes
-
-## Learning Objectives
-
-After this lab you will be able to:
-
-- Create a simple bash script with echo statements
-- Add a shebang line (`#!/bin/bash`) and understand why it matters
-- Check file permissions with `ls -l`
-- Make a script executable with `chmod +x`
-- Run a script with `./script.sh` and understand the difference from `bash script.sh`
-
-## Lab Structure
-
-- **Level 1:** First steps – create a script, add shebang, try to run (encounter permission denied)
-- **Level 2:** Making scripts executable – check permissions, chmod +x, run successfully
-
-Each clue ends with a **NEXT STEP** telling you exactly where to go next.
-
-## Tips
-
-Optional hints are in `data/secrets/tips.txt`.
-
-## Version
-
-- **Version:** 1.0
-- **Repository:** https://github.com/IITC-College/DevOps-Jan26

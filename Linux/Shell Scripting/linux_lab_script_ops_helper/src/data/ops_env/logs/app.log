@@ -1,0 +1,4 @@
+[2026-02-10 10:15:23] INFO: Application started
+[2026-02-10 10:15:24] INFO: Listening on port 8080
+[2026-02-10 10:18:45] WARNING: High memory usage (75%)
+[2026-02-10 10:20:00] INFO: Health check OK
