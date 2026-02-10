@@ -93,13 +93,13 @@ Labs are numbered in the order they should be completed, following the course st
   - **Download**: See `Linux Module/STUDENT_COMMAND.txt`
 
 - **Lab 10**: Processes Basics
-  - **Version**: v1.0
+  - **Version**: v1.1
   - **Lab ID**: `linux_lab_processes_basics`
   - **Focus**: Understanding what a process is, using ps, top, htop, and identifying process resources
   - **Duration**: 40-45 minutes
   - **Download**:
     ```bash
-    curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v1.0/linux_lab_processes_basics.tar.gz | tar -xz && cd linux_lab_processes_basics && cd clues/level1 && cat clue1.txt
+    curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v1.1-processes-basics/linux_lab_processes_basics.tar.gz | tar -xz && cd linux_lab_processes_basics && cd clues/level1 && cat clue1.txt
     ```
 
 - **Lab 11**: Process Management (kill)
@@ -133,13 +133,13 @@ Labs are numbered in the order they should be completed, following the course st
     ```
 
 - **Lab 14**: Logs-First: journalctl
-  - **Version**: v1.0
+  - **Version**: v1.1
   - **Lab ID**: `linux_lab_journalctl_logs_first`
   - **Focus**: Using journalctl to view and filter system logs, finding errors, and describing problems professionally
   - **Duration**: 45-50 minutes
   - **Download**:
     ```bash
-    curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v1.0/linux_lab_journalctl_logs_first.tar.gz | tar -xz && cd linux_lab_journalctl_logs_first && cd clues/level1 && cat clue1.txt
+    curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v1.1-journalctl-logs/linux_lab_journalctl_logs_first.tar.gz | tar -xz && cd linux_lab_journalctl_logs_first && cd clues/level1 && cat clue1.txt
     ```
 
 - **Lab 15**: Troubleshooting Flow
