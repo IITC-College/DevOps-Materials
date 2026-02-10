@@ -1,0 +1,194 @@
+================================================================================
+                            LEVEL 3 - EXERCISE 3
+                "Cleaning Up Groups: Final Cleanup Challenge"
+================================================================================
+
+The final exercise! Let's learn to clean up groups and complete the full
+lifecycle of user and group management.
+
+BACKGROUND:
+-----------
+Just like users, groups should be cleaned up when no longer needed. However,
+you must be careful about group deletion order and dependencies:
+
+Key points about deleting groups:
+- Cannot delete a group if it's a user's PRIMARY group
+- Must change user's primary group first, or delete the user
+- Can delete a group even if it's a secondary group for users
+- System groups (GID < 1000) should never be deleted
+- Verify no critical files depend on the group
+
+The groupdel command:
+- sudo groupdel groupname: Delete a group
+- Will fail if it's any user's primary group
+- Succeeds even if it's a secondary group for users
+
+Cleanup workflow:
+1. Check who's using the group (getent group groupname)
+2. Check if it's anyone's primary group (getent passwd | grep GID)
+3. Remove users from group or change their primary group
+4. Delete the group
+5. Verify deletion (getent group groupname)
+
+EXERCISE:
+---------
+You'll perform a complete cleanup of all test users and groups you created,
+practicing the full lifecycle of user and group management.
+
+INSTRUCTIONS:
+-------------
+1. First, let's review what test resources exist:
+   getent passwd | grep testuser
+   getent group | grep -E 'developers|testers|admins'
+
+2. Check who's in the developers group:
+   getent group developers
+
+3. Try to delete the developers group (this might fail):
+   sudo groupdel developers
+
+4. If it failed, check if it's someone's primary group:
+   getent passwd | grep developers
+
+5. If testuser1 has developers as primary, delete testuser1 first:
+   sudo deluser --remove-home testuser1
+
+6. Now delete the developers group:
+   sudo groupdel developers
+
+7. Delete the remaining test groups:
+   sudo groupdel testers
+   sudo groupdel admins
+
+8. Verify all test groups are deleted:
+   getent group | grep -E 'developers|testers|admins'
+
+9. Check for any remaining test users and delete them:
+   getent passwd | grep testuser
+   
+10. If any test users remain, delete them:
+    sudo deluser --remove-home testuser1 (if still exists)
+    sudo deluser --remove-home testuser2 (if still exists)
+    sudo deluser --remove-home testuser3 (if still exists)
+
+11. Final verification - confirm cleanup is complete:
+    getent passwd | grep testuser
+    getent group | grep -E 'developers|testers|admins'
+    ls -la /home | grep testuser
+
+COMMANDS TO USE:
+----------------
+- getent passwd | grep testuser
+- getent group | grep -E 'developers|testers|admins'
+- getent group developers
+- sudo groupdel developers
+- getent passwd | grep developers
+- sudo deluser --remove-home testuser1
+- sudo groupdel testers
+- sudo groupdel admins
+- ls -la /home | grep testuser
+
+WHAT TO OBSERVE:
+----------------
+- Could you delete developers group immediately?
+- What error appeared if it was someone's primary group?
+- What order did you need to delete things?
+- Were secondary groups easier to delete than primary?
+- What remained after cleanup?
+
+UNDERSTANDING:
+-------------
+Group Deletion Rules:
+
+1. Cannot delete primary group:
+   If testuser1 has primary group "developers", you cannot:
+   sudo groupdel developers
+   
+   Error: "groupdel: cannot remove the primary group of user 'testuser1'"
+   
+   Solution: Either delete the user first, or change their primary group
+
+2. Can delete secondary group:
+   If developers is only a secondary group for users:
+   sudo groupdel developers
+   
+   Succeeds! Users are simply removed from the group.
+
+3. Deletion order matters:
+   Correct order for complete cleanup:
+   a. Delete users (or change their primary groups)
+   b. Delete groups
+   
+   Wrong order:
+   a. Try to delete primary groups (fails)
+   b. Get errors
+   c. Have to figure out dependencies
+
+Best Practices for Production:
+
+1. Before deleting a group:
+   - Check members: getent group groupname
+   - Check if it's a primary group: getent passwd | grep :GID:
+   - Check file ownership: find / -group groupname 2>/dev/null
+   - Verify it's not a system group (GID < 1000)
+
+2. Audit trail:
+   - Document why group is being deleted
+   - Record current members
+   - Back up if group owns important files
+
+3. Safe deletion:
+   - Remove users from group first (if secondary)
+   - Change primary groups (if primary)
+   - Delete group
+   - Verify deletion
+
+4. Never delete:
+   - System groups (root, www-data, mysql, docker, etc.)
+   - Groups with GID < 1000 (system groups)
+   - Groups that own critical system files
+
+WRITE YOUR ANSWER:
+------------------
+After completing the exercise, write in my_answers.txt:
+- Were you able to delete the developers group immediately? Why or why not?
+- What was the correct order for cleanup?
+- What's the difference between deleting a primary vs secondary group?
+- What should you check before deleting a group in production?
+- Why can't you delete a group that's someone's primary group?
+- What happens to files owned by a deleted group?
+
+FINAL REFLECTION:
+-----------------
+Congratulations! You've completed the Users and Groups Management Lab!
+
+Write a final reflection in my_answers.txt covering:
+1. What's the difference between adduser and useradd?
+2. What's the difference between primary and secondary groups?
+3. Why is 'usermod -aG' safer than 'usermod -G'?
+4. When should you keep a user's home directory vs delete it?
+5. What's the proper order for cleaning up users and groups?
+6. What are the most important safety considerations for user/group management?
+7. How will you apply this knowledge in real-world scenarios?
+
+Excellent work! You now understand the fundamentals of Linux user and group
+management - a critical skill for system administration!
+
+==============================================================================
+                        LAB COMPLETE!
+==============================================================================
+
+You've learned:
+✓ Creating users with adduser and useradd
+✓ Discovering user information with id, whoami, groups
+✓ Viewing all users with getent passwd
+✓ Creating groups with groupadd
+✓ Managing group membership with usermod -g and -aG
+✓ Understanding the danger of usermod -G without -a
+✓ Setting passwords with passwd
+✓ Deleting users with and without home directories
+✓ Cleaning up groups properly
+
+Save your my_answers.txt file with all your answers and reflections.
+
+Thank you for completing this lab!

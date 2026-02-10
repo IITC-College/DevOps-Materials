@@ -1,0 +1,131 @@
+================================================================================
+    WELCOME TO THE USERS AND GROUPS MANAGEMENT LAB!
+================================================================================
+
+⚠️  INSTRUCTOR NOTE: Before students start this lab, you MUST run:
+   sudo ./setup_environment.sh
+   This sets up the lab environment and verifies sudo permissions.
+
+================================================================================
+
+Hello, Linux Explorer!
+
+This lab is designed to teach you how to create and manage users and groups
+in Linux. You will learn the essential commands that system administrators use
+every day to manage multi-user systems.
+
+IMPORTANT: This lab focuses on understanding the fundamental commands for user
+and group management. You'll work with test users and groups, learning when
+and how to use each command safely and effectively.
+
+================================================================================
+    WHAT YOU'LL LEARN
+================================================================================
+
+- How to create users with adduser and useradd (and the difference!)
+- How to discover user information with id, whoami, and groups
+- How to view all system users with getent passwd
+- How to create and manage groups with groupadd
+- How to add users to groups (primary vs secondary groups)
+- How to set and change passwords with passwd
+- How to delete users and groups properly
+- When to keep or remove home directories
+- The risks of replacing all groups vs adding to groups
+
+================================================================================
+    YOUR FIRST TASK
+================================================================================
+
+1. Check where you are right now:
+   Run: pwd
+
+2. List all files in the current directory:
+   Run: ls -la
+
+3. Navigate to the first level of clues:
+   Run: cd clues/level1
+
+4. Read the first exercise:
+   Run: cat clue1.txt
+
+================================================================================
+    WHAT TO EXPECT
+================================================================================
+
+- You will create test users and groups during exercises
+- You will learn the difference between adduser and useradd
+- You will discover how to check user and group information
+- You will understand primary vs secondary groups
+- You will learn to manage group membership safely
+- You will practice deleting users and groups properly
+- All operations require sudo and are logged for security
+
+Remember: User and group management is powerful - always verify what you're
+doing before executing commands!
+
+================================================================================
+    IMPORTANT REMINDERS
+================================================================================
+
+* All user/group management requires sudo - You need elevated privileges
+* Work with test users only - Never modify system users (root, www-data, etc.)
+* Verify before deleting - Use 'id' and 'groups' to check before removing users
+* adduser vs useradd - adduser is interactive, useradd is basic
+* Primary vs Secondary groups - Every user has ONE primary, many secondary
+* Use -aG to ADD groups - Using -G alone REPLACES all groups (dangerous!)
+* Check home directories - Decide if you need to keep or remove them
+* Understand group membership - Groups control file access permissions
+* Take notes as you progress through the exercises
+* Don't worry about making mistakes - that's how you learn!
+
+================================================================================
+    COMMANDS YOU'LL USE
+================================================================================
+
+User Creation:
+- sudo adduser <username>     (create user with home directory and settings)
+- sudo useradd <username>     (basic user creation, manual setup needed)
+
+User Information:
+- id                          (show your user ID and groups)
+- id <username>               (show specific user's information)
+- whoami                      (show current username)
+- groups                      (show your groups)
+- groups <username>           (show user's groups)
+- getent passwd               (view all users)
+- getent passwd <username>    (view specific user)
+
+Password Management:
+- sudo passwd <username>      (set or change password)
+
+Group Creation and Deletion:
+- sudo groupadd <groupname>   (create a group)
+- sudo groupdel <groupname>   (delete a group)
+
+Group Information:
+- getent group                (view all groups)
+- getent group <groupname>    (view specific group)
+
+Group Management:
+- sudo usermod -g <group> <user>     (change primary group)
+- sudo usermod -aG <group> <user>    (add to secondary group - SAFE)
+- sudo usermod -G <groups> <user>    (replace all groups - DANGER!)
+
+User Deletion:
+- sudo deluser <username>              (delete user, keep home directory)
+- sudo deluser --remove-home <username> (delete user and home directory)
+
+Navigation:
+- cd <directory>              (change directory)
+- pwd                         (show current location)
+
+================================================================================
+    READY? LET'S BEGIN!
+================================================================================
+
+Your first destination: clues/level1/clue1.txt
+
+Navigate there and read the file to begin your journey into user and group
+management!
+
+Good luck, and remember: Always understand what a command does before running it!

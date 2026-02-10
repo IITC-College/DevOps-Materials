@@ -1,0 +1,124 @@
+================================================================================
+                            LEVEL 2 - EXERCISE 2
+                    "Managing Group Membership: Primary vs Secondary"
+================================================================================
+
+Now you understand groups. Let's learn how to add users to groups - and
+understand the critical difference between primary and secondary groups!
+
+BACKGROUND:
+-----------
+Every user has exactly ONE primary group and can have MULTIPLE secondary groups.
+
+Primary Group:
+- Set when user is created (usually same name as username)
+- New files created by user belong to this group
+- Changed with: sudo usermod -g groupname username
+
+Secondary Groups:
+- Additional groups the user belongs to
+- Provides access to shared files owned by those groups
+- Added with: sudo usermod -aG groupname username (the 'a' means APPEND!)
+- DANGER: usermod -G (without 'a') REPLACES all secondary groups!
+
+The difference between -g and -aG:
+- -g changes PRIMARY group (only one)
+- -aG ADDS to secondary groups (safe, append mode)
+- -G REPLACES all secondary groups (dangerous!)
+
+EXERCISE:
+---------
+You'll practice adding users to groups safely and understand the differences.
+
+INSTRUCTIONS:
+-------------
+1. Check testuser1's current groups:
+   groups testuser1
+   id testuser1
+
+2. Add testuser1 to the developers group (secondary group):
+   sudo usermod -aG developers testuser1
+
+3. Verify the change worked:
+   groups testuser1
+   getent group developers
+
+4. Add testuser1 to the testers group as well:
+   sudo usermod -aG testers testuser1
+
+5. Verify testuser1 is now in both groups:
+   groups testuser1
+   id testuser1
+
+6. Check what testuser1's PRIMARY group is:
+   id -gn testuser1
+
+7. Now change testuser1's primary group to developers:
+   sudo usermod -g developers testuser1
+
+8. See how this affected testuser1:
+   id testuser1
+   groups testuser1
+
+COMMANDS TO USE:
+----------------
+- groups testuser1
+- id testuser1
+- sudo usermod -aG developers testuser1
+- getent group developers
+- sudo usermod -aG testers testuser1
+- id -gn testuser1
+- sudo usermod -g developers testuser1
+
+WHAT TO OBSERVE:
+----------------
+- What was testuser1's primary group initially?
+- After usermod -aG developers, did the primary group change?
+- What happened to the secondary groups list?
+- Did testuser1 appear in 'getent group developers' output?
+- After usermod -g developers, what changed?
+- What's testuser1's primary group now?
+
+UNDERSTANDING:
+-------------
+Primary Group (-g):
+- Every user has exactly ONE primary group
+- New files/directories created by user belong to this group
+- Shown first in 'id' output: gid=1003(developers)
+- Changed with: sudo usermod -g groupname username
+- Only ONE group allowed
+
+Secondary Groups (-aG):
+- User can belong to MULTIPLE secondary groups
+- Provides access to files owned by those groups
+- Shown in 'id' output: groups=1003(developers),1004(testers),27(sudo)
+- Added with: sudo usermod -aG groupname username
+- The 'a' means APPEND (add without removing existing groups)
+- ALWAYS use -aG to add to groups safely!
+
+DANGER: usermod -G (without -a):
+- REPLACES all secondary groups with new list
+- Example: usermod -G developers user
+  - User now belongs ONLY to developers
+  - All other secondary groups are REMOVED!
+- Can break system access (removing user from sudo group!)
+- Almost always want -aG instead!
+
+Real-world example:
+- Primary group: developers (all new files owned by developers group)
+- Secondary groups: docker, sudo, www-data (access to Docker, admin, web files)
+
+WRITE YOUR ANSWER:
+------------------
+After completing the exercise, write in my_answers.txt:
+- What was testuser1's original primary group?
+- After adding to developers with -aG, what groups does testuser1 belong to?
+- What's the difference between 'usermod -g' and 'usermod -aG'?
+- What happened when you changed the primary group with -g?
+- Why is the 'a' in -aG important?
+- What could happen if you use -G without -a?
+
+Then proceed to the next exercise: clue3.txt in this same directory.
+
+Hint: ALWAYS use -aG to add users to groups! Using -G without -a is dangerous
+and can break access. The 'a' stands for 'append' - it adds without removing!

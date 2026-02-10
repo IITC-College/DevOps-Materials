@@ -1,0 +1,130 @@
+================================================================================
+                            LEVEL 2 - EXERCISE 3
+                    "Password Management: Security and Control"
+================================================================================
+
+Users need passwords to log in! Let's learn how to set and change passwords
+properly.
+
+BACKGROUND:
+-----------
+Password management is a critical security task in Linux. The 'passwd' command
+allows you to:
+- Set passwords for new users
+- Change existing passwords
+- Check password status
+- Lock and unlock user accounts
+
+Security considerations:
+- Never use weak passwords in production!
+- Password complexity requirements depend on system policy
+- Passwords are stored encrypted in /etc/shadow (not readable by users)
+- Root (via sudo) can change any user's password without knowing the old one
+
+The passwd command:
+- passwd: Change your own password
+- sudo passwd username: Change another user's password (requires sudo)
+- sudo passwd -S username: Check password status
+- sudo passwd -l username: Lock account (disable password login)
+- sudo passwd -u username: Unlock account
+
+EXERCISE:
+---------
+You'll practice setting and managing passwords for test users.
+
+INSTRUCTIONS:
+-------------
+1. Check the password status for testuser2 (created with useradd):
+   sudo passwd -S testuser2
+
+2. Set a password for testuser2:
+   sudo passwd testuser2
+
+3. Enter a password when prompted (you can use: Test123!)
+4. Re-enter the same password to confirm
+
+5. Check the password status again:
+   sudo passwd -S testuser2
+
+6. Change testuser1's password:
+   sudo passwd testuser1
+
+7. Enter a new password (you can use: NewPass456!)
+8. Re-enter to confirm
+
+9. Check password status for testuser1:
+   sudo passwd -S testuser1
+
+10. View the encrypted password file (you can't read actual passwords):
+    sudo ls -l /etc/shadow
+    sudo head -3 /etc/shadow
+
+COMMANDS TO USE:
+----------------
+- sudo passwd -S testuser2
+- sudo passwd testuser2
+- sudo passwd -S testuser2
+- sudo passwd testuser1
+- sudo passwd -S testuser1
+- sudo ls -l /etc/shadow
+- sudo head -3 /etc/shadow
+
+WHAT TO OBSERVE:
+----------------
+- What was testuser2's password status before setting one?
+- What changed after setting the password?
+- What does the password status output show?
+- What are the permissions on /etc/shadow?
+- Who can read /etc/shadow?
+- Can you see the actual passwords in /etc/shadow?
+
+UNDERSTANDING:
+-------------
+Password Status Output:
+sudo passwd -S testuser1
+Output: testuser1 P 01/27/2024 0 99999 7 -1
+
+Fields:
+1. Username: testuser1
+2. Status: P = password set, L = locked, NP = no password
+3. Last changed: Date password was last changed
+4. Min days: Minimum days before password can be changed (0 = anytime)
+5. Max days: Maximum days before password must be changed (99999 = never)
+6. Warn days: Days before expiration to warn user (7 days)
+7. Inactive: Days after expiration before account is locked (-1 = never)
+
+Password Storage:
+- Actual passwords are NEVER stored in plain text
+- Passwords are stored as encrypted hashes in /etc/shadow
+- Only root can read /etc/shadow (permissions: -rw-r-----)
+- Format in /etc/shadow:
+  username:$6$salt$encryptedpasswordhash:lastchange:min:max:warn:inactive:expire
+
+Password Requirements:
+- Complexity depends on system configuration (PAM)
+- Typical requirements: minimum length, mix of characters
+- In practice, use strong passwords: long, mixed case, numbers, symbols
+- Consider using passphrases instead of passwords
+
+Why sudo is required:
+- Only root can change other users' passwords
+- Users can change their own password with just 'passwd'
+- This prevents users from changing each other's passwords!
+
+WRITE YOUR ANSWER:
+------------------
+After completing the exercise, write in my_answers.txt:
+- What was testuser2's password status before you set one?
+- What changed in the status after setting a password?
+- What do each of the fields in 'passwd -S' output mean?
+- What are the permissions on /etc/shadow and why?
+- Can regular users read /etc/shadow? Why or why not?
+- Why doesn't /etc/shadow show passwords in plain text?
+
+You've completed Level 2! Now navigate to Level 3:
+   cd ../level3
+   cat clue1.txt
+
+Hint: Password security is critical! In production, always enforce strong
+password policies and consider using SSH keys instead of passwords for
+server access!

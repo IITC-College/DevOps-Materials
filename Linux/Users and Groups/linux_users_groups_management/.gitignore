@@ -1,0 +1,16 @@
+# Student answers - should not be committed
+my_answers.txt
+
+# Temporary files
+*.tmp
+*.swp
+*~
+.*.swp
+
+# Backup files
+*.bak
+*_backup
+
+# OS-specific files
+.DS_Store
+Thumbs.db

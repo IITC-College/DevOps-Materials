@@ -1,0 +1,108 @@
+================================================================================
+                            LEVEL 1 - EXERCISE 2
+                    "Discovering User Information: Who Am I?"
+================================================================================
+
+Now that you've created users, let's learn how to discover information about
+users on the system!
+
+BACKGROUND:
+-----------
+In Linux, you often need to find out:
+- Who you are currently logged in as (your username)
+- Your user ID (UID) and group ID (GID)
+- What groups you belong to
+- Information about other users
+
+Linux provides several commands to discover this information:
+- whoami: Shows your current username
+- id: Shows your UID, GID, and all groups you belong to
+- groups: Lists all groups you're a member of
+
+Understanding user and group IDs is important because Linux uses these numbers
+internally for permissions and access control!
+
+EXERCISE:
+---------
+You'll use various commands to discover information about yourself and the
+test users you created.
+
+INSTRUCTIONS:
+-------------
+1. Find out your current username:
+   whoami
+
+2. Get your full user information (UID, GID, groups):
+   id
+
+3. List all groups you belong to:
+   groups
+
+4. Now check information about testuser1:
+   id testuser1
+
+5. Check what groups testuser1 belongs to:
+   groups testuser1
+
+6. Get your username again, but from the environment variable:
+   echo $USER
+
+7. Compare your UID with testuser1's UID:
+   id -u
+   id -u testuser1
+
+COMMANDS TO USE:
+----------------
+- whoami
+- id
+- groups
+- id testuser1
+- groups testuser1
+- echo $USER
+- id -u
+- id -u testuser1
+
+WHAT TO OBSERVE:
+----------------
+- What is your username? (from whoami)
+- What is your UID? (user ID number)
+- What is your primary GID? (group ID number)
+- What groups do you belong to?
+- What is testuser1's UID?
+- What is testuser1's primary group?
+- Are UIDs sequential or do they jump?
+
+UNDERSTANDING:
+-------------
+User IDs (UID):
+- Every user has a unique numeric ID
+- UID 0 is always root (the superuser)
+- UIDs 1-999 are typically system users (www-data, mysql, etc.)
+- UIDs 1000+ are typically regular users
+- Linux uses UIDs internally for permissions
+
+Group IDs (GID):
+- Every user has a primary group (shown in 'id' output)
+- Users can belong to multiple groups (secondary groups)
+- By default, files created by a user belong to their primary group
+- GIDs work like UIDs (0-999 system, 1000+ regular users)
+
+The 'id' command output format:
+uid=1000(username) gid=1000(groupname) groups=1000(groupname),4(adm),27(sudo)
+     ^UID   ^name    ^primary GID        ^all groups with their GIDs
+
+WRITE YOUR ANSWER:
+------------------
+After completing the exercise, write in my_answers.txt:
+- What is your username and UID?
+- What is your primary group and GID?
+- What other groups do you belong to?
+- What is testuser1's UID and primary group?
+- Why does Linux use numeric IDs instead of just usernames?
+- What's the difference between 'whoami' and 'id'?
+
+Then proceed to the next exercise: clue3.txt in this same directory.
+
+Hint: The 'id' command is one of the most useful commands for understanding
+your identity and permissions in Linux. Use it often when debugging access
+issues!

@@ -1,0 +1,119 @@
+================================================================================
+                            LEVEL 2 - EXERCISE 1
+                    "Creating and Viewing Groups"
+================================================================================
+
+Welcome to Level 2!
+
+Now that you understand users, let's learn about groups - the way Linux
+controls shared access to files and resources.
+
+BACKGROUND:
+-----------
+Groups in Linux allow multiple users to share access to files and directories.
+Instead of giving each user individual permissions, you can:
+1. Create a group
+2. Add users to that group
+3. Set file permissions for the group
+
+Common examples:
+- 'developers' group: All developers can read/write shared code
+- 'www-data' group: Web server can access web application files
+- 'docker' group: Users who can run Docker commands
+
+Just like users, groups have:
+- A group name (e.g., 'developers')
+- A numeric Group ID (GID)
+- A list of members
+
+EXERCISE:
+---------
+You'll create groups and learn to view group information.
+
+INSTRUCTIONS:
+-------------
+1. Create a new group called 'developers':
+   sudo groupadd developers
+
+2. Create another group called 'testers':
+   sudo groupadd testers
+
+3. View all groups on the system:
+   getent group
+
+4. View information about the developers group specifically:
+   getent group developers
+
+5. View information about the testers group:
+   getent group testers
+
+6. Count how many groups exist on the system:
+   getent group | wc -l
+
+7. Check if testuser1 is in any groups besides their primary group:
+   groups testuser1
+
+8. View your own groups:
+   groups
+
+COMMANDS TO USE:
+----------------
+- sudo groupadd developers
+- sudo groupadd testers
+- getent group
+- getent group developers
+- getent group testers
+- getent group | wc -l
+- groups testuser1
+- groups
+
+WHAT TO OBSERVE:
+----------------
+- How many total groups are on the system?
+- What information does 'getent group developers' show?
+- What is the GID of the developers group?
+- Are there any members listed in the developers group yet?
+- What groups does testuser1 belong to currently?
+- What's the format of the group database entries?
+
+UNDERSTANDING:
+-------------
+The /etc/group format (4 fields, separated by colons):
+groupname:x:GID:member_list
+
+Example: developers:x:1003:alice,bob,charlie
+
+Field breakdown:
+1. groupname: Name of the group (developers)
+2. x: Password placeholder (rarely used)
+3. GID: Group ID number (1003)
+4. member_list: Comma-separated list of members (alice,bob,charlie)
+
+Important note: The member_list in /etc/group shows SECONDARY group members
+only. Primary group membership is defined in /etc/passwd (each user's GID).
+
+Types of groups:
+- Primary group: Every user has ONE primary group (set in /etc/passwd)
+  - New files created by user belong to this group by default
+- Secondary groups: Users can belong to MULTIPLE secondary groups
+  - Listed in /etc/group or added via usermod -aG
+
+System groups vs Regular groups:
+- System groups (GID < 1000): For system services (www-data, mysql, docker)
+- Regular groups (GID >= 1000): For users and projects
+
+WRITE YOUR ANSWER:
+------------------
+After completing the exercise, write in my_answers.txt:
+- What is the GID of the developers group?
+- What is the full getent group line for developers?
+- How many groups are on your system?
+- Are there any members in the developers group yet?
+- What's the difference between a primary group and secondary group?
+- Why are groups useful in Linux?
+
+Then proceed to the next exercise: clue2.txt in this same directory.
+
+Hint: Groups are one of the fundamental security mechanisms in Linux. They
+allow you to share access to files among team members while keeping them
+private from others!

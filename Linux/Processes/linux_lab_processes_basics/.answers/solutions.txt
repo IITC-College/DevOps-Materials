@@ -15,7 +15,7 @@ LEVEL 1 - CLUE 1: "What is a Process?" - Your First Process List
 
 SETUP (from clues/level1/):
   ../../scripts/setup_1_1.sh
-  Starts 1 dummy CPU eater for this clue.
+  No setup needed - Level 1 uses existing system processes only.
 
 STEP 1 – List processes in simple form, then with detail
   Command:  ps
@@ -33,7 +33,7 @@ STEP 3 – Document
 
 CLEANUP (from clues/level1/):
   ../../scripts/cleanup_1_1.sh
-  Stops the dummy processes from this clue.
+  No cleanup needed - no processes were started.
 
 EXAMPLE ANSWER: "ps aux showed roughly 100–200 processes."
 
@@ -44,7 +44,7 @@ LEVEL 1 - CLUE 2: "Finding a Specific Process" - Searching by Name
 
 SETUP (from clues/level1/):
   ../../scripts/setup_1_2.sh
-  Starts 1 dummy CPU eater for this clue.
+  No setup needed - Level 1 uses existing system processes only.
 
 STEP 1 – List all processes
   Command:  ps aux
@@ -61,6 +61,7 @@ STEP 3 – Document
 
 CLEANUP (from clues/level1/):
   ../../scripts/cleanup_1_2.sh
+  No cleanup needed - no processes were started.
 
 EXAMPLE ANSWER: "bash PID: 1234"
 
@@ -71,7 +72,7 @@ LEVEL 1 - CLUE 3: "Who Owns What?" - Understanding Process Ownership
 
 SETUP (from clues/level1/):
   ../../scripts/setup_1_3.sh
-  Starts 1 dummy CPU eater.
+  No setup needed - Level 1 uses existing system processes only.
 
 STEP 1 – Find your username
   Command:  whoami
@@ -90,6 +91,7 @@ STEP 4 – Document
 
 CLEANUP (from clues/level1/):
   ../../scripts/cleanup_1_3.sh
+  No cleanup needed - no processes were started.
 
 EXAMPLE ANSWER: "My processes: ~10, root processes: ~80" (numbers vary by system)
 

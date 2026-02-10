@@ -1,0 +1,107 @@
+================================================================================
+                            LEVEL 1 - EXERCISE 1
+                    "Creating Users: adduser vs useradd"
+================================================================================
+
+Welcome to Level 1!
+
+Your first exercise: Learning how to create users in Linux and understanding
+the important differences between adduser and useradd.
+
+BACKGROUND:
+-----------
+In Linux, there are two main commands for creating users: adduser and useradd.
+While they both create users, they work very differently!
+
+- adduser: Interactive, user-friendly command that creates home directory,
+  sets up password, copies default files, and asks for user information.
+  
+- useradd: Low-level command that creates a basic user account but requires
+  you to manually configure everything (home directory, password, shell, etc.)
+
+Understanding the difference is important because you'll encounter both in
+real-world scenarios!
+
+EXERCISE:
+---------
+You'll create two test users - one with adduser and one with useradd - then
+compare the results to understand the differences.
+
+INSTRUCTIONS:
+-------------
+1. First, create a user with adduser (the easy way):
+   sudo adduser testuser1
+
+2. Follow the interactive prompts:
+   - Enter a password (you can use: Test123!)
+   - Re-enter the password
+   - For the user information (Full Name, Room Number, etc.), just press Enter
+   - Confirm by typing 'Y' when asked
+
+3. Now create a user with useradd (the manual way):
+   sudo useradd testuser2
+
+4. Check if testuser1 has a home directory:
+   ls -la /home | grep testuser1
+
+5. Check if testuser2 has a home directory:
+   ls -la /home | grep testuser2
+
+6. View detailed information about both users:
+   getent passwd testuser1
+   getent passwd testuser2
+
+7. Check if testuser2 has a password set:
+   sudo passwd -S testuser2
+
+COMMANDS TO USE:
+----------------
+- sudo adduser testuser1
+- sudo useradd testuser2
+- ls -la /home | grep testuser1
+- ls -la /home | grep testuser2
+- getent passwd testuser1
+- getent passwd testuser2
+- sudo passwd -S testuser2
+
+WHAT TO OBSERVE:
+----------------
+- Which command was interactive (asked questions)?
+- Does testuser1 have a home directory? (/home/testuser1)
+- Does testuser2 have a home directory? (/home/testuser2)
+- What's the difference in the getent passwd output?
+- Does testuser2 have a password set?
+
+UNDERSTANDING:
+-------------
+adduser (Debian/Ubuntu):
+- Interactive and user-friendly
+- Creates home directory automatically
+- Sets up password interactively
+- Copies default configuration files
+- Recommended for manual user creation
+
+useradd (All Linux distributions):
+- Low-level, non-interactive
+- Does NOT create home directory by default
+- Does NOT set up password
+- Requires manual configuration
+- Used in scripts and automation
+
+For manual user creation, adduser is usually better. For scripts and
+automation, useradd with options is more predictable.
+
+WRITE YOUR ANSWER:
+------------------
+After completing the exercise, write in my_answers.txt (in the main lab directory):
+- Which command was interactive: adduser or useradd?
+- Did testuser1 have a home directory created automatically?
+- Did testuser2 have a home directory created automatically?
+- What would you need to do to make testuser2 fully functional?
+- When would you use adduser vs useradd?
+
+Then proceed to the next exercise: clue2.txt in this same directory.
+
+Hint: adduser is a friendlier wrapper around useradd! For creating users
+manually, adduser is usually the better choice. For scripts, useradd with
+proper options gives you more control.

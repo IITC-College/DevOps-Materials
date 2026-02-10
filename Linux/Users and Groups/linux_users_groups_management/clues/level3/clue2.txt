@@ -1,0 +1,151 @@
+================================================================================
+                            LEVEL 3 - EXERCISE 2
+                "Deleting Users: Cleanup and Home Directories"
+================================================================================
+
+All good things must come to an end! Let's learn how to properly delete users
+and understand when to keep or remove their home directories.
+
+BACKGROUND:
+-----------
+When removing users, you have two main decisions:
+
+1. Delete user only (keep home directory):
+   sudo deluser username
+   - Removes user account
+   - Keeps /home/username directory
+   - Useful when user might return or files are needed
+
+2. Delete user and home directory:
+   sudo deluser --remove-home username
+   - Removes user account
+   - Removes /home/username directory
+   - Permanent deletion (can't be undone!)
+
+Important considerations:
+- Always verify who you're deleting (check with 'id username' first)
+- Decide if you need to keep their files
+- Check if user owns important files elsewhere (find / -user username)
+- Consider backing up home directory before deletion
+- Never delete system users (root, www-data, mysql, etc.)
+
+The deluser command (Debian/Ubuntu):
+- deluser username: Remove user, keep home
+- deluser --remove-home username: Remove user and home
+- deluser --backup username: Create backup before deletion
+
+Alternative (all Linux): userdel
+- userdel username: Remove user, keep home
+- userdel -r username: Remove user and home
+
+EXERCISE:
+---------
+You'll practice deleting users both ways and understand the differences.
+
+INSTRUCTIONS:
+-------------
+1. First, verify testuser2 exists and has a home directory:
+   id testuser2
+   ls -la /home | grep testuser2
+
+2. Check what's in testuser2's home directory (if it exists):
+   sudo ls -la /home/testuser2
+
+3. Delete testuser2 but KEEP the home directory:
+   sudo deluser testuser2
+
+4. Verify the user is deleted:
+   id testuser2
+   getent passwd testuser2
+
+5. Check if the home directory still exists:
+   ls -la /home | grep testuser2
+
+6. If the directory exists, see who owns it now:
+   sudo ls -la /home | grep testuser2
+
+7. Now create a new test user and delete it completely:
+   sudo adduser testuser3
+   (Use password: Test123!, press Enter for other prompts)
+
+8. Verify testuser3 has a home directory:
+   ls -la /home | grep testuser3
+
+9. Delete testuser3 AND remove the home directory:
+   sudo deluser --remove-home testuser3
+
+10. Verify both user and home directory are gone:
+    id testuser3
+    ls -la /home | grep testuser3
+
+COMMANDS TO USE:
+----------------
+- id testuser2
+- ls -la /home | grep testuser2
+- sudo ls -la /home/testuser2
+- sudo deluser testuser2
+- getent passwd testuser2
+- sudo adduser testuser3
+- sudo deluser --remove-home testuser3
+
+WHAT TO OBSERVE:
+----------------
+- Did testuser2's home directory remain after deletion?
+- Who owns the orphaned home directory?
+- What happened to testuser3's home directory?
+- What's the difference between the two deletion methods?
+- Can you still see deleted users in 'getent passwd'?
+
+UNDERSTANDING:
+-------------
+Orphaned Home Directories:
+When you delete a user but keep the home directory:
+- Directory remains in /home
+- Owned by the user's UID (which no longer has a name)
+- Shows as numeric UID in 'ls -l' output
+- Files are still accessible to root
+- Can be useful for:
+  * Archiving user's work
+  * User might return later
+  * Files needed for ongoing projects
+
+Example:
+drwx------ 2 1001 1001 4096 Jan 27 10:00 testuser2
+
+Here, 1001 was testuser2's UID. The user is deleted but UID remains.
+
+Complete Deletion:
+When you delete user with --remove-home:
+- User account removed from /etc/passwd
+- Home directory completely deleted
+- All files in home directory lost
+- Cannot be undone!
+- Use when:
+  * User permanently leaving
+  * Files not needed
+  * You've backed up important data
+
+Best Practices:
+1. Always verify before deleting (id username, groups username)
+2. Check for important files (sudo ls -la /home/username)
+3. Consider backing up home directory first:
+   sudo tar -czf username_backup.tar.gz /home/username
+4. Decide: keep home for archives or delete for cleanup
+5. Check for files owned by user elsewhere:
+   sudo find /var /opt -user username 2>/dev/null
+6. Never delete system users (UID < 1000)
+
+WRITE YOUR ANSWER:
+------------------
+After completing the exercise, write in my_answers.txt:
+- What happened to testuser2's home directory after deleting the user?
+- What happened to testuser3's home directory with --remove-home?
+- What does an orphaned home directory look like in 'ls -l'?
+- When would you want to keep a user's home directory?
+- When would you want to delete the home directory?
+- What should you do before permanently deleting a user?
+
+Then proceed to the final exercise: clue3.txt in this same directory.
+
+Hint: In production, always back up before deleting! Use 'deluser' for simple
+deletion and 'deluser --remove-home' when you're sure files aren't needed.

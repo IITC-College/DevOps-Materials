@@ -1,0 +1,136 @@
+================================================================================
+                            LEVEL 3 - EXERCISE 1
+                "Advanced Group Management: The Dangers of -G Without -a"
+================================================================================
+
+Welcome to Level 3!
+
+You've learned to safely add users to groups with -aG. Now let's understand
+what happens when you use -G WITHOUT the 'a' - and why it's dangerous!
+
+BACKGROUND:
+-----------
+There are three usermod commands for group management:
+
+1. usermod -g groupname username
+   - Change PRIMARY group (safe, only affects one group)
+
+2. usermod -aG groupname username
+   - ADD to secondary groups (safe, appends to existing groups)
+
+3. usermod -G group1,group2,group3 username
+   - REPLACE all secondary groups (DANGEROUS!)
+   - Removes user from ALL groups except those listed
+   - Can break system access if you remove important groups!
+
+The danger scenario:
+If a user is in groups: developers, testers, sudo, docker
+And you run: sudo usermod -G developers username
+Result: User is now ONLY in developers - lost sudo, docker access!
+
+You must understand this to avoid breaking access in production!
+
+EXERCISE:
+---------
+You'll intentionally use -G to see what happens, then learn to fix it.
+
+INSTRUCTIONS:
+-------------
+1. First, check testuser1's current groups:
+   id testuser1
+   groups testuser1
+
+2. Note all the groups testuser1 belongs to (primary and secondary)
+
+3. Now use -G to set ONLY the developers group:
+   sudo usermod -G developers testuser1
+
+4. Check what happened to testuser1's groups:
+   id testuser1
+   groups testuser1
+
+5. Notice that testuser1 lost the 'testers' group!
+
+6. Now let's add testuser1 back to multiple groups using -G correctly:
+   sudo usermod -G developers,testers testuser1
+
+7. Verify both groups are restored:
+   groups testuser1
+
+8. For comparison, add testuser1 to a third group safely with -aG:
+   sudo groupadd admins
+   sudo usermod -aG admins testuser1
+
+9. Confirm testuser1 is now in all three groups:
+   groups testuser1
+
+COMMANDS TO USE:
+----------------
+- id testuser1
+- groups testuser1
+- sudo usermod -G developers testuser1
+- sudo usermod -G developers,testers testuser1
+- sudo groupadd admins
+- sudo usermod -aG admins testuser1
+
+WHAT TO OBSERVE:
+----------------
+- What groups was testuser1 in before using -G?
+- What happened after usermod -G developers?
+- Which groups were removed?
+- How did you restore multiple groups with -G?
+- What's the difference between adding with -G vs -aG?
+
+UNDERSTANDING:
+-------------
+When to use each command:
+
+usermod -g groupname username:
+- Change PRIMARY group only
+- Safe operation (only affects one group)
+- Example: usermod -g developers alice
+
+usermod -aG groupname username:
+- ADD to secondary groups (append mode)
+- Safe operation (doesn't remove existing groups)
+- RECOMMENDED for adding to groups
+- Example: usermod -aG docker alice
+
+usermod -G group1,group2,group3 username:
+- REPLACE all secondary groups
+- Dangerous! Removes all groups not listed
+- Only use when you want to set exact group list
+- Must list ALL groups you want user to keep
+- Example: usermod -G developers,testers,docker alice
+
+Real-world danger scenario:
+A user has: groups=1000(alice),27(sudo),999(docker),1001(developers)
+
+Admin runs: sudo usermod -G developers alice
+Result: groups=1000(alice),1001(developers)
+
+Consequences:
+- User lost sudo access (can't run admin commands!)
+- User lost docker access (can't run Docker!)
+- System access broken
+- Requires root to fix
+
+Best practice:
+- ALWAYS use -aG to add to groups
+- Only use -G when you intentionally want to set exact group membership
+- Double-check group list before using -G
+
+WRITE YOUR ANSWER:
+------------------
+After completing the exercise, write in my_answers.txt:
+- What groups did testuser1 belong to initially?
+- What happened when you used 'usermod -G developers'?
+- How is 'usermod -G' different from 'usermod -aG'?
+- When would you intentionally use -G instead of -aG?
+- What could happen if you accidentally removed a user from the sudo group?
+- Why is -aG considered the safe option?
+
+Then proceed to the next exercise: clue2.txt in this same directory.
+
+Hint: In production, ALWAYS use -aG unless you have a specific reason to
+replace all groups. The 'a' in -aG is your safety net!

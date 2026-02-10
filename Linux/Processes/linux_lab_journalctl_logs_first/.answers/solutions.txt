@@ -15,7 +15,7 @@ LEVEL 1 - CLUE 1: "What Are Logs?" - Your First Look at journalctl
 
 SETUP (from clues/level1/):
   ../../scripts/setup_1_1.sh
-  Starts lab-logger-ok.service (user service) for this clue.
+  No setup needed - Level 1, Clue 1 uses general system logs only.
 
 STEP 1 – View the system journal
   Command:  journalctl
@@ -31,6 +31,7 @@ STEP 3 – Document
 
 CLEANUP (from clues/level1/):
   ../../scripts/cleanup_1_1.sh
+  No cleanup needed - no service was started.
 
 EXAMPLE ANSWER: "A log is a record of what the system and services did. It is
 the most reliable source when something goes wrong – before guessing, check

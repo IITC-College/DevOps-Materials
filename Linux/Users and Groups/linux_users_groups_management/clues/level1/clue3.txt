@@ -1,0 +1,109 @@
+================================================================================
+                            LEVEL 1 - EXERCISE 3
+                    "Viewing All Users: The System User Database"
+================================================================================
+
+You've learned to check your own user information. Now let's see ALL users
+on the system!
+
+BACKGROUND:
+-----------
+Linux is a multi-user operating system. Even on a single-user desktop, there
+are many "users" - most are system users that run services and daemons.
+
+The user database is stored in /etc/passwd (despite the name, it doesn't
+contain passwords - those are in /etc/shadow). However, the best way to query
+this database is using the 'getent' command.
+
+getent (get entries) can query various system databases:
+- getent passwd: Query the user database
+- getent group: Query the group database
+- getent passwd username: Get specific user information
+
+Understanding the user database helps you see the difference between regular
+users and system users.
+
+EXERCISE:
+---------
+You'll explore the system user database and learn to interpret the information.
+
+INSTRUCTIONS:
+-------------
+1. View all users on the system:
+   getent passwd
+
+2. Notice how many users there are! Now filter to see only your test users:
+   getent passwd | grep testuser
+
+3. View specific user information:
+   getent passwd testuser1
+
+4. View information about a system user (www-data):
+   getent passwd www-data
+
+5. Count how many users are on the system:
+   getent passwd | wc -l
+
+6. View only regular users (UID >= 1000):
+   getent passwd | awk -F: '$3 >= 1000 {print $1, "UID:", $3}'
+
+7. View your own user information from the database:
+   getent passwd $USER
+
+COMMANDS TO USE:
+----------------
+- getent passwd
+- getent passwd | grep testuser
+- getent passwd testuser1
+- getent passwd www-data
+- getent passwd | wc -l
+- getent passwd | awk -F: '$3 >= 1000 {print $1, "UID:", $3}'
+- getent passwd $USER
+
+WHAT TO OBSERVE:
+----------------
+- How many total users are on the system?
+- What information does each line show?
+- What's the difference between testuser1 and www-data entries?
+- What's the format of each line?
+- Which users have UID < 1000 (system users)?
+- Which users have UID >= 1000 (regular users)?
+
+UNDERSTANDING:
+-------------
+The /etc/passwd format (7 fields, separated by colons):
+username:x:UID:GID:comment:home_directory:shell
+
+Example: testuser1:x:1001:1001::/home/testuser1:/bin/bash
+
+Field breakdown:
+1. username: Login name (testuser1)
+2. x: Password placeholder (actual password in /etc/shadow)
+3. UID: User ID number (1001)
+4. GID: Primary group ID (1001)
+5. comment: Full name or description (usually empty or full name)
+6. home_directory: User's home directory (/home/testuser1)
+7. shell: Login shell (/bin/bash, /bin/sh, or /usr/sbin/nologin for system users)
+
+System users vs Regular users:
+- System users (UID < 1000): Run services, no login shell, no home in /home
+  Examples: www-data, mysql, sshd
+- Regular users (UID >= 1000): Can log in, have home directory in /home
+  Examples: your user, testuser1, testuser2
+
+WRITE YOUR ANSWER:
+------------------
+After completing the exercise, write in my_answers.txt:
+- How many total users are on your system?
+- What is the full getent passwd line for testuser1?
+- Break down each field of testuser1's entry and explain what it means
+- What's the difference between testuser1 and www-data entries?
+- Why do system users exist?
+- What shell does testuser1 have? What does this mean?
+
+You've completed Level 1! Now navigate to Level 2:
+   cd ../level2
+   cat clue1.txt
+
+Hint: System users are essential for security - they allow services to run
+with limited privileges instead of running everything as root!

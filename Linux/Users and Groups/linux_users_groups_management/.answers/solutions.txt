@@ -1,0 +1,735 @@
+================================================================================
+                    LAB SOLUTIONS - INSTRUCTOR COPY
+================================================================================
+
+This file contains all answers to the Users and Groups Management Lab.
+Keep this file secure and do not share with students.
+
+================================================================================
+                            FLOW OVERVIEW (9 CLUES)
+================================================================================
+Level 1: User creation (adduser vs useradd), discovering user info (id, whoami,
+         groups), viewing all users (getent passwd)
+Level 2: Creating groups (groupadd), managing group membership (usermod -g/-aG),
+         password management (passwd)
+Level 3: Advanced group management (-G danger), user deletion (deluser),
+         group cleanup and final reflection
+
+Commands covered: adduser, useradd, deluser, id, whoami, groups, getent passwd,
+getent group, groupadd, groupdel, usermod -g/-aG/-G, passwd
+
+================================================================================
+                            LEVEL 1 SOLUTIONS
+================================================================================
+
+EXERCISE 1 - Creating Users: adduser vs useradd
+------------------------------------------------
+Commands:
+1. sudo adduser testuser1
+   (Enter password: Test123!, press Enter for other prompts, confirm with Y)
+2. sudo useradd testuser2
+3. ls -la /home | grep testuser1
+4. ls -la /home | grep testuser2
+5. getent passwd testuser1
+6. getent passwd testuser2
+7. sudo passwd -S testuser2
+
+Expected Results:
+- adduser is interactive (asks for password, user info)
+- useradd is silent (no prompts)
+- testuser1 has home directory: drwxr-x--- testuser1 testuser1 ... testuser1
+- testuser2 may NOT have home directory (depends on system defaults)
+- getent passwd shows both users but testuser2 may have different defaults
+
+Example Output:
+getent passwd testuser1
+testuser1:x:1001:1001::/home/testuser1:/bin/bash
+
+getent passwd testuser2
+testuser2:x:1002:1002::/home/testuser2:/bin/sh
+(or may not have home directory path if not created)
+
+sudo passwd -S testuser2
+testuser2 NP (no password set)
+
+Answers:
+- Which command was interactive: adduser
+- Did testuser1 have home directory: YES
+- Did testuser2 have home directory: Usually NO (depends on system)
+- What to make testuser2 functional:
+  * sudo passwd testuser2 (set password)
+  * sudo mkdir /home/testuser2 (create home directory if missing)
+  * sudo chown testuser2:testuser2 /home/testuser2 (set ownership)
+  * sudo usermod -s /bin/bash testuser2 (set shell if needed)
+- When to use adduser: Manual user creation, interactive setup
+- When to use useradd: Scripts, automation, precise control
+
+Key Learning: adduser is user-friendly and creates complete user account.
+useradd is low-level and requires manual configuration but gives more control
+for scripting.
+
+EXERCISE 2 - Discovering User Information: Who Am I?
+-----------------------------------------------------
+Commands:
+1. whoami
+2. id
+3. groups
+4. id testuser1
+5. groups testuser1
+6. echo $USER
+7. id -u
+8. id -u testuser1
+
+Expected Output Examples:
+whoami
+alice (or your actual username)
+
+id
+uid=1000(alice) gid=1000(alice) groups=1000(alice),4(adm),27(sudo)
+
+groups
+alice adm sudo
+
+id testuser1
+uid=1001(testuser1) gid=1001(testuser1) groups=1001(testuser1)
+
+groups testuser1
+testuser1
+
+id -u
+1000
+
+id -u testuser1
+1001
+
+Answers:
+- Your username: (varies by student, e.g., alice)
+- Your UID: (varies, typically 1000)
+- Your primary group: Same as username (alice)
+- Your primary GID: (varies, typically 1000)
+- Other groups: May include adm, sudo, docker, etc.
+- testuser1 UID: 1001 (or next available)
+- testuser1 primary group: testuser1
+- UIDs: Usually sequential for regular users (1000, 1001, 1002...)
+  but may jump if users were deleted
+- Why numeric IDs: Faster for kernel, language-independent, persistent
+  even if username changes
+- Difference whoami vs id: whoami shows only username, id shows UID, GID,
+  and all group memberships
+
+Key Learning: Linux uses numeric UIDs and GIDs internally. Commands like
+'id' are essential for debugging permission issues.
+
+EXERCISE 3 - Viewing All Users: The System User Database
+---------------------------------------------------------
+Commands:
+1. getent passwd
+2. getent passwd | grep testuser
+3. getent passwd testuser1
+4. getent passwd www-data
+5. getent passwd | wc -l
+6. getent passwd | awk -F: '$3 >= 1000 {print $1, "UID:", $3}'
+7. getent passwd $USER
+
+Expected Output Examples:
+getent passwd testuser1
+testuser1:x:1001:1001::/home/testuser1:/bin/bash
+
+getent passwd www-data
+www-data:x:33:33:www-data:/var/www:/usr/sbin/nologin
+
+getent passwd | wc -l
+42 (varies by system - typically 30-50 users)
+
+Regular users (UID >= 1000):
+alice UID: 1000
+testuser1 UID: 1001
+testuser2 UID: 1002
+
+Answers:
+- Total users: Varies by system (typically 30-50)
+- testuser1 entry: testuser1:x:1001:1001::/home/testuser1:/bin/bash
+- Field breakdown:
+  1. username: testuser1
+  2. password placeholder: x (real password in /etc/shadow)
+  3. UID: 1001
+  4. primary GID: 1001
+  5. comment/full name: (empty)
+  6. home directory: /home/testuser1
+  7. shell: /bin/bash
+- Difference from www-data:
+  * www-data has UID 33 (system user)
+  * Shell is /usr/sbin/nologin (cannot login)
+  * Home is /var/www (web root, not /home)
+  * Purpose: run web server with limited privileges
+- Why system users exist: Security! Services run as dedicated users with
+  minimal permissions instead of running as root
+- testuser1 shell: /bin/bash - means user can log in interactively
+
+Key Learning: Linux has many system users (UID < 1000) that run services.
+Regular users (UID >= 1000) can log in. getent passwd is the proper way
+to query the user database.
+
+================================================================================
+                            LEVEL 2 SOLUTIONS
+================================================================================
+
+EXERCISE 1 - Creating and Viewing Groups
+-----------------------------------------
+Commands:
+1. sudo groupadd developers
+2. sudo groupadd testers
+3. getent group
+4. getent group developers
+5. getent group testers
+6. getent group | wc -l
+7. groups testuser1
+8. groups
+
+Expected Output:
+getent group developers
+developers:x:1003:
+
+getent group testers
+testers:x:1004:
+
+groups testuser1
+testuser1
+
+Answers:
+- GID of developers: 1003 (or next available GID >= 1000)
+- Full getent group line: developers:x:1003:
+- Total groups: Varies (typically 50-70 groups)
+- Members in developers: None yet (fourth field is empty)
+- Difference primary vs secondary:
+  * Primary: Every user has ONE, set in /etc/passwd, new files belong to it
+  * Secondary: Users can have MANY, listed in /etc/group, provides access
+- Why groups are useful:
+  * Share access to files among team members
+  * Control permissions at group level
+  * Easier than managing individual user permissions
+  * Essential for multi-user collaboration
+
+Key Learning: Groups are Linux's primary mechanism for sharing access.
+Primary group is for file ownership, secondary groups are for access control.
+
+EXERCISE 2 - Managing Group Membership: Primary vs Secondary
+-------------------------------------------------------------
+Commands:
+1. groups testuser1
+2. id testuser1
+3. sudo usermod -aG developers testuser1
+4. groups testuser1
+5. getent group developers
+6. sudo usermod -aG testers testuser1
+7. groups testuser1
+8. id testuser1
+9. id -gn testuser1
+10. sudo usermod -g developers testuser1
+11. id testuser1
+12. groups testuser1
+
+Expected Output Progression:
+
+Initial:
+groups testuser1 → testuser1
+id testuser1 → uid=1001(testuser1) gid=1001(testuser1) groups=1001(testuser1)
+
+After usermod -aG developers:
+groups testuser1 → testuser1 developers
+getent group developers → developers:x:1003:testuser1
+
+After usermod -aG testers:
+groups testuser1 → testuser1 developers testers
+id testuser1 → uid=1001(testuser1) gid=1001(testuser1) groups=1001(testuser1),1003(developers),1004(testers)
+
+Primary group:
+id -gn testuser1 → testuser1
+
+After usermod -g developers:
+id testuser1 → uid=1001(testuser1) gid=1003(developers) groups=1003(developers),1004(testers)
+groups testuser1 → developers testers
+(Note: Primary group changed to developers, testuser1 group may still exist but user no longer uses it)
+
+Answers:
+- Original primary group: testuser1
+- After -aG developers: testuser1 (primary), developers testers (secondary)
+- Difference usermod -g vs -aG:
+  * -g: Change PRIMARY group (only one)
+  * -aG: ADD to secondary groups (can have many)
+- What happened with -g: Primary group changed from testuser1 to developers,
+  new files will belong to developers group
+- Why 'a' is important: 'a' means APPEND - adds without removing existing groups
+  Without 'a', all secondary groups are replaced!
+- What could happen with -G (no -a):
+  * All secondary groups replaced with new list
+  * User could lose sudo access
+  * User could lose docker access
+  * System access broken
+  * Requires root to fix
+
+Key Learning: -aG (append to groups) is safe. -G (replace groups) is dangerous.
+Always use -aG unless you intentionally want to replace all groups.
+
+EXERCISE 3 - Password Management: Security and Control
+-------------------------------------------------------
+Commands:
+1. sudo passwd -S testuser2
+2. sudo passwd testuser2 (enter: Test123!)
+3. sudo passwd -S testuser2
+4. sudo passwd testuser1 (enter: NewPass456!)
+5. sudo passwd -S testuser1
+6. sudo ls -l /etc/shadow
+7. sudo head -3 /etc/shadow
+
+Expected Output:
+
+Initial status:
+sudo passwd -S testuser2
+testuser2 NP (no password)
+
+After setting password:
+sudo passwd -S testuser2
+testuser2 P 01/27/2024 0 99999 7 -1
+
+Meaning:
+- testuser2: username
+- P: password set (NP = no password, L = locked)
+- 01/27/2024: last password change date
+- 0: minimum days before password can be changed
+- 99999: maximum days before must change (essentially never)
+- 7: warning days before expiration
+- -1: inactive days after expiration before account locked
+
+/etc/shadow permissions:
+-rw-r----- 1 root shadow (or -rw------- 1 root root)
+Only root can write, only root/shadow group can read
+
+Sample /etc/shadow entry:
+testuser1:$6$saltsalt$hashhashhashhash...:19738:0:99999:7:::
+
+Answers:
+- testuser2 status before: NP (no password)
+- Changed after: P (password set)
+- passwd -S fields:
+  1. Username
+  2. Status (P/NP/L)
+  3. Last change date
+  4. Min days (0 = can change anytime)
+  5. Max days (99999 = never expires)
+  6. Warn days (7 = warn 7 days before expiration)
+  7. Inactive days (-1 = never lock for inactivity)
+- /etc/shadow permissions: -rw-r----- or -rw------- (only root can write)
+- Can regular users read: NO - would expose password hashes
+- Why not plain text: Security! Encrypted hashes cannot be reversed.
+  Even if file is compromised, attackers can't get actual passwords
+
+Key Learning: Passwords are stored as irreversible hashes in /etc/shadow.
+Only root can set passwords for other users. This is fundamental to Linux
+security.
+
+================================================================================
+                            LEVEL 3 SOLUTIONS
+================================================================================
+
+EXERCISE 1 - Advanced Group Management: The Dangers of -G Without -a
+---------------------------------------------------------------------
+Commands:
+1. id testuser1
+2. groups testuser1
+3. sudo usermod -G developers testuser1
+4. id testuser1
+5. groups testuser1
+6. sudo usermod -G developers,testers testuser1
+7. groups testuser1
+8. sudo groupadd admins
+9. sudo usermod -aG admins testuser1
+10. groups testuser1
+
+Expected Output Progression:
+
+Initial (from Level 2):
+groups testuser1 → developers testers
+(testuser1 is in developers as primary, testers as secondary)
+
+After usermod -G developers:
+groups testuser1 → developers
+(testers was REMOVED! Only developers remains)
+
+After usermod -G developers,testers:
+groups testuser1 → developers testers
+(Both groups restored by explicitly listing them)
+
+After usermod -aG admins:
+groups testuser1 → developers testers admins
+(admins ADDED without affecting others - this is the safe way!)
+
+Answers:
+- Initially belonged to: developers (primary), testers (secondary)
+- After usermod -G developers: Lost testers group, only in developers
+- Difference -G vs -aG:
+  * -G: REPLACE all secondary groups (dangerous!)
+  * -aG: APPEND to secondary groups (safe!)
+- When to use -G: Only when you intentionally want to set exact group list,
+  e.g., removing user from groups or setting precise membership
+- What if removed from sudo: User would lose admin access, couldn't run sudo
+  commands, would need root user to restore access
+- Why -aG is safe: 'a' means append - it only adds, never removes existing groups
+
+Key Learning: The 'a' in -aG is critical! Without it, usermod -G replaces
+ALL secondary groups, which can break system access. ALWAYS use -aG unless
+you specifically intend to replace all groups.
+
+EXERCISE 2 - Deleting Users: Cleanup and Home Directories
+----------------------------------------------------------
+Commands:
+1. id testuser2
+2. ls -la /home | grep testuser2
+3. sudo ls -la /home/testuser2
+4. sudo deluser testuser2
+5. id testuser2
+6. getent passwd testuser2
+7. ls -la /home | grep testuser2
+8. sudo ls -la /home | grep testuser2
+9. sudo adduser testuser3 (password: Test123!)
+10. ls -la /home | grep testuser3
+11. sudo deluser --remove-home testuser3
+12. id testuser3
+13. ls -la /home | grep testuser3
+
+Expected Results:
+
+testuser2 (delete user, keep home):
+Before: user exists, home may or may not exist depending on how created
+After deluser: user deleted, home directory remains (if it existed)
+ls -la /home shows: drwxr-x--- 2 1002 1002 ... testuser2
+(Owned by UID 1002, which no longer has a name - orphaned directory)
+
+testuser3 (delete user and home):
+Before: user exists, home exists
+After deluser --remove-home: both user and home completely removed
+ls -la /home shows: no testuser3 entry
+
+Answers:
+- testuser2 home after deletion: Remained on system (if it existed)
+- testuser3 home after --remove-home: Completely deleted
+- Orphaned directory looks like: drwxr-x--- 2 1002 1002 4096 Jan 27 10:00 testuser2
+  (Shows numeric UID instead of username)
+- When to keep home:
+  * User might return
+  * Need to archive their work
+  * Files needed for ongoing projects
+  * Legal/compliance requirements to retain data
+- When to delete home:
+  * User permanently leaving
+  * Files not needed
+  * Already backed up important data
+  * Want clean system
+- Before deleting:
+  * Verify correct user (id username)
+  * Check important files (sudo ls -la /home/username)
+  * Back up if needed (tar -czf backup.tar.gz /home/username)
+  * Check for files elsewhere (find / -user username)
+  * Decide: keep or remove home directory
+
+Key Learning: deluser removes account, --remove-home removes account AND files.
+Always verify and back up before permanent deletion!
+
+EXERCISE 3 - Cleaning Up Groups: Final Cleanup Challenge
+---------------------------------------------------------
+Commands:
+1. getent passwd | grep testuser
+2. getent group | grep -E 'developers|testers|admins'
+3. getent group developers
+4. sudo groupdel developers
+5. getent passwd | grep developers
+6. sudo deluser --remove-home testuser1
+7. sudo groupdel developers
+8. sudo groupdel testers
+9. sudo groupdel admins
+10. getent group | grep -E 'developers|testers|admins'
+11. getent passwd | grep testuser
+12. sudo deluser --remove-home testuser2 (if still exists)
+13. sudo deluser --remove-home testuser3 (if still exists)
+14. ls -la /home | grep testuser
+
+Expected Results:
+
+Attempt to delete developers (if it's testuser1's primary group):
+sudo groupdel developers
+Error: "groupdel: cannot remove the primary group of user 'testuser1'"
+
+After deleting testuser1:
+sudo groupdel developers
+Success! (group deleted)
+
+Secondary groups (testers, admins):
+Can be deleted even if users have them as secondary groups
+
+Final verification should show:
+getent passwd | grep testuser → (no output)
+getent group | grep -E 'developers|testers|admins' → (no output)
+ls -la /home | grep testuser → (no output)
+
+Answers:
+- Delete developers immediately: NO (if it's testuser1's primary group)
+- Correct cleanup order:
+  1. Delete users (or change their primary groups)
+  2. Delete primary groups
+  3. Delete secondary groups (can be done anytime)
+- Difference primary vs secondary deletion:
+  * Primary: Cannot delete if any user has it as primary group
+  * Secondary: Can delete anytime, users just lose that group membership
+- Before deleting in production:
+  * Check members: getent group groupname
+  * Check if primary: getent passwd | grep :GID:
+  * Check file ownership: find / -group groupname
+  * Verify not system group: GID >= 1000
+  * Document and get approval
+- Why can't delete primary group: Every user must have a primary group.
+  Linux uses it for file ownership. Deleting it would leave user in invalid state.
+- What happens to files: They still show the numeric GID in ls -l output.
+  The files remain but show as owned by number instead of group name.
+
+FINAL REFLECTION - Suggested Answer Points:
+-------------------------------------------
+
+1. adduser vs useradd:
+   - adduser: Interactive, creates home, sets password, user-friendly
+   - useradd: Low-level, manual config needed, better for scripts
+
+2. Primary vs secondary groups:
+   - Primary: ONE per user, default for new files, in /etc/passwd
+   - Secondary: MANY per user, for access control, in /etc/group
+
+3. Why -aG is safer:
+   - 'a' means append, adds without removing existing groups
+   - -G alone replaces ALL groups, can break sudo/docker access
+   - Always use -aG unless intentionally replacing all groups
+
+4. When to keep/delete home:
+   - Keep: User might return, files needed, archival
+   - Delete: Permanent departure, files backed up, clean system
+
+5. Cleanup order:
+   - Check dependencies first (who uses groups, what's primary)
+   - Delete or modify users first
+   - Delete groups second
+   - Verify cleanup complete
+
+6. Safety considerations:
+   - Verify before deleting (id, groups, getent)
+   - Back up important data
+   - Never modify system users/groups
+   - Understand primary vs secondary groups
+   - Use -aG not -G
+   - Test in lab before production
+   - Document all changes
+
+7. Real-world application:
+   - Setting up development teams with shared access
+   - Managing web server users (www-data)
+   - Container users (docker group)
+   - Database users (mysql, postgres)
+   - Employee onboarding/offboarding
+   - Project collaboration
+   - Security and access control
+
+Key Learning: User and group management is fundamental to Linux security
+and collaboration. Understanding these concepts enables proper access control,
+team collaboration, and system security.
+
+================================================================================
+                        COMPLETE ANSWERS SUMMARY
+================================================================================
+
+LEVEL 1:
+--------
+1. Exercise 1: adduser is friendly/interactive, useradd is basic/manual
+2. Exercise 2: id shows UID/GID/groups, whoami shows username only
+3. Exercise 3: getent passwd queries user database, shows all users
+
+LEVEL 2:
+--------
+1. Exercise 1: groupadd creates groups, getent group shows them
+2. Exercise 2: -g changes primary group, -aG adds to secondary (safe!)
+3. Exercise 3: passwd manages passwords, stored encrypted in /etc/shadow
+
+LEVEL 3:
+--------
+1. Exercise 1: -G replaces all groups (danger!), -aG appends (safe!)
+2. Exercise 2: deluser keeps home, --remove-home deletes everything
+3. Exercise 3: Delete users before their primary groups, verify cleanup
+
+================================================================================
+                        COMMANDS STUDENTS SHOULD USE
+================================================================================
+
+User Creation:
+- sudo adduser username (interactive, recommended)
+- sudo useradd username (basic, for scripts)
+
+User Deletion:
+- sudo deluser username (keep home directory)
+- sudo deluser --remove-home username (delete everything)
+
+User Information:
+- id (show your UID, GID, groups)
+- id username (show specific user info)
+- whoami (show your username)
+- groups (show your groups)
+- groups username (show user's groups)
+- getent passwd (view all users)
+- getent passwd username (view specific user)
+
+Password Management:
+- sudo passwd username (set/change password)
+- sudo passwd -S username (check password status)
+
+Group Creation and Deletion:
+- sudo groupadd groupname (create group)
+- sudo groupdel groupname (delete group)
+
+Group Information:
+- getent group (view all groups)
+- getent group groupname (view specific group)
+
+Group Management:
+- sudo usermod -g groupname username (change primary group)
+- sudo usermod -aG groupname username (add to secondary - SAFE!)
+- sudo usermod -G group1,group2 username (replace all - DANGER!)
+
+Navigation:
+- cd <directory> (change directory)
+- pwd (show current location)
+
+================================================================================
+                        KEY LEARNING POINTS
+================================================================================
+
+1. adduser vs useradd
+   - adduser: User-friendly, interactive, creates complete account
+   - useradd: Low-level, requires manual setup
+   - Use adduser for manual creation, useradd for scripts
+
+2. User Information
+   - id: Shows UID, GID, and all group memberships
+   - whoami: Shows current username
+   - groups: Shows group memberships
+   - getent passwd: Queries user database
+
+3. Primary vs Secondary Groups
+   - Primary: ONE per user, for file ownership
+   - Secondary: MANY per user, for access control
+   - Changed with -g (primary) or -aG (secondary)
+
+4. Group Management Safety
+   - ALWAYS use -aG to add to groups (append mode)
+   - NEVER use -G without 'a' (replaces all groups!)
+   - Can break sudo access if not careful
+
+5. Password Security
+   - Stored as encrypted hashes in /etc/shadow
+   - Only root can set other users' passwords
+   - Check status with passwd -S
+
+6. User Deletion
+   - deluser: Removes user, keeps home
+   - deluser --remove-home: Removes user and home
+   - Always verify and back up first
+
+7. Group Deletion
+   - Cannot delete primary groups while users use them
+   - Delete users first, then their primary groups
+   - Secondary groups can be deleted anytime
+
+8. Safety First
+   - Verify before deleting
+   - Back up important data
+   - Never modify system users/groups (UID/GID < 1000)
+   - Understand dependencies
+   - Test in lab before production
+
+================================================================================
+                        GRADING RUBRIC (SUGGESTION)
+================================================================================
+
+Level 1 - Understanding Users (30 points)
+- Exercise 1: Creating users with adduser vs useradd (10 points)
+- Exercise 2: Discovering user information with id, whoami, groups (10 points)
+- Exercise 3: Viewing all users with getent passwd (10 points)
+
+Level 2 - Groups and Management (30 points)
+- Exercise 1: Creating and viewing groups (10 points)
+- Exercise 2: Managing group membership (primary vs secondary) (10 points)
+- Exercise 3: Password management (10 points)
+
+Level 3 - Advanced Management (30 points)
+- Exercise 1: Understanding -G danger and safe practices (10 points)
+- Exercise 2: Deleting users properly (10 points)
+- Exercise 3: Complete cleanup and final reflection (10 points)
+
+Documentation (10 points)
+- Created my_answers.txt
+- Provided clear, complete answers
+- Showed understanding of concepts
+- Completed final reflection thoughtfully
+- Answered all questions
+
+TOTAL: 100 points
+
+================================================================================
+                        NOTES FOR INSTRUCTOR
+================================================================================
+
+Common Student Mistakes:
+1. Using useradd and wondering why there's no home directory
+2. Confusing primary and secondary groups
+3. Using usermod -G without -a and losing all groups
+4. Trying to delete a group that's a user's primary group
+5. Not understanding why passwords aren't visible
+6. Deleting users without backing up first
+7. Forgetting to verify changes with id, groups, getent
+
+Tips for Helping Students:
+- Emphasize adduser vs useradd difference early
+- Explain primary vs secondary groups with file ownership examples
+- Demonstrate the danger of -G without -a (but in safe lab environment)
+- Show orphaned directories when users are deleted
+- Explain why /etc/shadow exists and why it's protected
+- Help students understand cleanup order (users before primary groups)
+- Encourage verification after every change (id, groups, getent)
+
+Typical Completion Time:
+- Fast students: 60-75 minutes
+- Average students: 75-90 minutes
+- Struggling students: 90-120 minutes
+
+Important Reminders:
+- This lab requires sudo access - verify student has it
+- Students will create and delete users - ensure they work only with testusers
+- Emphasize -aG vs -G difference - critical for production
+- Remind students to verify every change
+- Password security is fundamental - explain hashing concept
+- Real-world application: onboarding, offboarding, team collaboration
+
+Prerequisites:
+- Basic Linux navigation (cd, ls, pwd)
+- Understanding of sudo (from Lab 9: sudo mindset)
+- Basic file permissions (from Lab 6-8)
+
+This lab teaches:
+- Fundamental user and group management
+- Critical safety practices for production
+- Difference between user-friendly and low-level commands
+- Security concepts (password hashing, /etc/shadow)
+- Complete lifecycle: create, manage, delete
+
+Next steps after this lab:
+- Advanced permissions (ACLs)
+- SSH key authentication
+- PAM configuration
+- User quotas
+- Automated user provisioning
+
+================================================================================
