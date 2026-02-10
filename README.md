@@ -324,9 +324,29 @@ Hands-on coding exercises for mastering bash scripting. Each lab is a self-conta
     curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v1.0-script-mini-devops-tool/linux_lab_script_mini_devops_tool.tar.gz | tar -xz && cd linux_lab_script_mini_devops_tool && cat TASKS.md
     ```
 
+- **Lab 29**: Leap Year
+  - **Version**: v1.0
+  - **Lab ID**: `linux_lab_script_leap_year`
+  - **Focus**: Arithmetic, conditionals, user input – build a leap-year checker (divisible by 4, 100, 400)
+  - **Duration**: 20-30 minutes
+  - **Download**:
+    ```bash
+    curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v1.0-script-leap-year/linux_lab_script_leap_year.tar.gz | tar -xz && cd linux_lab_script_leap_year && cat TASKS.md
+    ```
+
+- **Lab 30**: Number Guessing Game
+  - **Version**: v1.0
+  - **Lab ID**: `linux_lab_script_guessing_game`
+  - **Focus**: Random numbers, read, conditionals, while loop – guess until correct, count attempts
+  - **Duration**: 25-35 minutes
+  - **Download**:
+    ```bash
+    curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v1.0-script-guessing-game/linux_lab_script_guessing_game.tar.gz | tar -xz && cd linux_lab_script_guessing_game && cat TASKS.md
+    ```
+
 #### Networking
 
-- **Lab 29**: Network Adapter Debug
+- **Lab 31**: Network Adapter Debug
   - **Version**: v4.0
   - **Lab ID**: `linux_networking_lab1_adapter`
   - **Focus**: Diagnosing and fixing real-world networking issues (interfaces, IP, gateway, DNS, firewall, MTU, routing)
@@ -338,7 +358,7 @@ Hands-on coding exercises for mastering bash scripting. Each lab is a self-conta
 
 #### Users and Groups
 
-- **Lab 30**: Users and Groups Management
+- **Lab 32**: Users and Groups Management
   - **Version**: In Development
   - **Lab ID**: `linux_users_groups_management`
   - **Focus**: Creating users, managing groups, understanding user permissions
@@ -518,10 +538,10 @@ Every lab must meet these criteria:
 | Linux           | Files & Navigation    | 5    | 150+        | ~50KB      |
 | Linux           | Permissions           | 6    | 200+        | ~80KB      |
 | Linux           | Processes & Services  | 6    | 150+        | ~70KB      |
-| Linux           | Shell Scripting       | 11   | 130+        | ~45KB      |
+| Linux           | Shell Scripting       | 13   | 140+        | ~50KB      |
 | Linux           | Networking            | 1    | 50+         | ~20KB      |
 | Linux           | Users & Groups        | 1    | 30+         | ~10KB      |
-| **Total Linux** |                       | **30** | **710+**    | **~275KB** |
+| **Total Linux** |                       | **32** | **720+**    | **~280KB** |
 | Docker          | -                     | -    | -           | -          |
 | K8s             | -                     | -    | -           | -          |
 
