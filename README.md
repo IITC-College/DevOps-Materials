@@ -214,7 +214,7 @@ Hands-on coding exercises for mastering bash scripting. Each lab is a self-conta
 - `HINTS.md` - Helpful tips (no complete solutions)
 - `src/` - Ready-to-use starter files
 
-- **Lab 1**: Script Basics
+- **Lab 18**: Script Basics
   - **Version**: v1.0
   - **Lab ID**: `linux_lab_script_basics`
   - **Focus**: Creating scripts, shebangs, permissions, chmod, execution methods
@@ -224,7 +224,7 @@ Hands-on coding exercises for mastering bash scripting. Each lab is a self-conta
     curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v1.0-script-basics/linux_lab_script_basics.tar.gz | tar -xz && cd linux_lab_script_basics && cat TASKS.md
     ```
 
-- **Lab 2**: Variables
+- **Lab 19**: Variables
   - **Version**: v1.0
   - **Lab ID**: `linux_lab_script_variables`
   - **Focus**: Variables, command substitution, timestamps, dynamic values
@@ -234,7 +234,7 @@ Hands-on coding exercises for mastering bash scripting. Each lab is a self-conta
     curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v1.0-script-variables/linux_lab_script_variables.tar.gz | tar -xz && cd linux_lab_script_variables && cat TASKS.md
     ```
 
-- **Lab 3**: User Input
+- **Lab 20**: User Input
   - **Version**: v1.0
   - **Lab ID**: `linux_lab_script_input`
   - **Focus**: Reading input with read, validation importance, empty input handling
@@ -244,7 +244,7 @@ Hands-on coding exercises for mastering bash scripting. Each lab is a self-conta
     curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v1.0-script-input/linux_lab_script_input.tar.gz | tar -xz && cd linux_lab_script_input && cat TASKS.md
     ```
 
-- **Lab 4**: Conditionals
+- **Lab 21**: Conditionals
   - **Version**: v1.0
   - **Lab ID**: `linux_lab_script_conditionals`
   - **Focus**: File/directory checks, input validation, if/elif/else, building validators
@@ -254,7 +254,7 @@ Hands-on coding exercises for mastering bash scripting. Each lab is a self-conta
     curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v1.0-script-conditionals/linux_lab_script_conditionals.tar.gz | tar -xz && cd linux_lab_script_conditionals && cat TASKS.md
     ```
 
-- **Lab 5**: Case Statements
+- **Lab 22**: Case Statements
   - **Version**: v1.0
   - **Lab ID**: `linux_lab_script_case`
   - **Focus**: Case syntax, menu systems, pattern matching, default branches
@@ -264,7 +264,7 @@ Hands-on coding exercises for mastering bash scripting. Each lab is a self-conta
     curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v1.0-script-case/linux_lab_script_case.tar.gz | tar -xz && cd linux_lab_script_case && cat TASKS.md
     ```
 
-- **Lab 6**: Loops
+- **Lab 23**: Loops
   - **Version**: v1.0
   - **Lab ID**: `linux_lab_script_loops`
   - **Focus**: For loops, while loops, retry patterns, nested loops
