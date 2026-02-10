@@ -218,10 +218,10 @@ Hands-on coding exercises for mastering bash scripting. Each lab is a self-conta
   - **Version**: v1.0
   - **Lab ID**: `linux_lab_script_basics`
   - **Focus**: Creating scripts, shebangs, permissions, chmod, execution methods
-  - **Duration**: 25-35 minutes
+  - **Duration**: 20-30 minutes
   - **Download**:
     ```bash
-    curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v1.0-script-basics/linux_lab_script_basics.tar.gz | tar -xz && cd linux_lab_script_basics && cat TASKS.md
+    curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v1.1-script-basics/linux_lab_script_basics.tar.gz | tar -xz && cd linux_lab_script_basics && cat TASKS.md
     ```
 
 - **Lab 19**: Variables
