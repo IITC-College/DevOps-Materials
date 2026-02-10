@@ -152,6 +152,87 @@ Labs are numbered in the order they should be completed, following the course st
     curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v1.0/linux_lab_troubleshooting_flow.tar.gz | tar -xz && cd linux_lab_troubleshooting_flow && cd clues/level1 && cat clue1.txt
     ```
 
+### Shell Scripting Module
+
+Hands-on coding exercises for mastering bash scripting. Each lab is a self-contained exercise with tasks, hints, and starter files.
+
+**New Format**: These labs use a simplified structure:
+- `TASKS.md` - All exercises in one file
+- `HINTS.md` - Helpful tips (no complete solutions)
+- `src/` - Ready-to-use starter files
+
+**Getting Started**: Clone the repo and navigate to the lab folder, then open `TASKS.md`:
+```bash
+cd "Linux/Shell Scripting/linux_lab_script_basics"
+cat TASKS.md
+```
+
+- **Lab 1**: Script Basics
+  - **Lab ID**: `linux_lab_script_basics`
+  - **Focus**: Creating scripts, shebangs, permissions, chmod, execution methods
+  - **Duration**: 25-35 minutes
+  - **Path**: `Linux/Shell Scripting/linux_lab_script_basics/`
+
+- **Lab 2**: Variables
+  - **Lab ID**: `linux_lab_script_variables`
+  - **Focus**: Variables, command substitution, timestamps, dynamic values
+  - **Duration**: 25-35 minutes
+  - **Path**: `Linux/Shell Scripting/linux_lab_script_variables/`
+
+- **Lab 3**: User Input
+  - **Lab ID**: `linux_lab_script_input`
+  - **Focus**: Reading input with read, validation importance, empty input handling
+  - **Duration**: 20-30 minutes
+  - **Path**: `Linux/Shell Scripting/linux_lab_script_input/`
+
+- **Lab 4**: Conditionals
+  - **Lab ID**: `linux_lab_script_conditionals`
+  - **Focus**: File/directory checks, input validation, if/elif/else, building validators
+  - **Duration**: 25-35 minutes
+  - **Path**: `Linux/Shell Scripting/linux_lab_script_conditionals/`
+
+- **Lab 5**: Case Statements
+  - **Lab ID**: `linux_lab_script_case`
+  - **Focus**: Case syntax, menu systems, pattern matching, default branches
+  - **Duration**: 25-35 minutes
+  - **Path**: `Linux/Shell Scripting/linux_lab_script_case/`
+
+- **Lab 6**: Loops
+  - **Lab ID**: `linux_lab_script_loops`
+  - **Focus**: For loops, while loops, retry patterns, nested loops
+  - **Duration**: 25-35 minutes
+  - **Path**: `Linux/Shell Scripting/linux_lab_script_loops/`
+
+- **Lab 7**: Functions
+  - **Lab ID**: `linux_lab_script_functions`
+  - **Focus**: Defining functions, parameters, code organization, reusability
+  - **Duration**: 25-35 minutes
+  - **Path**: `Linux/Shell Scripting/linux_lab_script_functions/`
+
+- **Lab 8**: Exit Codes
+  - **Lab ID**: `linux_lab_script_exit_codes`
+  - **Focus**: Exit codes, $?, chaining with && and ||, fail-fast patterns, CI/CD integration
+  - **Duration**: 25-35 minutes
+  - **Path**: `Linux/Shell Scripting/linux_lab_script_exit_codes/`
+
+- **Lab 9**: Debugging
+  - **Lab ID**: `linux_lab_script_debugging`
+  - **Focus**: Finding and fixing common bash errors, syntax debugging, error messages
+  - **Duration**: 25-35 minutes
+  - **Path**: `Linux/Shell Scripting/linux_lab_script_debugging/`
+
+- **Lab 10**: Ops Helper Tool
+  - **Lab ID**: `linux_lab_script_ops_helper`
+  - **Focus**: Building a practical ops tool combining all concepts
+  - **Duration**: 25-35 minutes
+  - **Path**: `Linux/Shell Scripting/linux_lab_script_ops_helper/`
+
+- **Lab 11**: Mini DevOps Tool (Capstone)
+  - **Lab ID**: `linux_lab_script_mini_devops_tool`
+  - **Focus**: Comprehensive capstone project - menu-driven tool with health checks, status, backups, and CI/CD pipeline
+  - **Duration**: 35-45 minutes
+  - **Path**: `Linux/Shell Scripting/linux_lab_script_mini_devops_tool/`
+
 ---
 
 ## 👨‍🎓 For Students
@@ -319,11 +400,12 @@ Every lab must meet these criteria:
 
 ## 📊 Lab Statistics
 
-| Module | Labs | Total Files | Total Size |
-|--------|------|-------------|------------|
-| Linux  | 15   | 400+        | ~200KB     |
-| Docker | -    | -           | -          |
-| K8s    | -    | -           | -          |
+| Module         | Labs | Total Files | Total Size |
+|----------------|------|-------------|------------|
+| Linux          | 15   | 400+        | ~200KB     |
+| Shell Scripting| 11   | 130+        | ~150KB     |
+| Docker         | -    | -           | -          |
+| K8s            | -    | -           | -          |
 
 ---
 
@@ -341,6 +423,6 @@ Course materials © 2026 IITC College. For educational use only.
 
 ---
 
-**Last Updated**: 2026-01-26  
+**Last Updated**: 2026-02-10  
 **Repository**: IITC-College/DevOps-Jan26  
 **Maintainer**: Course Instructor
