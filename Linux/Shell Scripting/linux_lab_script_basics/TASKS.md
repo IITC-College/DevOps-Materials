@@ -2,7 +2,7 @@
 
 ## Goal
 
-Learn to create, structure, and run bash scripts by building a simple deployment script. You'll master shebangs, file permissions, and execution methods.
+Learn the fundamentals of creating and running bash scripts. You'll practice creating script files, adding shebangs, managing permissions, and executing scripts in different ways - all using simple echo commands.
 
 ## Prerequisites
 
@@ -11,109 +11,203 @@ Learn to create, structure, and run bash scripts by building a simple deployment
 
 ## Tasks
 
-### Task 1: Create Your First Script
+### Task 1: Create a Welcome Script
 
-**Objective:** Create a basic bash script with echo statements
+**Objective:** Create your first bash script with simple echo statements
 
 **Instructions:**
-1. Create a file called `first_deploy.sh` in this lab directory
-2. Add five echo statements that simulate a deployment process:
-   - "Deploy started..."
-   - "Stopping old service..."
-   - "Copying files..."
-   - "Starting new service..."
-   - "Deploy complete."
+1. Create a file called `welcome.sh`
+2. Add these echo statements to the file:
+   ```bash
+   echo "================================"
+   echo "Welcome to Bash Scripting!"
+   echo "================================"
+   echo ""
+   echo "This is my first script."
+   echo "Scripts help automate tasks."
+   echo ""
+   echo "Let's get started!"
+   ```
+3. Run the script: `bash welcome.sh`
+
+**Expected Output:**
+```
+================================
+Welcome to Bash Scripting!
+================================
+
+This is my first script.
+Scripts help automate tasks.
+
+Let's get started!
+```
+
+**Script Name:** `welcome.sh`
+
+---
+
+### Task 2: Add a Shebang Line
+
+**Objective:** Add a shebang to tell the system which interpreter to use
+
+**Instructions:**
+1. Open `welcome.sh` in your editor
+2. Add `#!/bin/bash` as the **very first line** (before the echo statements)
 3. Save the file
-4. Run the script with: `bash first_deploy.sh`
+4. Try to run it with: `./welcome.sh`
 
 **Expected Output:**
-All five lines should print to the terminal in order.
+You'll get a "Permission denied" error - this is normal! You need to make it executable first (next task).
 
-**Script Name:** `first_deploy.sh`
+**Script Name:** `welcome.sh` (modify existing)
 
 ---
 
-### Task 2: Add the Shebang Line
+### Task 3: Make the Script Executable
 
-**Objective:** Understand and add a shebang to specify the interpreter
+**Objective:** Add execute permission so you can run the script with `./`
 
 **Instructions:**
-1. Open `first_deploy.sh` in your editor
-2. Add `#!/bin/bash` as the very first line
-3. Save the file
-4. Try running the script with: `./first_deploy.sh`
+1. Check current permissions: `ls -l welcome.sh`
+2. Make it executable: `chmod +x welcome.sh`
+3. Check permissions again: `ls -l welcome.sh` (notice the `x` now appears)
+4. Run the script: `./welcome.sh`
 
 **Expected Output:**
-You should see a "Permission denied" error. This is expected and you'll fix it in the next task!
+```
+================================
+Welcome to Bash Scripting!
+================================
 
-**Script Name:** `first_deploy.sh` (modify existing)
+This is my first script.
+Scripts help automate tasks.
+
+Let's get started!
+```
+
+**Script Name:** `welcome.sh` (modify permissions)
 
 ---
 
-### Task 3: Understand File Permissions
+### Task 4: Create a Deployment Messages Script
 
-**Objective:** Learn to check and understand file permissions
+**Objective:** Create a new script that simulates deployment messages
 
 **Instructions:**
-1. Run `ls -l first_deploy.sh` to check the file permissions
-2. Note the permission string (e.g., `-rw-r--r--`)
-3. Notice there's no `x` (execute) permission
-4. Verify that `bash first_deploy.sh` still works (bash doesn't need execute permission)
-5. Compare with the sample script: `ls -l src/sample_script.sh`
+1. Create a file called `deploy.sh`
+2. Add the shebang as the first line: `#!/bin/bash`
+3. Add echo statements that simulate a deployment:
+   ```bash
+   #!/bin/bash
+   echo "Starting deployment..."
+   echo ""
+   echo "Step 1: Stopping old service"
+   echo "Step 2: Backing up database"
+   echo "Step 3: Copying new files"
+   echo "Step 4: Running migrations"
+   echo "Step 5: Starting new service"
+   echo ""
+   echo "Deployment complete!"
+   ```
+4. Make it executable: `chmod +x deploy.sh`
+5. Run it: `./deploy.sh`
 
 **Expected Output:**
-- Your script shows permissions like `-rw-r--r--` (no x)
-- The sample script shows permissions with `x` (e.g., `-rwxr-xr-x`)
-- Running with `bash first_deploy.sh` works fine
+```
+Starting deployment...
 
-**Script Name:** `first_deploy.sh` (inspection only)
+Step 1: Stopping old service
+Step 2: Backing up database
+Step 3: Copying new files
+Step 4: Running migrations
+Step 5: Starting new service
+
+Deployment complete!
+```
+
+**Script Name:** `deploy.sh`
 
 ---
 
-### Task 4: Make Your Script Executable
+### Task 5: Create a Status Report Script
 
-**Objective:** Use chmod to add execute permissions
-
-**Instructions:**
-1. Run `chmod +x first_deploy.sh`
-2. Check the permissions again with `ls -l first_deploy.sh`
-3. Notice the `x` now appears in the permission string
-4. Run the script with `./first_deploy.sh`
-
-**Expected Output:**
-- Permissions now show `x` flags (e.g., `-rwxr-xr-x`)
-- Running `./first_deploy.sh` works and prints all five lines
-
-**Script Name:** `first_deploy.sh` (modify permissions)
-
----
-
-### Task 5: Compare Execution Methods
-
-**Objective:** Understand the difference between `./script.sh` and `bash script.sh`
+**Objective:** Practice creating scripts with formatted output
 
 **Instructions:**
-1. With execute permission, run: `./first_deploy.sh` (should work)
-2. Run: `bash first_deploy.sh` (should also work)
-3. Remove execute permission: `chmod -x first_deploy.sh`
-4. Try `./first_deploy.sh` (should fail)
-5. Try `bash first_deploy.sh` (should still work!)
-6. Restore execute permission: `chmod +x first_deploy.sh`
+1. Create a file called `status.sh`
+2. Start with the shebang: `#!/bin/bash`
+3. Add echo statements that display a status report:
+   ```bash
+   #!/bin/bash
+   echo "========================================="
+   echo "        SYSTEM STATUS REPORT"
+   echo "========================================="
+   echo ""
+   echo "Service Status:"
+   echo "  - Web Server: Running"
+   echo "  - Database: Running"
+   echo "  - Cache: Running"
+   echo ""
+   echo "Resource Usage:"
+   echo "  - CPU: 45%"
+   echo "  - Memory: 62%"
+   echo "  - Disk: 78%"
+   echo ""
+   echo "Last Backup: 2 hours ago"
+   echo "Next Scheduled Backup: In 6 hours"
+   echo ""
+   echo "========================================="
+   ```
+4. Make it executable: `chmod +x status.sh`
+5. Run it: `./status.sh`
 
 **Expected Output:**
-- Both methods work when the file has execute permission
-- Only `bash script.sh` works without execute permission
-- Understanding: `./script.sh` requires the shebang and execute permission; `bash script.sh` explicitly uses the bash interpreter
+```
+=========================================
+        SYSTEM STATUS REPORT
+=========================================
 
-**Script Name:** `first_deploy.sh` (testing only)
+Service Status:
+  - Web Server: Running
+  - Database: Running
+  - Cache: Running
+
+Resource Usage:
+  - CPU: 45%
+  - Memory: 62%
+  - Disk: 78%
+
+Last Backup: 2 hours ago
+Next Scheduled Backup: In 6 hours
+
+=========================================
+```
+
+**Script Name:** `status.sh`
 
 ---
 
 ## Completion
 
-You've successfully learned:
-- How to create bash scripts
-- What a shebang line is and why it's important
-- How to check and modify file permissions
-- Two different ways to execute scripts
-- When to use `./script.sh` vs `bash script.sh`
+Congratulations! You've successfully created 5 bash scripts:
+1. **welcome.sh** - Your first script with echo statements
+2. **deploy.sh** - Simulated deployment messages
+3. **status.sh** - Formatted status report
+
+### Key Concepts Learned:
+- Creating bash script files
+- Adding shebang lines (`#!/bin/bash`)
+- Using echo statements to display output
+- Making scripts executable with `chmod +x`
+- Running scripts with `./script.sh` vs `bash script.sh`
+- Understanding file permissions
+
+### What You've Mastered:
+✓ Script creation and structure
+✓ The purpose of shebangs
+✓ File permissions basics
+✓ Two methods of script execution
+✓ Formatting output with echo
+
+### Next Steps:
+Now that you understand the basics of creating and running scripts, move on to the Variables lab to learn how to make your scripts dynamic and interactive!
