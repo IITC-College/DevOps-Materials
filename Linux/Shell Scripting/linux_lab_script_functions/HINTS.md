@@ -44,6 +44,14 @@
 - Professional scripts use functions for clarity
 - Think about what each function should do before coding
 
+## Task 7 - Menu with Functions (Case + Functions)
+- Define all functions at the top, then the menu and case statement below
+- Each case branch just calls a function: `1) show_disk ;;`
+- No parentheses when calling: `show_disk` not `show_disk()`
+- Case handles routing; functions handle the actual work
+- This pattern keeps menus readable and easy to extend
+- You need Case Statement lab knowledge for the `case ... esac` syntax
+
 ## General Tips
 
 ### Function Basics

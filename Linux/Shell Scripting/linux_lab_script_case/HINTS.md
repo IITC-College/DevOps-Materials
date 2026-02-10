@@ -35,15 +35,6 @@
   ```
 - Exit codes: if the branch command fails, the script continues unless you check `$?` or use `set -e`
 
-## Task 5
-- Functions must be defined before use (put at top of script)
-- Function syntax: `function_name() { commands; }`
-- Call functions by name: `show_disk` (no parentheses)
-- Functions can access script variables
-- Functions can have their own local variables: `local VAR="value"`
-- Combine case + functions = clean, modular code
-- Easy to add new menu options: define function, add case branch
-
 ## General Tips
 
 ### Case Pattern Matching
@@ -58,8 +49,6 @@
 - Number options for easy selection
 - Always include exit option
 - Handle invalid input gracefully
-- Use descriptive function names
-- Group related functionality
 
 ### When to Use Case vs If/Elif
 - **Use case when:**

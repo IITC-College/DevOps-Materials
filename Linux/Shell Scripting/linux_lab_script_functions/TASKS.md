@@ -6,7 +6,7 @@ Master bash functions to write modular, reusable code. You'll learn to define fu
 
 ## Prerequisites
 
-- Script Basics, Variables, Conditionals, and Loops labs (or equivalent knowledge)
+- Script Basics, Variables, Conditionals, Loops, and Case Statement labs (or equivalent knowledge)
 - Linux system with bash
 - A text editor
 
@@ -272,6 +272,76 @@ Deploying application tiers...
 
 ---
 
+### Task 7: Build a Menu with Functions (Case + Functions)
+
+**Objective:** Combine case statements with functions for a clean, maintainable menu
+
+**Instructions:**
+1. Create a script called `menu_full.sh`
+2. Define functions at the top:
+   ```bash
+   #!/bin/bash
+   
+   show_disk() {
+       echo "=== Disk Usage (current directory) ==="
+       df -h .
+   }
+   
+   show_uptime() {
+       echo "=== System Uptime ==="
+       uptime
+   }
+   
+   show_status() {
+       echo "=== System Status ==="
+       echo "Hostname: $(hostname)"
+       echo "Date: $(date)"
+   }
+   ```
+3. Add a menu prompt:
+   ```bash
+   echo "Operations Menu:"
+   echo "1) Check disk usage"
+   echo "2) Show uptime"
+   echo "3) Show system status"
+   echo "4) Exit"
+   read -p "Enter choice: " CHOICE
+   ```
+4. Add case statement calling functions:
+   ```bash
+   case "$CHOICE" in
+       1)
+           show_disk
+           ;;
+       2)
+           show_uptime
+           ;;
+       3)
+           show_status
+           ;;
+       4)
+           echo "Exiting."
+           exit 0
+           ;;
+       *)
+           echo "Invalid option."
+           exit 1
+           ;;
+   esac
+   ```
+5. Make executable and test all menu options
+
+**Expected Output:**
+- Option 1 → formatted disk usage
+- Option 2 → system uptime
+- Option 3 → hostname and date
+- Option 4 → "Exiting."
+- Invalid input → "Invalid option." and exit code 1
+
+**Script Name:** `menu_full.sh`
+
+---
+
 ## Completion
 
 You've successfully learned:
@@ -280,6 +350,7 @@ You've successfully learned:
 - Passing parameters to functions with `$1`, `$2`, etc.
 - Using functions to eliminate code duplication
 - Combining functions with loops
+- Combining case statements with functions (menu with functions)
 - Building modular, maintainable scripts
 - Creating realistic deployment automation
 

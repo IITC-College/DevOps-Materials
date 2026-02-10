@@ -257,11 +257,11 @@ Hands-on coding exercises for mastering bash scripting. Each lab is a self-conta
 - **Lab 22**: Case Statements
   - **Version**: v1.0
   - **Lab ID**: `linux_lab_script_case`
-  - **Focus**: Case syntax, menu systems, pattern matching, default branches
-  - **Duration**: 25-35 minutes
+  - **Focus**: Case syntax, menu systems, pattern matching, default branches (no functions)
+  - **Duration**: 20-30 minutes
   - **Download**:
     ```bash
-    curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v1.0-script-case/linux_lab_script_case.tar.gz | tar -xz && cd linux_lab_script_case && cat TASKS.md
+    curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v1.1-script-case/linux_lab_script_case.tar.gz | tar -xz && cd linux_lab_script_case && cat TASKS.md
     ```
 
 - **Lab 23**: Loops
@@ -277,11 +277,11 @@ Hands-on coding exercises for mastering bash scripting. Each lab is a self-conta
 - **Lab 24**: Functions
   - **Version**: v1.0
   - **Lab ID**: `linux_lab_script_functions`
-  - **Focus**: Defining functions, parameters, code organization, reusability
-  - **Duration**: 25-35 minutes
+  - **Focus**: Defining functions, parameters, loops, case+functions menu, reusability
+  - **Duration**: 30-40 minutes
   - **Download**:
     ```bash
-    curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v1.0-script-functions/linux_lab_script_functions.tar.gz | tar -xz && cd linux_lab_script_functions && cat TASKS.md
+    curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v1.1-script-functions/linux_lab_script_functions.tar.gz | tar -xz && cd linux_lab_script_functions && cat TASKS.md
     ```
 
 - **Lab 25**: Exit Codes

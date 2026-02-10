@@ -2,7 +2,7 @@
 
 ## Goal
 
-Master the bash `case` statement for building clean, maintainable menu-driven scripts. You'll progress from simple number menus to sophisticated ops tools with real commands and functions.
+Master the bash `case` statement for building clean, maintainable menu-driven scripts. You'll progress from simple number menus to ops tools that run real commands—no functions required (those come in the Functions lab).
 
 ## Prerequisites
 
@@ -159,72 +159,6 @@ Master the bash `case` statement for building clean, maintainable menu-driven sc
 
 ---
 
-### Task 5: Build Full Menu with Functions
-
-**Objective:** Combine case statements with functions for clean, maintainable code
-
-**Instructions:**
-1. Create a script called `menu_full.sh`
-2. Define functions at the top:
-   ```bash
-   #!/bin/bash
-   
-   show_disk() {
-       echo "=== Disk Usage (current directory) ==="
-       df -h .
-   }
-   
-   show_uptime() {
-       echo "=== System Uptime ==="
-       uptime
-   }
-   
-   show_status() {
-       echo "=== System Status ==="
-       echo "Hostname: $(hostname)"
-       echo "Date: $(date)"
-   }
-   ```
-3. Add a menu prompt:
-   ```bash
-   echo "Operations Menu:"
-   echo "1) Check disk usage"
-   echo "2) Show uptime"
-   echo "3) Show system status"
-   echo "4) Exit"
-   read -p "Enter choice: " CHOICE
-   ```
-4. Add case statement calling functions:
-   ```bash
-   case "$CHOICE" in
-       1)
-           show_disk
-           ;;
-       2)
-           show_uptime
-           ;;
-       3)
-           show_status
-           ;;
-       4)
-           echo "Exiting."
-           exit 0
-           ;;
-       *)
-           echo "Invalid option."
-           exit 1
-           ;;
-   esac
-   ```
-5. Test all menu options
-
-**Expected Output:**
-A professional menu system with formatted output for each option.
-
-**Script Name:** `menu_full.sh`
-
----
-
 ## Completion
 
 You've successfully learned:
@@ -233,7 +167,6 @@ You've successfully learned:
 - The default branch with `*)`
 - Exit codes in case branches
 - Executing real commands in case branches
-- Combining case statements with functions
-- Building clean, maintainable menu-driven scripts
+- Building clean, menu-driven scripts
 
-The `case` statement is cleaner than long `if/elif` chains when you have many options to handle. It's perfect for menu systems, command routing, and option parsing in DevOps tools!
+The `case` statement is cleaner than long `if/elif` chains when you have many options to handle. It's perfect for menu systems, command routing, and option parsing. Once you learn functions (Functions lab), you can combine case with functions for even cleaner menus!
