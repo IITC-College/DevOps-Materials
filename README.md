@@ -274,7 +274,7 @@ Hands-on coding exercises for mastering bash scripting. Each lab is a self-conta
     curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v1.0-script-loops/linux_lab_script_loops.tar.gz | tar -xz && cd linux_lab_script_loops && cat TASKS.md
     ```
 
-- **Lab 7**: Functions
+- **Lab 24**: Functions
   - **Version**: v1.0
   - **Lab ID**: `linux_lab_script_functions`
   - **Focus**: Defining functions, parameters, code organization, reusability
@@ -284,7 +284,7 @@ Hands-on coding exercises for mastering bash scripting. Each lab is a self-conta
     curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v1.0-script-functions/linux_lab_script_functions.tar.gz | tar -xz && cd linux_lab_script_functions && cat TASKS.md
     ```
 
-- **Lab 8**: Exit Codes
+- **Lab 25**: Exit Codes
   - **Version**: v1.0
   - **Lab ID**: `linux_lab_script_exit_codes`
   - **Focus**: Exit codes, $?, chaining with && and ||, fail-fast patterns, CI/CD integration
@@ -294,7 +294,7 @@ Hands-on coding exercises for mastering bash scripting. Each lab is a self-conta
     curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v1.0-script-exit-codes/linux_lab_script_exit_codes.tar.gz | tar -xz && cd linux_lab_script_exit_codes && cat TASKS.md
     ```
 
-- **Lab 9**: Debugging
+- **Lab 26**: Debugging
   - **Version**: v1.0
   - **Lab ID**: `linux_lab_script_debugging`
   - **Focus**: Finding and fixing common bash errors, syntax debugging, error messages
@@ -304,7 +304,7 @@ Hands-on coding exercises for mastering bash scripting. Each lab is a self-conta
     curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v1.0-script-debugging/linux_lab_script_debugging.tar.gz | tar -xz && cd linux_lab_script_debugging && cat TASKS.md
     ```
 
-- **Lab 10**: Ops Helper Tool
+- **Lab 27**: Ops Helper Tool
   - **Version**: v1.0
   - **Lab ID**: `linux_lab_script_ops_helper`
   - **Focus**: Building a practical ops tool combining all concepts
@@ -314,7 +314,7 @@ Hands-on coding exercises for mastering bash scripting. Each lab is a self-conta
     curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v1.0-script-ops-helper/linux_lab_script_ops_helper.tar.gz | tar -xz && cd linux_lab_script_ops_helper && cat TASKS.md
     ```
 
-- **Lab 11**: Mini DevOps Tool (Capstone)
+- **Lab 28**: Mini DevOps Tool (Capstone)
   - **Version**: v1.0
   - **Lab ID**: `linux_lab_script_mini_devops_tool`
   - **Focus**: Comprehensive capstone project - menu-driven tool with health checks, status, backups, and CI/CD pipeline
@@ -323,6 +323,28 @@ Hands-on coding exercises for mastering bash scripting. Each lab is a self-conta
     ```bash
     curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v1.0-script-mini-devops-tool/linux_lab_script_mini_devops_tool.tar.gz | tar -xz && cd linux_lab_script_mini_devops_tool && cat TASKS.md
     ```
+
+#### Networking
+
+- **Lab 29**: Network Adapter Debug
+  - **Version**: v4.0
+  - **Lab ID**: `linux_networking_lab1_adapter`
+  - **Focus**: Diagnosing and fixing real-world networking issues (interfaces, IP, gateway, DNS, firewall, MTU, routing)
+  - **Duration**: 90-120 minutes
+  - **Download**:
+    ```bash
+    curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v4.0/linux_networking_lab1_adapter.tar.gz | tar -xz && cd linux_networking_lab1_adapter && cat README.md
+    ```
+
+#### Users and Groups
+
+- **Lab 30**: Users and Groups Management
+  - **Version**: In Development
+  - **Lab ID**: `linux_users_groups_management`
+  - **Focus**: Creating users, managing groups, understanding user permissions
+  - **Duration**: 60-90 minutes
+  - **Path**: `Linux/Users and Groups/linux_users_groups_management/`
+  - **Note**: Requires instructor setup - see lab README
 
 ---
 
@@ -497,7 +519,9 @@ Every lab must meet these criteria:
 | Linux           | Permissions           | 6    | 200+        | ~80KB      |
 | Linux           | Processes & Services  | 6    | 150+        | ~70KB      |
 | Linux           | Shell Scripting       | 11   | 130+        | ~45KB      |
-| **Total Linux** |                       | **28** | **630+**    | **~245KB** |
+| Linux           | Networking            | 1    | 50+         | ~20KB      |
+| Linux           | Users & Groups        | 1    | 30+         | ~10KB      |
+| **Total Linux** |                       | **30** | **710+**    | **~275KB** |
 | Docker          | -                     | -    | -           | -          |
 | K8s             | -                     | -    | -           | -          |
 
