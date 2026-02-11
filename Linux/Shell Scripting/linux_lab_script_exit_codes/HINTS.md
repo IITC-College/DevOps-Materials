@@ -235,3 +235,108 @@ validate || exit 1
 - Check each step individually
 - Verify `$?` immediately (don't let other commands overwrite it)
 - Test failure cases intentionally
+
+---
+
+## Solutions
+
+### Task 1 Solution
+
+```bash
+#!/bin/bash
+TARGET="${1:-src/data/environments/project1}"
+
+if [ -d "$TARGET" ]; then
+    echo "Directory found: $TARGET"
+    exit 0
+else
+    echo "Directory NOT found: $TARGET"
+    exit 1
+fi
+```
+
+### Task 2 Solution
+
+```bash
+#!/bin/bash
+CONFIG="${1:-src/data/configs/app.conf}"
+
+if [ -f "$CONFIG" ]; then
+    echo "Config found: $CONFIG"
+    exit 0
+else
+    echo "Config NOT found: $CONFIG"
+    exit 1
+fi
+```
+
+### Task 3 Solution
+
+No script - just run these commands:
+
+```bash
+# Test 1: AND operator
+./check_config_exit.sh && echo "Next step..."
+
+# Test 2: OR operator
+./check_config_exit.sh missing || echo "Failed!"
+
+# Test 3: Combined
+./check_config_exit.sh && echo "Success!" || echo "Failed!"
+```
+
+### Task 4 Solution
+
+```bash
+#!/bin/bash
+
+echo "=== Validation Pipeline ==="
+echo ""
+
+# Step 1: Check directory
+echo "Step 1: Checking directory..."
+if [ ! -d "src/data/environments/project1" ]; then
+    echo "ERROR: Directory not found"
+    exit 1
+fi
+echo "✓ Directory check passed"
+echo ""
+
+# Step 2: Check config
+echo "Step 2: Checking config..."
+if [ ! -f "src/data/configs/app.conf" ]; then
+    echo "ERROR: Config file not found"
+    exit 1
+fi
+echo "✓ Config check passed"
+echo ""
+
+# Step 3: Simulate deployment
+echo "Step 3: Deploying application..."
+echo "  → Stopping services..."
+echo "  → Copying files..."
+echo "  → Starting services..."
+echo "✓ Deployment complete"
+echo ""
+
+echo "=== All steps passed! ==="
+exit 0
+```
+
+### Task 5 Solution
+
+```bash
+#!/bin/bash
+
+echo "Running check_config_exit.sh..."
+./check_config_exit.sh "$@"
+
+# Capture the exit code
+EXIT_CODE=$?
+
+echo ""
+echo "Script exited with code: $EXIT_CODE"
+
+# Pass the exit code through
+exit $EXIT_CODE
+```

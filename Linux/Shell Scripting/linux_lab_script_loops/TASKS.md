@@ -16,16 +16,19 @@ Master bash loops (`for` and `while`) to automate repetitive tasks. You'll learn
 
 **Objective:** Learn basic `for` loop syntax with a hardcoded list
 
-**Instructions:**
-1. Create a script called `check_dirs_step1.sh`
-2. Add the shebang
-3. Create a for loop that iterates over directory names:
-   ```bash
-   for DIR in project1 project2 logs; do
-       echo "Checking $DIR"
-   done
-   ```
-4. Make it executable and run it
+**Requirements:**
+- Create a script called `check_dirs_step1.sh`
+- Add the shebang line
+- Create a for loop that iterates over three directory names: project1, project2, logs
+- For each iteration, print "Checking [directory name]"
+- Make it executable and run it
+
+**Technical Hints:**
+- For loop syntax: `for VARIABLE in list of items; do ... done`
+- The variable (e.g., DIR) gets each value in turn
+- Use `$VARIABLE` inside the loop to reference current value
+- Separate list items with spaces
+- The `do` and `done` keywords mark the loop body
 
 **Expected Output:**
 ```
@@ -33,6 +36,11 @@ Checking project1
 Checking project2
 Checking logs
 ```
+
+**Testing:**
+1. Run the script - should print three lines
+2. Try adding another directory name to the list
+3. Run again - should print four lines now
 
 **Script Name:** `check_dirs_step1.sh`
 
@@ -42,21 +50,21 @@ Checking logs
 
 **Objective:** Combine loops with conditionals to check if directories exist
 
-**Instructions:**
-1. Extend your `check_dirs_step1.sh` (or create `check_dirs_step2.sh`)
-2. Inside the loop, check if each directory exists:
-   ```bash
-   for DIR in project1 project2 logs; do
-       DIR_PATH="src/data/environments/$DIR"
-       if [ -d "$DIR_PATH" ]; then
-           echo "  $DIR: exists"
-       else
-           echo "  $DIR: missing"
-       fi
-   done
-   ```
-3. Run the script
-4. Verify by checking: `ls src/data/environments/`
+**Requirements:**
+- Extend your `check_dirs_step1.sh` (or create `check_dirs_step2.sh`)
+- First, verify what's in the directory: `ls src/data/environments/`
+- Modify the loop to check if each directory actually exists
+- For each directory in the list, build the full path: "src/data/environments/[dirname]"
+- Use a conditional inside the loop to test existence
+- If exists, print "  [dirname]: exists"
+- If missing, print "  [dirname]: missing"
+
+**Technical Hints:**
+- Combine for loop with if statement (nest them)
+- Build path inside loop: `DIR_PATH="src/data/environments/$DIR"`
+- Use `[ -d "$DIR_PATH" ]` to test existence
+- The conditional goes INSIDE the loop body
+- Indentation (spaces) helps readability
 
 **Expected Output:**
 ```
@@ -64,7 +72,12 @@ Checking logs
   project2: missing
   logs: exists
 ```
-(project2 doesn't exist in the src/data/environments folder)
+(Based on what actually exists in src/data/environments/)
+
+**Testing:**
+1. Run and observe which directories exist
+2. Create missing directory: `mkdir src/data/environments/project2`
+3. Run again - should now show "exists" for project2
 
 **Script Name:** `check_dirs_step1.sh` (extended) or `check_dirs_step2.sh`
 
@@ -74,17 +87,21 @@ Checking logs
 
 **Objective:** Read list items from a file and iterate over them
 
-**Instructions:**
-1. Check the paths file: `cat src/data/configs/paths.txt`
-2. Create a script called `process_paths.sh`
-3. Loop over the paths from the file:
-   ```bash
-   #!/bin/bash
-   for PATHNAME in $(cat src/data/configs/paths.txt); do
-       echo "Processing $PATHNAME"
-   done
-   ```
-4. Run the script
+**Requirements:**
+- First, examine the paths file: `cat src/data/configs/paths.txt`
+- Create a script called `process_paths.sh`
+- Add the shebang
+- Create a for loop that iterates over the contents of the file
+- Use command substitution to read the file
+- For each path name, print "Processing [pathname]"
+- Run the script
+
+**Technical Hints:**
+- Command substitution: `$(command)`
+- Read file: `cat filename`
+- Combine them: `for VAR in $(cat file); do`
+- The output of `cat` becomes the list for the loop
+- Each word/line in the file becomes one iteration
 
 **Expected Output:**
 ```
@@ -92,6 +109,13 @@ Processing logs
 Processing config
 Processing backup
 ```
+(Based on actual contents of paths.txt)
+
+**Testing:**
+1. Run the script
+2. Edit paths.txt and add another line
+3. Run again - should process the new item too
+4. This shows dynamic list processing!
 
 **Script Name:** `process_paths.sh`
 
@@ -101,20 +125,22 @@ Processing backup
 
 **Objective:** Learn `while` loop syntax for count-based iteration
 
-**Instructions:**
-1. Create a script called `run_count.sh`
-2. Use a while loop with a counter:
-   ```bash
-   #!/bin/bash
-   COUNT=1
-   while [ $COUNT -le 3 ]; do
-       echo "Run $COUNT"
-       COUNT=$((COUNT + 1))
-   done
-   echo "Done."
-   ```
-3. Run the script
-4. Experiment: Change `-le 3` to `-le 5` and run again
+**Requirements:**
+- Create a script called `run_count.sh`
+- Add the shebang
+- Initialize a counter variable COUNT starting at 1
+- Create a while loop that runs while COUNT is less than or equal to 3
+- Inside the loop, print "Run [count number]"
+- Increment the counter after each iteration
+- After the loop, print "Done."
+- Run and observe the output
+
+**Technical Hints:**
+- While loop syntax: `while [ condition ]; do ... done`
+- Numeric comparison: `[ $VAR -le number ]` (less than or equal)
+- Increment counter: `COUNT=$((COUNT + 1))`
+- Arithmetic syntax: `$((expression))`
+- The condition is tested BEFORE each iteration
 
 **Expected Output:**
 ```
@@ -124,6 +150,12 @@ Run 3
 Done.
 ```
 
+**Testing:**
+1. Run the script as-is
+2. Change `-le 3` to `-le 5` - should run 5 times
+3. Change increment to `COUNT=$((COUNT + 2))` - should skip numbers
+4. This shows how while loops use conditions
+
 **Script Name:** `run_count.sh`
 
 ---
@@ -132,31 +164,26 @@ Done.
 
 **Objective:** Use while loops to implement retry logic with break
 
-**Instructions:**
-1. Create a script called `retry_check.sh`
-2. Implement a retry pattern:
-   ```bash
-   #!/bin/bash
-   MAX_ATTEMPTS=3
-   ATTEMPT=1
-   
-   while [ $ATTEMPT -le $MAX_ATTEMPTS ]; do
-       echo "Attempt $ATTEMPT..."
-       
-       # Simulate a check that passes on attempt 2
-       if [ $ATTEMPT -eq 2 ]; then
-           echo "  OK - check passed!"
-           break
-       fi
-       
-       echo "  Not ready - retrying..."
-       ATTEMPT=$((ATTEMPT + 1))
-   done
-   
-   echo "Done."
-   ```
-3. Run the script (should stop at attempt 2)
-4. Remove the `break` statement and run again (should run all 3 attempts)
+**Requirements:**
+- Create a script called `retry_check.sh`
+- Add the shebang
+- Set MAX_ATTEMPTS to 3
+- Initialize ATTEMPT counter to 1
+- Create a while loop that runs while ATTEMPT <= MAX_ATTEMPTS
+- For each attempt:
+  - Print "Attempt [number]..."
+  - Simulate a check that succeeds on attempt 2 (use if statement)
+  - If check succeeds (ATTEMPT equals 2), print success message and break out of loop
+  - Otherwise, print "Not ready - retrying..." and increment counter
+- After loop, print "Done."
+- Test with and without the break statement
+
+**Technical Hints:**
+- Numeric equality: `[ $VAR -eq number ]`
+- Break statement: `break` (exits loop immediately)
+- Without break, loop continues until condition fails
+- This pattern is common in DevOps (waiting for services, retries, etc.)
+- Increment counter AFTER the check (not before)
 
 **Expected Output (with break):**
 ```
@@ -167,6 +194,12 @@ Attempt 2...
 Done.
 ```
 
+**Testing:**
+1. Run as-is - should stop at attempt 2
+2. Remove `break` statement - should run all 3 attempts
+3. Change `[ $ATTEMPT -eq 2 ]` to `[ $ATTEMPT -eq 1 ]` - should succeed immediately
+4. This simulates real retry logic for health checks!
+
 **Script Name:** `retry_check.sh`
 
 ---
@@ -175,35 +208,29 @@ Done.
 
 **Objective:** Nest loops for complex scenarios like checking multiple directories with retry
 
-**Instructions:**
-1. Create a script called `check_dirs_retry.sh`
-2. Combine a for loop (directories) with a while loop (retry):
-   ```bash
-   #!/bin/bash
-   
-   for DIR in project1 project2; do
-       echo "Checking directory: $DIR"
-       ATTEMPT=1
-       MAX_ATTEMPTS=2
-       
-       while [ $ATTEMPT -le $MAX_ATTEMPTS ]; do
-           echo "  Attempt $ATTEMPT..."
-           
-           if [ -d "src/data/environments/$DIR" ]; then
-               echo "  Found!"
-               break
-           fi
-           
-           echo "  Not found, retrying..."
-           ATTEMPT=$((ATTEMPT + 1))
-       done
-       
-       if [ $ATTEMPT -gt $MAX_ATTEMPTS ]; then
-           echo "  $DIR not found after $MAX_ATTEMPTS attempts."
-       fi
-   done
-   ```
-3. Run the script and observe how it checks each directory with retry logic
+**Requirements:**
+- Create a script called `check_dirs_retry.sh`
+- Add the shebang
+- Create an outer for loop that iterates over: project1, project2
+- For EACH directory in the loop:
+  - Print "Checking directory: [dirname]"
+  - Initialize attempt counter and max attempts (e.g., 2)
+  - Create an inner while loop for retry logic
+  - In the while loop, print attempt number
+  - Check if the directory exists in "src/data/environments/"
+  - If found, print "Found!" and break
+  - If not found, print retry message and increment counter
+  - After the while loop, check if max attempts exceeded
+  - If exceeded, print failure message
+- This combines all loop concepts into one realistic script
+
+**Technical Hints:**
+- Outer loop: `for DIR in list`
+- Inner loop: `while [ condition ]`
+- Reset ATTEMPT counter for EACH directory (inside for loop, before while)
+- The while loop is INSIDE the for loop (nested)
+- After while loop ends, check if it succeeded or failed
+- Pattern: for each item, retry until success or max attempts
 
 **Expected Output:**
 ```
@@ -217,6 +244,13 @@ Checking directory: project2
   Not found, retrying...
   project2 not found after 2 attempts.
 ```
+(Based on what actually exists)
+
+**Testing:**
+1. Run and observe retry logic for each directory
+2. Create project2: `mkdir -p src/data/environments/project2`
+3. Run again - both should be found on first attempt
+4. This is a real-world pattern for checking multiple services/resources!
 
 **Script Name:** `check_dirs_retry.sh`
 

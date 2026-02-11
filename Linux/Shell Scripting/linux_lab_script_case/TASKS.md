@@ -16,36 +16,36 @@ Master the bash `case` statement for building clean, maintainable menu-driven sc
 
 **Objective:** Learn basic `case` syntax for menu options
 
-**Instructions:**
-1. Create a script called `menu_step1.sh`
-2. Add the shebang
-3. Read user input:
-   ```bash
-   read -p "Enter option (1/2/3): " CHOICE
-   ```
-4. Add a case statement:
-   ```bash
-   case "$CHOICE" in
-       1)
-           echo "You selected Option 1"
-           ;;
-       2)
-           echo "You selected Option 2"
-           ;;
-       3)
-           echo "You selected Option 3"
-           ;;
-       *)
-           echo "Invalid option"
-           ;;
-   esac
-   ```
-5. Make executable and test with: 1, 2, 3, and 9
+**Requirements:**
+- Create a script called `menu_step1.sh`
+- Add the shebang
+- Prompt user to enter an option (1, 2, or 3)
+- Store input in CHOICE variable
+- Use a case statement to handle each option:
+  - Option 1: print "You selected Option 1"
+  - Option 2: print "You selected Option 2"
+  - Option 3: print "You selected Option 3"
+  - Any other input: print "Invalid option"
+- Make executable and test with different inputs
+
+**Technical Hints:**
+- Case syntax: `case "$VAR" in ... esac`
+- Each pattern ends with `)`
+- Each branch ends with `;;`
+- Default case: `*)` matches anything not matched above
+- Quote the variable: `"$CHOICE"`
+- Case is cleaner than multiple if/elif for many options
 
 **Expected Output:**
 - 1 → "You selected Option 1"
 - 2 → "You selected Option 2"
+- 3 → "You selected Option 3"
 - 9 → "Invalid option"
+
+**Testing:**
+1. Test with 1, 2, 3 - should match specific options
+2. Test with 9 or any other input - should show "Invalid option"
+3. Test with empty input - should also hit default case
 
 **Script Name:** `menu_step1.sh`
 
@@ -55,35 +55,35 @@ Master the bash `case` statement for building clean, maintainable menu-driven sc
 
 **Objective:** Use case with descriptive string values instead of numbers
 
-**Instructions:**
-1. Create a script called `menu_step2.sh`
-2. Read input for string options:
-   ```bash
-   read -p "Enter option (disk/uptime/exit): " CHOICE
-   ```
-3. Add case with strings:
-   ```bash
-   case "$CHOICE" in
-       disk)
-           echo "Option: disk check"
-           ;;
-       uptime)
-           echo "Option: uptime"
-           ;;
-       exit)
-           echo "Exiting."
-           ;;
-       *)
-           echo "Invalid option"
-           ;;
-   esac
-   ```
-4. Test with: disk, uptime, exit, restart (invalid)
+**Requirements:**
+- Create a script called `menu_step2.sh`
+- Add the shebang
+- Prompt user to enter an option: disk, uptime, or exit
+- Store input in CHOICE variable
+- Use case statement with string matching:
+  - "disk": print "Option: disk check"
+  - "uptime": print "Option: uptime"
+  - "exit": print "Exiting."
+  - Anything else: print "Invalid option"
+- Test with various string inputs
+
+**Technical Hints:**
+- Case can match strings, not just numbers
+- Patterns are case-sensitive: "disk" != "Disk"
+- No quotes around patterns: `disk)` not `"disk")`
+- But DO quote the variable: `case "$CHOICE" in`
+- String matching is cleaner than multiple `[ "$VAR" = "value" ]` checks
 
 **Expected Output:**
 - "disk" → "Option: disk check"
 - "uptime" → "Option: uptime"
+- "exit" → "Exiting."
 - "restart" → "Invalid option"
+
+**Testing:**
+1. Test with "disk", "uptime", "exit"
+2. Test with "restart" (should be invalid)
+3. Test with "Disk" (capital D) - should also be invalid (case-sensitive)
 
 **Script Name:** `menu_step2.sh`
 
@@ -93,23 +93,32 @@ Master the bash `case` statement for building clean, maintainable menu-driven sc
 
 **Objective:** Learn to exit with error code 1 for invalid options
 
-**Instructions:**
-1. Open `menu_step2.sh` (or create `menu_step3.sh`)
-2. Modify the default branch `*)` to exit with code 1:
-   ```bash
-   *)
-       echo "Invalid option"
-       exit 1
-       ;;
-   ```
-3. Run with an invalid option (e.g., "restart")
-4. Check the exit code: `echo $?` (should show 1)
-5. Run with a valid option and check exit code (should show 0)
+**Requirements:**
+- Modify `menu_step2.sh` (or create `menu_step3.sh`)
+- Update the default branch (`*`) to exit with error code 1
+- Keep the "Invalid option" message
+- Valid options should complete normally (exit code 0)
+- Test both valid and invalid options
+- Verify exit codes using `echo $?` immediately after running
+
+**Technical Hints:**
+- `exit 1` means error (non-zero exit code)
+- `exit 0` means success (can omit - default)
+- Check exit code of previous command: `echo $?`
+- Must check immediately - the value changes with each command
+- Exit codes signal success/failure to other scripts/tools
 
 **Expected Output:**
-- Invalid option exits with code 1
-- Valid options exit with code 0
-- Use `echo $?` immediately after script runs to see the exit code
+- Invalid option: prints message and exits with code 1
+- Valid options: complete normally with code 0
+- Verification: run `./script.sh` then immediately `echo $?`
+
+**Testing:**
+1. Run with "restart" (invalid)
+2. Immediately run: `echo $?` - should show 1
+3. Run with "disk" (valid)
+4. Immediately run: `echo $?` - should show 0
+5. This is how scripts communicate success/failure!
 
 **Script Name:** `menu_step2.sh` (modified) or `menu_step3.sh`
 
@@ -119,41 +128,38 @@ Master the bash `case` statement for building clean, maintainable menu-driven sc
 
 **Objective:** Execute actual system commands in case branches
 
-**Instructions:**
-1. Create a script called `menu_ops.sh`
-2. Create a menu with real commands:
-   ```bash
-   #!/bin/bash
-   read -p "Enter option (1=disk, 2=uptime, 3=exit): " CHOICE
-   
-   case "$CHOICE" in
-       1)
-           df -h .
-           ;;
-       2)
-           uptime
-           ;;
-       3)
-           echo "Exiting."
-           exit 0
-           ;;
-       *)
-           echo "Invalid option."
-           exit 1
-           ;;
-   esac
-   ```
-3. Test each option:
-   - 1 shows disk usage
-   - 2 shows system uptime
-   - 3 exits cleanly
-   - 9 shows error and exits with code 1
+**Requirements:**
+- Create a script called `menu_ops.sh`
+- Add the shebang
+- Prompt user with options: 1=disk, 2=uptime, 3=exit
+- Store choice in CHOICE variable
+- Use case statement to execute real commands:
+  - Option 1: run `df -h .` (disk free space for current directory)
+  - Option 2: run `uptime` (system uptime)
+  - Option 3: print "Exiting." and exit with code 0
+  - Invalid: print error and exit with code 1
+- Test all options to see actual command output
+
+**Technical Hints:**
+- You can run ANY command in case branches
+- `df -h .` shows disk usage in human-readable format
+- `uptime` shows how long system has been running
+- Explicit `exit 0` for successful exit option
+- Each branch can have multiple commands
+- Real ops menus would include: start service, stop service, check logs, etc.
 
 **Expected Output:**
-- 1 → disk usage output from `df`
-- 2 → system uptime
+- 1 → disk usage output (filesystem, size, used, available, mounted on)
+- 2 → system uptime (load averages, how long running)
 - 3 → "Exiting."
-- 9 → "Invalid option." (exit code 1)
+- 9 → "Invalid option." (and exit code 1)
+
+**Testing:**
+1. Test option 1 - should show disk information
+2. Test option 2 - should show uptime
+3. Test option 3 - should exit cleanly
+4. Test option 9 - should show error
+5. This is a working ops menu!
 
 **Script Name:** `menu_ops.sh`
 

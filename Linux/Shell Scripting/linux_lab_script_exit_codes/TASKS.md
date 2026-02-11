@@ -16,39 +16,44 @@ Master exit codes to build robust CI/CD pipelines and automation. Learn how scri
 
 **Objective:** Learn to use `exit 0` (success) and `exit 1` (failure)
 
-**Instructions:**
-1. Create a script called `check_dir_exit.sh`
-2. Check if a directory exists and exit with appropriate code:
-   ```bash
-   #!/bin/bash
-   TARGET="${1:-src/data/environments/project1}"
-   
-   if [ -d "$TARGET" ]; then
-       echo "Directory found: $TARGET"
-       exit 0
-   else
-       echo "Directory NOT found: $TARGET"
-       exit 1
-   fi
-   ```
-3. Make it executable
-4. Run with existing directory: `./check_dir_exit.sh`
-5. Check exit code: `echo $?` (should be 0)
-6. Run with missing directory: `./check_dir_exit.sh missing`
-7. Check exit code: `echo $?` (should be 1)
+**Requirements:**
+- Create a script called `check_dir_exit.sh`
+- Add the shebang
+- Accept a directory path as first command-line argument ($1)
+- If no argument provided, use default: "src/data/environments/project1"
+- Check if the directory exists
+- If exists: print "Directory found: [path]" and exit with code 0
+- If not: print "Directory NOT found: [path]" and exit with code 1
+- Test both scenarios and verify exit codes
+
+**Technical Hints:**
+- Default parameter syntax: `VAR="${1:-default_value}"`
+- Directory check: `[ -d "$PATH" ]`
+- Exit success: `exit 0`
+- Exit failure: `exit 1`
+- Check last exit code: `echo $?` (immediately after running)
+- Exit code 0 = success, non-zero = failure
 
 **Expected Output:**
 ```
 # With existing directory
+./check_dir_exit.sh
 Directory found: src/data/environments/project1
 $ echo $?
 0
 
 # With missing directory
+./check_dir_exit.sh missing
 Directory NOT found: missing
 $ echo $?
 1
 ```
+
+**Testing:**
+1. Run without arguments - should find default directory (exit 0)
+2. Run with "missing" - should not find it (exit 1)
+3. Always check `echo $?` immediately after each run
+4. Exit codes communicate success/failure to other scripts!
 
 **Script Name:** `check_dir_exit.sh`
 
@@ -58,27 +63,29 @@ $ echo $?
 
 **Objective:** Apply exit codes to file validation
 
-**Instructions:**
-1. Create a script called `check_config_exit.sh`
-2. Check if a config file exists:
-   ```bash
-   #!/bin/bash
-   CONFIG="${1:-src/data/configs/app.conf}"
-   
-   if [ -f "$CONFIG" ]; then
-       echo "Config found: $CONFIG"
-       exit 0
-   else
-       echo "Config NOT found: $CONFIG"
-       exit 1
-   fi
-   ```
-3. Test with valid and invalid paths
-4. Check `echo $?` after each run
+**Requirements:**
+- Create a script called `check_config_exit.sh`
+- Add the shebang
+- Accept a file path as first argument, default to "src/data/configs/app.conf"
+- Check if the file exists (not directory - file!)
+- If exists: print "Config found: [path]" and exit 0
+- If not: print "Config NOT found: [path]" and exit 1
+- Test with valid and invalid paths
+
+**Technical Hints:**
+- File check uses `[ -f ]` instead of `[ -d ]`
+- Same exit code pattern as Task 1
+- Default parameter: `"${1:-default}"`
+- This script can be used by other scripts to validate config
 
 **Expected Output:**
-- Valid path → exit code 0
-- Invalid path → exit code 1
+- Valid path → "Config found: ..." (exit 0)
+- Invalid path → "Config NOT found: ..." (exit 1)
+
+**Testing:**
+1. Run without arguments - should find default config
+2. Run with "missing.conf" - should exit with 1
+3. Verify with `echo $?` each time
 
 **Script Name:** `check_config_exit.sh`
 
@@ -88,25 +95,40 @@ $ echo $?
 
 **Objective:** Use exit codes to control command flow
 
-**Instructions:**
-1. Use your `check_config_exit.sh` script with `&&` and `||`:
-   ```bash
-   # This runs "Next step" only if check succeeds (exit 0)
-   ./check_config_exit.sh && echo "Next step..."
-   
-   # This runs "Failed!" only if check fails (exit 1)
-   ./check_config_exit.sh missing || echo "Failed!"
-   
-   # Combine both: success message OR failure message
-   ./check_config_exit.sh && echo "Success!" || echo "Failed!"
-   ```
-2. Run each command and observe the behavior
-3. Try with both valid and invalid paths
+**Requirements:**
+- Use your `check_config_exit.sh` script from Task 2
+- Test command chaining with `&&` (AND operator)
+- Test command chaining with `||` (OR operator)
+- Test combining both operators
+- Observe how exit codes control which commands run
+
+**Technical Hints:**
+- `cmd1 && cmd2` - run cmd2 ONLY if cmd1 exits with 0
+- `cmd1 || cmd2` - run cmd2 ONLY if cmd1 exits non-zero
+- `cmd1 && cmd2 || cmd3` - if cmd1 succeeds run cmd2, else run cmd3
+- These operators check `$?` automatically
+
+**Commands to Test:**
+```bash
+# Test 1: AND operator (only runs on success)
+./check_config_exit.sh && echo "Next step..."
+
+# Test 2: OR operator (only runs on failure)
+./check_config_exit.sh missing || echo "Failed!"
+
+# Test 3: Combined (success OR failure path)
+./check_config_exit.sh && echo "Success!" || echo "Failed!"
+```
 
 **Expected Behavior:**
-- `&&` runs the next command only if exit code is 0
-- `||` runs the next command only if exit code is non-zero
-- Chain: `cmd1 && cmd2 || cmd3` → if cmd1 succeeds run cmd2, else run cmd3
+- Test 1 with valid file: prints "Config found..." AND "Next step..."
+- Test 2 with missing file: prints "Config NOT found..." AND "Failed!"
+- Test 3: always prints either "Success!" or "Failed!" based on result
+
+**Testing:**
+1. Run each test command
+2. Observe which parts execute
+3. This is how CI/CD pipelines chain steps!
 
 **Script Name:** None (command-line testing)
 
@@ -116,47 +138,29 @@ $ echo $?
 
 **Objective:** Create a script that stops on first failure
 
-**Instructions:**
-1. Create a script called `pipeline_simple.sh`
-2. Implement a multi-step validation pipeline:
-   ```bash
-   #!/bin/bash
-   
-   echo "=== Validation Pipeline ==="
-   echo ""
-   
-   # Step 1: Check directory
-   echo "Step 1: Checking directory..."
-   if [ ! -d "src/data/environments/project1" ]; then
-       echo "ERROR: Directory not found"
-       exit 1
-   fi
-   echo "✓ Directory check passed"
-   echo ""
-   
-   # Step 2: Check config
-   echo "Step 2: Checking config..."
-   if [ ! -f "src/data/configs/app.conf" ]; then
-       echo "ERROR: Config file not found"
-       exit 1
-   fi
-   echo "✓ Config check passed"
-   echo ""
-   
-   # Step 3: Simulate deployment
-   echo "Step 3: Deploying application..."
-   echo "  → Stopping services..."
-   echo "  → Copying files..."
-   echo "  → Starting services..."
-   echo "✓ Deployment complete"
-   echo ""
-   
-   echo "=== All steps passed! ==="
-   exit 0
-   ```
-3. Run the script (should succeed)
-4. Break step 1 by changing the directory path to something that doesn't exist
-5. Run again - deployment should never happen (fail-fast)
+**Requirements:**
+- Create a script called `pipeline_simple.sh`
+- Implement a 3-step validation pipeline
+- Print header: "=== Validation Pipeline ==="
+- **Step 1:** Check if directory exists (src/data/environments/project1)
+  - If not: print error and exit 1
+  - If yes: print success
+- **Step 2:** Check if config file exists (src/data/configs/app.conf)
+  - If not: print error and exit 1
+  - If yes: print success
+- **Step 3:** Simulate deployment (just print messages)
+  - Print stopping, copying, starting messages
+  - Print completion message
+- Print footer: "=== All steps passed! ==="
+- Exit with 0 if all steps succeed
+- Test: Run normally (should complete), then break step 1 and run (should fail fast)
+
+**Technical Hints:**
+- Use `[ ! -d ]` for negation (if NOT exists)
+- Exit immediately on first failure (fail-fast pattern)
+- If step 1 fails, steps 2 and 3 never execute
+- This is how CI/CD pipelines work: stop on first error
+- Each step should have clear success/error messages
 
 **Expected Output (success):**
 ```
@@ -184,7 +188,13 @@ Step 3: Deploying application...
 Step 1: Checking directory...
 ERROR: Directory not found
 ```
-(Script exits immediately, steps 2 and 3 never run)
+(Script exits immediately - steps 2 and 3 never run)
+
+**Testing:**
+1. Run with valid paths - should complete all steps
+2. Change step 1 directory to "missing" - should fail immediately
+3. Restore step 1, break step 2 - should fail at step 2 (no step 3)
+4. This demonstrates defensive programming!
 
 **Script Name:** `pipeline_simple.sh`
 
@@ -194,31 +204,28 @@ ERROR: Directory not found
 
 **Objective:** Learn to capture and pass through exit codes
 
-**Instructions:**
-1. Create a script called `wrapper.sh`
-2. Call another script and capture its exit code:
-   ```bash
-   #!/bin/bash
-   
-   echo "Running check_config_exit.sh..."
-   ./check_config_exit.sh "$@"
-   
-   # Capture the exit code
-   EXIT_CODE=$?
-   
-   echo ""
-   echo "Script exited with code: $EXIT_CODE"
-   
-   # Pass the exit code through
-   exit $EXIT_CODE
-   ```
-3. Run: `./wrapper.sh` (should exit with 0)
-4. Run: `./wrapper.sh missing` (should exit with 1)
-5. Check: `echo $?` after each run
+**Requirements:**
+- Create a script called `wrapper.sh`
+- Add the shebang
+- Print "Running check_config_exit.sh..."
+- Call the `check_config_exit.sh` script
+- Pass all arguments from wrapper to the called script
+- Capture the exit code from the called script
+- Print "Script exited with code: [code]"
+- Exit the wrapper with the SAME exit code (pass-through)
+- Test with valid and invalid arguments
+
+**Technical Hints:**
+- `$@` passes all command-line arguments to another script
+- Capture exit code: `EXIT_CODE=$?` (must be immediately after command)
+- Exit with variable: `exit $EXIT_CODE`
+- Wrapper scripts monitor and log other scripts
+- The wrapper's exit code should match the wrapped script
 
 **Expected Output:**
 ```
 # With valid config
+./wrapper.sh
 Running check_config_exit.sh...
 Config found: src/data/configs/app.conf
 
@@ -227,6 +234,7 @@ $ echo $?
 0
 
 # With invalid path
+./wrapper.sh missing
 Running check_config_exit.sh...
 Config NOT found: missing
 
@@ -234,6 +242,13 @@ Script exited with code: 1
 $ echo $?
 1
 ```
+
+**Testing:**
+1. Run without arguments - should exit 0
+2. Check `echo $?` - should be 0
+3. Run with "missing" - should exit 1
+4. Check `echo $?` - should be 1
+5. Wrapper preserves the exit code!
 
 **Script Name:** `wrapper.sh`
 

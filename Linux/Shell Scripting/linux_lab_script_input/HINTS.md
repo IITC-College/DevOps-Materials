@@ -41,3 +41,37 @@
 - The `read` command returns non-zero exit code on EOF (Ctrl+D)
 - For multiple inputs, use multiple read statements or read multiple variables at once: `read VAR1 VAR2`
 - For sensitive input (passwords), use `read -s` to hide input
+
+---
+
+## Solutions
+
+### Task 1 Solution
+
+```bash
+#!/bin/bash
+read -p "Enter service name: " SERVICE
+echo "Checking service: $SERVICE"
+```
+
+### Task 2 Solution
+
+```bash
+#!/bin/bash
+# read_test.sh - without -p flag
+read SERVICE
+echo "Service: $SERVICE"
+```
+
+### Task 3 Solution
+
+```bash
+#!/bin/bash
+read -p "Enter service name: " SERVICE
+echo "Checking service: $SERVICE"
+echo "Will check status of $SERVICE now."
+```
+
+### Task 4 & 5
+
+These tasks are about testing and understanding, not writing new code. Use the Task 3 solution and test it with empty input (just press Enter when prompted).

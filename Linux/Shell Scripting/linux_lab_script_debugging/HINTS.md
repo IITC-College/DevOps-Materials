@@ -226,3 +226,81 @@ shellcheck script.sh
 - Use meaningful variable names
 - Validate all user inputs
 - Test error paths (not just happy path)
+
+---
+
+## Solutions
+
+These show the fixes needed for each broken script. Try to fix them yourself first!
+
+### Task 1 - Variable Assignment Fix
+
+Change:
+```bash
+APP_NAME = "myapp"    # WRONG - spaces around =
+```
+
+To:
+```bash
+APP_NAME="myapp"      # RIGHT - no spaces
+```
+
+### Task 2 - Missing Quotes Fix
+
+Change:
+```bash
+if [ -f $CONFIG ]; then    # RISKY - unquoted variable
+```
+
+To:
+```bash
+if [ -f "$CONFIG" ]; then  # SAFE - quoted variable
+```
+
+### Task 3 - Missing 'then' Fix
+
+Change:
+```bash
+if [ condition ]           # WRONG - missing then
+    echo "..."
+fi
+```
+
+To:
+```bash
+if [ condition ]; then     # RIGHT - has then
+    echo "..."
+fi
+```
+
+### Task 4 - Wrong Path Fix
+
+Change:
+```bash
+CONFIG="config.txt"        # WRONG - file not in current dir
+```
+
+To:
+```bash
+CONFIG="data/configs/build_config.txt"  # RIGHT - correct path
+```
+
+### Task 5 - Missing 'fi' Fix
+
+Change:
+```bash
+if [ condition ]; then
+    echo "..."
+# WRONG - missing fi
+```
+
+To:
+```bash
+if [ condition ]; then
+    echo "..."
+fi                         # RIGHT - closed with fi
+```
+
+### Task 6 - All Fixes Combined
+
+All five fixes need to be applied to the `ci_full_broken.sh` script. Work through them systematically, fixing syntax errors first (spaces, then, fi) before logical errors (quotes, paths).

@@ -209,10 +209,11 @@ Labs are numbered in the order they should be completed, following the course st
 
 Hands-on coding exercises for mastering bash scripting. Each lab is a self-contained exercise with tasks, hints, and starter files.
 
-**New Format**: These labs use a simplified structure:
-- `TASKS.md` - All exercises in one file
-- `HINTS.md` - Helpful tips (no complete solutions)
-- `src/` - Ready-to-use starter files
+**Hardened format (v1.1)**: Labs are instruction-based so students write code instead of copying. Structure:
+- `TASKS.md` - Requirements, objectives, and expected output (no full code to copy)
+- `HINTS.md` - Syntax tips and a **Solutions** section at the end (use when stuck)
+- `src/` - Starter files and data (e.g. configs, logs)
+- **Basics** lab (Lab 18) keeps full examples; Labs 19–30 use progressive difficulty (more guidance early, less later)
 
 - **Lab 18**: Script Basics
   - **Version**: v1.0
@@ -561,6 +562,6 @@ Course materials © 2026 IITC College. For educational use only.
 
 ---
 
-**Last Updated**: 2026-02-10  
+**Last Updated**: 2026-02-11  
 **Repository**: IITC-College/DevOps-Jan26  
 **Maintainer**: Course Instructor

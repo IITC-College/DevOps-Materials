@@ -169,3 +169,102 @@ echo "Blast off!"
 - Use `set -x` to trace execution
 - Test with small iterations first (e.g., 3 instead of 100)
 - Check loop variable after loop to see final value
+
+---
+
+## Solutions
+
+### Task 1 Solution
+
+```bash
+#!/bin/bash
+for DIR in project1 project2 logs; do
+    echo "Checking $DIR"
+done
+```
+
+### Task 2 Solution
+
+```bash
+#!/bin/bash
+for DIR in project1 project2 logs; do
+    DIR_PATH="src/data/environments/$DIR"
+    if [ -d "$DIR_PATH" ]; then
+        echo "  $DIR: exists"
+    else
+        echo "  $DIR: missing"
+    fi
+done
+```
+
+### Task 3 Solution
+
+```bash
+#!/bin/bash
+for PATHNAME in $(cat src/data/configs/paths.txt); do
+    echo "Processing $PATHNAME"
+done
+```
+
+### Task 4 Solution
+
+```bash
+#!/bin/bash
+COUNT=1
+while [ $COUNT -le 3 ]; do
+    echo "Run $COUNT"
+    COUNT=$((COUNT + 1))
+done
+echo "Done."
+```
+
+### Task 5 Solution
+
+```bash
+#!/bin/bash
+MAX_ATTEMPTS=3
+ATTEMPT=1
+
+while [ $ATTEMPT -le $MAX_ATTEMPTS ]; do
+    echo "Attempt $ATTEMPT..."
+    
+    # Simulate a check that passes on attempt 2
+    if [ $ATTEMPT -eq 2 ]; then
+        echo "  OK - check passed!"
+        break
+    fi
+    
+    echo "  Not ready - retrying..."
+    ATTEMPT=$((ATTEMPT + 1))
+done
+
+echo "Done."
+```
+
+### Task 6 Solution
+
+```bash
+#!/bin/bash
+
+for DIR in project1 project2; do
+    echo "Checking directory: $DIR"
+    ATTEMPT=1
+    MAX_ATTEMPTS=2
+    
+    while [ $ATTEMPT -le $MAX_ATTEMPTS ]; do
+        echo "  Attempt $ATTEMPT..."
+        
+        if [ -d "src/data/environments/$DIR" ]; then
+            echo "  Found!"
+            break
+        fi
+        
+        echo "  Not found, retrying..."
+        ATTEMPT=$((ATTEMPT + 1))
+    done
+    
+    if [ $ATTEMPT -gt $MAX_ATTEMPTS ]; then
+        echo "  $DIR not found after $MAX_ATTEMPTS attempts."
+    fi
+done
+```

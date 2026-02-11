@@ -83,3 +83,98 @@ esac
 - Verify `esac` is present (missing esac = syntax error)
 - Verify `;;` after each branch
 - Use `set -x` to trace execution
+
+---
+
+## Solutions
+
+### Task 1 Solution
+
+```bash
+#!/bin/bash
+read -p "Enter option (1/2/3): " CHOICE
+
+case "$CHOICE" in
+    1)
+        echo "You selected Option 1"
+        ;;
+    2)
+        echo "You selected Option 2"
+        ;;
+    3)
+        echo "You selected Option 3"
+        ;;
+    *)
+        echo "Invalid option"
+        ;;
+esac
+```
+
+### Task 2 Solution
+
+```bash
+#!/bin/bash
+read -p "Enter option (disk/uptime/exit): " CHOICE
+
+case "$CHOICE" in
+    disk)
+        echo "Option: disk check"
+        ;;
+    uptime)
+        echo "Option: uptime"
+        ;;
+    exit)
+        echo "Exiting."
+        ;;
+    *)
+        echo "Invalid option"
+        ;;
+esac
+```
+
+### Task 3 Solution
+
+```bash
+#!/bin/bash
+read -p "Enter option (disk/uptime/exit): " CHOICE
+
+case "$CHOICE" in
+    disk)
+        echo "Option: disk check"
+        ;;
+    uptime)
+        echo "Option: uptime"
+        ;;
+    exit)
+        echo "Exiting."
+        ;;
+    *)
+        echo "Invalid option"
+        exit 1
+        ;;
+esac
+```
+
+### Task 4 Solution
+
+```bash
+#!/bin/bash
+read -p "Enter option (1=disk, 2=uptime, 3=exit): " CHOICE
+
+case "$CHOICE" in
+    1)
+        df -h .
+        ;;
+    2)
+        uptime
+        ;;
+    3)
+        echo "Exiting."
+        exit 0
+        ;;
+    *)
+        echo "Invalid option."
+        exit 1
+        ;;
+esac
+```

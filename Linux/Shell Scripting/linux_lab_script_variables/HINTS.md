@@ -46,3 +46,84 @@
 - Debug variables: `echo "DEBUG: VAR=$VAR"` to check values
 - Common mistake: spaces in assignment - bash will treat it as a command
 - Use `set -x` at the top of script to see all commands as they execute (debugging)
+
+---
+
+## Solutions
+
+### Task 1 Solution
+
+```bash
+#!/bin/bash
+echo "Backup started for app: myapp"
+echo "Version: 1.0"
+echo "Backing up..."
+echo "Backup complete."
+```
+
+### Task 2 Solution
+
+```bash
+#!/bin/bash
+APP_NAME="myapp"
+VERSION="1.0"
+
+echo "Backup started for app: $APP_NAME"
+echo "Version: $VERSION"
+echo "Backing up..."
+echo "Backup complete."
+```
+
+### Task 3 Solution
+
+```bash
+#!/bin/bash
+APP_NAME="myapp"
+VERSION="1.0"
+BACKUP_DIR="backups"
+
+echo "Backup started for app: $APP_NAME"
+echo "Version: $VERSION"
+echo "Target directory: $BACKUP_DIR"
+echo "Backing up..."
+echo "Backup complete."
+```
+
+### Task 4 Solution
+
+```bash
+#!/bin/bash
+DATE=$(date +%Y-%m-%d)
+
+echo "Backup date: $DATE"
+echo "Backing up logs from src/data/logs/..."
+```
+
+### Task 5 Solution
+
+```bash
+#!/bin/bash
+DATE=$(date +%Y-%m-%d)
+BACKUP_FILE="backup_${DATE}.log"
+
+echo "Backup file will be: $BACKUP_FILE"
+```
+
+### Task 6 Solution
+
+```bash
+#!/bin/bash
+APP_NAME="myapp"
+VERSION="1.0"
+BACKUP_DIR="backups"
+DATE=$(date +%Y-%m-%d)
+BACKUP_FILE="backup_${DATE}.log"
+
+echo "Backup started for app: $APP_NAME"
+echo "Version: $VERSION"
+echo "Backup date: $DATE"
+echo "Target directory: $BACKUP_DIR"
+echo "Backup file will be: $BACKUP_FILE"
+echo "Backing up logs..."
+echo "Backup complete."
+```

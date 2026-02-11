@@ -215,3 +215,180 @@ die() {
 - Return codes limited to 0-255
 - Parameters accessed positionally, not by name
 - No built-in parameter validation (do it manually)
+
+---
+
+## Solutions
+
+### Task 1 Solution
+
+```bash
+#!/bin/bash
+
+greet() {
+    echo "Hello from the function!"
+}
+
+# Call the function
+greet
+greet
+```
+
+### Task 2 Solution
+
+```bash
+#!/bin/bash
+
+check_dir() {
+    if [ -d "$1" ]; then
+        echo "Directory $1 exists"
+    else
+        echo "Directory $1 missing"
+    fi
+}
+
+# Call with different arguments
+check_dir "src/data/environments/project1"
+check_dir "logs"
+check_dir "src/data/environments/missing"
+```
+
+### Task 3 Solution
+
+```bash
+#!/bin/bash
+
+deploy_tier() {
+    echo "Deploying $1..."
+    echo "  $1: deployed"
+}
+
+# Deploy multiple tiers
+deploy_tier "frontend"
+deploy_tier "api"
+deploy_tier "worker"
+deploy_tier "cache"
+```
+
+### Task 4 Solution
+
+```bash
+#!/bin/bash
+
+log_header() {
+    echo "[$(date '+%H:%M:%S')] $1"
+}
+
+# Use the function
+log_header "Deploy started."
+echo "  Stopping old services..."
+echo "  Copying new files..."
+echo "  Starting new services..."
+log_header "Deploy complete."
+```
+
+### Task 5 Solution
+
+```bash
+#!/bin/bash
+
+deploy_tier() {
+    echo "Deploying $1..."
+    echo "  $1: deployed"
+}
+
+# Loop over tiers and deploy each
+for TIER in frontend api worker; do
+    deploy_tier "$TIER"
+done
+
+echo "All tiers deployed!"
+```
+
+### Task 6 Solution
+
+```bash
+#!/bin/bash
+
+# Function for formatted log messages
+log_header() {
+    echo "========================================"
+    echo "[$(date '+%Y-%m-%d %H:%M:%S')] $1"
+    echo "========================================"
+}
+
+# Function to deploy a single tier
+deploy_tier() {
+    echo "  → Stopping $1..."
+    sleep 1
+    echo "  → Deploying $1 from /opt/releases/$1..."
+    sleep 1
+    echo "  → Starting $1..."
+    echo "  ✓ $1: deployed successfully"
+    echo ""
+}
+
+# Main deployment flow
+log_header "Starting Multi-Tier Deployment"
+
+echo "Deploying application tiers..."
+echo ""
+
+for TIER in frontend api worker; do
+    deploy_tier "$TIER"
+done
+
+log_header "All tiers deployed. Running smoke tests..."
+echo "✓ Smoke tests passed!"
+
+log_header "Deployment Complete"
+```
+
+### Task 7 Solution
+
+```bash
+#!/bin/bash
+
+show_disk() {
+    echo "=== Disk Usage (current directory) ==="
+    df -h .
+}
+
+show_uptime() {
+    echo "=== System Uptime ==="
+    uptime
+}
+
+show_status() {
+    echo "=== System Status ==="
+    echo "Hostname: $(hostname)"
+    echo "Date: $(date)"
+}
+
+echo "Operations Menu:"
+echo "1) Check disk usage"
+echo "2) Show uptime"
+echo "3) Show system status"
+echo "4) Exit"
+read -p "Enter choice: " CHOICE
+
+case "$CHOICE" in
+    1)
+        show_disk
+        ;;
+    2)
+        show_uptime
+        ;;
+    3)
+        show_status
+        ;;
+    4)
+        echo "Exiting."
+        exit 0
+        ;;
+    *)
+        echo "Invalid option."
+        exit 1
+        ;;
+esac
+```

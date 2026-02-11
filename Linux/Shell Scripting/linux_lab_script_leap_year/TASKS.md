@@ -24,25 +24,23 @@ Examples: 2000 is leap, 1900 is not, 2024 is leap, 2023 is not.
 
 **Objective:** Use arithmetic to check if a year is divisible by 4
 
-**Instructions:**
-1. Create a script called `leap_step1.sh`
-2. Add the shebang and set a variable: `YEAR=2024`
-3. Use an arithmetic conditional to check if the year is divisible by 4:
-   ```bash
-   #!/bin/bash
-   YEAR=2024
-   if (( YEAR % 4 == 0 )); then
-       echo "$YEAR is divisible by 4 (candidate for leap year)"
-   else
-       echo "$YEAR is not divisible by 4 (not a leap year)"
-   fi
-   ```
-4. Run the script
-5. Change YEAR to 2023 and run again
+**Requirements:**
+- Create `leap_step1.sh` with shebang
+- Set YEAR variable to 2024
+- Use arithmetic conditional to check if divisible by 4
+- If divisible: print "[year] is divisible by 4 (candidate for leap year)"
+- If not: print "[year] is not divisible by 4 (not a leap year)"
+- Test with 2024, then change to 2023 and test again
+
+**Technical Hints:**
+- Arithmetic conditional: `(( expression ))`
+- Modulo operator: `%` (remainder after division)
+- Check if remainder is 0: `(( YEAR % 4 == 0 ))`
+- Use if/else with arithmetic conditional
 
 **Expected Output:**
-- With 2024: "2024 is divisible by 4 (candidate for leap year)"
-- With 2023: "2023 is not divisible by 4 (not a leap year)"
+- 2024: "2024 is divisible by 4 (candidate for leap year)"
+- 2023: "2023 is not divisible by 4 (not a leap year)"
 
 **Script Name:** `leap_step1.sh`
 
@@ -52,24 +50,21 @@ Examples: 2000 is leap, 1900 is not, 2024 is leap, 2023 is not.
 
 **Objective:** Years divisible by 100 are not leap years (unless divisible by 400)
 
-**Instructions:**
-1. Create a script called `leap_step2.sh`
-2. Set `YEAR=1900`
-3. Implement logic: if divisible by 100 and not by 400, it's not a leap year:
-   ```bash
-   #!/bin/bash
-   YEAR=1900
-   if (( YEAR % 400 == 0 )); then
-       echo "$YEAR is a leap year (divisible by 400)"
-   elif (( YEAR % 100 == 0 )); then
-       echo "$YEAR is not a leap year (divisible by 100 but not 400)"
-   elif (( YEAR % 4 == 0 )); then
-       echo "$YEAR is a leap year (divisible by 4, not by 100)"
-   else
-       echo "$YEAR is not a leap year (not divisible by 4)"
-   fi
-   ```
-4. Test with YEAR=1900, YEAR=2000, YEAR=2024, YEAR=2023
+**Requirements:**
+- Create `leap_step2.sh` with shebang
+- Set YEAR to 1900
+- Implement complete leap year logic with if/elif/else:
+  1. If divisible by 400: is a leap year
+  2. Else if divisible by 100: not a leap year
+  3. Else if divisible by 4: is a leap year
+  4. Else: not a leap year
+- Print appropriate message for each case
+- Test with: 1900, 2000, 2024, 2023
+
+**Technical Hints:**
+- Check most specific rule first (400), then less specific (100, 4)
+- Use multiple elif branches
+- Order matters! Check 400 before 100
 
 **Expected Output:**
 - 1900 → not a leap year (divisible by 100 but not 400)
@@ -85,26 +80,25 @@ Examples: 2000 is leap, 1900 is not, 2024 is leap, 2023 is not.
 
 **Objective:** Prompt for the year instead of hardcoding it
 
-**Instructions:**
-1. Create a script called `leap_year.sh`
-2. Prompt the user for a year:
-   ```bash
-   #!/bin/bash
-   read -p "Enter a year: " YEAR
-   ```
-3. Use the same leap-year logic from Task 2 (if/elif/else with % 400, % 100, % 4)
-4. Output only one line: either "YEAR is a leap year." or "YEAR is not a leap year."
-5. Make it executable and test with 2000, 1900, 2024
+**Requirements:**
+- Create `leap_year.sh` with shebang
+- Prompt user: "Enter a year: "
+- Store input in YEAR variable
+- Apply same leap year logic from Task 2
+- Output simplified messages:
+  - Leap year: "[year] is a leap year."
+  - Not leap year: "[year] is not a leap year."
+- Test with: 2000, 1900, 2024, 2023
+
+**Technical Hints:**
+- Use `read -p "prompt" VARIABLE`
+- Reuse the if/elif/else structure from Task 2
+- Simplify output messages (no need to explain why)
 
 **Expected Output:**
 ```
 Enter a year: 2024
 2024 is a leap year.
-```
-
-```
-Enter a year: 1900
-1900 is not a leap year.
 ```
 
 **Script Name:** `leap_year.sh`

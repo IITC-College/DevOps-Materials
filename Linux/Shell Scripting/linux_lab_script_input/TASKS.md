@@ -16,25 +16,33 @@ Learn to capture user input in bash scripts using the `read` command. You'll bui
 
 **Objective:** Learn to capture user input with the `read` command
 
-**Instructions:**
-1. Create a script called `check_service.sh`
-2. Add the shebang: `#!/bin/bash`
-3. Add a read command with prompt:
-   ```bash
-   read -p "Enter service name: " SERVICE
-   ```
-4. Add an echo to display what was entered:
-   ```bash
-   echo "Checking service: $SERVICE"
-   ```
-5. Make it executable and run it
-6. Type a service name (like "web" or "database") and press Enter
+**Requirements:**
+- Create a script called `check_service.sh`
+- Add the shebang line
+- Use the `read` command to prompt the user with "Enter service name: "
+- Store the user's input in a variable called SERVICE
+- Display a message showing what was entered: "Checking service: [service name]"
+- Make it executable and test it
+- Try typing different service names (like "web" or "database")
+
+**Technical Hints:**
+- The `read` command with `-p` flag allows inline prompts
+- Syntax: `read -p "prompt text" VARIABLE_NAME`
+- When declaring with `read`, don't use `$` before the variable name
+- To use the value later, reference it with `$VARIABLE_NAME`
+- The prompt text should end with a space for better readability
 
 **Expected Output:**
 ```
 Enter service name: web
 Checking service: web
 ```
+
+**Testing:**
+1. Run the script
+2. Type "web" and press Enter
+3. Run again and type "database"
+4. The script should echo back whatever you enter
 
 **Script Name:** `check_service.sh`
 
@@ -44,20 +52,29 @@ Checking service: web
 
 **Objective:** Learn the difference between `read` with and without the `-p` option
 
-**Instructions:**
-1. Run your current script (`./check_service.sh`) and notice how the prompt works
-2. Create a test script called `read_test.sh` with:
-   ```bash
-   #!/bin/bash
-   read SERVICE
-   echo "Service: $SERVICE"
-   ```
-3. Run both scripts and compare the user experience
-4. Notice that `read -p` shows the prompt on the same line, while plain `read` just waits
+**Requirements:**
+- Run your current `check_service.sh` script and observe the prompt
+- Create a new test script called `read_test.sh`
+- In the test script, use plain `read` (without `-p`)
+- Store input in a SERVICE variable
+- Echo the service name
+- Run both scripts and compare the user experience
+- Identify which version provides better user experience
 
-**Expected Output:**
-- `read -p`: Prompt appears, you type on the same line
-- plain `read`: Cursor waits on next line, no visible prompt
+**Technical Hints:**
+- `read -p "text"` = inline prompt (text appears, cursor waits on same line)
+- `read` (no `-p`) = no visible prompt (cursor waits on blank line)
+- Both work, but `-p` is more user-friendly
+- The `-p` flag stands for "prompt"
+
+**Expected Behavior:**
+- `check_service.sh` with `-p`: Prompt appears, you type on the same line
+- `read_test.sh` without `-p`: Cursor waits on next line, no visible prompt (confusing!)
+
+**Testing:**
+1. Run `check_service.sh` - notice the clear prompt
+2. Run `read_test.sh` - notice no prompt appears
+3. Conclude: Always use `-p` for better UX
 
 **Script Name:** `read_test.sh` (new), `check_service.sh` (comparison)
 
@@ -67,14 +84,18 @@ Checking service: web
 
 **Objective:** Build better user feedback with multiple echo statements
 
-**Instructions:**
-1. Open `check_service.sh`
-2. After the existing echo, add another line:
-   ```bash
-   echo "Will check status of $SERVICE now."
-   ```
-3. Run the script and enter a service name
-4. Notice how the variable is used in multiple places
+**Requirements:**
+- Modify `check_service.sh`
+- After the existing echo statement, add a second confirmation message
+- The new message should say "Will check status of [service name] now."
+- Use the SERVICE variable in both messages
+- Run and test to verify the variable works in multiple places
+
+**Technical Hints:**
+- You can use the same variable as many times as needed
+- Each `$SERVICE` reference will be replaced with the user's input
+- Variables persist throughout the entire script execution
+- Adding confirmation messages improves user experience
 
 **Expected Output:**
 ```
@@ -82,6 +103,12 @@ Enter service name: database
 Checking service: database
 Will check status of database now.
 ```
+
+**Testing:**
+1. Run the script
+2. Enter "database"
+3. Both messages should show "database"
+4. Try different service names to verify it works
 
 **Script Name:** `check_service.sh` (modified)
 

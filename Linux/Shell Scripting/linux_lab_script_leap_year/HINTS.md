@@ -26,3 +26,75 @@
 - **Arithmetic**: `(( a % b ))` is the remainder of a divided by b
 - **Order of checks**: 400 → 100 → 4 → else
 - **Quoting**: Inside `(( ))` you can use YEAR unquoted; in `[[ ]]` use `"$YEAR"`
+
+---
+
+## Solutions
+
+### Task 1 Solution
+
+```bash
+#!/bin/bash
+YEAR=2024
+if (( YEAR % 4 == 0 )); then
+    echo "$YEAR is divisible by 4 (candidate for leap year)"
+else
+    echo "$YEAR is not divisible by 4 (not a leap year)"
+fi
+```
+
+### Task 2 Solution
+
+```bash
+#!/bin/bash
+YEAR=1900
+if (( YEAR % 400 == 0 )); then
+    echo "$YEAR is a leap year (divisible by 400)"
+elif (( YEAR % 100 == 0 )); then
+    echo "$YEAR is not a leap year (divisible by 100 but not 400)"
+elif (( YEAR % 4 == 0 )); then
+    echo "$YEAR is a leap year (divisible by 4, not by 100)"
+else
+    echo "$YEAR is not a leap year (not divisible by 4)"
+fi
+```
+
+### Task 3 Solution
+
+```bash
+#!/bin/bash
+read -p "Enter a year: " YEAR
+
+if (( YEAR % 400 == 0 )); then
+    echo "$YEAR is a leap year."
+elif (( YEAR % 100 == 0 )); then
+    echo "$YEAR is not a leap year."
+elif (( YEAR % 4 == 0 )); then
+    echo "$YEAR is a leap year."
+else
+    echo "$YEAR is not a leap year."
+fi
+```
+
+### Task 4 Solution (Optional)
+
+```bash
+#!/bin/bash
+read -p "Enter a year: " YEAR
+
+# Validate input is a positive number
+if [[ ! "$YEAR" =~ ^[0-9]+$ ]]; then
+    echo "Invalid year. Please enter a positive number."
+    exit 1
+fi
+
+if (( YEAR % 400 == 0 )); then
+    echo "$YEAR is a leap year."
+elif (( YEAR % 100 == 0 )); then
+    echo "$YEAR is not a leap year."
+elif (( YEAR % 4 == 0 )); then
+    echo "$YEAR is a leap year."
+else
+    echo "$YEAR is not a leap year."
+fi
+```

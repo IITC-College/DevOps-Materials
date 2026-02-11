@@ -76,3 +76,116 @@
 - Test your error paths (try to make them fail)
 - Consider using `set -e` at top of script (exit on any error)
 - Use `set -u` to catch undefined variables
+
+---
+
+## Solutions
+
+### Task 1 Solution
+
+```bash
+#!/bin/bash
+CONFIG="src/data/configs/.env.prod"
+
+if [ -f "$CONFIG" ]; then
+    echo "Config file exists."
+else
+    echo "Config file not found."
+fi
+```
+
+### Task 2 Solution
+
+```bash
+#!/bin/bash
+DEPLOY_DIR="src/data/environments/prod"
+
+if [ -d "$DEPLOY_DIR" ]; then
+    echo "Deploy directory exists."
+else
+    echo "Deploy directory not found."
+fi
+```
+
+### Task 3 Solution
+
+```bash
+#!/bin/bash
+read -p "Enter environment (prod or staging): " ENV
+
+if [ -z "$ENV" ]; then
+    echo "Error: environment cannot be empty."
+    exit 1
+fi
+
+echo "Environment: $ENV"
+```
+
+### Task 4 Solution
+
+```bash
+#!/bin/bash
+read -p "Enter environment (prod or staging): " ENV
+
+if [ -z "$ENV" ]; then
+    echo "Error: Environment cannot be empty."
+    exit 1
+fi
+
+if [ "$ENV" = "prod" ]; then
+    echo "Deploying to PRODUCTION."
+elif [ "$ENV" = "staging" ]; then
+    echo "Deploying to STAGING."
+else
+    echo "Error: environment must be prod or staging."
+    exit 1
+fi
+```
+
+### Task 5 Solution
+
+```bash
+#!/bin/bash
+TARGET="src/data/environments/backup"
+
+if [ ! -d "$TARGET" ]; then
+    mkdir -p "$TARGET"
+    echo "Created $TARGET"
+else
+    echo "$TARGET already exists."
+fi
+```
+
+### Task 6 Solution
+
+```bash
+#!/bin/bash
+
+# Check config file
+CONFIG="src/data/configs/.env.prod"
+if [ ! -f "$CONFIG" ]; then
+    echo "Error: Config file not found."
+    exit 1
+fi
+
+# Check deploy directory
+DEPLOY_DIR="src/data/environments/prod"
+if [ ! -d "$DEPLOY_DIR" ]; then
+    echo "Error: Deploy directory not found."
+    exit 1
+fi
+
+# Validate environment
+read -p "Enter environment (prod or staging): " ENV
+if [ -z "$ENV" ]; then
+    echo "Error: Environment cannot be empty."
+    exit 1
+fi
+
+if [ "$ENV" != "prod" ] && [ "$ENV" != "staging" ]; then
+    echo "Error: Environment must be prod or staging."
+    exit 1
+fi
+
+echo "All checks passed! Ready to deploy to $ENV."
+```
