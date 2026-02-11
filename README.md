@@ -231,37 +231,37 @@ Hands-on coding exercises for mastering bash scripting. Each lab is a self-conta
     ```
 
 - **Lab 19**: Variables
-  - **Version**: v1.0
+  - **Version**: v1.1
   - **Lab ID**: `linux_lab_script_variables`
   - **Focus**: Variables, command substitution, timestamps, dynamic values
   - **Duration**: 25-35 minutes
   - **Download**:
     ```bash
-    curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v1.0-script-variables/linux_lab_script_variables.tar.gz | tar -xz && cd linux_lab_script_variables && cat TASKS.md
+    curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v1.1-script-variables/linux_lab_script_variables.tar.gz | tar -xz && cd linux_lab_script_variables && cat TASKS.md
     ```
 
 - **Lab 20**: User Input
-  - **Version**: v1.0
+  - **Version**: v1.1
   - **Lab ID**: `linux_lab_script_input`
   - **Focus**: Reading input with read, validation importance, empty input handling
   - **Duration**: 20-30 minutes
   - **Download**:
     ```bash
-    curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v1.0-script-input/linux_lab_script_input.tar.gz | tar -xz && cd linux_lab_script_input && cat TASKS.md
+    curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v1.1-script-input/linux_lab_script_input.tar.gz | tar -xz && cd linux_lab_script_input && cat TASKS.md
     ```
 
 - **Lab 21**: Conditionals
-  - **Version**: v1.0
+  - **Version**: v1.1
   - **Lab ID**: `linux_lab_script_conditionals`
   - **Focus**: File/directory checks, input validation, if/elif/else, building validators
   - **Duration**: 25-35 minutes
   - **Download**:
     ```bash
-    curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v1.0-script-conditionals/linux_lab_script_conditionals.tar.gz | tar -xz && cd linux_lab_script_conditionals && cat TASKS.md
+    curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v1.1-script-conditionals/linux_lab_script_conditionals.tar.gz | tar -xz && cd linux_lab_script_conditionals && cat TASKS.md
     ```
 
 - **Lab 22**: Case Statements
-  - **Version**: v1.0
+  - **Version**: v1.1
   - **Lab ID**: `linux_lab_script_case`
   - **Focus**: Case syntax, menu systems, pattern matching, default branches (no functions)
   - **Duration**: 20-30 minutes
@@ -271,17 +271,17 @@ Hands-on coding exercises for mastering bash scripting. Each lab is a self-conta
     ```
 
 - **Lab 23**: Loops
-  - **Version**: v1.0
+  - **Version**: v1.1
   - **Lab ID**: `linux_lab_script_loops`
   - **Focus**: For loops, while loops, retry patterns, nested loops
   - **Duration**: 25-35 minutes
   - **Download**:
     ```bash
-    curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v1.0-script-loops/linux_lab_script_loops.tar.gz | tar -xz && cd linux_lab_script_loops && cat TASKS.md
+    curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v1.1-script-loops/linux_lab_script_loops.tar.gz | tar -xz && cd linux_lab_script_loops && cat TASKS.md
     ```
 
 - **Lab 24**: Functions
-  - **Version**: v1.0
+  - **Version**: v1.1
   - **Lab ID**: `linux_lab_script_functions`
   - **Focus**: Defining functions, parameters, loops, case+functions menu, reusability
   - **Duration**: 30-40 minutes
@@ -291,63 +291,63 @@ Hands-on coding exercises for mastering bash scripting. Each lab is a self-conta
     ```
 
 - **Lab 25**: Exit Codes
-  - **Version**: v1.0
+  - **Version**: v1.1
   - **Lab ID**: `linux_lab_script_exit_codes`
   - **Focus**: Exit codes, $?, chaining with && and ||, fail-fast patterns, CI/CD integration
   - **Duration**: 25-35 minutes
   - **Download**:
     ```bash
-    curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v1.0-script-exit-codes/linux_lab_script_exit_codes.tar.gz | tar -xz && cd linux_lab_script_exit_codes && cat TASKS.md
+    curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v1.1-script-exit-codes/linux_lab_script_exit_codes.tar.gz | tar -xz && cd linux_lab_script_exit_codes && cat TASKS.md
     ```
 
 - **Lab 26**: Debugging
-  - **Version**: v1.0
+  - **Version**: v1.1
   - **Lab ID**: `linux_lab_script_debugging`
   - **Focus**: Finding and fixing common bash errors, syntax debugging, error messages
   - **Duration**: 25-35 minutes
   - **Download**:
     ```bash
-    curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v1.0-script-debugging/linux_lab_script_debugging.tar.gz | tar -xz && cd linux_lab_script_debugging && cat TASKS.md
+    curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v1.1-script-debugging/linux_lab_script_debugging.tar.gz | tar -xz && cd linux_lab_script_debugging && cat TASKS.md
     ```
 
 - **Lab 27**: Ops Helper Tool
-  - **Version**: v1.0
+  - **Version**: v1.1
   - **Lab ID**: `linux_lab_script_ops_helper`
   - **Focus**: Building a practical ops tool combining all concepts
   - **Duration**: 25-35 minutes
   - **Download**:
     ```bash
-    curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v1.0-script-ops-helper/linux_lab_script_ops_helper.tar.gz | tar -xz && cd linux_lab_script_ops_helper && cat TASKS.md
+    curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v1.1-script-ops-helper/linux_lab_script_ops_helper.tar.gz | tar -xz && cd linux_lab_script_ops_helper && cat TASKS.md
     ```
 
 - **Lab 28**: Mini DevOps Tool (Capstone)
-  - **Version**: v1.0
+  - **Version**: v1.1
   - **Lab ID**: `linux_lab_script_mini_devops_tool`
   - **Focus**: Comprehensive capstone project - menu-driven tool with health checks, status, backups, and CI/CD pipeline
   - **Duration**: 35-45 minutes
   - **Download**:
     ```bash
-    curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v1.0-script-mini-devops-tool/linux_lab_script_mini_devops_tool.tar.gz | tar -xz && cd linux_lab_script_mini_devops_tool && cat TASKS.md
+    curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v1.1-script-mini-devops-tool/linux_lab_script_mini_devops_tool.tar.gz | tar -xz && cd linux_lab_script_mini_devops_tool && cat TASKS.md
     ```
 
 - **Lab 29**: Leap Year
-  - **Version**: v1.0
+  - **Version**: v1.1
   - **Lab ID**: `linux_lab_script_leap_year`
   - **Focus**: Arithmetic, conditionals, user input – build a leap-year checker (divisible by 4, 100, 400)
   - **Duration**: 20-30 minutes
   - **Download**:
     ```bash
-    curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v1.0-script-leap-year/linux_lab_script_leap_year.tar.gz | tar -xz && cd linux_lab_script_leap_year && cat TASKS.md
+    curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v1.1-script-leap-year/linux_lab_script_leap_year.tar.gz | tar -xz && cd linux_lab_script_leap_year && cat TASKS.md
     ```
 
 - **Lab 30**: Number Guessing Game
-  - **Version**: v1.0
+  - **Version**: v1.1
   - **Lab ID**: `linux_lab_script_guessing_game`
   - **Focus**: Random numbers, read, conditionals, while loop – guess until correct, count attempts
   - **Duration**: 25-35 minutes
   - **Download**:
     ```bash
-    curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v1.0-script-guessing-game/linux_lab_script_guessing_game.tar.gz | tar -xz && cd linux_lab_script_guessing_game && cat TASKS.md
+    curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v1.1-script-guessing-game/linux_lab_script_guessing_game.tar.gz | tar -xz && cd linux_lab_script_guessing_game && cat TASKS.md
     ```
 
 #### Networking
