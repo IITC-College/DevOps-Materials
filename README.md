@@ -374,6 +374,23 @@ Hands-on coding exercises for mastering bash scripting. Each lab is a self-conta
 
 ---
 
+### Docker Module
+
+#### Container Basics
+
+- **Lab 1**: Docker Container Basics
+  - **Version**: v1.0
+  - **Lab ID**: `docker_lab_basics`
+  - **Focus**: Run containers (hello-world, nginx, PostgreSQL), manage lifecycle, view logs, exec into containers
+  - **Duration**: 30-40 minutes
+  - **Download**:
+    ```bash
+    curl -L https://github.com/IITC-College/DevOps-Materials/releases/download/v1.0/docker_lab_basics.tar.gz | tar -xz && cd docker_lab_basics && cat README.md
+    ```
+  - **Start**: Open `TASKS.md` to begin the lab
+
+---
+
 ## 👨‍🎓 For Students
 
 ### How to Use This Repository
@@ -552,16 +569,16 @@ Every lab must meet these criteria:
 | Linux           | Networking            | 1    | 50+         | ~20KB      |
 | Linux           | Users & Groups        | 1    | 30+         | ~10KB      |
 | **Total Linux** |                       | **32** | **720+**    | **~280KB** |
-| Docker          | -                     | -    | -           | -          |
+| Docker          | Container Basics      | 1    | 10+         | ~75KB      |
 | K8s             | -                     | -    | -           | -          |
 
 ---
 
 ## 🔗 Links
 
-- **Repository**: https://github.com/IITC-College/DevOps-Jan26
-- **Releases**: https://github.com/IITC-College/DevOps-Jan26/releases (latest: [v1.1-shell-scripting-hardened](https://github.com/IITC-College/DevOps-Jan26/releases/tag/v1.1-shell-scripting-hardened))
-- **Issues**: https://github.com/IITC-College/DevOps-Jan26/issues
+- **Repository**: https://github.com/IITC-College/DevOps-Materials
+- **Releases**: https://github.com/IITC-College/DevOps-Materials/releases
+- **Issues**: https://github.com/IITC-College/DevOps-Materials/issues
 
 ---
 
@@ -571,6 +588,6 @@ Course materials © 2026 IITC College. For educational use only.
 
 ---
 
-**Last Updated**: 2026-02-11  
-**Repository**: IITC-College/DevOps-Jan26  
+**Last Updated**: 2026-02-13  
+**Repository**: IITC-College/DevOps-Materials  
 **Maintainer**: Course Instructor

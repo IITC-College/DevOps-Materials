@@ -27,6 +27,7 @@ lab_name/
 **TASKS.md conventions:**
 
 - Each task: **Objective**, **Instructions** (numbered), **Expected Output**.
+- **Always put a blank line** between the **Instructions:** heading and the first numbered item (1. …).
 - Put commands in single code blocks. Prefer one-line commands so copy-paste works (avoid `\` line continuations when possible).
 - Close code blocks with ` ``` ` only (no language name on the closing fence).
 - Keep notes (e.g. “-e sets environment variables”) outside the code block, after the block.

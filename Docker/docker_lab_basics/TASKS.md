@@ -17,6 +17,7 @@ Learn the fundamentals of working with Docker containers. You'll practice pullin
 **Objective:** Run Docker's hello-world image to verify your installation
 
 **Instructions:**
+
 1. Run the hello-world container:
    ```bash
    docker run hello-world
@@ -39,6 +40,7 @@ You should see a message that says "Hello from Docker!" followed by an explanati
 **Objective:** View the images you have on your system
 
 **Instructions:**
+
 1. List all Docker images:
    ```bash
    docker images
@@ -59,6 +61,7 @@ hello-world   latest    xxxxxxxxxxxxx  X months ago   XX.XkB
 **Objective:** Run a web server container and access it from your browser
 
 **Instructions:**
+
 1. Run nginx container with port mapping:
    ```bash
    docker run -d -p 8080:80 --name my-nginx nginx
@@ -91,6 +94,7 @@ Open `http://localhost:8080` in your web browser to see the nginx welcome page.
 **Objective:** Check the logs of a running container
 
 **Instructions:**
+
 1. View the logs from your nginx container:
    ```bash
    docker logs my-nginx
@@ -114,6 +118,7 @@ You should see access logs showing GET requests to "/" with HTTP status code 200
 **Objective:** Run commands inside a running container
 
 **Instructions:**
+
 1. Execute a bash shell inside the nginx container:
    ```bash
    docker exec -it my-nginx bash
@@ -140,6 +145,7 @@ You should see access logs showing GET requests to "/" with HTTP status code 200
 **Objective:** Learn how to stop and clean up containers
 
 **Instructions:**
+
 1. Stop the nginx container:
    ```bash
    docker stop my-nginx
@@ -172,6 +178,7 @@ You should see access logs showing GET requests to "/" with HTTP status code 200
 **Objective:** Run a database container with environment variables
 
 **Instructions:**
+
 1. Run a PostgreSQL container (copy this entire line):
    ```bash
    docker run -d --name my-postgres -e POSTGRES_PASSWORD=mysecretpassword -e POSTGRES_DB=testdb -p 5432:5432 postgres
@@ -189,7 +196,8 @@ You should see access logs showing GET requests to "/" with HTTP status code 200
    docker exec -it my-postgres psql -U postgres -d testdb
    ```
 
-4. Inside psql, run some SQL commands:
+4. Inside psql, run these SQL commands (type them one at a time and press Enter, or copy-paste the block). Each command is explained below so you know what you're doing:
+
    ```sql
    \l
    \dt
@@ -199,10 +207,19 @@ You should see access logs showing GET requests to "/" with HTTP status code 200
    \q
    ```
 
+   **What each command does:**
+   - **`\l`** — Lists all databases on the server. You should see `testdb` in the list (the one we created with the container).
+   - **`\dt`** — Lists all tables in the current database. At first it will be empty; after you create the table, you'll see `users`.
+   - **`CREATE TABLE users (...)`** — Creates a new table named `users`. The columns are: `id` (auto-incrementing number, used as the primary key) and `name` (text, up to 100 characters). The semicolon `;` at the end tells PostgreSQL to run the command.
+   - **`INSERT INTO users (name) VALUES ('John Doe');`** — Adds one row into the `users` table: the `name` column gets the value `'John Doe'`. The `id` is filled automatically.
+   - **`SELECT * FROM users;`** — Shows all rows in the `users` table. You should see one row with id 1 and name John Doe.
+   - **`\q`** — Quits the psql client and returns you to your normal terminal (still inside the container until you type `exit`).
+
 **Expected Output:**
 - The logs show PostgreSQL starting successfully
 - You can connect to the database
-- The SQL commands create a table and insert data
+- `\l` shows a list including `testdb`; `\dt` is empty at first, then shows `users`
+- After INSERT and SELECT, you see one row: id=1, name=John Doe
 - `\q` exits the psql client
 
 ---
@@ -212,6 +229,7 @@ You should see access logs showing GET requests to "/" with HTTP status code 200
 **Objective:** View detailed information about a container
 
 **Instructions:**
+
 1. Inspect the PostgreSQL container:
    ```bash
    docker inspect my-postgres
@@ -239,6 +257,7 @@ You should see access logs showing GET requests to "/" with HTTP status code 200
 **Objective:** Run multiple containers simultaneously
 
 **Instructions:**
+
 1. Run another nginx container on a different port:
    ```bash
    docker run -d -p 8081:80 --name nginx-2 nginx
@@ -249,16 +268,15 @@ You should see access logs showing GET requests to "/" with HTTP status code 200
    docker ps
    ```
 
-3. Test both web servers:
+3. Test the nginx container you just started (the first nginx was stopped and removed in Task 6, so only nginx-2 is running now):
    ```bash
-   curl http://localhost:8080
    curl http://localhost:8081
    ```
 
 **Expected Output:**
-- `docker ps` shows both postgres and nginx containers running
-- Both curl commands return nginx welcome pages
-- Each container is isolated and runs independently
+- `docker ps` shows postgres and nginx-2 running (two containers)
+- The curl command to port 8081 returns the nginx welcome page
+- Each container runs independently; you can have multiple containers at once
 
 ---
 
@@ -267,15 +285,17 @@ You should see access logs showing GET requests to "/" with HTTP status code 200
 **Objective:** Stop and remove all containers and images
 
 **Instructions:**
+
 1. Stop all running containers:
    ```bash
    docker stop my-postgres nginx-2
    ```
 
-2. Remove all containers:
+2. Remove all containers (including the exited hello-world container from Task 1; it stays as "Exited" and blocks removing its image until you remove it):
    ```bash
-   docker rm my-postgres nginx-2
+   docker rm $(docker ps -aq)
    ```
+   This removes every stopped container. Without this, `docker rmi hello-world` in step 4 would fail with "container is using the image".
 
 3. View all images:
    ```bash
