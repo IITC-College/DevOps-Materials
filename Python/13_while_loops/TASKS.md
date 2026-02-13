@@ -83,92 +83,95 @@ You chose 7
 
 ---
 
-## Task 6 – Multiply by 2 until >= 100 (`while_double.py`)
+## Task 6 – Shopping total (while + input + variables + str) (`while_shopping.py`)
 
-- Create `while_double.py`.
-- Start with `value = 1`. While `value < 100`, print `value`, then do `value *= 2`. After the loop print the final value. Run and see 1, 2, 4, 8, 16, 32, 64 then exit.
+- Create `while_shopping.py`.
+- In a loop: ask for item name (e.g. "Item name (or 'done' to finish):"). If the user types `"done"`, exit the loop. Otherwise ask for price (float), add the price to a running total, and print a line like "Added [name]: [price]. Running total: [total]" using variables and `str()` so the numbers show correctly. After the loop print "Total: " + str(total). Combines: while, input(), float(), if and break, variables, string concatenation with str().
 
-**Expected output:**
+**Expected output (example – bread 2.5, milk 1.2, done):**
 ```
-1
-2
-4
-8
-16
-32
-64
-128
+Item name (or 'done' to finish): bread
+Price: 2.5
+Added bread: 2.5. Running total: 2.5
+Item name (or 'done' to finish): milk
+Price: 1.2
+Added milk: 1.2. Running total: 3.7
+Item name (or 'done' to finish): done
+Total: 3.7
 ```
 
 ---
 
-## Task 7 – Sum of entered numbers (stop at 0) (`while_sum_input.py`)
+## Task 7 – Simple calculator menu (while + input + if/elif/else + operators) (`while_calc_menu.py`)
 
-- Create `while_sum_input.py`.
-- Use a variable `total = 0`. In a loop, read a number with `input()` (convert to int). If the number is 0, break out of the loop (or use `while True` and break when 0). Otherwise add it to `total`. After the loop print the total. Test by entering e.g. 10, 20, 30, 0.
+- Create `while_calc_menu.py`.
+- In a loop: print a menu "1=Add 2=Subtract 3=Multiply 4=Quit" and read the user’s choice (int). If 4, break. If 1: read two numbers, print their sum. If 2: read two numbers, print their difference. If 3: read two numbers, print their product. Else print "Invalid option". Use variables for choice and for the two numbers. Combines: while, input(), int(), if/elif/else, arithmetic operators.
+
+**Expected output (example – 1, then 10 and 3, then 4):**
+```
+1=Add 2=Subtract 3=Multiply 4=Quit
+Choice: 1
+First number: 10
+Second number: 3
+13
+1=Add 2=Subtract 3=Multiply 4=Quit
+Choice: 4
+Bye
+```
+
+---
+
+## Task 8 – Password retry (while + input + conditions + break) (`while_password.py`)
+
+- Create `while_password.py`.
+- Set a secret password in a variable (e.g. `"python"`). Use a variable `attempts = 0`. While `attempts < 3`: ask for the password with input(). If it matches the secret, print "Welcome" and break. Else print "Wrong. Attempts left: X" (use a variable or expression for X, e.g. `2 - attempts` before you add 1), then do `attempts += 1`. After the loop, if the user never succeeded (e.g. check `attempts == 3`), print "Locked". Combines: while, input(), comparison (==), if/else, break, variables, +=.
+
+**Expected output (example – wrong twice, then correct):**
+```
+Password: abc
+Wrong. Attempts left: 2
+Password: xyz
+Wrong. Attempts left: 1
+Password: python
+Welcome
+```
+
+---
+
+## Task 9 – Number stats: count, sum, average (while + input + break + conditions) (`while_stats.py`)
+
+- Create `while_stats.py`.
+- Use variables `total = 0` and `count = 0`. In a loop, read a number (int). If it is 0, break. Otherwise add it to `total`, add 1 to `count`, and continue. After the loop print "Count: X, Sum: Y" using the variables. If `count > 0`, compute average as `total / count` (use float) and print "Average: Z". If count is 0, print "No numbers entered". Combines: while, input(), int(), break, accumulation, if/else, division, print with variables and str().
 
 **Expected output (example – 10, 20, 30, 0):**
 ```
-Enter a number (0 to stop): 10
-Enter a number (0 to stop): 20
-Enter a number (0 to stop): 30
-Enter a number (0 to stop): 0
-Total: 60
+Enter a number (0 to finish): 10
+Enter a number (0 to finish): 20
+Enter a number (0 to finish): 30
+Enter a number (0 to finish): 0
+Count: 3, Sum: 60
+Average: 20.0
 ```
 
 ---
 
-## Task 8 – Print even numbers up to N (`while_evens.py`)
+## Task 10 – Student name and average of N scores (while + input + variables + str) (`while_student_avg.py`)
 
-- Create `while_evens.py`.
-- Read an integer `n`. Use a variable `i = 0` (or 2). While `i <= n`, if `i` is even (e.g. `i % 2 == 0`), print `i`. Then `i += 1`. Run with n=8 to get 0, 2, 4, 6, 8 (or 2, 4, 6, 8 if you start at 2 and go by 2).
+- Create `while_student_avg.py`.
+- Ask for the student’s name (input, store in a variable). Ask "How many scores?" and read an integer `n`. Use a counter `i = 0` and `total = 0`. While `i < n`: ask for "Score [i+1]:", read the score (int or float), add it to total, then `i += 1`. After the loop compute `average = total / n`. Print one line like "Student: [name], Average: [average]" using string concatenation and `str()` (e.g. `"Student: " + name + ", Average: " + str(round(average, 1))`). Combines: input(), variables, while with counter, int()/float(), accumulation, division, str() and concatenation.
 
-**Expected output (n = 8, evens 0 to 8):**
+**Expected output (example – name "Ali", 3 scores 80, 90, 70):**
 ```
-Enter n: 8
-0
-2
-4
-6
-8
-```
-
----
-
-## Task 9 – Reverse countdown with input (`while_countdown_input.py`)
-
-- Create `while_countdown_input.py`.
-- Read a positive integer `n`. Use a variable equal to `n`. While it is >= 0, print it, then subtract 1. So for n=3 you get 3, 2, 1, 0. After the loop print "Done".
-
-**Expected output (n = 3):**
-```
-Start from: 3
-3
-2
-1
-0
-Done
-```
-
----
-
-## Task 10 – Loop until user says "quit" (`while_quit.py`)
-
-- Create `while_quit.py`.
-- Use a variable `word = ""`. While `word` is not equal to `"quit"` (or `"exit"`), ask for a word with `input()`, store in `word`, and if it’s not "quit" print something like "You said: ...". When the user types "quit", exit the loop and print "Bye".
-
-**Expected output (example – user types hello, then bye, then quit):**
-```
-Enter a word (quit to exit): hello
-You said: hello
-Enter a word (quit to exit): bye
-You said: bye
-Enter a word (quit to exit): quit
-Bye
+Student name: Ali
+How many scores? 3
+Score 1: 80
+Score 2: 90
+Score 3: 70
+Student: Ali, Average: 80.0
 ```
 
 ---
 
 ## Done
 
-You’ve used: `while` with a counter, with input, accumulation (sum), countdown, doubling, validation loop, and loop until a sentinel value ("quit" or 0).
+You’ve used: `while` with counter, input, break, and accumulation; combined with variables, if/elif/else, operators, str() and string concatenation, and conditions for real small programs (shopping total, menu calculator, password retry, stats, student average).
