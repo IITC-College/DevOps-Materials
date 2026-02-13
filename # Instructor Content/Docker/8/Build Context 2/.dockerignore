@@ -1,0 +1,5 @@
+# Large files
+largefile.bin
+
+# Test files
+**/*.test.js
