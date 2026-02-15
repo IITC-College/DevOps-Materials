@@ -4,7 +4,7 @@
 docker build -t react-app:alpine .
 
 # Run development container
-docker run --rm -it     
+docker run --rm -it -p react-app:alpine
 
 # Build for production
 docker build --target production -t react-vite-app:prod .
