@@ -13,7 +13,7 @@ function App() {
             count is {count}
           </button>
           <p>
-            Edit <code>src/App.tsx</code> and save to test HMR
+            Helllo from BLUE NGINX SERVER
           </p>
         </div>
         <p className="subtitle">
