@@ -3,15 +3,15 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT;
 
 app.use(bodyParser.json());
 
-mongoose.connect('mongodb://localhost:27017/keyvalue',
+mongoose.connect(`mongodb://${process.env.MONGODB_HOST}/${process.env.KEY_VALUE_DB}`,
     {
         auth: {
-            username: 'key-value-user',
-            password: 'key-value-password'
+            username: process.env.KEY_VALUE_USER,
+            password: process.env.KEY_VALUE_PASSWORD
         },
         connectTimeoutMS: 500
     }
@@ -21,10 +21,11 @@ mongoose.connect('mongodb://localhost:27017/keyvalue',
         console.log(`Server listening on port ${PORT}`);
     });
 }).catch((err) => {
-    console.error('MongoDB connection error:', err.message);
+    console.error('Something went wrong');
+    console.error(err);
     process.exit(1);
 });
 
 app.get('/health', (req, res) => {
-    res.json({ ok: true, message: 'Health check' });
+    res.json({ ok: true, message: 'Health check!!' });
 });

@@ -1,31 +1,10 @@
 #! /bin/bash
 
-# Start the MongoDB container
-MONGODB_IMAGE="mongodb/mongodb-community-server"
-MONGODB_TAG="7.0-ubuntu2204"
+# Load database configuration
 source .env.db
 
-# Root credentials
-ROOT_USER="root-user"
-ROOT_PASSWORD="root-password"
-
-# Key-value database credentials
-KEY_VALUE_DB="key-value-db"
-KEY_VALUE_USER="key-value-user"
-KEY_VALUE_PASSWORD="key-value-password"
-
-# Ports
-LOCALHOST_PORT=27017
-CONTAINER_PORT=27017
-
-# Network
+# Load network configuration
 source .env.network
-NETWORK_NAME="key-value-net"
-
-# Volumes
-source .env.volume
-VOLUME_NAME="key-value-volume"
-VOLUME_CONTAINER_PATH="/data/db"
 
 # Setup the environment
 source setup.sh
@@ -37,6 +16,13 @@ if [ "$(docker ps -q -f name=$DB_CONTAINER_NAME)" ]; then
   exit 1
 fi
 
+# Get absolute path for init script (works on Windows Git Bash)
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+INIT_SCRIPT_PATH="$SCRIPT_DIR/db-config/mongo-init.js"
+
+# Prevent Git Bash from converting paths on Windows
+export MSYS_NO_PATHCONV=1
+
 # Start the container
 docker run -d --rm --name $DB_CONTAINER_NAME \
     -e MONGO_INITDB_ROOT_USERNAME=$ROOT_USER \
@@ -47,8 +33,11 @@ docker run -d --rm --name $DB_CONTAINER_NAME \
     -p $LOCALHOST_PORT:$CONTAINER_PORT \
     --network $NETWORK_NAME \
     -v $VOLUME_NAME:$VOLUME_CONTAINER_PATH \
-    -v ./db-config/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro \
-    $MONGODB_IMAGE:$MONGODB_TAG 
+    -v "$INIT_SCRIPT_PATH":/docker-entrypoint-initdb.d/mongo-init.js:ro \
+    $MONGODB_IMAGE:$MONGODB_TAG
+    
+# Reset path conversion
+unset MSYS_NO_PATHCONV 
 
 # Wait few seconds to let the container start
 echo "Waiting for the container to start..."
@@ -56,9 +45,9 @@ sleep 5
 
 # Check if the container is running
 if [ $(docker ps -q -f name=$DB_CONTAINER_NAME) ]; then
-  echo "Container $CONTAINER_NAME is running"
+  echo "Container $DB_CONTAINER_NAME is running"
   echo "Root user: $ROOT_USER"
   echo "Root password: $ROOT_PASSWORD"
 else
-  echo "Container $CONTAINER_NAME is not running"
+  echo "Container $DB_CONTAINER_NAME is not running"
 fi
