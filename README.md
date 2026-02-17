@@ -1,4 +1,4 @@
-# DevOps-Jan26 Course Materials
+# DevOps Course Materials
 
 ## 📚 Overview
 
@@ -9,7 +9,7 @@ This repository contains all lab materials for the DevOps January 2026 course. E
 ## 🗂️ Repository Structure
 
 ```
-DevOps-Jan26/
+DevOps-Materials/
 ├── README.md                      ← You are here
 ├── LAB_WORKFLOW.md                ← Complete lab creation workflow
 ├── LAB_DESIGN_SPEC.md             ← Lab design principles
@@ -33,59 +33,59 @@ Labs are numbered in the order they should be completed, following the course st
 
 | # | Topic | Download |
 |---|--------|----------|
-| 1 | Navigation Basics (cd, ls, hidden files) | `curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v2.0/linux_lab1_navigation_basics.tar.gz | tar -xz && cd linux_lab1_navigation_basics && cat start_here.txt` |
-| 2 | File and Directory Management (mkdir, touch, cp, mv, rm) | `curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v2.1/linux_lab2_file_management.tar.gz | tar -xz && cd linux_lab2_file_management && cat start_here.txt` |
-| 3 | Reading Files (cat, less, head, tail) | `curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v2.2/linux_lab3_reading_files.tar.gz | tar -xz && cd linux_lab3_reading_files && cat start_here.txt` |
-| 4 | Search Basics (grep, find) | `curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v2.3/linux_lab4_search_basics.tar.gz | tar -xz && cd linux_lab4_search_basics && cat start_here.txt` |
-| 5 | File System Scavenger Hunt (capstone) | `curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v2.4/linux_lab5_scavenger_hunt.tar.gz | tar -xz && cd linux_lab5_scavenger_hunt && cat start_here.txt` |
+| 1 | Navigation Basics (cd, ls, hidden files) | `curl -L https://github.com/IITC-College/DevOps-Materials/releases/download/v2.0/linux_lab1_navigation_basics.tar.gz | tar -xz && cd linux_lab1_navigation_basics && cat start_here.txt` |
+| 2 | File and Directory Management (mkdir, touch, cp, mv, rm) | `curl -L https://github.com/IITC-College/DevOps-Materials/releases/download/v2.1/linux_lab2_file_management.tar.gz | tar -xz && cd linux_lab2_file_management && cat start_here.txt` |
+| 3 | Reading Files (cat, less, head, tail) | `curl -L https://github.com/IITC-College/DevOps-Materials/releases/download/v2.2/linux_lab3_reading_files.tar.gz | tar -xz && cd linux_lab3_reading_files && cat start_here.txt` |
+| 4 | Search Basics (grep, find) | `curl -L https://github.com/IITC-College/DevOps-Materials/releases/download/v2.3/linux_lab4_search_basics.tar.gz | tar -xz && cd linux_lab4_search_basics && cat start_here.txt` |
+| 5 | File System Scavenger Hunt (capstone) | `curl -L https://github.com/IITC-College/DevOps-Materials/releases/download/v2.4/linux_lab5_scavenger_hunt.tar.gz | tar -xz && cd linux_lab5_scavenger_hunt && cat start_here.txt` |
 
 #### Permissions
 
 | # | Topic | Download |
 |---|--------|----------|
-| 6 | Permission Encounter (reading permissions) | `curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v2.5/linux_lab6_permission_encounter.tar.gz | tar -xz && cd linux_lab6_permission_encounter && cd clues/level1 && cat clue1.txt` |
-| 7 | Why Script Doesn't Run (chmod, execute) | `curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v2.6/linux_lab7_why_script_doesnt_run.tar.gz | tar -xz && cd linux_lab7_why_script_doesnt_run && cd clues/level1 && cat clue1.txt` |
-| 8 | Ownership and Groups (chown, groups) | `curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v2.7/linux_lab8_ownership_and_groups.tar.gz | tar -xz && cd linux_lab8_ownership_and_groups && cd clues/level1 && cat clue1.txt` |
-| 9 | Understanding sudo | `curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v2.8/linux_lab9_sudo_mindset.tar.gz | tar -xz && cd linux_lab9_sudo_mindset && cd clues/level1 && cat clue1.txt` |
-| 10 | Default Permissions (umask) | `curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v2.10/linux_lab10_default_permissions.tar.gz | tar -xz && cd linux_lab10_default_permissions && cd clues/level1 && cat clue1.txt` |
-| 11 | Debug Mindset (permission debugging) | `curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v4.1/linux_lab11_debug_mindset.tar.gz | tar -xz && cd linux_lab11_debug_mindset && cd clues/level1 && cat clue1.txt` |
+| 6 | Permission Encounter (reading permissions) | `curl -L https://github.com/IITC-College/DevOps-Materials/releases/download/v2.5/linux_lab6_permission_encounter.tar.gz | tar -xz && cd linux_lab6_permission_encounter && cd clues/level1 && cat clue1.txt` |
+| 7 | Why Script Doesn't Run (chmod, execute) | `curl -L https://github.com/IITC-College/DevOps-Materials/releases/download/v2.6/linux_lab7_why_script_doesnt_run.tar.gz | tar -xz && cd linux_lab7_why_script_doesnt_run && cd clues/level1 && cat clue1.txt` |
+| 8 | Ownership and Groups (chown, groups) | `curl -L https://github.com/IITC-College/DevOps-Materials/releases/download/v2.7/linux_lab8_ownership_and_groups.tar.gz | tar -xz && cd linux_lab8_ownership_and_groups && cd clues/level1 && cat clue1.txt` |
+| 9 | Understanding sudo | `curl -L https://github.com/IITC-College/DevOps-Materials/releases/download/v2.8/linux_lab9_sudo_mindset.tar.gz | tar -xz && cd linux_lab9_sudo_mindset && cd clues/level1 && cat clue1.txt` |
+| 10 | Default Permissions (umask) | `curl -L https://github.com/IITC-College/DevOps-Materials/releases/download/v2.10/linux_lab10_default_permissions.tar.gz | tar -xz && cd linux_lab10_default_permissions && cd clues/level1 && cat clue1.txt` |
+| 11 | Debug Mindset (permission debugging) | `curl -L https://github.com/IITC-College/DevOps-Materials/releases/download/v4.1/linux_lab11_debug_mindset.tar.gz | tar -xz && cd linux_lab11_debug_mindset && cd clues/level1 && cat clue1.txt` |
 
 #### Processes and Services
 
 | # | Topic | Download |
 |---|--------|----------|
-| 12 | Processes Basics (ps, top, htop) | `curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v1.1-processes-basics/linux_lab_processes_basics.tar.gz | tar -xz && cd linux_lab_processes_basics && cd clues/level1 && cat clue1.txt` |
-| 13 | Process Management (kill, SIGTERM/SIGKILL) | `curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v1.0/linux_lab_processes_kill.tar.gz | tar -xz && cd linux_lab_processes_kill && cd clues/level1 && cat clue1.txt` |
-| 14 | Process vs Service | `curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v1.0/linux_lab_processes_vs_service.tar.gz | tar -xz && cd linux_lab_processes_vs_service && cd clues/level1 && cat clue1.txt` |
-| 15 | systemd and Services (systemctl) | `curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v1.0/linux_lab_systemd_services.tar.gz | tar -xz && cd linux_lab_systemd_services && cd clues/level1 && cat clue1.txt` |
-| 16 | Logs-First (journalctl) | `curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v1.1-journalctl-logs/linux_lab_journalctl_logs_first.tar.gz | tar -xz && cd linux_lab_journalctl_logs_first && cd clues/level1 && cat clue1.txt` |
-| 17 | Troubleshooting Flow (5-step method) | `curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v1.0/linux_lab_troubleshooting_flow.tar.gz | tar -xz && cd linux_lab_troubleshooting_flow && cd clues/level1 && cat clue1.txt` |
+| 12 | Processes Basics (ps, top, htop) | `curl -L https://github.com/IITC-College/DevOps-Materials/releases/download/v1.1-processes-basics/linux_lab_processes_basics.tar.gz | tar -xz && cd linux_lab_processes_basics && cd clues/level1 && cat clue1.txt` |
+| 13 | Process Management (kill, SIGTERM/SIGKILL) | `curl -L https://github.com/IITC-College/DevOps-Materials/releases/download/v1.1-processes-kill/linux_lab_processes_kill.tar.gz | tar -xz && cd linux_lab_processes_kill && cd clues/level1 && cat clue1.txt` |
+| 14 | Process vs Service | `curl -L https://github.com/IITC-College/DevOps-Materials/releases/download/v1.1-processes-vs-service/linux_lab_processes_vs_service.tar.gz | tar -xz && cd linux_lab_processes_vs_service && cd clues/level1 && cat clue1.txt` |
+| 15 | systemd and Services (systemctl) | `curl -L https://github.com/IITC-College/DevOps-Materials/releases/download/v1.1-systemd-services/linux_lab_systemd_services.tar.gz | tar -xz && cd linux_lab_systemd_services && cd clues/level1 && cat clue1.txt` |
+| 16 | Logs-First (journalctl) | `curl -L https://github.com/IITC-College/DevOps-Materials/releases/download/v1.1-journalctl-logs/linux_lab_journalctl_logs_first.tar.gz | tar -xz && cd linux_lab_journalctl_logs_first && cd clues/level1 && cat clue1.txt` |
+| 17 | Troubleshooting Flow (5-step method) | `curl -L https://github.com/IITC-College/DevOps-Materials/releases/download/v1.1-troubleshooting-flow/linux_lab_troubleshooting_flow.tar.gz | tar -xz && cd linux_lab_troubleshooting_flow && cd clues/level1 && cat clue1.txt` |
 
 #### Shell Scripting
 
-Hands-on bash scripting: **TASKS.md** (requirements, no full code to copy), **HINTS.md** (solutions when stuck), **src/** (starter files). **Hardened format (v1.1)** — [Release notes](https://github.com/IITC-College/DevOps-Jan26/releases/tag/v1.1-shell-scripting-hardened).
+Hands-on bash scripting: **TASKS.md** (requirements, no full code to copy), **HINTS.md** (solutions when stuck), **src/** (starter files). **Hardened format (v1.1)** — [Release notes](https://github.com/IITC-College/DevOps-Materials/releases/tag/v1.1-shell-scripting-hardened).
 
 | # | Topic | Download |
 |---|--------|----------|
-| 18 | Script Basics (shebang, chmod, execution) | `curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v1.1-script-basics/linux_lab_script_basics.tar.gz | tar -xz && cd linux_lab_script_basics && cat TASKS.md` |
-| 19 | Variables (command substitution, timestamps) | `curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v1.1-script-variables/linux_lab_script_variables.tar.gz | tar -xz && cd linux_lab_script_variables && cat TASKS.md` |
-| 20 | User Input (read, validation) | `curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v1.1-script-input/linux_lab_script_input.tar.gz | tar -xz && cd linux_lab_script_input && cat TASKS.md` |
-| 21 | Conditionals (if/elif/else, validators) | `curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v1.1-script-conditionals/linux_lab_script_conditionals.tar.gz | tar -xz && cd linux_lab_script_conditionals && cat TASKS.md` |
-| 22 | Case Statements (menus, pattern matching) | `curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v1.1-script-case/linux_lab_script_case.tar.gz | tar -xz && cd linux_lab_script_case && cat TASKS.md` |
-| 23 | Loops (for, while, retry, nested) | `curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v1.1-script-loops/linux_lab_script_loops.tar.gz | tar -xz && cd linux_lab_script_loops && cat TASKS.md` |
-| 24 | Functions (parameters, reusability) | `curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v1.1-script-functions/linux_lab_script_functions.tar.gz | tar -xz && cd linux_lab_script_functions && cat TASKS.md` |
-| 25 | Exit Codes ($?, && and \|\|, CI/CD) | `curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v1.1-script-exit-codes/linux_lab_script_exit_codes.tar.gz | tar -xz && cd linux_lab_script_exit_codes && cat TASKS.md` |
-| 26 | Debugging (bash errors, syntax) | `curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v1.1-script-debugging/linux_lab_script_debugging.tar.gz | tar -xz && cd linux_lab_script_debugging && cat TASKS.md` |
-| 27 | Ops Helper Tool | `curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v1.1-script-ops-helper/linux_lab_script_ops_helper.tar.gz | tar -xz && cd linux_lab_script_ops_helper && cat TASKS.md` |
-| 28 | Mini DevOps Tool (Capstone) | `curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v1.1-script-mini-devops-tool/linux_lab_script_mini_devops_tool.tar.gz | tar -xz && cd linux_lab_script_mini_devops_tool && cat TASKS.md` |
-| 29 | Leap Year (arithmetic, conditionals) | `curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v1.1-script-leap-year/linux_lab_script_leap_year.tar.gz | tar -xz && cd linux_lab_script_leap_year && cat TASKS.md` |
-| 30 | Number Guessing Game | `curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v1.1-script-guessing-game/linux_lab_script_guessing_game.tar.gz | tar -xz && cd linux_lab_script_guessing_game && cat TASKS.md` |
+| 18 | Script Basics (shebang, chmod, execution) | `curl -L https://github.com/IITC-College/DevOps-Materials/releases/download/v1.1-script-basics/linux_lab_script_basics.tar.gz | tar -xz && cd linux_lab_script_basics && cat TASKS.md` |
+| 19 | Variables (command substitution, timestamps) | `curl -L https://github.com/IITC-College/DevOps-Materials/releases/download/v1.1-script-variables/linux_lab_script_variables.tar.gz | tar -xz && cd linux_lab_script_variables && cat TASKS.md` |
+| 20 | User Input (read, validation) | `curl -L https://github.com/IITC-College/DevOps-Materials/releases/download/v1.1-script-input/linux_lab_script_input.tar.gz | tar -xz && cd linux_lab_script_input && cat TASKS.md` |
+| 21 | Conditionals (if/elif/else, validators) | `curl -L https://github.com/IITC-College/DevOps-Materials/releases/download/v1.1-script-conditionals/linux_lab_script_conditionals.tar.gz | tar -xz && cd linux_lab_script_conditionals && cat TASKS.md` |
+| 22 | Case Statements (menus, pattern matching) | `curl -L https://github.com/IITC-College/DevOps-Materials/releases/download/v1.1-script-case/linux_lab_script_case.tar.gz | tar -xz && cd linux_lab_script_case && cat TASKS.md` |
+| 23 | Loops (for, while, retry, nested) | `curl -L https://github.com/IITC-College/DevOps-Materials/releases/download/v1.1-script-loops/linux_lab_script_loops.tar.gz | tar -xz && cd linux_lab_script_loops && cat TASKS.md` |
+| 24 | Functions (parameters, reusability) | `curl -L https://github.com/IITC-College/DevOps-Materials/releases/download/v1.1-script-functions/linux_lab_script_functions.tar.gz | tar -xz && cd linux_lab_script_functions && cat TASKS.md` |
+| 25 | Exit Codes ($?, && and \|\|, CI/CD) | `curl -L https://github.com/IITC-College/DevOps-Materials/releases/download/v1.1-script-exit-codes/linux_lab_script_exit_codes.tar.gz | tar -xz && cd linux_lab_script_exit_codes && cat TASKS.md` |
+| 26 | Debugging (bash errors, syntax) | `curl -L https://github.com/IITC-College/DevOps-Materials/releases/download/v1.1-script-debugging/linux_lab_script_debugging.tar.gz | tar -xz && cd linux_lab_script_debugging && cat TASKS.md` |
+| 27 | Ops Helper Tool | `curl -L https://github.com/IITC-College/DevOps-Materials/releases/download/v1.1-script-ops-helper/linux_lab_script_ops_helper.tar.gz | tar -xz && cd linux_lab_script_ops_helper && cat TASKS.md` |
+| 28 | Mini DevOps Tool (Capstone) | `curl -L https://github.com/IITC-College/DevOps-Materials/releases/download/v1.1-script-mini-devops-tool/linux_lab_script_mini_devops_tool.tar.gz | tar -xz && cd linux_lab_script_mini_devops_tool && cat TASKS.md` |
+| 29 | Leap Year (arithmetic, conditionals) | `curl -L https://github.com/IITC-College/DevOps-Materials/releases/download/v1.1-script-leap-year/linux_lab_script_leap_year.tar.gz | tar -xz && cd linux_lab_script_leap_year && cat TASKS.md` |
+| 30 | Number Guessing Game | `curl -L https://github.com/IITC-College/DevOps-Materials/releases/download/v1.1-script-guessing-game/linux_lab_script_guessing_game.tar.gz | tar -xz && cd linux_lab_script_guessing_game && cat TASKS.md` |
 
 #### Networking
 
 | # | Topic | Download |
 |---|--------|----------|
-| 31 | Network Adapter Debug (interfaces, IP, DNS, firewall) | `curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v4.0/linux_networking_lab1_adapter.tar.gz | tar -xz && cd linux_networking_lab1_adapter && cat README.md` |
+| 31 | Network Adapter Debug (interfaces, IP, DNS, firewall) | `curl -L https://github.com/IITC-College/DevOps-Materials/releases/download/v4.0/linux_networking_lab1_adapter.tar.gz | tar -xz && cd linux_networking_lab1_adapter && cat README.md` |
 
 #### Users and Groups
 
@@ -161,7 +161,7 @@ Hands-on coding labs with **TASKS.md** (requirements and objectives), **HINTS.md
 ### Example
 ```bash
 # For Linux Module
-curl -L https://github.com/IITC-College/DevOps-Jan26/releases/download/v1.0/linux_scavenger_hunt.tar.gz | tar -xz && cd linux_scavenger_hunt && cat start_here.txt
+curl -L https://github.com/IITC-College/DevOps-Materials/releases/download/v1.0/linux_scavenger_hunt.tar.gz | tar -xz && cd linux_scavenger_hunt && cat start_here.txt
 ```
 
 ---
@@ -219,7 +219,7 @@ gh release create v1.0 \
   "Module Name/lab_name.tar.gz" \
   --title "Lab Name v1.0" \
   --notes "Description" \
-  --repo IITC-College/DevOps-Jan26
+  --repo IITC-College/DevOps-Materials
 ```
 
 ---
@@ -273,7 +273,7 @@ Every lab must meet these criteria:
 - `v2.0` - Major content changes
 
 ### Recent Releases
-- **v1.1-shell-scripting-hardened** — Shell Scripting labs (19–30) hardened: requirements-based tasks, solutions in `HINTS.md`. [Release](https://github.com/IITC-College/DevOps-Jan26/releases/tag/v1.1-shell-scripting-hardened)
+- **v1.1-shell-scripting-hardened** — Shell Scripting labs (19–30) hardened: requirements-based tasks, solutions in `HINTS.md`. [Release](https://github.com/IITC-College/DevOps-Materials/releases/tag/v1.1-shell-scripting-hardened)
 
 ### Release Process
 1. Create and test lab
