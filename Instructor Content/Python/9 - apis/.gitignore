@@ -1,0 +1,8 @@
+# Ignore all files related to python
+__pycache__/
+
+.venv/
+
+# Never commit secrets
+.env
+.env.*
