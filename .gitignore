@@ -4,6 +4,23 @@ Instructor Content/Docker/8/Build Context/some-large-file
 # Node modules (should be in bundles/archives, not directly committed)
 node_modules/
 
+# Python cache and compiled files
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+*.pyo
+
+# Python virtual environments
+.env
+.venv
+env/
+venv/
+ENV/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
 # OS files
 .DS_Store
 Thumbs.db
