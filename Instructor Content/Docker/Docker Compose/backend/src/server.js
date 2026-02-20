@@ -13,6 +13,9 @@ app.use(bodyParser.json());
 
 
 // routes
+app.use('/', (req, res, next) => {
+    res.json({ ok: true, message: 'Welcome to Key-Value Store API!!' });
+});
 app.use('/health', healthRouter);
 app.use('/store', keyValueRouter);
 
@@ -26,7 +29,7 @@ mongoose.connect(`mongodb://${process.env.MONGODB_HOST}/${process.env.KEY_VALUE_
         connectTimeoutMS: 500
     }
 ).then(() => {
-    console.log('MongoDB connected successfully');
+    console.log('MongoDB connected successfully!!');
     app.listen(PORT, () => {
         console.log(`Server listening on port ${PORT}`);
     });
