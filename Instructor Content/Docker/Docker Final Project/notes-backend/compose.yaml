@@ -6,8 +6,8 @@ services:
       context: .
       # dockerfile: Dockerfile.dev
       dockerfile: Dockerfile
-      # target: development
-      target: production
+      target: development
+      # target: production
     ports:
       - "3001:80"
     environment:
