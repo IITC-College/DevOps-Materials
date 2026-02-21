@@ -21,15 +21,36 @@ const validateId = (req, res, next) => {
 noteRouter.post("/", async (req, res) => {
   try {
     const { title, content, notebookId } = req.body;
+    let validatedNotebookId = null;
 
-    if (notebookId) {
+    if (!notebookId) {
+      console.info("Notebook ID not provided. Storing note without notebook.");
+    } else if (!mongoose.Types.ObjectId.isValid(notebookId)) {
+      return res.status(400).json({
+        error: "Notebook not found",
+        notebookId,
+      });
+    } else {
       try {
         await axios.get(`${notebooksApiUrl}/api/notebooks/${notebookId}`);
       } catch (error) {
-        console.error(error.message);
-        return res.status(400).json({
-          error: "Invalid notebookId",
-        });
+        const jsonError = error.toJSON();
+
+        if (jsonError.status === 404) {
+          return res.status(400).json({
+            error: "Notebook not found",
+          });
+        }
+
+        console.error(
+          "Error verifying notebook ID. Upstream service not available. Storing for later validation.",
+          {
+            notebookId,
+            error: error.message,
+          }
+        );
+      } finally {
+        validatedNotebookId = notebookId;
       }
     }
 
@@ -42,7 +63,7 @@ noteRouter.post("/", async (req, res) => {
     const note = new Note({
       title,
       content,
-      notebookId
+      notebookId: validatedNotebookId,
     });
 
     await note.save();
