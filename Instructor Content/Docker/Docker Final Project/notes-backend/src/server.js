@@ -6,12 +6,12 @@ const noteRouter = require("./routes");
 const mongoose = require("mongoose");
 
 app.use(bodyParser.json());
-app.use("/api/notes", noteRouter);
 app.get("/api/notes/health", (req, res) => {
   res.json({
     message: "hello from notes",
   });
 });
+app.use("/api/notes", noteRouter);
 
 mongoose
   .connect(process.env.DB_URL)

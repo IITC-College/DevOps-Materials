@@ -1,0 +1,566 @@
+{
+  "info": {
+    "name": "Notes App",
+    "description": "Full API collection for the Notes App — covers the Notebooks service (port 3000 / nginx path /api/notebooks) and the Notes service (port 3001 / nginx path /api/notes).\n\nBase URLs:\n- Via nginx reverse-proxy: http://localhost:8080\n- Notebooks service directly: http://localhost:3000\n- Notes service directly: http://localhost:3001\n\nThe collection uses the variable {{baseUrl}} (default: http://localhost:8080) so you can switch between direct and proxied access by editing a single variable.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080",
+      "type": "string",
+      "description": "Base URL. Switch to http://localhost:3000 for notebooks direct or http://localhost:3001 for notes direct."
+    },
+    {
+      "key": "notebookId",
+      "value": "",
+      "type": "string",
+      "description": "Populated automatically by the 'Create Notebook' test script."
+    },
+    {
+      "key": "noteId",
+      "value": "",
+      "type": "string",
+      "description": "Populated automatically by the 'Create Note' test script."
+    }
+  ],
+  "item": [
+    {
+      "name": "Notebooks",
+      "description": "CRUD operations for notebooks. Service runs on port 3000 internally; reachable at {{baseUrl}}/api/notebooks through the nginx reverse-proxy.",
+      "item": [
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/notebooks/health",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "notebooks", "health"]
+            },
+            "description": "Verify the notebooks service is up."
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "status": "OK",
+              "code": 200,
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"message\": \"hello from notebooks\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Create Notebook",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 201) {",
+                  "  const json = pm.response.json();",
+                  "  pm.collectionVariables.set('notebookId', json.data._id);",
+                  "  pm.test('Notebook created', () => pm.response.to.have.status(201));",
+                  "  pm.test('Returns _id', () => pm.expect(json.data._id).to.be.a('string'));",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"My First Notebook\",\n  \"description\": \"A notebook for testing\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/notebooks",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "notebooks"]
+            },
+            "description": "Create a new notebook. `name` is required; `description` is optional. The created notebook's `_id` is saved to the `notebookId` collection variable."
+          },
+          "response": [
+            {
+              "name": "201 Created",
+              "status": "Created",
+              "code": 201,
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"data\": {\n    \"_id\": \"664a1b2c3d4e5f6a7b8c9d0e\",\n    \"name\": \"My First Notebook\",\n    \"description\": \"A notebook for testing\",\n    \"createdAt\": \"2024-05-19T12:00:00.000Z\",\n    \"updatedAt\": \"2024-05-19T12:00:00.000Z\",\n    \"__v\": 0\n  }\n}"
+            },
+            {
+              "name": "400 Bad Request — missing name",
+              "status": "Bad Request",
+              "code": 400,
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"error\": \"Name field is required\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get All Notebooks",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/notebooks",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "notebooks"]
+            },
+            "description": "Retrieve all notebooks."
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "status": "OK",
+              "code": 200,
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"data\": [\n    {\n      \"_id\": \"664a1b2c3d4e5f6a7b8c9d0e\",\n      \"name\": \"My First Notebook\",\n      \"description\": \"A notebook for testing\",\n      \"createdAt\": \"2024-05-19T12:00:00.000Z\",\n      \"updatedAt\": \"2024-05-19T12:00:00.000Z\",\n      \"__v\": 0\n    }\n  ]\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get Notebook by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/notebooks/{{notebookId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "notebooks", "{{notebookId}}"]
+            },
+            "description": "Retrieve a single notebook by its MongoDB ObjectId. Uses the `notebookId` collection variable set by 'Create Notebook'."
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "status": "OK",
+              "code": 200,
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"data\": {\n    \"_id\": \"664a1b2c3d4e5f6a7b8c9d0e\",\n    \"name\": \"My First Notebook\",\n    \"description\": \"A notebook for testing\",\n    \"createdAt\": \"2024-05-19T12:00:00.000Z\",\n    \"updatedAt\": \"2024-05-19T12:00:00.000Z\",\n    \"__v\": 0\n  }\n}"
+            },
+            {
+              "name": "404 Not Found",
+              "status": "Not Found",
+              "code": 404,
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"error\": \"Notebook not found\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Update Notebook",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Updated Notebook Name\",\n  \"description\": \"Updated description\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/notebooks/{{notebookId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "notebooks", "{{notebookId}}"]
+            },
+            "description": "Update a notebook's `name` and/or `description`. Both fields are optional in the body."
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "status": "OK",
+              "code": 200,
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"data\": {\n    \"_id\": \"664a1b2c3d4e5f6a7b8c9d0e\",\n    \"name\": \"Updated Notebook Name\",\n    \"description\": \"Updated description\",\n    \"createdAt\": \"2024-05-19T12:00:00.000Z\",\n    \"updatedAt\": \"2024-05-19T13:00:00.000Z\",\n    \"__v\": 0\n  }\n}"
+            },
+            {
+              "name": "404 Not Found",
+              "status": "Not Found",
+              "code": 404,
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"error\": \"Notebook not found\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Delete Notebook",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/notebooks/{{notebookId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "notebooks", "{{notebookId}}"]
+            },
+            "description": "Delete a notebook by ID. Returns 204 No Content on success."
+          },
+          "response": [
+            {
+              "name": "204 No Content",
+              "status": "No Content",
+              "code": 204,
+              "header": [],
+              "body": ""
+            },
+            {
+              "name": "404 Not Found",
+              "status": "Not Found",
+              "code": 404,
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"error\": \"Notebook not found\"\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Notes",
+      "description": "CRUD operations for notes. Service runs on port 3001 internally; reachable at {{baseUrl}}/api/notes through the nginx reverse-proxy.",
+      "item": [
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/notes/health",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "notes", "health"]
+            },
+            "description": "Verify the notes service is up."
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "status": "OK",
+              "code": 200,
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"message\": \"hello from notes\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Create Note",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 201) {",
+                  "  const json = pm.response.json();",
+                  "  pm.collectionVariables.set('noteId', json.data._id);",
+                  "  pm.test('Note created', () => pm.response.to.have.status(201));",
+                  "  pm.test('Returns _id', () => pm.expect(json.data._id).to.be.a('string'));",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"My First Note\",\n  \"content\": \"This is the content of my first note.\",\n  \"notebookId\": \"{{notebookId}}\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/notes",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "notes"]
+            },
+            "description": "Create a new note. `title` and `content` are required. `notebookId` is optional — when provided the service verifies it against the notebooks service (non-blocking). The created note's `_id` is saved to the `noteId` collection variable."
+          },
+          "response": [
+            {
+              "name": "201 Created",
+              "status": "Created",
+              "code": 201,
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"data\": {\n    \"_id\": \"664a1b2c3d4e5f6a7b8c9d1f\",\n    \"title\": \"My First Note\",\n    \"content\": \"This is the content of my first note.\",\n    \"notebookId\": \"664a1b2c3d4e5f6a7b8c9d0e\",\n    \"createdAt\": \"2024-05-19T12:01:00.000Z\",\n    \"updatedAt\": \"2024-05-19T12:01:00.000Z\",\n    \"__v\": 0\n  }\n}"
+            },
+            {
+              "name": "400 Bad Request — missing title or content",
+              "status": "Bad Request",
+              "code": 400,
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"error\": \"Title and content fields are required\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Create Note (without Notebook)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 201) {",
+                  "  const json = pm.response.json();",
+                  "  pm.collectionVariables.set('noteId', json.data._id);",
+                  "  pm.test('Note created', () => pm.response.to.have.status(201));",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Standalone Note\",\n  \"content\": \"A note not linked to any notebook.\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/notes",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "notes"]
+            },
+            "description": "Create a note without linking it to a notebook."
+          },
+          "response": [
+            {
+              "name": "201 Created",
+              "status": "Created",
+              "code": 201,
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"data\": {\n    \"_id\": \"664a1b2c3d4e5f6a7b8c9d2g\",\n    \"title\": \"Standalone Note\",\n    \"content\": \"A note not linked to any notebook.\",\n    \"notebookId\": null,\n    \"createdAt\": \"2024-05-19T12:02:00.000Z\",\n    \"updatedAt\": \"2024-05-19T12:02:00.000Z\",\n    \"__v\": 0\n  }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get All Notes",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/notes",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "notes"]
+            },
+            "description": "Retrieve all notes."
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "status": "OK",
+              "code": 200,
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"data\": [\n    {\n      \"_id\": \"664a1b2c3d4e5f6a7b8c9d1f\",\n      \"title\": \"My First Note\",\n      \"content\": \"This is the content of my first note.\",\n      \"notebookId\": \"664a1b2c3d4e5f6a7b8c9d0e\",\n      \"createdAt\": \"2024-05-19T12:01:00.000Z\",\n      \"updatedAt\": \"2024-05-19T12:01:00.000Z\",\n      \"__v\": 0\n    }\n  ]\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get Note by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/notes/{{noteId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "notes", "{{noteId}}"]
+            },
+            "description": "Retrieve a single note by its MongoDB ObjectId. Uses the `noteId` collection variable set by 'Create Note'."
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "status": "OK",
+              "code": 200,
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"data\": {\n    \"_id\": \"664a1b2c3d4e5f6a7b8c9d1f\",\n    \"title\": \"My First Note\",\n    \"content\": \"This is the content of my first note.\",\n    \"notebookId\": \"664a1b2c3d4e5f6a7b8c9d0e\",\n    \"createdAt\": \"2024-05-19T12:01:00.000Z\",\n    \"updatedAt\": \"2024-05-19T12:01:00.000Z\",\n    \"__v\": 0\n  }\n}"
+            },
+            {
+              "name": "404 Not Found",
+              "status": "Not Found",
+              "code": 404,
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"error\": \"Note not found\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Update Note",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Updated Note Title\",\n  \"content\": \"Updated note content.\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/notes/{{noteId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "notes", "{{noteId}}"]
+            },
+            "description": "Update a note's `title` and/or `content`. Both fields are optional in the body."
+          },
+          "response": [
+            {
+              "name": "200 OK",
+              "status": "OK",
+              "code": 200,
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"data\": {\n    \"_id\": \"664a1b2c3d4e5f6a7b8c9d1f\",\n    \"title\": \"Updated Note Title\",\n    \"content\": \"Updated note content.\",\n    \"notebookId\": \"664a1b2c3d4e5f6a7b8c9d0e\",\n    \"createdAt\": \"2024-05-19T12:01:00.000Z\",\n    \"updatedAt\": \"2024-05-19T13:01:00.000Z\",\n    \"__v\": 0\n  }\n}"
+            },
+            {
+              "name": "404 Not Found",
+              "status": "Not Found",
+              "code": 404,
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"error\": \"Note not found\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Delete Note",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/notes/{{noteId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "notes", "{{noteId}}"]
+            },
+            "description": "Delete a note by ID. Returns 204 No Content on success."
+          },
+          "response": [
+            {
+              "name": "204 No Content",
+              "status": "No Content",
+              "code": 204,
+              "header": [],
+              "body": ""
+            },
+            {
+              "name": "404 Not Found",
+              "status": "Not Found",
+              "code": 404,
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"error\": \"Note not found\"\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Error Cases",
+      "description": "Requests that demonstrate validation and error responses.",
+      "item": [
+        {
+          "name": "Create Notebook — missing name",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"Notebook with no name\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/notebooks",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "notebooks"]
+            },
+            "description": "Expects 400 because `name` is required."
+          },
+          "response": [
+            {
+              "name": "400 Bad Request",
+              "status": "Bad Request",
+              "code": 400,
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"error\": \"Name field is required\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Create Note — missing title and content",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/notes",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "notes"]
+            },
+            "description": "Expects 400 because both `title` and `content` are required."
+          },
+          "response": [
+            {
+              "name": "400 Bad Request",
+              "status": "Bad Request",
+              "code": 400,
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"error\": \"Title and content fields are required\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get Notebook — invalid ID format",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/notebooks/not-a-valid-id",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "notebooks", "not-a-valid-id"]
+            },
+            "description": "Expects 404 because the ID is not a valid MongoDB ObjectId."
+          },
+          "response": [
+            {
+              "name": "404 Not Found",
+              "status": "Not Found",
+              "code": 404,
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"error\": \"Notebook not found\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get Note — invalid ID format",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/notes/not-a-valid-id",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "notes", "not-a-valid-id"]
+            },
+            "description": "Expects 404 because the ID is not a valid MongoDB ObjectId."
+          },
+          "response": [
+            {
+              "name": "404 Not Found",
+              "status": "Not Found",
+              "code": 404,
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"error\": \"Note not found\"\n}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

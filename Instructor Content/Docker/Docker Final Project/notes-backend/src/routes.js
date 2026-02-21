@@ -1,8 +1,10 @@
-
 const express = require("express");
-const Notebook = require("./models");
-const notebookRouter = express.Router();
+const Note = require("./models");
 const mongoose = require("mongoose");
+const axios = require("axios");
+
+const notebooksApiUrl = process.env.NOTEBOOKS_API_URL;
+const noteRouter = express.Router();
 
 const validateId = (req, res, next) => {
   const { id } = req.params;
@@ -18,7 +20,18 @@ const validateId = (req, res, next) => {
 
 noteRouter.post("/", async (req, res) => {
   try {
-    const { title, content } = req.body;
+    const { title, content, notebookId } = req.body;
+
+    if (notebookId) {
+      try {
+        await axios.get(`${notebooksApiUrl}/api/notebooks/${notebookId}`);
+      } catch (error) {
+        console.error(error.message);
+        return res.status(400).json({
+          error: "Invalid notebookId",
+        });
+      }
+    }
 
     if (!title || !content) {
       return res.status(400).json({
@@ -29,6 +42,7 @@ noteRouter.post("/", async (req, res) => {
     const note = new Note({
       title,
       content,
+      notebookId
     });
 
     await note.save();
@@ -82,7 +96,7 @@ noteRouter.put("/:id", validateId, async (req, res) => {
     const note = await Note.findByIdAndUpdate(
       req.params.id,
       { title, content },
-      { new: true }
+      { new: true },
     );
 
     if (!note) {
@@ -116,3 +130,5 @@ noteRouter.delete("/:id", validateId, async (req, res) => {
     });
   }
 });
+
+module.exports = noteRouter;
