@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: color-api
+  namespace: dev
+  labels:
+    app: color-api
+spec:
+  type: ClusterIP
+  selector:
+    app: color-api
+  ports:
+    - port: 80
+      targetPort: 80
