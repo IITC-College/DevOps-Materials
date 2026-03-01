@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: color-api-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: color-api
+      environment: local
+      tier: backend
+
+    matchExpressions:
+      # Active example:
+      - key: managed
+        operator: Exists
+
+      # ============================
+      # Additional examples (commented)
+      # ============================
+
+      # Example using NotIn:
+      # - key: release
+      #   operator: NotIn
+      #   values:
+      #     - canary
+
+      # Example using In:
+      # - key: tier
+      #   operator: In
+      #   values:
+      #     - backend
+      #     - cache
+
+      # Example using DoesNotExist:
+      # - key: deprecated
+      #   operator: DoesNotExist
+
+  template:
+    metadata:
+      labels:
+        app: color-api
+        environment: local
+        tier: backend
+        managed: deployment   # Required for the Exists operator to match
+    spec:
+      containers:
+        - name: color-backend
+          image: lironefitoussi/color-api:1.1.0
+          ports:
+            - containerPort: 80
