@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: traffic-generator
+  labels:
+    app: traffic-generator
+spec:
+  containers:
+    - name: traffic-generator
+      image: lironefitoussi/traffic-generator:1.0.0
+      args:
+        - "http://10.244.0.62/api"
+        - "0.5"
