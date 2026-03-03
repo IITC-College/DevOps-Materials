@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: color-statefulset
+spec:
+  serviceName: color-service   # MUST match Service name
+  replicas: 3
+
+  selector:
+    matchLabels:
+      app: color-api
+
+  template:
+    metadata:
+      labels:
+        app: color-api
+    spec:
+      containers:
+        - name: color-api
+          image: lironefitoussi/color-api:1.2.1
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: temp-data
+              mountPath: /tmp/data
+
+  volumeClaimTemplates:
+    - metadata:
+        name: temp-data
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        storageClassName: standard
+        resources:
+          requests:
+            storage: 128Mi
