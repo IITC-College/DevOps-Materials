@@ -13,3 +13,10 @@ Hands-on Linux fundamentals for DevOps. Topics progress from basic navigation to
 | [Networking](Networking/) | Network adapters, basic connectivity |
 | [Shell Scripting](Shell%20Scripting/) | Bash scripting: variables, conditions, loops, functions |
 | [Pipes and Redirection](Pipes%20and%20Redirection/) | `>`, `>>`, `<`, `<<`, `\|` — redirecting and piping data |
+
+---
+
+## Latest Release
+
+**[Linux Pipes & Redirection Labs v5.0](https://github.com/IITC-College/DevOps-Materials/releases/tag/v5.0-pipes-redirection)**
+10 new labs covering `>`, `>>`, `<`, `<<`, and `|`.
