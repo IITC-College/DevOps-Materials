@@ -17,10 +17,19 @@ building reports, and fixing real bugs.
 ### Method 1: Download with curl (Recommended)
 
 ```bash
-curl -L -o lab.tar.gz https://github.com/IITC-College/DevOps-Jan26/releases/download/latest/linux_lab_redir_output_overwrite_2.tar.gz
+curl -L -o lab.tar.gz https://github.com/IITC-College/DevOps-Materials/releases/download/v5.0-pipes-redirection/linux_lab_redir_output_overwrite_2.tar.gz
 tar -xzf lab.tar.gz
 cd linux_lab_redir_output_overwrite_2
 ```
+
+### Method 2: Clone the repository
+
+```bash
+git clone https://github.com/IITC-College/DevOps-Materials.git
+cd DevOps-Materials/Linux/Pipes\ and\ Redirection/linux_lab_redir_output_overwrite_2
+```
+
+---
 
 ---
 

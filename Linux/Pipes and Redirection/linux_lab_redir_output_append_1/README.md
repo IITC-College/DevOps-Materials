@@ -15,10 +15,19 @@ In this lab you will discover how `>>` differs from `>`. While `>` replaces a fi
 ### Method 1: Download with curl (Recommended)
 
 ```bash
-curl -L -o lab.tar.gz https://github.com/IITC-College/DevOps-Jan26/releases/download/latest/linux_lab_redir_output_append_1.tar.gz
+curl -L -o lab.tar.gz https://github.com/IITC-College/DevOps-Materials/releases/download/v5.0-pipes-redirection/linux_lab_redir_output_append_1.tar.gz
 tar -xzf lab.tar.gz
 cd linux_lab_redir_output_append_1
 ```
+
+### Method 2: Clone the repository
+
+```bash
+git clone https://github.com/IITC-College/DevOps-Materials.git
+cd DevOps-Materials/Linux/Pipes\ and\ Redirection/linux_lab_redir_output_append_1
+```
+
+---
 
 ---
 
