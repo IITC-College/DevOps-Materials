@@ -1,0 +1,67 @@
+================================================================================
+                        LEVEL 3 - EXERCISE 2
+            "Process Monitoring — Finding Resource-Heavy Processes"
+================================================================================
+
+BACKGROUND:
+-----------
+Process monitoring is one of the most practical uses of pipes in Linux system
+administration. `ps aux` outputs a table of all running processes with columns
+for CPU%, memory%, PID, user, and command. Piping it through sort, head, and
+grep lets you quickly identify resource-heavy or problematic processes.
+
+EXERCISE:
+---------
+Step 1: View all running processes:
+
+  ps aux
+
+Step 2: Sort by CPU usage (column 3), highest first — top 10:
+
+  ps aux | sort -k3 -rn | head -10
+
+Step 3: Sort by memory usage (column 4), highest first — top 10:
+
+  ps aux | sort -k4 -rn | head -10
+
+Step 4: Count total running processes:
+
+  ps aux | wc -l
+
+Step 5: Count how many processes each user is running:
+
+  ps aux | tail -n +2 | cut -d' ' -f1 | sort | uniq -c | sort -rn
+
+  (tail -n +2 skips the header line)
+
+Step 6: Find processes related to a specific program (e.g., "bash"):
+
+  ps aux | grep "bash" | grep -v "grep"
+
+  (grep -v "grep" removes the grep process itself from results)
+
+Step 7: Find all processes using more than 0% CPU:
+
+  ps aux | awk '$3 > 0.0 {print $3, $11}' | sort -rn | head -10
+
+Step 8: Save a process snapshot:
+
+  ps aux | sort -k3 -rn | head -20 > process_snapshot.txt
+  echo "Captured at: $(date)" >> process_snapshot.txt
+  cat process_snapshot.txt
+
+QUESTIONS TO ANSWER:
+--------------------
+- Which process is using the most CPU right now?
+- Which user is running the most processes?
+- How many total processes are running?
+- What does sort -k3 do? What does -k4 do?
+
+WRITE YOUR ANSWER:
+------------------
+  echo "L3C2: Total processes=$(ps aux | wc -l), top CPU=$(ps aux | sort -k3 -rn | head -2 | tail -1 | awk '{print $11}')" >> ../../my_answers.txt
+
+================================================================================
+Move to the final exercise:
+  cat clue3.txt
+================================================================================

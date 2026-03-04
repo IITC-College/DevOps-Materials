@@ -1,0 +1,50 @@
+Line 1: This is the first line of the big file - welcome!
+Line 2: The second line follows right after the first
+Line 3: We are now on line three, making progress
+Line 4: Line four brings us closer to the middle
+Line 5: Halfway to ten - this is line five
+Line 6: Line six begins the second half of the first ten
+Line 7: Lucky number seven appears here on line seven
+Line 8: Line eight, only two more to reach ten
+Line 9: Almost there - line nine is the penultimate
+Line 10: Line ten - a perfect milestone in our big file
+Line 11: Continuing past ten, we reach line eleven
+Line 12: Twelve lines in and the file keeps growing
+Line 13: Baker's dozen - line thirteen of our big file
+Line 14: Line fourteen marches steadily onward
+Line 15: The midpoint of thirty is here at fifteen
+Line 16: Line sixteen begins the second half
+Line 17: Seventeen is a prime number and this is line seventeen
+Line 18: Eighteen lines of content, nicely formatted
+Line 19: Line nineteen, so close to twenty now
+Line 20: Twenty lines! A solid chunk of content completed
+Line 21: Past twenty now - line twenty-one carries on
+Line 22: Twenty-two, moving through the back third
+Line 23: Line twenty-three continues the count
+Line 24: Two dozen lines - line twenty-four reached
+Line 25: Exactly halfway through fifty lines - line twenty-five
+Line 26: Line twenty-six starts the home stretch to fifty
+Line 27: Twenty-seven, still climbing toward the end
+Line 28: Line twenty-eight, methodical and consistent
+Line 29: Nearly thirty - line twenty-nine almost there
+Line 30: Thirty lines! This is line thirty of fifty
+Line 31: Thirty-one - continuing the journey
+Line 32: Line thirty-two, two thirds of the way done
+Line 33: Thirty-three lines and the file grows longer
+Line 34: Line thirty-four, steady as ever
+Line 35: Thirty-five lines - fifteen more to go
+Line 36: Line thirty-six begins the final countdown
+Line 37: Thirty-seven, a prime line in a long file
+Line 38: Line thirty-eight marches on reliably
+Line 39: Thirty-nine lines - just eleven more to the end
+Line 40: Forty lines! Round number milestone achieved
+Line 41: Line forty-one starts the final ten lines
+Line 42: Forty-two - the answer to everything, line forty-two
+Line 43: Line forty-three continues toward the finish
+Line 44: Forty-four lines, almost in the home stretch
+Line 45: Line forty-five - five lines remaining after this
+Line 46: Forty-six lines, four more to go after this
+Line 47: Line forty-seven - three remain after this one
+Line 48: Forty-eight lines - penultimate pair in sight
+Line 49: Line forty-nine - the penultimate line of the file
+Line 50: Line fifty - this is the final, last line of the big file!

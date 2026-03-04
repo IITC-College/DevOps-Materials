@@ -1,0 +1,68 @@
+================================================================================
+                        LEVEL 3 - EXERCISE 1
+            "Combine Pipes with Redirection — The Full Picture"
+================================================================================
+
+BACKGROUND:
+-----------
+Pipes (|) and redirection (>, >>, <) are not mutually exclusive — they work
+together. The general pattern is:
+
+  source | transform | transform | ... > final_output.txt
+
+The pipe chain processes the data, and > (or >>) saves the final result.
+You can also use tee in the middle to save intermediate results.
+
+EXERCISE:
+---------
+Step 1: Filter WARN lines, sort, remove duplicates, save to file:
+
+  cat ../../data/server.log | grep "WARN" | sort | uniq > warnings_unique.txt
+  cat warnings_unique.txt
+  wc -l warnings_unique.txt
+
+Step 2: Extract IPs from ERROR lines and save unique ones:
+
+  cat ../../data/server.log | grep "ERROR" | grep -o "[0-9]*\.[0-9]*\.[0-9]*\.[0-9]*" | sort | uniq > error_ips.txt
+  cat error_ips.txt
+
+Step 3: Build a log level statistics file:
+
+  echo "INFO:  $(cat ../../data/server.log | grep "INFO"  | wc -l)" > log_stats.txt
+  echo "WARN:  $(cat ../../data/server.log | grep "WARN"  | wc -l)" >> log_stats.txt
+  echo "ERROR: $(cat ../../data/server.log | grep "ERROR" | wc -l)" >> log_stats.txt
+  cat log_stats.txt
+
+Step 4: Find all unique HTTP status codes in the web access log:
+
+  cat ../../data/web_access.log | cut -d' ' -f4 | sort | uniq -c | sort -rn > status_codes.txt
+  cat status_codes.txt
+
+Step 5: Full combined pipeline — get top requesting IPs AND save them:
+
+  cat ../../data/web_access.log | \
+    cut -d' ' -f1 | \
+    sort | \
+    uniq -c | \
+    sort -rn | \
+    head -10 | \
+    tee top_10_ips.txt | \
+    wc -l
+
+  cat top_10_ips.txt
+
+QUESTIONS TO ANSWER:
+--------------------
+- How many unique WARN messages are in warnings_unique.txt?
+- What is in log_stats.txt?
+- How many unique status codes does the web access log contain?
+- What does the backslash \ do at the end of a line in the shell?
+
+WRITE YOUR ANSWER:
+------------------
+  echo "L3C1: WARN unique=$(wc -l < warnings_unique.txt 2>/dev/null || echo 0)" >> ../../my_answers.txt
+
+================================================================================
+Move to the next exercise:
+  cat clue2.txt
+================================================================================

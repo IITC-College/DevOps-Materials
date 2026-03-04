@@ -1,0 +1,248 @@
+================================================================================
+                    LAB SOLUTIONS - INSTRUCTOR COPY
+            linux_lab_pipes_2 — Pipes in Practice
+================================================================================
+
+Keep this file secure. Do not share with students.
+
+================================================================================
+                        LEVEL 1 SOLUTIONS
+================================================================================
+
+EXERCISE 1 — Process Search: ps aux | grep
+-------------------------------------------
+Key answers:
+  - ps aux | wc -l: varies by system (typically 100-300+ on a running Linux VM)
+  - ps aux | grep "bash": shows bash processes (at least 1 — the student's session)
+  - grep -v "grep": removes the grep process itself from results
+    Without it, grep appears in the ps results since it IS a running process
+  - sort -k3 -rn: sort by field 3 (CPU%) in reverse numeric order
+
+Key Learning:
+  ps aux | grep is the standard way to check if a process is running.
+  grep -v "grep" is a common idiom to clean up ps results.
+  sort -k3 sorts by the 3rd whitespace-separated column.
+
+
+EXERCISE 2 — Head and Tail via Pipes
+--------------------------------------
+Expected content of big_file.txt:
+  First 5 lines: Lines 1-5
+  Last 5 lines: Lines 46-50
+
+Key answers:
+  - cat big_file.txt | head -5: Lines 1-5
+  - cat big_file.txt | tail -5: Lines 46-50
+  - cat big_file.txt | head -10 | tail -5: Lines 6-10 (first 10, last 5 of those)
+  - cat big_file.txt | grep "ERROR" | tail -3: last 3 ERROR lines from server.log
+    (Note: students use big_file for head/tail, server.log for ERROR filter)
+  - head -10 | tail -5: gives lines 6-10 of ANY file — useful for pagination
+
+Key Learning:
+  head -N | tail -M is a way to extract a specific range of lines.
+
+
+EXERCISE 3 — Column Extraction: cut in a Pipeline
+---------------------------------------------------
+Commands:
+  cat ../../data/employees.csv | cut -d',' -f1   → names (including header)
+  cat ../../data/employees.csv | cut -d',' -f2   → departments
+  cat ../../data/employees.csv | cut -d',' -f3   → salaries
+  cat ../../data/employees.csv | tail -n +2 | cut -d',' -f3 | sort -n → sorted salaries
+
+Key answers:
+  - Highest salary: 102000 (Eve Martinez, Engineering)
+  - First employee in file: Alice Johnson
+  - tail -n +2: skip first N-1 lines, start from line 2 (skips header)
+  - sort -t',' -k3 -rn: sort CSV by field 3 (salary) in reverse numeric order
+
+================================================================================
+                        LEVEL 2 SOLUTIONS
+================================================================================
+
+EXERCISE 1 — Multi-Step Text Processing
+-----------------------------------------
+Commands:
+  cat mixed.txt | tr 'A-Z' 'a-z' | sort | uniq | wc -l
+
+Expected content of mixed.txt: Linux, LINUX, linux, Bash, BASH, etc.
+After tr to lowercase: linux(x3), bash(x2), shell(x3), pipe(x3), redirect(x2), stream(x2), stdin(x2), stdout(x2)
+After sort | uniq: bash, linux, pipe, redirect, shell, stdin, stdout, stream = 8 unique
+
+Key answers:
+  - Unique items (case-insensitive): 8
+  - Full pipeline: convert to lowercase → sort → remove duplicates → count
+
+Key Learning:
+  tr handles case conversion; sort | uniq removes duplicates; order matters.
+
+
+EXERCISE 2 — Top IPs: Access Log Analysis
+-------------------------------------------
+web_access.log has 80 lines, 6 unique IPs:
+  192.168.1.10  — 20 requests (most frequent)
+  10.0.0.5      — 12 requests
+  172.16.0.1    — 14 requests
+  203.0.113.42  — 12 requests
+  198.51.100.7  — 8 requests
+  (Note: actual counts may vary — count from the provided file)
+
+Expected top_ips.txt format (approximate):
+     20 192.168.1.10
+     14 172.16.0.1
+     12 10.0.0.5
+     12 203.0.113.42
+      8 198.51.100.7
+
+Key answers:
+  - Most frequent IP: 192.168.1.10 (~20 requests)
+  - Unique IPs: 5 (or 6 depending on count)
+
+Pipeline breakdown:
+  cut -d' ' -f1   → extract IP (field 1)
+  sort            → group identical IPs
+  uniq -c         → count each group
+  sort -rn        → sort by count descending
+  head -5         → show top 5
+
+Key Learning:
+  This "extract → sort → count → re-sort" pattern is a fundamental log analysis technique.
+
+
+EXERCISE 3 — tee: Split Output
+--------------------------------
+Key answers:
+  - tee reads stdin and writes to BOTH stdout AND a file simultaneously
+  - > only redirects — data doesn't continue through the pipeline
+  - tee -a appends to the file (like >>) instead of overwriting (like >)
+  - ERROR count from server.log: 5 ERROR lines
+
+Example:
+  cat server.log | grep "ERROR" | tee errors.txt | wc -l
+  → Screen shows: 5
+  → errors.txt contains: all 5 ERROR lines
+
+Key Learning:
+  tee is essential when you need BOTH the intermediate data AND to continue the pipeline.
+
+================================================================================
+                        LEVEL 3 SOLUTIONS
+================================================================================
+
+EXERCISE 1 — Combine Pipes with Redirection
+---------------------------------------------
+Commands:
+  cat server.log | grep "WARN" | sort | uniq > warnings_unique.txt
+
+Expected: server.log has 6 WARN lines. After sort | uniq, likely 6 unique (all different).
+
+log_stats.txt expected content:
+  INFO:  19 (varies based on server.log content)
+  WARN:  6
+  ERROR: 5
+
+Status codes in web_access.log:
+  200: ~55
+  301: ~3-4
+  404: ~12-15
+  (500: 0)
+
+Backslash at end of line: \ is a line continuation character. The shell treats
+the next line as a continuation of the current command. Used for readability
+when pipelines get very long.
+
+
+EXERCISE 2 — Process Monitoring
+---------------------------------
+Answers are system-dependent. General guidance:
+  - sort -k3 -rn: sort by column 3 (CPU%) descending
+  - sort -k4 -rn: sort by column 4 (MEM%) descending
+  - ps aux | tail -n +2 | cut -d' ' -f1: extracts usernames
+    tail -n +2 skips the header line "USER PID %CPU ..."
+
+Common top CPU consumers on a fresh Linux VM:
+  - often a kworker, systemd, or the student's own processes
+
+
+EXERCISE 3 — Final Web Log Analysis
+--------------------------------------
+web_access.log counts (from the provided file):
+  Total requests: 80
+  Unique IPs: 5 (192.168.1.10, 10.0.0.5, 172.16.0.1, 203.0.113.42, 198.51.100.7)
+  Unique pages: /index.html, /about.html, /dashboard, /login, /settings, /api/data, /api/users, /api/status
+
+Most requested page: /index.html (appears most often)
+Most requested IP: 192.168.1.10
+
+HTTP status breakdown (approximate):
+  200: ~55-60 requests
+  301: ~3-4 requests
+  404: ~12-15 requests
+  500: 0 requests
+
+Expected web_summary.txt structure:
+  ============================================
+     WEB ACCESS LOG ANALYSIS REPORT
+     Generated: [current date]
+  ============================================
+  Total requests: 80
+  Unique IPs: 5
+  Unique pages: 8
+  ...
+
+================================================================================
+                        GRADING RUBRIC
+================================================================================
+
+Level 1 (3 points):
+  - Clue 1: Correctly identifies grep -v removes grep from results (1 pt)
+  - Clue 2: Correctly answers what head -10 | tail -5 gives (lines 6-10) (1 pt)
+  - Clue 3: Identifies highest salary as 102000 (Eve Martinez) (1 pt)
+
+Level 2 (3 points):
+  - Clue 1: Correct unique count of 8 case-insensitive items (1 pt)
+  - Clue 2: Correct most frequent IP (192.168.1.10) (1 pt)
+  - Clue 3: Explains tee correctly; identifies ERROR count (1 pt)
+
+Level 3 (3 points):
+  - Clue 1: log_stats.txt has correct INFO/WARN/ERROR counts (1 pt)
+  - Clue 2: Correctly identifies top CPU process (system-dependent) (1 pt)
+  - Clue 3: web_summary.txt is complete with all sections (1 pt)
+
+================================================================================
+                    ESTIMATED COMPLETION TIME
+================================================================================
+
+Level 1: 20-25 minutes
+Level 2: 25-30 minutes
+Level 3: 30-40 minutes
+Total:   75-95 minutes
+
+================================================================================
+                    COMMON STUDENT MISTAKES
+================================================================================
+
+1. Forgetting grep -v "grep" when searching ps aux (grep itself appears in results)
+2. Using sort without -n for numeric data (lexicographic vs numeric sort)
+3. Not understanding tee — confusing it with > in the middle of a pipeline
+4. Forgetting tail -n +2 to skip CSV header rows before processing
+5. Using sort -k3 instead of sort -k3 -n (column 3 sorts as strings without -n)
+6. Not understanding that uniq only removes ADJACENT duplicates (must sort first)
+7. Confusion about web_access.log field positions (IP is field 1, path is field 3, status is field 4)
+
+================================================================================
+                    TEACHING TIPS
+================================================================================
+
+1. The "frequency count" pattern (sort | uniq -c | sort -rn | head -N) is worth
+   memorizing. Show students this works on ANY data: IPs, usernames, error codes.
+
+2. Have students build the web_access.log pipeline one step at a time, adding
+   one command at a time and observing how the data transforms.
+
+3. tee is best demonstrated live: show the pipeline with and without tee,
+   highlighting that you lose intermediate data without it.
+
+4. The backslash line continuation (\) is worth emphasizing — real production
+   pipelines can be 8-10 commands long.
+================================================================================

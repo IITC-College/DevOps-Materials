@@ -1,0 +1,64 @@
+================================================================================
+                        LEVEL 2 - EXERCISE 2
+            "Find Top Entries — Access Log IP Analysis"
+================================================================================
+
+BACKGROUND:
+-----------
+One of the most common real-world pipeline patterns is:
+  extract a field → sort → count occurrences → sort by count → show top N
+
+This pattern is used constantly in log analysis, traffic monitoring, and
+security auditing. Once you have this pipeline memorized, you can apply it
+to almost any data.
+
+EXERCISE:
+---------
+Step 1: View the web access log:
+
+  cat ../../data/web_access.log
+
+Step 2: Extract just the IP addresses (first field, space-delimited):
+
+  cat ../../data/web_access.log | cut -d' ' -f1
+
+Step 3: Sort the IPs (groups identical ones together):
+
+  cat ../../data/web_access.log | cut -d' ' -f1 | sort
+
+Step 4: Count how many times each IP appears:
+
+  cat ../../data/web_access.log | cut -d' ' -f1 | sort | uniq -c
+
+Step 5: Sort by count (most frequent first):
+
+  cat ../../data/web_access.log | cut -d' ' -f1 | sort | uniq -c | sort -rn
+
+Step 6: Show only the top 5:
+
+  cat ../../data/web_access.log | cut -d' ' -f1 | sort | uniq -c | sort -rn | head -5
+
+Step 7: Save the top 5 to a file:
+
+  cat ../../data/web_access.log | cut -d' ' -f1 | sort | uniq -c | sort -rn | head -5 > top_ips.txt
+  cat top_ips.txt
+
+Step 8: Count how many unique IPs there are in total:
+
+  cat ../../data/web_access.log | cut -d' ' -f1 | sort | uniq | wc -l
+
+QUESTIONS TO ANSWER:
+--------------------
+- What is the most frequent IP address?
+- How many requests did the most frequent IP make?
+- How many unique IPs are in the log?
+- What does each step in the pipeline add to the process?
+
+WRITE YOUR ANSWER:
+------------------
+  echo "L2C2: Top IP=$(head -1 top_ips.txt)" >> ../../my_answers.txt
+
+================================================================================
+Move to the next exercise:
+  cat clue3.txt
+================================================================================

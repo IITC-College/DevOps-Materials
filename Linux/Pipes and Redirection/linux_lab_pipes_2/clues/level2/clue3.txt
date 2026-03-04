@@ -1,0 +1,71 @@
+================================================================================
+                        LEVEL 2 - EXERCISE 3
+            "tee — Split Output to Both Screen and File Simultaneously"
+================================================================================
+
+BACKGROUND:
+-----------
+The `tee` command reads from stdin and writes to BOTH stdout AND a file at
+the same time. It "tees" the data flow like a T-junction in plumbing.
+
+Without tee:   command1 | command2 | wc -l  → you get count but lose the data
+With tee:      command1 | command2 | tee saved.txt | wc -l
+               → you get the count AND the data is saved to saved.txt
+
+This is extremely useful when you want to see a count AND preserve the matches.
+
+EXERCISE:
+---------
+Step 1: Basic tee — output goes to screen AND file:
+
+  echo "hello from tee" | tee hello.txt
+  cat hello.txt
+
+Step 2: Tee in a pipeline — save errors while also counting them:
+
+  cat ../../data/server.log | grep "ERROR" | tee errors.txt | wc -l
+
+Observe: The number appears on screen (from wc -l).
+         The actual error lines are saved in errors.txt.
+
+Step 3: Verify both happened:
+
+  wc -l errors.txt
+  cat errors.txt
+
+Step 4: Tee with append (-a flag):
+
+  echo "first line" | tee -a growing.txt
+  echo "second line" | tee -a growing.txt
+  echo "third line" | tee -a growing.txt
+  cat growing.txt
+
+Step 5: Real-world tee — filter WARN lines, save them, and count:
+
+  cat ../../data/server.log | grep "WARN" | tee warnings.txt | wc -l
+  echo "Saved $(wc -l < warnings.txt) WARN lines to warnings.txt"
+
+Step 6: Tee in a longer pipeline (save intermediate results):
+
+  cat ../../data/web_access.log | cut -d' ' -f1 | sort | tee all_ips_sorted.txt | uniq -c | sort -rn | head -5
+
+Now you have:
+  - all_ips_sorted.txt — sorted IP list
+  - Screen shows — top 5 IPs by frequency
+
+QUESTIONS TO ANSWER:
+--------------------
+- What does tee do that > cannot do in the middle of a pipeline?
+- What is the difference between tee and tee -a?
+- After step 2, how many ERROR lines are there?
+- Why is tee useful when you want BOTH the count AND the matching lines?
+
+WRITE YOUR ANSWER:
+------------------
+  echo "L2C3: tee saves to file while passing data through; ERROR count=$(wc -l < errors.txt 2>/dev/null || echo 0)" >> ../../my_answers.txt
+
+================================================================================
+Level 2 complete! Move to Level 3:
+  cd ../level3
+  cat clue1.txt
+================================================================================

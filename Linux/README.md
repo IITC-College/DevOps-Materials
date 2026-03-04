@@ -12,3 +12,4 @@ Hands-on Linux fundamentals for DevOps. Topics progress from basic navigation to
 | [Processes](Processes/) | Processes, services, systemd, journalctl, troubleshooting |
 | [Networking](Networking/) | Network adapters, basic connectivity |
 | [Shell Scripting](Shell%20Scripting/) | Bash scripting: variables, conditions, loops, functions |
+| [Pipes and Redirection](Pipes%20and%20Redirection/) | `>`, `>>`, `<`, `<<`, `\|` — redirecting and piping data |

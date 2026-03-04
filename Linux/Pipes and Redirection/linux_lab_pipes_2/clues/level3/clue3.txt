@@ -1,0 +1,113 @@
+================================================================================
+                        LEVEL 3 - EXERCISE 3
+            "Final Challenge — Full Web Access Log Analysis"
+================================================================================
+
+BACKGROUND:
+-----------
+You now have all the skills to perform a real-world log analysis task. In this
+final exercise, you will build a complete summary report from a web access log
+using everything you have learned: pipes, redirection, grep, cut, sort, uniq,
+wc, head, and tee working together.
+
+EXERCISE:
+---------
+Step 1: Explore the web access log:
+
+  cat ../../data/web_access.log
+  wc -l ../../data/web_access.log
+
+Step 2: Count total requests:
+
+  cat ../../data/web_access.log | wc -l
+
+Step 3: Top 10 IPs by request count:
+
+  cat ../../data/web_access.log | cut -d' ' -f1 | sort | uniq -c | sort -rn | head -10
+
+Step 4: Most requested page/path:
+
+  cat ../../data/web_access.log | cut -d' ' -f3 | sort | uniq -c | sort -rn | head -1
+
+Step 5: Count requests by HTTP status code:
+
+  for code in 200 301 302 404 500; do
+      count=$(cat ../../data/web_access.log | grep " $code " | wc -l)
+      echo "HTTP $code: $count requests"
+  done
+
+Step 6: Save top 10 IPs to file:
+
+  cat ../../data/web_access.log | cut -d' ' -f1 | sort | uniq -c | sort -rn | head -10 > top_ips.txt
+  cat top_ips.txt
+
+Step 7: Build the full summary report:
+
+  echo "============================================" > web_summary.txt
+  echo "   WEB ACCESS LOG ANALYSIS REPORT" >> web_summary.txt
+  echo "   Generated: $(date)" >> web_summary.txt
+  echo "============================================" >> web_summary.txt
+  echo "" >> web_summary.txt
+  echo "Total requests: $(cat ../../data/web_access.log | wc -l)" >> web_summary.txt
+  echo "Unique IPs:     $(cat ../../data/web_access.log | cut -d' ' -f1 | sort | uniq | wc -l)" >> web_summary.txt
+  echo "Unique pages:   $(cat ../../data/web_access.log | cut -d' ' -f3 | sort | uniq | wc -l)" >> web_summary.txt
+  echo "" >> web_summary.txt
+  echo "--- Status Code Breakdown ---" >> web_summary.txt
+  for code in 200 301 302 404 500; do
+      echo "HTTP $code: $(cat ../../data/web_access.log | grep ' '$code' ' | wc -l)" >> web_summary.txt
+  done
+  echo "" >> web_summary.txt
+  echo "--- Top 5 IPs ---" >> web_summary.txt
+  cat ../../data/web_access.log | cut -d' ' -f1 | sort | uniq -c | sort -rn | head -5 >> web_summary.txt
+  echo "" >> web_summary.txt
+  echo "--- Top 5 Pages ---" >> web_summary.txt
+  cat ../../data/web_access.log | cut -d' ' -f3 | sort | uniq -c | sort -rn | head -5 >> web_summary.txt
+  echo "============================================" >> web_summary.txt
+
+Step 8: View your complete report:
+
+  cat web_summary.txt
+
+QUESTIONS TO ANSWER:
+--------------------
+- How many total requests are in the log?
+- How many unique IPs?
+- What is the most requested page?
+- What is the most common HTTP status code?
+- What is the top IP address?
+
+WRITE YOUR ANSWER:
+------------------
+  echo "L3C3 COMPLETE: web_summary.txt created. Total=$(cat ../../data/web_access.log | wc -l) requests" >> ../../my_answers.txt
+
+================================================================================
+    CONGRATULATIONS! You have completed Lab 2 — Pipes in Practice!
+================================================================================
+
+KEY TAKEAWAYS:
+--------------
+  ✓ | (pipe) connects stdout of one command to stdin of the next
+  ✓ Data flows left to right through a pipeline
+  ✓ ps aux | grep finds specific running processes
+  ✓ head and tail limit output when piped
+  ✓ cut extracts specific columns from delimited data
+  ✓ sort | uniq -c | sort -rn = the "frequency count" pattern
+  ✓ tee splits a pipeline to save intermediate results to a file
+  ✓ Combine | and > to process data AND save the final result
+  ✓ \ at end of line continues a long pipeline on the next line
+  ✓ Pipelines compose: each command does one thing, chained together they're powerful
+
+NEXT STEPS:
+-----------
+You have now completed the full Pipes and Redirection lab series!
+Topics covered:
+  >   Output redirection (overwrite)
+  >>  Output redirection (append)
+  <   Input redirection
+  <<  Here-documents (heredoc)
+  |   Pipes
+
+Combine all five in real scripts and you have a powerful toolkit for
+Linux system administration and DevOps automation.
+
+================================================================================

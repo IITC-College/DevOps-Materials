@@ -1,0 +1,268 @@
+================================================================================
+                    LAB SOLUTIONS - INSTRUCTOR COPY
+            linux_lab_redir_output_append_1 — Building Files Over Time
+================================================================================
+
+Keep this file secure. Do not share with students.
+
+================================================================================
+                        LEVEL 1 SOLUTIONS
+================================================================================
+
+EXERCISE 1 — Append vs Overwrite: The Critical Difference
+-----------------------------------------------------------
+Commands:
+  echo "First write" > demo.txt   → demo.txt = "First write"
+  echo "Second write" > demo.txt  → demo.txt = "Second write" (First gone)
+  echo "Third write" > demo.txt   → demo.txt = "Third write"  (only this survives)
+
+  echo "First append" >> append_demo.txt   → 1 line
+  echo "Second append" >> append_demo.txt  → 2 lines
+  echo "Third append" >> append_demo.txt   → 3 lines
+  wc -l append_demo.txt → 3 append_demo.txt
+
+Key answers:
+  - demo.txt has 1 line (only "Third write")
+  - append_demo.txt has 3 lines (all three survived)
+  - Key difference: > replaces the file; >> adds to the end of the file
+
+Key Learning:
+  > (overwrite): destroys existing content, writes new content
+  >> (append): preserves existing content, adds new content at the end
+
+Common Mistakes:
+  - Students confuse the two because both "write to a file"
+  - Students expect >> to also overwrite because they're used to > behavior
+
+
+EXERCISE 2 — Building a List
+------------------------------
+Commands:
+  echo "Alice"   >> team.txt  → 1 line
+  echo "Bob"     >> team.txt  → 2 lines
+  echo "Charlie" >> team.txt  → 3 lines
+  echo "Diana"   >> team.txt  → 4 lines
+  echo "Eve"     >> team.txt  → 5 lines
+  wc -l team.txt → 5 team.txt
+
+Key answers:
+  - team.txt has 5 lines after all five appends
+  - No — earlier names do NOT disappear with >>
+  - Challenge answer: add any 3 names with >> ; wc -l should show 8
+
+Key Learning:
+  >> is perfect for building lists incrementally — common in scripts.
+
+
+EXERCISE 3 — Append Command Output
+-------------------------------------
+Commands:
+  date >> activity.log     → line 1
+  whoami >> activity.log   → line 2
+  hostname >> activity.log → line 3
+  date >> activity.log     → line 4 (second timestamp)
+  wc -l activity.log → 4
+
+Key answers:
+  - 4 lines after step 4
+  - Running date >> activity.log 10 more times → file grows by 10 lines
+  - Each run adds a new line; old lines are preserved
+
+Key Learning:
+  Any command's stdout can be appended to a file with >>. This is the
+  foundation of real Linux logging (syslog, application logs, cron logs).
+
+================================================================================
+                        LEVEL 2 SOLUTIONS
+================================================================================
+
+EXERCISE 1 — Log Rotation Concept
+------------------------------------
+Commands:
+  echo "$(date) - System check #1" >> system.log
+  ...
+  for i in 4 5 6 7 8; do echo "$(date) - System check #$i" >> system.log; done
+  wc -l system.log → 8 lines
+
+Key answers:
+  - 8 lines after the loop (3 manual + 5 from loop)
+  - Real system logs (syslog, journald, nginx, apache) use >> so entries accumulate
+  - If systems used > instead: each reboot or restart would wipe the entire log
+
+Key Learning:
+  >> is the append operator that enables persistent, growing log files.
+  Real-world consequence: losing a log due to > is a serious operational mistake.
+
+
+EXERCISE 2 — Append to Existing File
+---------------------------------------
+data/existing_log.txt has 10 pre-existing entries.
+
+Commands:
+  wc -l ../../data/existing_log.txt  → 10
+  echo "$(date) NEW: Service restarted by $(whoami)" >> ../../data/existing_log.txt
+  wc -l ../../data/existing_log.txt  → 11
+
+Key answers:
+  - 10 lines before, 11 after first append, 13 after 3 more appends
+  - tail -5 shows: the 5 most recently added lines (new entries at the bottom)
+
+Key Learning:
+  >> works on ANY file — including pre-existing files. The file grows.
+  tail -5 is a useful way to see the latest entries in a growing log.
+
+
+EXERCISE 3 — Build a Diary File
+----------------------------------
+Commands:
+  echo "$(date): Started the lab today" >> diary.txt
+  echo "$(date): Learned about >> for appending" >> diary.txt
+  echo "$(date): Now practicing with real files" >> diary.txt
+  echo "$(date): This is my fourth diary entry" >> diary.txt
+  echo "$(date): All five entries should be here!" >> diary.txt
+  wc -l diary.txt → 5
+
+Challenge with separators (8 lines total: 5 entries + 3 "---" separators if added after entries 1,2,3):
+  echo "---" >> diary.txt
+
+Key answers:
+  - 5 lines in diary.txt after all five echo >> commands
+  - tail -1 shows only the last entry
+  - With separators: lines depend on how many separators added
+
+Key Learning:
+  >> with $(date) is the pattern used in production for audit logs, diary-style logs,
+  and any record that needs a timestamp per entry.
+
+================================================================================
+                        LEVEL 3 SOLUTIONS
+================================================================================
+
+EXERCISE 1 — Append in a Loop
+--------------------------------
+Commands (broken version):
+  for color in red green blue yellow purple; do echo "$color" > colors.txt; done
+  cat colors.txt   → "purple" (only last iteration survives)
+  wc -l colors.txt → 1
+
+Commands (fixed version):
+  > colors_fixed.txt
+  for color in red green blue yellow purple; do echo "$color" >> colors_fixed.txt; done
+  wc -l colors_fixed.txt → 5
+
+Commands (numbered list):
+  > numbered.txt
+  for i in $(seq 1 10); do echo "Item $i: processed" >> numbered.txt; done
+  wc -l numbered.txt → 10
+
+Key answers:
+  - colors.txt (broken): 1 line ("purple")
+  - colors_fixed.txt: 5 lines (all colors)
+  - numbered.txt: 10 lines
+
+Key Learning:
+  >> inside a loop saves EVERY iteration. > inside a loop saves ONLY the last.
+  > filename alone (empty redirect) creates or clears a file — useful to initialize.
+
+
+EXERCISE 2 — Combining > and >>: The Professional Pattern
+-----------------------------------------------------------
+Commands:
+  > app_session.log                                     (initialize/clear)
+  echo "=== Session started: $(date) ===" >> app_session.log
+  echo "User: $(whoami)" >> app_session.log
+  echo "Host: $(hostname)" >> app_session.log
+  echo "---" >> app_session.log
+  for event in "login" "data_loaded" "report_generated" "logout"; do
+      echo "$(date): EVENT - $event" >> app_session.log
+  done
+  echo "=== Session ended: $(date) ===" >> app_session.log
+  wc -l app_session.log → ~10 lines (1 header + user + host + --- + 4 events + 1 footer)
+
+Key answers:
+  - > at step 1 clears/creates app_session.log (starts fresh each session)
+  - Final line count: ~10 lines
+  - Pattern: > to initialize, >> to grow
+
+Key Learning:
+  The professional pattern is: use > ONCE to start fresh, then >> for everything else.
+  This ensures the log resets cleanly each session while preserving all entries within it.
+
+
+EXERCISE 3 — Final Challenge: Audit Trail
+-------------------------------------------
+Commands:
+  echo "=== AUDIT LOG INITIALIZED: $(date) ===" > audit.log
+  echo "$(date) [INFO] User $(whoami) started audit session" >> audit.log
+  echo "$(date) [ACTION] Checked disk usage" >> audit.log
+  df -h >> audit.log
+  echo "$(date) [ACTION] Listed running processes" >> audit.log
+  ps aux | head -5 >> audit.log
+  echo "$(date) [ACTION] Checked memory" >> audit.log
+  free -h >> audit.log
+  echo "$(date) [INFO] Audit session complete" >> audit.log
+
+  wc -l audit.log → varies (at least 10+ lines due to df, ps, free output)
+  grep "\[ACTION\]" audit.log → shows 3 ACTION entries
+
+Key answers:
+  - Minimum ~15 lines (depends on df and ps output size)
+  - 3 [ACTION] entries
+  - The > on the first line ensures each run of the audit starts fresh
+
+Key Learning:
+  A real audit trail combines > (fresh start per session) and >> (grow within session).
+  Commands like df, free, ps can be piped directly into >> for structured log entries.
+
+================================================================================
+                        GRADING RUBRIC
+================================================================================
+
+Level 1 (3 points):
+  - Clue 1: Correct line counts (demo.txt=1, append_demo.txt=3) and explanation (1 pt)
+  - Clue 2: team.txt has 5+ lines, no names lost (1 pt)
+  - Clue 3: activity.log has 4 lines after step 4 (1 pt)
+
+Level 2 (3 points):
+  - Clue 1: system.log has 8 lines; correct explanation of why >> is used in real logs (1 pt)
+  - Clue 2: Correct before/after line counts from existing_log.txt (1 pt)
+  - Clue 3: diary.txt has 5 lines; correct use of tail -1 (1 pt)
+
+Level 3 (3 points):
+  - Clue 1: colors.txt=1 line, colors_fixed.txt=5 lines, numbered.txt=10 lines (1 pt)
+  - Clue 2: app_session.log ~10 lines; explains > vs >> pattern (1 pt)
+  - Clue 3: audit.log created with correct structure; 3 [ACTION] entries found (1 pt)
+
+================================================================================
+                    ESTIMATED COMPLETION TIME
+================================================================================
+
+Level 1: 15-20 minutes (foundational)
+Level 2: 20-25 minutes (application)
+Level 3: 25-30 minutes (mastery)
+Total:   60-75 minutes
+
+================================================================================
+                    COMMON STUDENT MISTAKES
+================================================================================
+
+1. Using > inside a loop (the most important mistake to catch and explain)
+2. Forgetting to use > first to initialize a file before a loop with >>
+3. Running a >> command twice in automation (duplicates accumulate)
+4. Using >> when they meant > and losing a "fresh start" for a session log
+5. Not checking file growth with wc -l (just trust without verifying)
+
+================================================================================
+                    TEACHING TIPS
+================================================================================
+
+1. The > vs >> distinction is CRITICAL. Demonstrate it with a 30-second live demo:
+   echo "line1" > test.txt; echo "line2" > test.txt; cat test.txt  → 1 line
+   echo "line1" >> test.txt; echo "line2" >> test.txt; cat test.txt → 2 lines
+
+2. The loop exercise (Level 3 Clue 1) is the most memorable lesson. Have students
+   predict the output BEFORE running it. The "only last value survives" result
+   surprises most students and makes the lesson stick.
+
+3. Show real-world evidence: cat /var/log/syslog | tail -20 to see a real growing log.
+================================================================================
