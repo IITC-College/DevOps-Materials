@@ -1,4 +1,26 @@
 # Linux Lab - Here-Document with << (Part 1)
+
+---
+
+## Installation Instructions
+
+### Method 1: Download with curl (Recommended)
+
+```bash
+curl -L -o lab.tar.gz https://github.com/IITC-College/DevOps-Materials/releases/download/v5.0-pipes-redirection/linux_lab_redir_heredoc_1.tar.gz
+tar -xzf lab.tar.gz
+cd linux_lab_redir_heredoc_1
+```
+
+### Method 2: Clone the repository
+
+```bash
+git clone https://github.com/IITC-College/DevOps-Materials.git
+cd DevOps-Materials/Linux/Pipes\ and\ Redirection/linux_lab_redir_heredoc_1
+```
+
+---
+
 ## Theme: Writing Multi-line Input Inline
 
 ---
