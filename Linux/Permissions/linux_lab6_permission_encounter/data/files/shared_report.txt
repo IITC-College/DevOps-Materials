@@ -5,8 +5,8 @@
 This file is a shared report that everyone can read and write.
 
 File: shared_report.txt
-Owner: alice
-Group: developers
+Owner: bob
+Group: shared_group
 Permissions: rw-rw-rw- (owner: read+write, group: read+write, others: read+write)
 
 Content:
@@ -18,7 +18,7 @@ This is useful for collaborative documents where everyone needs write access.
 
 Status: Draft
 Version: 1.0
-Last modified by: alice
+Last modified by: bob
 
 Sections:
 1. Executive Summary

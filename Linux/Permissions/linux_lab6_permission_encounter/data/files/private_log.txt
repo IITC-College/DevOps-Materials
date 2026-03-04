@@ -5,8 +5,8 @@
 This file contains private log information.
 
 File: private_log.txt
-Owner: bob
-Group: developers
+Owner: alice
+Group: alice
 Permissions: rw------- (owner: read+write, group: none, others: none)
 
 Content:
@@ -18,7 +18,7 @@ Private log entries - DO NOT SHARE
 [2026-01-27 10:30] Database connection established
 [2026-01-27 10:45] Cache cleared
 
-This file is private and should only be accessible by the owner (bob).
+This file is private and should only be accessible by the owner (alice).
 Even group members cannot read this file.
 
 This file demonstrates the -rw------- permission pattern, which provides

@@ -6,7 +6,7 @@ This file contains private personal notes.
 
 File: private_notes.txt
 Owner: bob
-Group: developers
+Group: bob
 Permissions: rw------- (owner: read+write, group: none, others: none)
 
 Content:
@@ -15,7 +15,7 @@ Personal Notes - Confidential
 
 These are private notes that should only be accessible by bob (the owner).
 Even though bob is in the "developers" group, this file is set to be
-private to demonstrate that ownership takes precedence.
+private to demonstrate that only the owner can access it.
 
 Personal reminders:
 - Review code changes

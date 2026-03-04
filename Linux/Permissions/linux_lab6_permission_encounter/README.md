@@ -7,12 +7,12 @@ Welcome to your first Linux permissions practice lab!
 ### Method 1: Download with curl (Recommended)
 
 ```bash
-curl -L -o lab.tar.gz https://github.com/IITC-College/DevOps-Jan26/releases/download/v2.5.6/linux_lab6_permission_encounter.tar.gz
+curl -L -o lab.tar.gz https://github.com/IITC-College/DevOps-Materials/releases/download/v6.0-permissions/linux_lab6_permission_encounter.tar.gz
 tar -xzf lab.tar.gz
 cd linux_lab6_permission_encounter
 ```
 
-> **Note:** If you get "not in gzip format" or a tiny download, the release v2.5.6 may not be published yet. Use Method 2 or ask the instructor for the tarball.
+> **Note:** If you get "not in gzip format" or a tiny download, the release may not be published yet. Use Method 2 or ask the instructor for the tarball.
 
 ### Method 2: From the repository (if release not yet published)
 
@@ -140,4 +140,4 @@ Remember: Linux permissions are there to protect the system. Learning to read th
 
 **Linux Course - Day 2**  
 **Permission Encounter Lab**  
-**Version**: v2.5.6
+**Version**: v6.0

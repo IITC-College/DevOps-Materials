@@ -3,8 +3,8 @@ Shared Project Documentation
 This file is part of a shared project where multiple users collaborate.
 
 File: shared_doc.txt
-Owner: alice
-Group: developers
+Owner: charlie
+Group: shared_group
 Permissions: rw-rw-r-- (owner: read+write, group: read+write, others: read)
 
 This demonstrates a collaborative file where both the owner and group

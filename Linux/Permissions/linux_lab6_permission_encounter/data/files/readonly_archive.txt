@@ -5,8 +5,8 @@
 This file is an archive that should not be modified.
 
 File: readonly_archive.txt
-Owner: alice
-Group: developers
+Owner: root
+Group: root
 Permissions: r--r--r-- (owner: read only, group: read only, others: read only)
 
 Content:

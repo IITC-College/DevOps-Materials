@@ -5,8 +5,8 @@
 This file contains team collaboration notes.
 
 File: team_notes.txt
-Owner: bob
-Group: developers
+Owner: alice
+Group: team_dev
 Permissions: rw-rw-r-- (owner: read+write, group: read+write, others: read)
 
 Content:
