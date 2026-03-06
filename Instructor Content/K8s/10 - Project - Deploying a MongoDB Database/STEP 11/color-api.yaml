@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: color-api
+  labels:
+    app: color-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: color-api
+  template:
+    metadata:
+      labels:
+        app: color-api
+    spec:
+      containers:
+        - name: color-api
+          image: lironefitoussi/color-api:2.0.0
+          imagePullPolicy: Always
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "500m"
+              memory: "256Mi"
+          env:
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb-color-db-creds
+                  key: username
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb-color-db-creds
+                  key: password
+            - name: DB_HOST
+              value: mongodb-ss-0.mongodb-svc.default.svc.cluster.local
+            - name: DB_PORT
+              value: "27017"
+            - name: DB_NAME
+              value: color-db
+            - name: DB_URL
+              value: mongodb://$(DB_USER):$(DB_PASSWORD)@$(DB_HOST):$(DB_PORT)/$(DB_NAME)
+          ports:
+            - containerPort: 80

@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: traffic-generator
+spec:
+  containers:
+    - name: traffic-generator
+      image: lironefitoussi/traffic-generator:1.0.0
+      resources:
+        requests:
+          cpu: 100m
+          memory: 128Mi
+        limits:
+          cpu: 100m
+          memory: 128Mi
+      args:
+        - color-svc/api?colorKey=primary
+        - "0.5"

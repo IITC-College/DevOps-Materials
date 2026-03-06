@@ -1,6 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser")
-
+const mongoose = require("mongoose");
 // Routers
 const healthRouter = require("./routes/health");
 const apiRouter = require("./routes/api");
