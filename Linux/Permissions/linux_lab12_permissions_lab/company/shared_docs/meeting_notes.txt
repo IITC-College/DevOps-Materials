@@ -1,0 +1,15 @@
+=== All-Hands Meeting Notes - March 2026 ===
+
+Attendees: All departments
+Topics:
+1. Q1 Results - Revenue up 15%
+2. New office opening - April
+3. Team restructuring - Engineering + DevOps merger
+4. Security audit results - 2 findings to address
+
+Action Items:
+- Engineering: Fix permission issues on shared resources
+- Marketing: Prepare launch materials
+- HR: Update onboarding docs
+
+NEXT MEETING: April 5, 2026

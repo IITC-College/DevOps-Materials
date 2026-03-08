@@ -1,0 +1,11 @@
+=== Company Handbook ===
+
+Welcome to TechCorp!
+
+Core Values:
+1. Collaboration across teams
+2. Transparency in communication
+3. Security-first mindset
+4. Continuous learning
+
+This document should be readable by ALL employees.

@@ -1,0 +1,8 @@
+# Deployment Configuration
+environment: production
+replicas: 3
+port: 8080
+database:
+  host: db.internal.company.com
+  port: 5432
+  name: app_production

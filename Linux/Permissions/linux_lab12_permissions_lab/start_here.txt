@@ -2,7 +2,7 @@
     WELCOME TO THE PERMISSIONS LAB!
 ================================================================================
 
-⚠️  INSTRUCTOR NOTE: Before students start this lab, you MUST run:
+  INSTRUCTOR NOTE: Before students start this lab, you MUST run:
    sudo ./setup_environment.sh
    This sets up the lab environment with intentionally WRONG permissions.
 
@@ -36,7 +36,7 @@ The company directory structure has BROKEN permissions. Files are owned by
 the wrong users, sensitive data is world-readable, and scripts can't execute.
 
 ================================================================================
-    YOUR FIRST TASK
+    BEFORE YOU BEGIN
 ================================================================================
 
 1. Check who you are and what groups you belong to:
@@ -48,42 +48,13 @@ the wrong users, sensitive data is world-readable, and scripts can't execute.
    Run: ls -la company/
    Run: ls -la company/hr/
    Run: ls -la company/engineering/
+   Run: ls -la company/marketing/
+   Run: ls -la company/shared_docs/
    Run: ls -la scripts/
-
-3. Navigate to the first level of clues:
-   Run: cd clues/level1
-
-4. Read the first exercise:
-   Run: cat clue1.txt
+   Run: ls -la data/reports/
 
 ================================================================================
-    WHAT TO EXPECT
-================================================================================
-
-- You WILL use chmod to change file permissions (both numeric and symbolic)
-- You WILL use chown to change file ownership
-- You WILL use chgrp to change group ownership
-- You WILL need sudo for ownership changes
-- Each level builds on the previous one - do them IN ORDER!
-
-================================================================================
-    THREE LEVELS OF CHALLENGES
-================================================================================
-
-Level 1: chmod - Fix File Permissions
-  Fix overly permissive and overly restrictive files using numeric and
-  symbolic modes.
-
-Level 2: chown - Fix File Ownership
-  Transfer ownership to the correct users and groups so departments can
-  access their own files.
-
-Level 3: Combined Challenges
-  Fix real-world scenarios that require BOTH permission and ownership
-  changes, plus group management.
-
-================================================================================
-    COMMANDS YOU'LL USE
+    COMMANDS REFERENCE
 ================================================================================
 
 Changing Permissions:
@@ -103,6 +74,7 @@ Reading Permissions:
 - stat <file>            (detailed file info including numeric permissions)
 - id                     (your user ID and groups)
 - groups <user>          (show user's groups)
+- getent group <name>    (show group members)
 
 ================================================================================
     IMPORTANT REMINDERS
@@ -111,16 +83,346 @@ Reading Permissions:
 * Always check permissions with ls -l BEFORE and AFTER making changes
 * Use sudo for chown and chgrp commands
 * You do NOT need sudo for chmod on files you own
-* Read each exercise carefully - some require numeric mode, some symbolic
+* Never use chmod 777 - it's almost always wrong and a security risk
 * Write your answers in my_answers.txt in the main lab directory
 * If group changes don't take effect, try: newgrp <groupname>
 
 ================================================================================
-    READY? LET'S FIX THESE PERMISSIONS!
+================================================================================
+    THE 10 STEPS - FIX TECHCORP'S PERMISSIONS!
+================================================================================
 ================================================================================
 
-Your first destination: clues/level1/clue1.txt
 
-Navigate there and read the file to begin your mission!
+================================================================================
+    STEP 1: Lock Down the Exposed Salaries (chmod - numeric mode)
+================================================================================
 
-Good luck, SysAdmin! The company is counting on you!
+File: company/hr/salaries.csv
+
+Run: ls -l company/hr/salaries.csv
+
+PROBLEM: This file contains employee salary data. Right now, ANYONE on the
+system can read it. Try it yourself:
+   cat company/hr/salaries.csv
+
+That should NOT be possible! Salary data is highly sensitive.
+
+YOUR TASK: Use chmod with NUMERIC mode to make this file readable and
+writable by the OWNER only. No one else should have any access.
+
+HINT: Think about what numeric value means "read + write for owner, nothing
+for group, nothing for others." Each digit represents owner, group, others.
+Read = 4, Write = 2, Execute = 1.
+
+VERIFY: After your fix, run ls -l on the file again. You should see
+-rw------- as the permissions.
+
+QUESTION: Write in my_answers.txt - what were the permissions before,
+what command did you use, and why is this the right permission level?
+
+================================================================================
+    STEP 2: Fix the Broken Build Script (chmod - symbolic mode)
+================================================================================
+
+File: company/engineering/build.sh
+
+Run: ls -l company/engineering/build.sh
+
+PROBLEM: This is a shell script that the engineering team needs to run.
+Try running it:
+   ./company/engineering/build.sh
+
+It fails! Look at the permissions - what's missing?
+
+YOUR TASK: Use chmod with SYMBOLIC mode to add execute permission for
+the owner AND group, without changing any other permissions.
+
+HINT: Symbolic mode lets you add (+) or remove (-) specific permissions
+for specific categories (u=user/owner, g=group, o=others). You want to
+ADD one specific permission to two categories.
+
+VERIFY: Run the script again after your fix - it should work now!
+
+QUESTION: Why is symbolic mode better here than numeric mode? What would
+happen if you used numeric mode and accidentally changed the wrong bits?
+
+================================================================================
+    STEP 3: Secure the Exposed Secrets (chmod - both modes)
+================================================================================
+
+File A: company/engineering/api_keys.env
+File B: company/hr/employee_reviews.txt
+
+Run: ls -l company/engineering/api_keys.env
+Run: stat company/engineering/api_keys.env
+
+PROBLEM A: The API keys file has permissions 666 (rw-rw-rw-). That means
+EVERYONE can read AND write to it! This is extremely dangerous.
+
+YOUR TASK A: Use NUMERIC mode to lock this file down so only the owner
+can read and write it.
+
+Run: ls -l company/hr/employee_reviews.txt
+
+PROBLEM B: Employee reviews are readable by everyone (group and others
+can read).
+
+YOUR TASK B: Use SYMBOLIC mode to remove read permission from group AND
+others, without touching the owner's permissions.
+
+HINT: For file B, think about the "go" category (group + others) and
+the minus (-) operator to remove (r) read access.
+
+VERIFY: Use stat on both files after fixing them. Both should show
+access mode 0600.
+
+QUESTION: What is the "principle of least privilege" and how does it
+apply to these files?
+
+================================================================================
+    STEP 4: Transfer Engineering Files to the Right Owner (chown)
+================================================================================
+
+File: company/engineering/deploy_config.yaml
+
+Run: ls -l company/engineering/deploy_config.yaml
+
+PROBLEM: This deployment configuration file is owned by the wrong user
+AND the wrong group. Look at who currently owns it - does an intern in
+the marketing group make sense for a deployment config?
+
+YOUR TASK: Use chown to change BOTH the owner and the group in a single
+command. The file should be owned by the developer user and belong to
+the engineering group.
+
+HINT: chown can change both owner and group at once using the syntax:
+   sudo chown <user>:<group> <file>
+
+VERIFY: Run ls -l again. You should see developer as the owner and
+engineering as the group.
+
+QUESTION: Why does sudo required for chown? What security risk would
+exist if any user could change file ownership?
+
+================================================================================
+    STEP 5: Fix the Marketing Department Files (chown + chgrp)
+================================================================================
+
+Files:
+  - company/marketing/campaign_plan.txt
+  - company/marketing/analytics_report.csv
+
+Run: ls -l company/marketing/
+
+PROBLEM: Both marketing files are owned by engineering users. Marketing
+can't manage their own files! Check who currently owns each file and
+what group they belong to.
+
+YOUR TASK:
+- Fix campaign_plan.txt: Change owner to manager, group to marketing
+  (use chown with user:group syntax)
+- Fix analytics_report.csv: Change owner to manager, group to marketing
+  (this time, try doing it in TWO separate commands - one chown for the
+  user, one chgrp for the group)
+
+HINT: There are two approaches to changing ownership:
+  1. One command:  sudo chown user:group file
+  2. Two commands: sudo chown user file + sudo chgrp group file
+Both achieve the same result.
+
+VERIFY: Run ls -l company/marketing/ - both files should show
+manager as owner and marketing as group.
+
+QUESTION: What is the difference between chown and chgrp? When might
+you prefer one over the other?
+
+================================================================================
+    STEP 6: Unlock the Shared Documents (chown + chmod combined)
+================================================================================
+
+Files:
+  - company/shared_docs/company_handbook.txt
+  - company/shared_docs/meeting_notes.txt
+
+Run: ls -l company/shared_docs/
+
+PROBLEM: The company handbook is owned by intern:intern with permissions
+600 - only the intern can read it! Meeting notes are owned by root:root
+with permissions 600. These are supposed to be company-wide documents
+that EVERYONE should be able to read.
+
+YOUR TASK: For EACH file:
+  1. Change ownership to manager:engineering (using chown)
+  2. Change permissions to 644 (using chmod)
+
+HINT: Sometimes you need to fix BOTH ownership AND permissions.
+Think of chown as "WHO" and chmod as "WHAT access they get."
+644 means: owner can read/write, everyone else can read.
+
+VERIFY: Try reading both files with cat. They should be accessible now.
+
+QUESTION: Why do you need to fix BOTH ownership and permissions, not
+just one? What happens if you only fix one?
+
+================================================================================
+    STEP 7: Fix the Automation Scripts (ownership + execute perms)
+================================================================================
+
+Files:
+  - scripts/backup_database.sh
+  - scripts/generate_report.sh
+  - scripts/cleanup_logs.sh
+
+Run: ls -l scripts/
+
+PROBLEM: All three scripts are owned by root:root with permissions 644.
+None of them can be executed, and they're owned by the wrong users.
+
+YOUR TASK: Fix each script with the correct owner, group, and permissions:
+
+  backup_database.sh  -> owner: developer, group: engineering
+                      -> permissions: owner rwx, group rx, others none
+
+  generate_report.sh  -> owner: manager, group: devops
+                      -> permissions: owner rwx, group rx, others none
+
+  cleanup_logs.sh     -> owner: manager, group: devops
+                      -> permissions: owner rwx ONLY (nobody else!)
+
+HINT: For each script you need TWO commands: one to fix ownership, one
+to fix permissions. Think about what numeric values give "rwx r-x ---"
+vs "rwx --- ---". Remember: r=4, w=2, x=1, so rwx=7, r-x=5, ---=0.
+
+VERIFY: Check with ls -l scripts/ that all ownership and permissions
+are correct.
+
+QUESTION: Why does cleanup_logs.sh get more restrictive permissions
+than the other two? Think about what a cleanup/delete script does.
+
+================================================================================
+    STEP 8: Secure the Reports (data sensitivity levels)
+================================================================================
+
+Files:
+  - data/reports/weekly_summary.txt
+  - data/reports/security_audit.txt
+
+Run: ls -l data/reports/
+
+PROBLEM: The weekly summary has permissions 666 - everyone can read AND
+write it. The security audit has permissions 777 - everyone can read,
+write, AND execute it! Both are owned by root:root.
+
+YOUR TASK:
+
+  weekly_summary.txt   -> owner: manager, group: engineering
+                       -> permissions: 644 (everyone can read, owner writes)
+
+  security_audit.txt   -> owner: manager, group: devops
+                       -> permissions: 600 (owner only - this is CONFIDENTIAL)
+
+HINT: Not all reports are equal. A weekly summary is general information
+that benefits from being widely readable. A security audit contains
+sensitive findings (vulnerabilities, weaknesses) that could be exploited
+if the wrong people read them.
+
+VERIFY: After fixing, try:
+  cat data/reports/weekly_summary.txt    (should work - 644)
+  cat data/reports/security_audit.txt    (should say Permission denied)
+
+QUESTION: Why is 777 especially dangerous for a security audit file?
+Think about what each permission (read, write, execute) allows.
+
+================================================================================
+    STEP 9: Verify Group Access (multi-group analysis)
+================================================================================
+
+No files to fix in this step - this is an analysis exercise!
+
+Run these commands to understand group memberships:
+  groups intern
+  groups developer
+  groups manager
+  getent group engineering
+  getent group marketing
+  getent group devops
+
+YOUR TASK: Based on the permissions you've set in Steps 1-8, figure out
+which files each user can and cannot access. Write your analysis in
+my_answers.txt.
+
+Think about it this way for each file:
+  1. Is the user the OWNER? -> owner permissions apply
+  2. Is the user in the GROUP? -> group permissions apply
+  3. Neither? -> "others" permissions apply
+
+QUESTIONS (answer in my_answers.txt):
+  - Can the intern read api_keys.env? Why or why not?
+  - Can the developer run cleanup_logs.sh? Why or why not?
+  - Can the intern read the weekly_summary.txt? Why or why not?
+  - Can the developer read the security_audit.txt? Why or why not?
+  - Which user has the MOST access? Why?
+
+================================================================================
+    STEP 10: The Final Audit
+================================================================================
+
+YOUR TASK: Run a full audit of every file in the lab and verify that
+ALL permissions and ownership are correct.
+
+Run this command to see everything at once:
+  find company/ scripts/ data/ -type f -exec ls -l {} \;
+
+Compare your output against this checklist:
+
+  FILE                              PERMS    OWNER      GROUP
+  company/hr/salaries.csv           600      manager    marketing
+  company/hr/employee_reviews.txt   600      root       root
+  company/engineering/build.sh      754      developer  engineering
+  company/engineering/api_keys.env  600      developer  engineering
+  company/engineering/deploy_config 640      developer  engineering
+  company/marketing/campaign_plan   664      manager    marketing
+  company/marketing/analytics_rpt   644      manager    marketing
+  company/shared_docs/handbook      644      manager    engineering
+  company/shared_docs/meeting_notes 644      manager    engineering
+  scripts/backup_database.sh        750      developer  engineering
+  scripts/generate_report.sh        750      manager    devops
+  scripts/cleanup_logs.sh           700      manager    devops
+  data/reports/weekly_summary.txt   644      manager    engineering
+  data/reports/security_audit.txt   600      manager    devops
+
+If anything doesn't match, go back and fix it!
+
+FINAL QUESTIONS (answer in my_answers.txt):
+
+1. What is the difference between chmod and chown?
+
+2. When would you use symbolic mode (u+x) vs numeric mode (644)?
+
+3. Explain the principle of least privilege in your own words.
+
+4. A coworker suggests using chmod 777 to fix a "Permission denied" error.
+   What would you tell them?
+
+5. What did you learn from this lab that you'll use in real-world scenarios?
+
+================================================================================
+    CONGRATULATIONS!
+================================================================================
+
+If all your permissions match the checklist above, you've successfully
+secured TechCorp's file system!
+
+Remember these key takeaways:
+  - chmod sets WHAT actions are allowed
+  - chown sets WHO the permissions apply to
+  - Groups enable team-based access without making files world-readable
+  - Always apply the principle of least privilege
+  - Regular audits catch permission drift over time
+
+Great job, SysAdmin!
+
+================================================================================
+    Linux Course - Day 2 | Permissions Lab | Version: v12.1
+================================================================================

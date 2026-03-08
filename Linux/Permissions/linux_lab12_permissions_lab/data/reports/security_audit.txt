@@ -1,0 +1,15 @@
+=== CONFIDENTIAL: Security Audit Report ===
+
+Finding 1 (HIGH): Shared files have overly permissive access (777)
+  - Risk: Any user can modify critical documents
+  - Fix: Restrict to owner/group only
+
+Finding 2 (MEDIUM): Scripts missing execute permission
+  - Risk: Automation workflows broken
+  - Fix: Add execute permission for appropriate users
+
+Finding 3 (LOW): HR files accessible to all users
+  - Risk: Salary data exposure
+  - Fix: Restrict to HR group / owner only
+
+Overall Score: 65/100 - NEEDS IMPROVEMENT

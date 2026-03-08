@@ -1,0 +1,9 @@
+=== CONFIDENTIAL: Employee Performance Reviews ===
+
+Q4 Review Summary:
+- Alice: Exceeds expectations - promote to Senior
+- Bob: Meets expectations - standard raise
+- Charlie: Needs improvement - schedule mentoring
+- Dana: Exceeds expectations - bonus approved
+
+This document is HR-CONFIDENTIAL.

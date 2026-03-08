@@ -33,7 +33,6 @@ This single script will:
 - Create lab users (**intern**, **developer**, **manager**) with locked passwords
 - Create lab groups (**engineering**, **marketing**, **devops**)
 - Add the student user to the **engineering** group
-- Create the company directory structure with realistic files
 - Set **intentionally WRONG** permissions and ownership for students to fix
 - Assign group memberships: intern → engineering; developer → engineering+devops; manager → engineering+marketing+devops
 
@@ -58,30 +57,28 @@ In this lab you will actively **fix** broken permissions in a simulated company 
 
 ## How to Start?
 
-1. Open the `start_here.txt` file - this is where to begin!
+1. Open the `start_here.txt` file - everything is there!
 2. Read the instructions carefully
-3. Follow the exercises step by step
+3. Follow the 10 steps in order
 
 ```bash
 cat start_here.txt
 ```
 
-## Exercise List
+## The 10 Steps
 
-### Level 1: chmod - Fix File Permissions
-- Exercise 1: Lock down exposed HR salary data (numeric mode)
-- Exercise 2: Make a build script executable (symbolic mode)
-- Exercise 3: Secure API keys and verify with stat (both modes)
-
-### Level 2: chown - Fix File Ownership
-- Exercise 1: Transfer engineering files to the correct owner and group
-- Exercise 2: Fix marketing department file ownership
-- Exercise 3: Make shared documents accessible to all employees
-
-### Level 3: Combined Challenges
-- Exercise 1: Fix automation scripts (ownership + permissions)
-- Exercise 2: Secure reports with correct access levels
-- Exercise 3: Final challenge - fix the entire company structure
+| Step | Topic | What You'll Fix |
+|------|-------|-----------------|
+| 1 | chmod (numeric) | Lock down exposed HR salary data |
+| 2 | chmod (symbolic) | Make a build script executable |
+| 3 | chmod (both modes) | Secure API keys and employee reviews |
+| 4 | chown | Transfer engineering files to correct owner |
+| 5 | chown + chgrp | Fix marketing department file ownership |
+| 6 | chown + chmod | Unlock shared documents for all employees |
+| 7 | ownership + execute | Fix automation scripts with correct access |
+| 8 | data sensitivity | Secure reports with appropriate access levels |
+| 9 | group analysis | Analyze multi-group access scenarios |
+| 10 | final audit | Verify the entire company structure |
 
 ## Commands You'll Use
 
@@ -125,10 +122,10 @@ cat start_here.txt
 
 ## Lab Submission
 
-After completing all exercises:
+After completing all 10 steps:
 
 1. Create a file called `my_answers.txt` in the lab directory
-2. Write short answers to each exercise question
+2. Write short answers to each step's questions
 3. Include your reflections on what you learned
 4. Save the file
 
@@ -136,7 +133,7 @@ After completing all exercises:
 
 If you get stuck:
 
-1. Read the instructions again in the current clue file
+1. Re-read the hints in `start_here.txt` for that step
 2. Check `ls -l` output - it tells you the current state
 3. Use `stat <file>` to see numeric permissions
 4. Use `id` and `groups` to verify group memberships
@@ -151,4 +148,4 @@ You've already learned to READ permissions - now it's time to MASTER them. Think
 
 **Linux Course - Day 2**
 **Permissions Lab**
-**Version**: v12.0
+**Version**: v12.1
