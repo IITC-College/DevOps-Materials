@@ -1,0 +1,508 @@
+================================================================================
+                    LAB SOLUTIONS - INSTRUCTOR COPY
+================================================================================
+
+This file contains all answers to the Permissions Lab (Lab 12).
+Keep this file secure and do not share with students.
+
+================================================================================
+                            LEVEL 1 SOLUTIONS
+                        chmod - Fix File Permissions
+================================================================================
+
+EXERCISE 1 - Exposed Salaries (Numeric Mode)
+----------------------------------------------
+Location: company/hr/salaries.csv
+Problem: Permissions 644 (rw-r--r--), owned by manager:marketing
+         → World-readable salary data!
+
+Commands:
+  ls -l company/hr/salaries.csv
+  cat company/hr/salaries.csv          (works - proving the problem)
+  sudo chmod 600 company/hr/salaries.csv
+  ls -l company/hr/salaries.csv
+
+Before: -rw-r--r-- 1 manager marketing ... salaries.csv
+After:  -rw------- 1 manager marketing ... salaries.csv
+
+Answers:
+- Before: 644 (rw-r--r--)
+- Command: sudo chmod 600 company/hr/salaries.csv
+- After: 600 (rw-------)
+- Why 600: Salary data is highly sensitive. Only the owner (HR manager)
+  should be able to read or modify it. No group or other access needed.
+
+Key Learning: Numeric mode sets ALL permissions at once. 600 = owner rw only.
+
+EXERCISE 2 - The Broken Build (Symbolic Mode)
+----------------------------------------------
+Location: company/engineering/build.sh
+Problem: Permissions 644 (rw-r--r--), missing execute permission
+         → Script can't run!
+
+Commands:
+  ls -l company/engineering/build.sh
+  ./company/engineering/build.sh        (Permission denied - no execute)
+  sudo chmod ug+x company/engineering/build.sh
+  ls -l company/engineering/build.sh
+  ./company/engineering/build.sh        (works now)
+
+Before: -rw-r--r-- 1 developer engineering ... build.sh
+After:  -rwxr-xr-- 1 developer engineering ... build.sh (754)
+
+Answers:
+- Before: 644 (-rw-r--r--)
+- Command: sudo chmod ug+x company/engineering/build.sh
+- After: 754 (-rwxr-xr--)
+- Why symbolic: We only wanted to ADD execute permission without changing
+  the existing read/write permissions. Symbolic mode (u+x) is perfect for
+  this because it modifies only what you specify.
+- "ug+x" means: "Add execute permission for the user (owner) AND group"
+
+Key Learning: Symbolic mode modifies specific permissions without affecting
+others. Use it when you want to add or remove one permission.
+
+EXERCISE 3 - The Exposed Secrets (Both Modes)
+----------------------------------------------
+Location: company/engineering/api_keys.env, company/hr/employee_reviews.txt
+
+Problem 1: api_keys.env has 666 (rw-rw-rw-) → everyone can read AND write!
+Problem 2: employee_reviews.txt has 644 (rw-r--r--) → everyone can read
+
+Commands:
+  ls -l company/engineering/api_keys.env
+  stat company/engineering/api_keys.env
+  sudo chmod 600 company/engineering/api_keys.env
+  stat company/engineering/api_keys.env
+  ls -l company/hr/employee_reviews.txt
+  sudo chmod go-r company/hr/employee_reviews.txt
+  ls -l company/hr/employee_reviews.txt
+
+api_keys.env:
+  Before: Access: (0666/-rw-rw-rw-)
+  After:  Access: (0600/-rw-------)
+
+employee_reviews.txt:
+  Before: -rw-r--r-- (644)
+  After:  -rw------- (600)
+
+Answers:
+- api_keys.env before: 0666 (-rw-rw-rw-)
+- api_keys.env after: 0600 (-rw-------)
+- employee_reviews.txt command: sudo chmod go-r company/hr/employee_reviews.txt
+- Principle of least privilege: Give each file the MINIMUM permissions needed
+  for its purpose. Don't grant access "just in case" - only grant what's
+  actually required.
+- Why 666 is dangerous for API keys: Anyone on the system can read the keys
+  (data breach) AND modify them (sabotage, injection of malicious keys).
+
+Key Learning: Use stat for detailed permission info. The principle of least
+privilege means: minimum access, maximum security.
+
+================================================================================
+                            LEVEL 2 SOLUTIONS
+                        chown - Fix File Ownership
+================================================================================
+
+EXERCISE 1 - Wrong Department (Engineering Files)
+--------------------------------------------------
+Location: company/engineering/deploy_config.yaml
+Problem: Owned by intern:marketing → wrong owner AND wrong group
+
+Commands:
+  ls -l company/engineering/deploy_config.yaml
+  groups intern
+  groups developer
+  sudo chown developer:engineering company/engineering/deploy_config.yaml
+  ls -l company/engineering/deploy_config.yaml
+
+Before: -rw-r----- 1 intern marketing ... deploy_config.yaml
+After:  -rw-r----- 1 developer engineering ... deploy_config.yaml
+
+Answers:
+- Before: intern:marketing
+- After: developer:engineering
+- Syntax: sudo chown user:group file
+- Why marketing group was wrong: Marketing group members could read the
+  deployment configuration (which may contain database credentials, server
+  addresses, etc.) - this is a security leak across departments.
+- Why sudo: Only root can change file ownership. This prevents users from
+  giving their files to others (which could be used to bypass disk quotas
+  or blame others for file contents).
+
+Key Learning: Ownership determines WHO the permission sets apply to.
+Wrong ownership means wrong people get access, even with correct permissions.
+
+EXERCISE 2 - Cross-Department Leak (Marketing Files)
+-----------------------------------------------------
+Location: company/marketing/campaign_plan.txt, analytics_report.csv
+Problem: Both owned by engineering users instead of marketing
+
+Commands:
+  ls -l company/marketing/
+  getent group marketing
+  sudo chown manager:marketing company/marketing/campaign_plan.txt
+  sudo chown manager company/marketing/analytics_report.csv
+  sudo chgrp marketing company/marketing/analytics_report.csv
+  ls -l company/marketing/
+
+campaign_plan.txt:
+  Before: developer:engineering
+  After:  manager:marketing
+
+analytics_report.csv:
+  Before: intern:engineering
+  After:  manager:marketing
+
+Answers:
+- Before: developer:engineering and intern:engineering
+- Two methods: chown user:group (one command) vs chown user + chgrp group
+  (two commands). Both achieve the same result.
+- chown changes owner (and optionally group). chgrp changes ONLY the group.
+- Security problem: Engineering users could read marketing's campaign plans
+  and analytics data, potentially leaking business strategy.
+- getent group marketing shows: marketing:x:GID:manager
+
+Key Learning: chown and chgrp are complementary. Use chown user:group for
+convenience, or separate commands for clarity.
+
+EXERCISE 3 - The Locked Handbook (Shared Documents)
+----------------------------------------------------
+Location: company/shared_docs/
+Problem: company_handbook.txt owned by intern:intern with 600
+         meeting_notes.txt owned by root:root with 600
+         → Nobody can read shared documents!
+
+Commands:
+  ls -l company/shared_docs/
+  sudo chown manager:engineering company/shared_docs/company_handbook.txt
+  sudo chmod 644 company/shared_docs/company_handbook.txt
+  sudo chown manager:engineering company/shared_docs/meeting_notes.txt
+  sudo chmod 644 company/shared_docs/meeting_notes.txt
+  ls -l company/shared_docs/
+  cat company/shared_docs/company_handbook.txt
+
+company_handbook.txt:
+  Before: -rw------- intern:intern
+  After:  -rw-r--r-- manager:engineering
+
+meeting_notes.txt:
+  Before: -rw------- root:root
+  After:  -rw-r--r-- manager:engineering
+
+Answers:
+- Handbook problem: Owned by intern (wrong - intern shouldn't own company
+  docs) with 600 (too restrictive - nobody else can read it)
+- Two commands per file: chown to fix ownership, chmod to fix permissions
+- Why 644: Company handbook should be readable by ALL employees (others has
+  r--), but only editable by the manager (owner has rw-). 644 is the standard
+  "public read, owner write" pattern.
+- When to use 660: When only the owner AND their team (group) should access
+  the file, and others should have NO access. Example: team-internal docs.
+- Must fix BOTH: Ownership without correct permissions is meaningless (wrong
+  permissions). Permissions without correct ownership is also broken (wrong
+  people get the right permissions).
+
+Key Learning: Fixing files often requires BOTH chown and chmod. Think of
+chown as "who" and chmod as "what".
+
+================================================================================
+                            LEVEL 3 SOLUTIONS
+                    Combined chmod + chown + Group Scenarios
+================================================================================
+
+EXERCISE 1 - Broken Automation (Scripts)
+-----------------------------------------
+Location: scripts/
+Problem: All scripts owned by root:root with 644 (no execute)
+
+Commands:
+  ls -l scripts/
+  sudo chown developer:engineering scripts/backup_database.sh
+  sudo chmod 750 scripts/backup_database.sh
+  sudo chown manager:devops scripts/generate_report.sh
+  sudo chmod 750 scripts/generate_report.sh
+  sudo chown manager:devops scripts/cleanup_logs.sh
+  sudo chmod 700 scripts/cleanup_logs.sh
+  ls -l scripts/
+
+Expected output after fix:
+  -rwxr-x--- 1 developer engineering ... backup_database.sh
+  -rwxr-x--- 1 manager   devops      ... generate_report.sh
+  -rwx------ 1 manager   devops      ... cleanup_logs.sh
+
+Answers:
+- Before: all had 644 (rw-r--r--) owned by root:root
+- 750 vs 700: backup_database.sh gets 750 because the engineering TEAM needs
+  to run it (group gets r-x). cleanup_logs.sh gets 700 because it's a
+  destructive operation (deletes files) so ONLY the manager should run it.
+- Two commands: sudo chown user:group file + sudo chmod NNN file
+- Can engineering run backup_database.sh? YES - group has r-x (5)
+- Can engineering run cleanup_logs.sh? NO - group has --- (0), and
+  engineering is not even the group on that file (devops is)
+
+Key Learning: Different scripts need different permission levels based on
+their risk. Dangerous scripts should be more restrictive.
+
+EXERCISE 2 - The Leaky Reports
+--------------------------------
+Location: data/reports/
+Problem: weekly_summary.txt has 666, security_audit.txt has 777
+
+Commands:
+  ls -l data/reports/
+  sudo chown manager:engineering data/reports/weekly_summary.txt
+  sudo chmod 644 data/reports/weekly_summary.txt
+  sudo chown manager:devops data/reports/security_audit.txt
+  sudo chmod 600 data/reports/security_audit.txt
+  ls -l data/reports/
+  cat data/reports/weekly_summary.txt     (should work - 644)
+  cat data/reports/security_audit.txt     (Permission denied - 600)
+
+Expected output after fix:
+  -rw-r--r-- 1 manager engineering ... weekly_summary.txt
+  -rw------- 1 manager devops     ... security_audit.txt
+
+Answers:
+- Before: weekly_summary.txt=666 (rw-rw-rw-), security_audit.txt=777 (rwxrwxrwx)
+- Why 644 vs 600: Weekly summary is general information everyone should read.
+  Security audit contains sensitive findings (vulnerabilities, passwords) that
+  only the manager/security team should see.
+- 777 danger example: With 777, any user could READ the security audit
+  (learning about vulnerabilities to exploit), MODIFY it (hiding findings or
+  adding false data), or even EXECUTE it (if it were a script).
+- After fix: Can read weekly_summary.txt (others has r). Cannot read
+  security_audit.txt (others has ---).
+- Thought process: "Who NEEDS this data? Give them access. Deny everyone else."
+
+Key Learning: Different data sensitivity levels require different permissions.
+Public = 644, Team = 640/660, Confidential = 600.
+
+EXERCISE 3 - The Final Audit
+------------------------------
+Location: Entire lab structure
+
+Audit command:
+  find company/ -type f -exec ls -l {} \;
+
+EXPECTED COMPLETE STATE (after all fixes):
+  company/hr/salaries.csv              -rw-------  manager    marketing    600
+  company/hr/employee_reviews.txt      -rw-------  root       root         600
+  company/engineering/deploy_config    -rw-r-----  developer  engineering  640
+  company/engineering/build.sh         -rwxr-xr--  developer  engineering  754
+  company/engineering/api_keys.env     -rw-------  developer  engineering  600
+  company/marketing/campaign_plan.txt  -rw-rw-r--  manager    marketing    664
+  company/marketing/analytics_report   -rw-r--r--  manager    marketing    644
+  company/shared_docs/handbook         -rw-r--r--  manager    engineering  644
+  company/shared_docs/meeting_notes    -rw-r--r--  manager    engineering  644
+  scripts/backup_database.sh           -rwxr-x---  developer  engineering  750
+  scripts/generate_report.sh           -rwxr-x---  manager    devops       750
+  scripts/cleanup_logs.sh              -rwx------  manager    devops       700
+  data/reports/weekly_summary.txt      -rw-r--r--  manager    engineering  644
+  data/reports/security_audit.txt      -rw-------  manager    devops       600
+
+Intern access analysis (groups: engineering):
+  CAN access:
+    - deploy_config.yaml (group=engineering, group has r--)
+    - build.sh (group=engineering, group has r-x)
+    - campaign_plan.txt (others has r--)
+    - analytics_report.csv (others has r--)
+    - company_handbook.txt (others has r--)
+    - meeting_notes.txt (others has r--)
+    - weekly_summary.txt (others has r--)
+    - backup_database.sh (group=engineering, group has r-x)
+  CANNOT access:
+    - salaries.csv (not owner, not in group, others has ---)
+    - employee_reviews.txt (not owner, not in group, others has ---)
+    - api_keys.env (not owner, group has ---)
+    - generate_report.sh (not in devops group, others has ---)
+    - cleanup_logs.sh (not owner, not in group, others has ---)
+    - security_audit.txt (not owner, not in group, others has ---)
+
+Developer access (groups: engineering, devops):
+  Same as intern PLUS:
+    - api_keys.env (owner=developer)
+    - build.sh (owner=developer)
+    - deploy_config.yaml (owner=developer)
+    - backup_database.sh (owner=developer)
+    - generate_report.sh (group=devops, group has r-x)
+
+Manager access (groups: engineering, marketing, devops):
+  Can access ALL files because:
+    - Owner of most files
+    - Member of all three groups
+    - Even files owned by others are accessible via group membership
+
+Reflection should include:
+  - chmod sets WHAT actions are allowed, chown sets WHO they apply to,
+    groups enable team-based access without making files world-readable.
+  - Principle of least privilege: give minimum access needed, no more.
+  - Regular audits catch permission drift (new files added with wrong
+    permissions, ownership changes due to staff turnover, etc.)
+
+================================================================================
+                        COMPLETE ANSWERS SUMMARY
+================================================================================
+
+LEVEL 1 (chmod):
+-----------------
+1. Exercise 1: chmod 600 to lock salary file (numeric mode)
+2. Exercise 2: chmod ug+x to make script executable (symbolic mode)
+3. Exercise 3: chmod 600 for API keys, chmod go-r for reviews, stat to verify
+
+LEVEL 2 (chown):
+-----------------
+1. Exercise 1: chown developer:engineering to fix deploy config ownership
+2. Exercise 2: chown + chgrp to fix marketing file ownership
+3. Exercise 3: chown + chmod combined to fix shared documents
+
+LEVEL 3 (Combined):
+--------------------
+1. Exercise 1: Fix scripts with correct ownership (750/700) and execute perms
+2. Exercise 2: Secure reports with appropriate access levels (644/600)
+3. Exercise 3: Full audit and access analysis with multi-group scenarios
+
+================================================================================
+                    COMMANDS STUDENTS SHOULD USE
+================================================================================
+
+Changing Permissions:
+- chmod 600 file         (numeric: owner rw only)
+- chmod 644 file         (numeric: owner rw, everyone reads)
+- chmod 750 file         (numeric: owner rwx, group rx)
+- chmod 700 file         (numeric: owner rwx only)
+- chmod u+x file         (symbolic: add execute for owner)
+- chmod ug+x file        (symbolic: add execute for owner and group)
+- chmod go-r file        (symbolic: remove read for group and others)
+
+Changing Ownership:
+- sudo chown user file             (change owner)
+- sudo chown user:group file       (change owner and group)
+- sudo chgrp group file            (change group only)
+
+Reading/Verifying:
+- ls -l                            (detailed listing)
+- stat file                        (detailed info with numeric perms)
+- id                               (current user ID and groups)
+- groups user                      (user's group memberships)
+- getent group groupname           (group members)
+- find dir/ -type f -exec ls -l {} \;  (audit entire tree)
+
+================================================================================
+                    PERMISSION PATTERNS REFERENCE
+================================================================================
+
+Before Setup (WRONG):
+  salaries.csv         644  manager:marketing     (too open)
+  employee_reviews.txt 644  root:root             (too open, wrong owner)
+  build.sh             644  developer:engineering  (missing execute)
+  api_keys.env         666  developer:engineering  (way too open)
+  deploy_config.yaml   640  intern:marketing       (wrong owner+group)
+  campaign_plan.txt    664  developer:engineering   (wrong dept)
+  analytics_report.csv 644  intern:engineering      (wrong dept)
+  company_handbook.txt 600  intern:intern           (too restrictive)
+  meeting_notes.txt    600  root:root               (too restrictive)
+  backup_database.sh   644  root:root               (wrong owner, no exec)
+  generate_report.sh   644  root:root               (wrong owner, no exec)
+  cleanup_logs.sh      644  root:root               (wrong owner, no exec)
+  weekly_summary.txt   666  root:root               (too open)
+  security_audit.txt   777  root:root               (way too open)
+
+After Fix (CORRECT):
+  salaries.csv         600  manager:marketing       (owner only)
+  employee_reviews.txt 600  root:root               (owner only)
+  build.sh             754  developer:engineering   (owner+group execute)
+  api_keys.env         600  developer:engineering   (owner only)
+  deploy_config.yaml   640  developer:engineering   (owner rw, group r)
+  campaign_plan.txt    664  manager:marketing       (team read/write)
+  analytics_report.csv 644  manager:marketing       (public read)
+  company_handbook.txt 644  manager:engineering      (public read)
+  meeting_notes.txt    644  manager:engineering      (public read)
+  backup_database.sh   750  developer:engineering   (team executable)
+  generate_report.sh   750  manager:devops          (team executable)
+  cleanup_logs.sh      700  manager:devops          (owner only)
+  weekly_summary.txt   644  manager:engineering     (public read)
+  security_audit.txt   600  manager:devops          (confidential)
+
+================================================================================
+                    GRADING RUBRIC (SUGGESTION)
+================================================================================
+
+Level 1 - chmod (30 points)
+- Exercise 1: Numeric mode - lock salary file (10 points)
+  - Correct command (5), explanation of 600 (5)
+- Exercise 2: Symbolic mode - add execute (10 points)
+  - Correct command (5), explanation of symbolic vs numeric (5)
+- Exercise 3: Both modes + stat (10 points)
+  - Both files fixed (5), principle of least privilege explained (5)
+
+Level 2 - chown (30 points)
+- Exercise 1: Fix ownership with chown user:group (10 points)
+  - Correct command (5), explanation of why ownership matters (5)
+- Exercise 2: Fix marketing files with chown/chgrp (10 points)
+  - Both files fixed (5), chown vs chgrp explained (5)
+- Exercise 3: Combined chown + chmod (10 points)
+  - Both files fixed (5), explanation of combined approach (5)
+
+Level 3 - Combined (30 points)
+- Exercise 1: Fix scripts ownership + execute perms (10 points)
+  - All three scripts correct (6), 750 vs 700 explained (4)
+- Exercise 2: Secure reports appropriately (10 points)
+  - Both reports fixed (5), 644 vs 600 reasoning (5)
+- Exercise 3: Full audit + access analysis (10 points)
+  - Audit output (3), access analysis (4), reflection (3)
+
+Documentation (10 points)
+- Created my_answers.txt
+- Provided clear, complete answers
+- Showed understanding of concepts
+- Demonstrated reflection on learning
+
+TOTAL: 100 points
+
+================================================================================
+                    NOTES FOR INSTRUCTOR
+================================================================================
+
+Common Student Mistakes:
+1. Using chmod 777 to "fix" everything (emphasize: 777 is NEVER the answer)
+2. Forgetting sudo for chown/chgrp commands
+3. Only fixing permissions but not ownership (or vice versa)
+4. Not understanding the difference between numeric and symbolic modes
+5. Not verifying changes with ls -l after each command
+6. Confusing chown and chgrp
+
+Tips for Helping Students:
+- Always ask: "WHO needs access?" before "WHAT access do they need?"
+- Show stat output to reinforce numeric permission understanding
+- Use groups/id commands to help students understand group membership
+- Emphasize: fix ownership FIRST, then permissions
+- Have students predict access BEFORE testing with cat
+
+Typical Completion Time:
+- Fast students: 45-60 minutes
+- Average students: 60-75 minutes
+- Struggling students: 75-90 minutes
+
+Prerequisites:
+- Students should have completed Lab 6 (Permission Encounter - reading)
+- Students should understand ls -l output format
+- Students should understand owner/group/others concepts
+
+Important Reminders:
+- This lab creates real system users (intern, developer, manager)
+- Users have locked passwords (passwd -l) - no login allowed
+- The student user is added to the "engineering" group
+- Students may need to run "newgrp engineering" or log out/in for group
+  membership to take effect
+- All file content is MOCK data - no real credentials or sensitive info
+
+Cleanup (optional, after lab is complete):
+  sudo userdel -r intern 2>/dev/null
+  sudo userdel -r developer 2>/dev/null
+  sudo userdel -r manager 2>/dev/null
+  sudo groupdel engineering 2>/dev/null
+  sudo groupdel marketing 2>/dev/null
+  sudo groupdel devops 2>/dev/null
+
+================================================================================

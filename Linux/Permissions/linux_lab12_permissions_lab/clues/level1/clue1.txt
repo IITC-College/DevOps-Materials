@@ -1,0 +1,78 @@
+================================================================================
+                            LEVEL 1 - EXERCISE 1
+                "Exposed Salaries" - Locking Down Sensitive Data
+================================================================================
+
+Welcome to Level 1!
+
+You're the new SysAdmin at TechCorp. The security audit found that the HR
+salary file is WORLD-READABLE. Anyone on the system can see everyone's salary!
+
+BACKGROUND:
+-----------
+File permissions in Linux use a 3-digit numeric (absolute) system:
+
+  Owner | Group | Others
+  ------|-------|-------
+    r=4 |  r=4  |  r=4
+    w=2 |  w=2  |  w=2
+    x=1 |  x=1  |  x=1
+
+  Example: 644 = Owner(rw-) Group(r--) Others(r--)
+  Example: 600 = Owner(rw-) Group(---) Others(---)
+  Example: 755 = Owner(rwx) Group(r-x) Others(r-x)
+
+EXERCISE:
+---------
+Fix the HR salary file so ONLY the owner can read and write it.
+
+INSTRUCTIONS:
+-------------
+1. First, look at the current permissions on the HR files:
+
+   ls -l company/hr/
+
+2. Notice the problem: salaries.csv is readable by group AND others.
+   Anyone can run: cat company/hr/salaries.csv
+   Try it yourself - you can see everyone's salary!
+
+3. Fix it using NUMERIC (absolute) mode. The salary file should be:
+   - Owner: read + write (6)
+   - Group: no access (0)
+   - Others: no access (0)
+
+   sudo chmod 600 company/hr/salaries.csv
+
+4. Verify your fix:
+
+   ls -l company/hr/salaries.csv
+
+COMMANDS TO USE:
+----------------
+- ls -l company/hr/
+- cat company/hr/salaries.csv
+- sudo chmod 600 company/hr/salaries.csv
+- ls -l company/hr/salaries.csv
+
+UNDERSTANDING NUMERIC PERMISSIONS:
+-----------------------------------
+Each digit is a SUM of: r(4) + w(2) + x(1)
+
+  7 = rwx (4+2+1) - full access
+  6 = rw- (4+2)   - read and write
+  5 = r-x (4+1)   - read and execute
+  4 = r-- (4)     - read only
+  3 = -wx (2+1)   - write and execute
+  2 = -w- (2)     - write only
+  1 = --x (1)     - execute only
+  0 = --- (0)     - no access
+
+WRITE YOUR ANSWER:
+------------------
+In my_answers.txt (in the main lab directory), write:
+1. What were the permissions on salaries.csv BEFORE you fixed them?
+2. What command did you use to fix them?
+3. What are the permissions AFTER your fix?
+4. Why is 600 the right choice for a salary file?
+
+Next: clue2.txt in this same directory.

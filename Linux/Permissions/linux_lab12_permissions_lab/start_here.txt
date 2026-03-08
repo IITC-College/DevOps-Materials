@@ -1,0 +1,126 @@
+================================================================================
+    WELCOME TO THE PERMISSIONS LAB!
+================================================================================
+
+⚠️  INSTRUCTOR NOTE: Before students start this lab, you MUST run:
+   sudo ./setup_environment.sh
+   This sets up the lab environment with intentionally WRONG permissions.
+
+================================================================================
+
+Hello, Linux Explorer!
+
+You've learned to READ permissions. Now it's time to FIX them!
+
+In this lab, you are a new Systems Administrator at TechCorp. The previous
+admin left the company and the file permissions are a MESS. Sensitive files
+are exposed, scripts can't run, and departments can't access their own files.
+
+Your job: Use chmod, chown, and group management to fix everything.
+
+================================================================================
+    SCENARIO
+================================================================================
+
+TechCorp has three departments:
+  - Engineering (group: engineering)
+  - Marketing   (group: marketing)
+  - DevOps      (group: devops)
+
+And three key employees:
+  - intern      (belongs to: engineering)
+  - developer   (belongs to: engineering, devops)
+  - manager     (belongs to: engineering, marketing, devops)
+
+The company directory structure has BROKEN permissions. Files are owned by
+the wrong users, sensitive data is world-readable, and scripts can't execute.
+
+================================================================================
+    YOUR FIRST TASK
+================================================================================
+
+1. Check who you are and what groups you belong to:
+   Run: whoami
+   Run: id
+   Run: groups
+
+2. Survey the damage - look at the current permissions:
+   Run: ls -la company/
+   Run: ls -la company/hr/
+   Run: ls -la company/engineering/
+   Run: ls -la scripts/
+
+3. Navigate to the first level of clues:
+   Run: cd clues/level1
+
+4. Read the first exercise:
+   Run: cat clue1.txt
+
+================================================================================
+    WHAT TO EXPECT
+================================================================================
+
+- You WILL use chmod to change file permissions (both numeric and symbolic)
+- You WILL use chown to change file ownership
+- You WILL use chgrp to change group ownership
+- You WILL need sudo for ownership changes
+- Each level builds on the previous one - do them IN ORDER!
+
+================================================================================
+    THREE LEVELS OF CHALLENGES
+================================================================================
+
+Level 1: chmod - Fix File Permissions
+  Fix overly permissive and overly restrictive files using numeric and
+  symbolic modes.
+
+Level 2: chown - Fix File Ownership
+  Transfer ownership to the correct users and groups so departments can
+  access their own files.
+
+Level 3: Combined Challenges
+  Fix real-world scenarios that require BOTH permission and ownership
+  changes, plus group management.
+
+================================================================================
+    COMMANDS YOU'LL USE
+================================================================================
+
+Changing Permissions:
+- chmod 644 <file>       (numeric: set exact permissions)
+- chmod u+x <file>       (symbolic: add execute for owner)
+- chmod g+rw <file>      (symbolic: add read+write for group)
+- chmod o-rwx <file>     (symbolic: remove all for others)
+
+Changing Ownership:
+- sudo chown user <file>         (change owner)
+- sudo chown user:group <file>   (change owner and group)
+- sudo chgrp group <file>        (change group only)
+
+Reading Permissions:
+- ls -l                  (detailed listing)
+- ls -la                 (include hidden files)
+- stat <file>            (detailed file info including numeric permissions)
+- id                     (your user ID and groups)
+- groups <user>          (show user's groups)
+
+================================================================================
+    IMPORTANT REMINDERS
+================================================================================
+
+* Always check permissions with ls -l BEFORE and AFTER making changes
+* Use sudo for chown and chgrp commands
+* You do NOT need sudo for chmod on files you own
+* Read each exercise carefully - some require numeric mode, some symbolic
+* Write your answers in my_answers.txt in the main lab directory
+* If group changes don't take effect, try: newgrp <groupname>
+
+================================================================================
+    READY? LET'S FIX THESE PERMISSIONS!
+================================================================================
+
+Your first destination: clues/level1/clue1.txt
+
+Navigate there and read the file to begin your mission!
+
+Good luck, SysAdmin! The company is counting on you!

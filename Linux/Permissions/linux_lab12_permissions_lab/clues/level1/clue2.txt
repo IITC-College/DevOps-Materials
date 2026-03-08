@@ -1,0 +1,86 @@
+================================================================================
+                            LEVEL 1 - EXERCISE 2
+            "The Broken Build" - Making Scripts Executable (Symbolic Mode)
+================================================================================
+
+Welcome to Exercise 2!
+
+The engineering team reported that their build script won't run. When they
+type `./company/engineering/build.sh`, they get "Permission denied". Let's
+investigate and fix it using SYMBOLIC mode.
+
+BACKGROUND:
+-----------
+Symbolic mode uses letters to add (+), remove (-), or set (=) permissions:
+
+  WHO:    u = owner (user)    g = group    o = others    a = all
+  ACTION: + = add    - = remove    = = set exactly
+  WHAT:   r = read   w = write    x = execute
+
+  Examples:
+    chmod u+x file    → Add execute for owner
+    chmod g+rw file   → Add read+write for group
+    chmod o-rwx file  → Remove all permissions for others
+    chmod a+r file    → Add read for everyone
+    chmod u=rwx file  → Set owner to exactly rwx
+
+EXERCISE:
+---------
+Fix the build script so it can be executed by the owner and group.
+
+INSTRUCTIONS:
+-------------
+1. Check the current permissions on the build script:
+
+   ls -l company/engineering/build.sh
+
+2. Notice the problem: the file has -rw-r--r-- (644). No execute permission!
+   Try running it:
+
+   ./company/engineering/build.sh
+
+   You should see: Permission denied (because there's no 'x' permission)
+
+3. Fix it using SYMBOLIC mode. Add execute permission for owner AND group:
+
+   sudo chmod ug+x company/engineering/build.sh
+
+4. Verify your fix:
+
+   ls -l company/engineering/build.sh
+
+5. Now try running it again:
+
+   ./company/engineering/build.sh
+
+   It should work now! (The script will print build output)
+
+COMMANDS TO USE:
+----------------
+- ls -l company/engineering/build.sh
+- ./company/engineering/build.sh
+- sudo chmod ug+x company/engineering/build.sh
+- ls -l company/engineering/build.sh
+- ./company/engineering/build.sh
+
+SYMBOLIC vs NUMERIC - WHEN TO USE WHICH:
+-----------------------------------------
+SYMBOLIC mode is best when you want to ADD or REMOVE specific permissions
+without changing the rest:
+  chmod u+x file    → "Add execute for owner, keep everything else"
+  chmod o-w file    → "Remove write for others, keep everything else"
+
+NUMERIC mode is best when you want to SET ALL permissions at once:
+  chmod 750 file    → "Set owner=rwx, group=r-x, others=none"
+  chmod 644 file    → "Set owner=rw-, group=r--, others=r--"
+
+WRITE YOUR ANSWER:
+------------------
+In my_answers.txt, write:
+1. What were the permissions BEFORE you added execute?
+2. What symbolic chmod command did you use?
+3. What are the permissions AFTER your fix?
+4. Why did we use symbolic mode (u+x) instead of numeric mode here?
+5. What does "ug+x" mean in plain English?
+
+Next: clue3.txt

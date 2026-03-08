@@ -1,0 +1,98 @@
+================================================================================
+                            LEVEL 2 - EXERCISE 1
+          "Wrong Department" - Fixing Engineering File Ownership
+================================================================================
+
+Welcome to Level 2!
+
+You fixed the permissions in Level 1, but there's another problem: many files
+are owned by the WRONG user or group. Even with correct permissions, the wrong
+owner means the wrong person has access.
+
+BACKGROUND:
+-----------
+File ownership has TWO parts:
+  - Owner (user): The individual who owns the file
+  - Group: The team/department that shares access
+
+In ls -l output:
+  -rw-r--r-- 1 developer engineering 1024 Mar 1 deploy_config.yaml
+                 ↑          ↑
+                 Owner      Group
+
+The chown command changes ownership:
+  sudo chown user file           → Change owner only
+  sudo chown user:group file     → Change BOTH owner and group
+  sudo chgrp group file          → Change group only
+
+NOTE: You need sudo for chown and chgrp because only root can give files
+to other users.
+
+EXERCISE:
+---------
+Fix the ownership of the deploy_config.yaml file. It's currently owned by
+the WRONG user (intern) and WRONG group (marketing). It should belong to
+the developer user and engineering group.
+
+INSTRUCTIONS:
+-------------
+1. Check the current ownership:
+
+   ls -l company/engineering/deploy_config.yaml
+
+2. Notice the problem: The file is owned by "intern:marketing".
+   This means the marketing group can access engineering's deploy config!
+   And the intern owns a production deployment file!
+
+3. Also check who should have access by looking at group memberships:
+
+   groups intern
+   groups developer
+
+4. Fix the ownership - change BOTH owner and group in one command:
+
+   sudo chown developer:engineering company/engineering/deploy_config.yaml
+
+5. Verify the fix:
+
+   ls -l company/engineering/deploy_config.yaml
+
+   You should see: developer engineering
+
+6. Check the current permissions (640 = rw-r-----):
+   - Owner (developer): can read and write
+   - Group (engineering): can read
+   - Others: no access
+
+   This is correct! The developer can edit the config, and the engineering
+   team can read it.
+
+COMMANDS TO USE:
+----------------
+- ls -l company/engineering/deploy_config.yaml
+- groups intern
+- groups developer
+- sudo chown developer:engineering company/engineering/deploy_config.yaml
+- ls -l company/engineering/deploy_config.yaml
+
+KEY CONCEPT - OWNERSHIP vs PERMISSIONS:
+----------------------------------------
+Permissions define WHAT actions are allowed (read, write, execute).
+Ownership defines WHO those permissions apply to.
+
+Even if a file has permissions 640 (rw-r-----), the WRONG owner means
+the wrong person gets read/write access. Both must be correct!
+
+  Wrong: intern:marketing    640 → intern can edit deploy config (bad!)
+  Right: developer:engineering 640 → developer can edit, engineers can read
+
+WRITE YOUR ANSWER:
+------------------
+In my_answers.txt, write:
+1. Who owned deploy_config.yaml BEFORE the fix? (user:group)
+2. Who owns it AFTER? (user:group)
+3. What is the chown command syntax for changing BOTH owner and group?
+4. Why does it matter that the file was in the "marketing" group?
+5. Why do you need sudo for chown?
+
+Next: clue2.txt

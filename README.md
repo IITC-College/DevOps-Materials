@@ -49,6 +49,7 @@ Labs are numbered in the order they should be completed, following the course st
 | 9 | Understanding sudo | `curl -L https://github.com/IITC-College/DevOps-Materials/releases/download/v2.8/linux_lab9_sudo_mindset.tar.gz \| tar -xz && cd linux_lab9_sudo_mindset && cd clues/level1 && cat clue1.txt` |
 | 10 | Default Permissions (umask) | `curl -L https://github.com/IITC-College/DevOps-Materials/releases/download/v2.10/linux_lab10_default_permissions.tar.gz \| tar -xz && cd linux_lab10_default_permissions && cd clues/level1 && cat clue1.txt` |
 | 11 | Debug Mindset (permission debugging) | `curl -L https://github.com/IITC-College/DevOps-Materials/releases/download/v4.1/linux_lab11_debug_mindset.tar.gz \| tar -xz && cd linux_lab11_debug_mindset && cd clues/level1 && cat clue1.txt` |
+| 12 | Permissions Lab (chmod, chown, groups) | `curl -L https://github.com/IITC-College/DevOps-Materials/releases/download/v12.0-permissions-lab/linux_lab12_permissions_lab.tar.gz \| tar -xz && cd linux_lab12_permissions_lab && cd clues/level1 && cat clue1.txt` |
 
 #### Processes and Services
 
@@ -347,13 +348,13 @@ Every lab must meet these criteria:
 | Module          | Category              | Labs | Total Files | Total Size |
 |-----------------|-----------------------|------|-------------|------------|
 | Linux           | Files & Navigation    | 5    | 150+        | ~50KB      |
-| Linux           | Permissions           | 6    | 200+        | ~80KB      |
+| Linux           | Permissions           | 7    | 220+        | ~90KB      |
 | Linux           | Processes & Services  | 6    | 150+        | ~70KB      |
 | Linux           | Shell Scripting       | 13   | 140+        | ~50KB      |
 | Linux           | Pipes & Redirection   | 10   | 150+        | ~160KB     |
 | Linux           | Networking            | 1    | 50+         | ~20KB      |
 | Linux           | Users & Groups        | 1    | 30+         | ~10KB      |
-| **Total Linux** |                       | **42** | **870+**  | **~440KB** |
+| **Total Linux** |                       | **43** | **890+**  | **~450KB** |
 | Docker          | Container Basics      | 1    | 10+         | ~75KB      |
 | Python          | Python Basics         | 28   | 85+         | ~25KB      |
 | K8s             | -                     | -    | -           | -          |
@@ -374,6 +375,6 @@ Course materials © 2026 IITC College. For educational use only.
 
 ---
 
-**Last Updated**: 2026-03-04
+**Last Updated**: 2026-03-08
 **Repository**: IITC-College/DevOps-Materials  
 **Maintainer**: Course Instructor
