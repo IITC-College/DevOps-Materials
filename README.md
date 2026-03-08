@@ -49,7 +49,7 @@ Labs are numbered in the order they should be completed, following the course st
 | 9 | Understanding sudo | `curl -L https://github.com/IITC-College/DevOps-Materials/releases/download/v2.8/linux_lab9_sudo_mindset.tar.gz \| tar -xz && cd linux_lab9_sudo_mindset && cd clues/level1 && cat clue1.txt` |
 | 10 | Default Permissions (umask) | `curl -L https://github.com/IITC-College/DevOps-Materials/releases/download/v2.10/linux_lab10_default_permissions.tar.gz \| tar -xz && cd linux_lab10_default_permissions && cd clues/level1 && cat clue1.txt` |
 | 11 | Debug Mindset (permission debugging) | `curl -L https://github.com/IITC-College/DevOps-Materials/releases/download/v4.1/linux_lab11_debug_mindset.tar.gz \| tar -xz && cd linux_lab11_debug_mindset && cd clues/level1 && cat clue1.txt` |
-| 12 | Permissions Lab (chmod, chown, groups) | `curl -L https://github.com/IITC-College/DevOps-Materials/releases/download/v12.0-permissions-lab/linux_lab12_permissions_lab.tar.gz \| tar -xz && cd linux_lab12_permissions_lab && cat start_here.txt` |
+| 12 | Permissions Lab (chmod, chown, groups) | `curl -L -o lab.tar.gz https://github.com/IITC-College/DevOps-Materials/releases/download/v12.1-permissions-lab/linux_lab12_permissions_lab.tar.gz && tar -xzf lab.tar.gz && cd linux_lab12_permissions_lab && cat start_here.txt` |
 
 #### Processes and Services
 
