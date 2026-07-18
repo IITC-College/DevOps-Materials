@@ -1,0 +1,126 @@
+services:
+  mongo:
+    image: mongo:7
+    volumes:
+      - mongo-data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping')"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    networks:
+      - store-network
+
+  auth:
+    build: ./services/auth-service
+    ports:
+      - "8001:8000"
+    environment:
+      - MONGO_URI=mongodb://mongo:27017
+      - JWT_SECRET=${JWT_SECRET:-dev-secret-change-me}
+    depends_on:
+      mongo:
+        condition: service_healthy
+    healthcheck: &service-healthcheck
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - store-network
+
+  catalog:
+    build: ./services/catalog-service
+    ports:
+      - "8002:8000"
+    environment:
+      - MONGO_URI=mongodb://mongo:27017
+      - JWT_SECRET=${JWT_SECRET:-dev-secret-change-me}
+    depends_on:
+      mongo:
+        condition: service_healthy
+    healthcheck: *service-healthcheck
+    networks:
+      - store-network
+
+  cart:
+    build: ./services/cart-service
+    ports:
+      - "8003:8000"
+    environment:
+      - MONGO_URI=mongodb://mongo:27017
+      - JWT_SECRET=${JWT_SECRET:-dev-secret-change-me}
+      - CATALOG_URL=http://catalog:8000
+    depends_on:
+      mongo:
+        condition: service_healthy
+    healthcheck: *service-healthcheck
+    networks:
+      - store-network
+
+  order:
+    build: ./services/order-service
+    ports:
+      - "8004:8000"
+    environment:
+      - MONGO_URI=mongodb://mongo:27017
+      - JWT_SECRET=${JWT_SECRET:-dev-secret-change-me}
+      - CART_URL=http://cart:8000
+      - CATALOG_URL=http://catalog:8000
+      - PAYMENT_URL=http://payment:8000
+      - SHIPPING_FLAT_RATE=5.00
+      - FREE_SHIPPING_THRESHOLD=100
+    depends_on:
+      mongo:
+        condition: service_healthy
+    healthcheck: *service-healthcheck
+    networks:
+      - store-network
+
+  payment:
+    build: ./services/payment-service
+    ports:
+      - "8005:8000"
+    environment:
+      - MONGO_URI=mongodb://mongo:27017
+      - JWT_SECRET=${JWT_SECRET:-dev-secret-change-me}
+      - PAYMENT_FAILURE_SUFFIX=${PAYMENT_FAILURE_SUFFIX:-0000}
+    depends_on:
+      mongo:
+        condition: service_healthy
+    healthcheck: *service-healthcheck
+    networks:
+      - store-network
+
+  seed:
+    build: ./seed
+    environment:
+      - MONGO_URI=mongodb://mongo:27017
+    depends_on:
+      mongo:
+        condition: service_healthy
+    restart: "no"
+    networks:
+      - store-network
+
+  gateway:
+    build:
+      context: .
+      dockerfile: gateway/Dockerfile
+    ports:
+      - "8080:80"
+    depends_on:
+      - auth
+      - catalog
+      - cart
+      - order
+      - payment
+    networks:
+      - store-network
+
+networks:
+  store-network:
+    driver: bridge
+
+volumes:
+  mongo-data:
