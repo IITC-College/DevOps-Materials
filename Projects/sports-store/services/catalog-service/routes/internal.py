@@ -5,13 +5,34 @@ from models import StockItem
 from security import get_current_user
 
 router = APIRouter(
-    prefix="/internal/stock",
+    prefix="/internal",
     tags=["internal"],
     dependencies=[Depends(get_current_user)],
 )
 
 
-@router.post("/check")
+@router.get("/variants/{sku}")
+async def get_variant(sku: str):
+    doc = await products_collection.find_one(
+        {"variants.sku": sku, "is_active": True},
+        {"name": 1, "image_url": 1, "variants.$": 1},
+    )
+    if doc is None:
+        raise HTTPException(status_code=404, detail="SKU not found")
+    variant = doc["variants"][0]
+    return {
+        "product_id": str(doc["_id"]),
+        "name": doc["name"],
+        "image_url": doc.get("image_url", ""),
+        "sku": variant["sku"],
+        "color": variant["color"],
+        "size": variant["size"],
+        "price": variant["price"],
+        "stock_quantity": variant["stock_quantity"],
+    }
+
+
+@router.post("/stock/check")
 async def check_stock(items: list[StockItem]):
     results = []
     for item in items:
@@ -30,7 +51,7 @@ async def check_stock(items: list[StockItem]):
     return results
 
 
-@router.post("/decrement")
+@router.post("/stock/decrement")
 async def decrement_stock(items: list[StockItem]):
     # No rollback of earlier items on partial failure — an accepted MVP gap
     # (see README: reservations/sagas are the Phase 2 exercise).
