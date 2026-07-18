@@ -1,0 +1,303 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  color: #1a1a1a;
+  background: #fafafa;
+  line-height: 1.5;
+}
+
+a {
+  color: inherit;
+}
+
+.container {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  background: #111;
+  color: #fff;
+}
+
+.brand {
+  font-size: 1.4rem;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-decoration: none;
+}
+
+.navbar nav {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.navbar a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.navbar a:hover {
+  text-decoration: underline;
+}
+
+.nav-user {
+  color: #aaa;
+  font-size: 0.9rem;
+}
+
+/* Hero */
+.hero {
+  background: #111;
+  color: #fff;
+  border-radius: 12px;
+  padding: 3rem 2rem;
+  margin-bottom: 2rem;
+}
+
+.hero h1 {
+  font-size: 2.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.hero p {
+  color: #bbb;
+  margin-bottom: 1.5rem;
+}
+
+/* Buttons */
+.button {
+  display: inline-block;
+  background: #e63946;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.7rem 1.4rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.button:hover {
+  background: #c62c39;
+}
+
+.button:disabled {
+  background: #999;
+  cursor: not-allowed;
+}
+
+.link-button {
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  font-size: inherit;
+  text-decoration: underline;
+}
+
+/* Product grid */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.25rem;
+  margin-top: 1rem;
+}
+
+.product-card {
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 10px;
+  overflow: hidden;
+  text-decoration: none;
+  transition: box-shadow 0.15s ease;
+}
+
+.product-card:hover {
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+}
+
+.product-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 140px;
+  font-size: 3.5rem;
+  background: #f0f0f0;
+}
+
+.product-info {
+  padding: 0.9rem;
+}
+
+.product-category {
+  color: #888;
+  font-size: 0.85rem;
+}
+
+.product-price {
+  font-weight: 700;
+  margin-top: 0.4rem;
+}
+
+/* Filters */
+.filters {
+  display: flex;
+  gap: 0.75rem;
+  margin: 1rem 0;
+}
+
+.filters select {
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+/* Product detail */
+.product-detail {
+  max-width: 560px;
+}
+
+.variant-picker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.variant {
+  padding: 0.5rem 0.9rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+}
+
+.variant.selected {
+  border-color: #111;
+  background: #111;
+  color: #fff;
+}
+
+.variant:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* Forms */
+.form {
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.form label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.form input {
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.hint {
+  color: #777;
+  font-size: 0.85rem;
+}
+
+/* Cart */
+.cart-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  background: #fff;
+}
+
+.cart-table th,
+.cart-table td {
+  text-align: left;
+  padding: 0.7rem;
+  border-bottom: 1px solid #eee;
+}
+
+.cart-subtotal {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin: 1rem 0;
+}
+
+/* Orders */
+.order-card {
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 10px;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.order-card ul {
+  margin: 0.5rem 0 0.5rem 1.25rem;
+}
+
+.status {
+  border-radius: 999px;
+  padding: 0.15rem 0.7rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.status-paid {
+  background: #d9f5e3;
+  color: #14713d;
+}
+
+.status-payment_failed {
+  background: #fde2e4;
+  color: #a4243b;
+}
+
+.status-pending {
+  background: #fff3cd;
+  color: #8a6d1a;
+}
+
+/* Messages */
+.error {
+  color: #a4243b;
+  background: #fde2e4;
+  border-radius: 6px;
+  padding: 0.5rem 0.8rem;
+}
+
+.success {
+  color: #14713d;
+  background: #d9f5e3;
+  border-radius: 6px;
+  padding: 0.5rem 0.8rem;
+}
