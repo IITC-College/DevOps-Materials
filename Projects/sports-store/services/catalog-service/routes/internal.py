@@ -11,15 +11,20 @@ router = APIRouter(
 )
 
 
+def find_variant(doc: dict | None, sku: str) -> dict | None:
+    if doc is None:
+        return None
+    return next((v for v in doc["variants"] if v["sku"] == sku), None)
+
+
 @router.get("/variants/{sku}")
 async def get_variant(sku: str):
     doc = await products_collection.find_one(
-        {"variants.sku": sku, "is_active": True},
-        {"name": 1, "image_url": 1, "variants.$": 1},
+        {"variants.sku": sku, "is_active": True}
     )
-    if doc is None:
+    variant = find_variant(doc, sku)
+    if variant is None:
         raise HTTPException(status_code=404, detail="SKU not found")
-    variant = doc["variants"][0]
     return {
         "product_id": str(doc["_id"]),
         "name": doc["name"],
@@ -37,10 +42,10 @@ async def check_stock(items: list[StockItem]):
     results = []
     for item in items:
         doc = await products_collection.find_one(
-            {"variants.sku": item.sku, "is_active": True},
-            {"variants.$": 1},
+            {"variants.sku": item.sku, "is_active": True}
         )
-        available = doc["variants"][0]["stock_quantity"] if doc else 0
+        variant = find_variant(doc, item.sku)
+        available = variant["stock_quantity"] if variant else 0
         results.append(
             {
                 "sku": item.sku,
