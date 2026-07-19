@@ -57,8 +57,9 @@ docker compose up --build -d
 
 Then open **http://localhost:8080**.
 
-The one-shot `seed` container idempotently loads ten Stryda products and an
-admin user, so repeated `docker compose up` runs are safe:
+On first run, MongoDB's `docker-entrypoint-initdb.d` hook runs
+`seed/init-mongo.js`, idempotently loading ten Stryda products and an admin
+user (only fires against an empty `mongo-data` volume):
 
 - Admin login: `admin@stryda-sports.com` / `Admin1234!`
 - Any card number "pays" successfully — except cards ending in `0000`

@@ -16,4 +16,4 @@ spec:
           env:
             - name: MONGO_URI
               valueFrom:
-                configMapKeyRef: { name: app-config, key: MONGO_URI }
+                secretKeyRef: { name: app-secrets, key: MONGO_URI }

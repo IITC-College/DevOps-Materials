@@ -1,15 +1,18 @@
 # Values for the Bitnami mongodb chart (oci://registry-1.docker.io/bitnamicharts/mongodb).
 # fullnameOverride keeps the Service name "mongo" so it matches MONGO_URI
-# in k8s/02-configmap.yaml (mongodb://mongo:27017) without touching app code.
+# in k8s/01-secret.yaml (mongodb://root:...@mongo:27017/...) without
+# touching app code.
 fullnameOverride: mongo
 
 architecture: standalone
 
-# Compose runs Mongo with no auth (mongodb://mongo:27017, no credentials) —
-# match that here for dev parity. Turn auth on and switch services to a
-# proper connection-string Secret before using this outside local/course use.
+# Root password comes from the app-secrets Secret (k8s/01-secret.yaml,
+# key "mongodb-root-password") instead of being duplicated here — that
+# Secret must be applied before `helm install`. Services read the matching
+# full connection string from the same Secret's MONGO_URI key.
 auth:
-  enabled: false
+  enabled: true
+  existingSecret: app-secrets
 
 persistence:
   enabled: true

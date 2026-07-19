@@ -1,8 +1,12 @@
 services:
   mongo:
     image: mongo:7
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_ROOT_PASSWORD:-dev-mongo-pw-change-me}
     volumes:
       - mongo-data:/data/db
+      - ./seed/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
     healthcheck:
       test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping')"]
       interval: 5s
@@ -16,7 +20,7 @@ services:
     ports:
       - "8001:8000"
     environment:
-      - MONGO_URI=mongodb://mongo:27017
+      - MONGO_URI=mongodb://root:${MONGO_ROOT_PASSWORD:-dev-mongo-pw-change-me}@mongo:27017/?authSource=admin
       - JWT_SECRET=${JWT_SECRET:-dev-secret-change-me}
     depends_on:
       mongo:
@@ -34,7 +38,7 @@ services:
     ports:
       - "8002:8000"
     environment:
-      - MONGO_URI=mongodb://mongo:27017
+      - MONGO_URI=mongodb://root:${MONGO_ROOT_PASSWORD:-dev-mongo-pw-change-me}@mongo:27017/?authSource=admin
       - JWT_SECRET=${JWT_SECRET:-dev-secret-change-me}
     depends_on:
       mongo:
@@ -48,7 +52,7 @@ services:
     ports:
       - "8003:8000"
     environment:
-      - MONGO_URI=mongodb://mongo:27017
+      - MONGO_URI=mongodb://root:${MONGO_ROOT_PASSWORD:-dev-mongo-pw-change-me}@mongo:27017/?authSource=admin
       - JWT_SECRET=${JWT_SECRET:-dev-secret-change-me}
       - CATALOG_URL=http://catalog:8000
     depends_on:
@@ -63,7 +67,7 @@ services:
     ports:
       - "8004:8000"
     environment:
-      - MONGO_URI=mongodb://mongo:27017
+      - MONGO_URI=mongodb://root:${MONGO_ROOT_PASSWORD:-dev-mongo-pw-change-me}@mongo:27017/?authSource=admin
       - JWT_SECRET=${JWT_SECRET:-dev-secret-change-me}
       - CART_URL=http://cart:8000
       - CATALOG_URL=http://catalog:8000
@@ -82,24 +86,13 @@ services:
     ports:
       - "8005:8000"
     environment:
-      - MONGO_URI=mongodb://mongo:27017
+      - MONGO_URI=mongodb://root:${MONGO_ROOT_PASSWORD:-dev-mongo-pw-change-me}@mongo:27017/?authSource=admin
       - JWT_SECRET=${JWT_SECRET:-dev-secret-change-me}
       - PAYMENT_FAILURE_SUFFIX=${PAYMENT_FAILURE_SUFFIX:-0000}
     depends_on:
       mongo:
         condition: service_healthy
     healthcheck: *service-healthcheck
-    networks:
-      - store-network
-
-  seed:
-    build: ./seed
-    environment:
-      - MONGO_URI=mongodb://mongo:27017
-    depends_on:
-      mongo:
-        condition: service_healthy
-    restart: "no"
     networks:
       - store-network
 

@@ -4,8 +4,8 @@ metadata:
   name: app-config
   namespace: sports-store
 data:
-  # "mongo" is the Service name installed by the Helm release (see k8s/mongodb).
-  MONGO_URI: mongodb://mongo:27017
+  # MONGO_URI moved to app-secrets (k8s/01-secret.yaml) — it now embeds the
+  # mongo root password.
   CATALOG_URL: http://catalog:8000
   CART_URL: http://cart:8000
   PAYMENT_URL: http://payment:8000
