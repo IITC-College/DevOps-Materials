@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: order
+  namespace: sports-store
+  labels:
+    app: order
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: order
+  template:
+    metadata:
+      labels:
+        app: order
+    spec:
+      containers:
+        - name: order
+          image: lironefitoussi/sports-store-order-service:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000
+          env:
+            - name: MONGO_URI
+              valueFrom:
+                configMapKeyRef: { name: app-config, key: MONGO_URI }
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef: { name: app-secrets, key: JWT_SECRET }
+            - name: CART_URL
+              valueFrom:
+                configMapKeyRef: { name: app-config, key: CART_URL }
+            - name: CATALOG_URL
+              valueFrom:
+                configMapKeyRef: { name: app-config, key: CATALOG_URL }
+            - name: PAYMENT_URL
+              valueFrom:
+                configMapKeyRef: { name: app-config, key: PAYMENT_URL }
+            - name: SHIPPING_FLAT_RATE
+              valueFrom:
+                configMapKeyRef: { name: app-config, key: SHIPPING_FLAT_RATE }
+            - name: FREE_SHIPPING_THRESHOLD
+              valueFrom:
+                configMapKeyRef: { name: app-config, key: FREE_SHIPPING_THRESHOLD }
+          readinessProbe:
+            httpGet: { path: /health, port: 8000 }
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet: { path: /health, port: 8000 }
+            initialDelaySeconds: 10
+            periodSeconds: 10
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: order
+  namespace: sports-store
+spec:
+  selector:
+    app: order
+  ports:
+    - port: 8000
+      targetPort: 8000

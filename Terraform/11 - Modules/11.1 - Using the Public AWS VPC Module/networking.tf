@@ -12,3 +12,8 @@ module "vpc" {
   private_subnets = ["10.0.0.0/24"]
   public_subnets  = ["10.0.128.0/24"]
 }
+
+# Output found azs 
+output "azs" {
+  value = data.aws_availability_zones.azs.names
+}

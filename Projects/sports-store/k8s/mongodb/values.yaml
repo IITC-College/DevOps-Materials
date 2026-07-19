@@ -1,0 +1,23 @@
+# Values for the Bitnami mongodb chart (oci://registry-1.docker.io/bitnamicharts/mongodb).
+# fullnameOverride keeps the Service name "mongo" so it matches MONGO_URI
+# in k8s/02-configmap.yaml (mongodb://mongo:27017) without touching app code.
+fullnameOverride: mongo
+
+architecture: standalone
+
+# Compose runs Mongo with no auth (mongodb://mongo:27017, no credentials) —
+# match that here for dev parity. Turn auth on and switch services to a
+# proper connection-string Secret before using this outside local/course use.
+auth:
+  enabled: false
+
+persistence:
+  enabled: true
+  size: 2Gi
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 256Mi
+  limits:
+    memory: 512Mi

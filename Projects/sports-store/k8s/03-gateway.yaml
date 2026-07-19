@@ -1,0 +1,48 @@
+# Gateway image bundles the built frontend + nginx.conf, which hardcodes
+# upstream hostnames (auth, catalog, cart, order, payment) — those must
+# stay the Service names above. Build context is repo root:
+#   docker build -f gateway/Dockerfile -t lironefitoussi/sports-store-gateway:latest .
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gateway
+  namespace: sports-store
+  labels:
+    app: gateway
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gateway
+  template:
+    metadata:
+      labels:
+        app: gateway
+    spec:
+      containers:
+        - name: gateway
+          image: lironefitoussi/sports-store-gateway:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+          readinessProbe:
+            httpGet: { path: /, port: 80 }
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet: { path: /, port: 80 }
+            initialDelaySeconds: 10
+            periodSeconds: 10
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gateway
+  namespace: sports-store
+spec:
+  type: NodePort
+  selector:
+    app: gateway
+  ports:
+    - port: 80
+      targetPort: 80
