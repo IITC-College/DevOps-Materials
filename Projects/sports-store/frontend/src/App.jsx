@@ -9,6 +9,8 @@ import Orders from './pages/Orders'
 import ProductDetail from './pages/ProductDetail'
 import ProductList from './pages/ProductList'
 import Register from './pages/Register'
+import NotFound from './pages/NotFound'
+import Footer from './components/Footer'
 
 export default function App() {
   return (
@@ -24,8 +26,10 @@ export default function App() {
           <Route path="/cart" element={<ProtectedRoute><CartPage /></ProtectedRoute>} />
           <Route path="/checkout" element={<ProtectedRoute><Checkout /></ProtectedRoute>} />
           <Route path="/orders" element={<ProtectedRoute><Orders /></ProtectedRoute>} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
+      <Footer />
     </>
   )
 }

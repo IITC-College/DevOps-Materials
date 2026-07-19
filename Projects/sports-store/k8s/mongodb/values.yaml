@@ -14,6 +14,10 @@ auth:
   enabled: true
   existingSecret: app-secrets
 
+# Created from seed/init-mongo.js by `make mongo-init`. The chart mounts and
+# runs these scripts only while initializing a new, empty MongoDB data volume.
+initdbScriptsConfigMap: mongo-init-scripts
+
 persistence:
   enabled: true
   size: 2Gi

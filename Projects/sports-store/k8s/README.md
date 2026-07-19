@@ -11,10 +11,13 @@ k8s/
   01-secret.yaml        # JWT_SECRET, mongo root password, full MONGO_URI
   02-configmap.yaml      # shared non-secret env (service URLs, ...)
   03-gateway.yaml        # nginx + built frontend, exposed via NodePort
-  04-seed-job.yaml       # one-shot data seed (Job, restartPolicy: Never)
   services/               # auth, catalog, cart, order, payment — Deployment + Service each
   mongodb/values.yaml    # Helm values for the Bitnami mongodb chart
 ```
+
+The shared first-boot data script lives at `seed/init-mongo.js` in the project
+root. Docker Compose mounts it directly; Kubernetes generates a
+`mongo-init-scripts` ConfigMap from the same file.
 
 ## 1. Build & push images
 
@@ -28,13 +31,12 @@ docker build -t lironefitoussi/sports-store-catalog-service:latest services/cata
 docker build -t lironefitoussi/sports-store-cart-service:latest    services/cart-service
 docker build -t lironefitoussi/sports-store-order-service:latest   services/order-service
 docker build -t lironefitoussi/sports-store-payment-service:latest services/payment-service
-docker build -t lironefitoussi/sports-store-seed:latest            seed
 docker build -f gateway/Dockerfile -t lironefitoussi/sports-store-gateway:latest .
 ```
 
 ```bash
 docker login
-for img in auth-service catalog-service cart-service order-service payment-service seed gateway; do
+for img in auth-service catalog-service cart-service order-service payment-service gateway; do
   docker push lironefitoussi/sports-store-$img:latest
 done
 ```
@@ -44,14 +46,17 @@ done
 Load images straight into minikube's node instead of pushing to Docker Hub:
 
 ```bash
-minikube image load lironefitoussi/sports-store-auth-service:latest
-minikube image load lironefitoussi/sports-store-catalog-service:latest
-minikube image load lironefitoussi/sports-store-cart-service:latest
-minikube image load lironefitoussi/sports-store-order-service:latest
-minikube image load lironefitoussi/sports-store-payment-service:latest
-minikube image load lironefitoussi/sports-store-seed:latest
-minikube image load lironefitoussi/sports-store-gateway:latest
+docker save lironefitoussi/sports-store-auth-service:latest | minikube image load --overwrite=true -
+docker save lironefitoussi/sports-store-catalog-service:latest | minikube image load --overwrite=true -
+docker save lironefitoussi/sports-store-cart-service:latest | minikube image load --overwrite=true -
+docker save lironefitoussi/sports-store-order-service:latest | minikube image load --overwrite=true -
+docker save lironefitoussi/sports-store-payment-service:latest | minikube image load --overwrite=true -
+docker save lironefitoussi/sports-store-gateway:latest | minikube image load --overwrite=true -
 ```
+
+The explicit `docker save` stream guarantees Minikube receives the locally
+built image bytes instead of resolving the same `:latest` tag from a registry
+or retaining an older runtime image.
 
 Or build straight against minikube's Docker daemon (no load step needed):
 
@@ -59,6 +64,21 @@ Or build straight against minikube's Docker daemon (no load step needed):
 eval $(minikube docker-env)
 # re-run the docker build commands above with that shell
 ```
+
+The Makefile wraps the local workflow:
+
+```bash
+make build-images  # build all six images locally
+make push-images   # push all six images to Docker Hub
+make load-images   # overwrite Minikube's cached copies
+make images        # build, push, and load all six images
+make rebuild       # force-build, push, load, and recreate the entire stack
+```
+
+`make rebuild` completes every image build, registry push, and Minikube load
+before deleting the current namespace. This prevents a build, authentication,
+network, or registry failure from taking down a working local deployment. Run
+`docker login` first when the Docker client is not already authenticated.
 
 ## 2. Namespace + Secret
 
@@ -74,6 +94,11 @@ kubectl apply -f k8s/01-secret.yaml
 ## 3. Install MongoDB via Helm
 
 ```bash
+kubectl create configmap mongo-init-scripts \
+  -n sports-store \
+  --from-file=init-mongo.js=seed/init-mongo.js \
+  --dry-run=client -o yaml | kubectl apply -f -
+
 helm install mongo oci://registry-1.docker.io/bitnamicharts/mongodb \
   -n sports-store \
   -f k8s/mongodb/values.yaml
@@ -85,18 +110,23 @@ matches the `mongo` hostname used in `MONGO_URI` (`k8s/01-secret.yaml`),
 same as the `mongo` service name in docker-compose. Auth is on
 (`auth.enabled: true`), root credentials come from `app-secrets`.
 
+`initdbScriptsConfigMap: mongo-init-scripts` tells the chart to mount the seed
+script through a ConfigMap. MongoDB runs it only when initializing an empty
+data directory; upgrades and pod restarts do not overwrite existing catalog or
+user data.
+
 ## 4. Apply the app manifests
 
 ```bash
 kubectl apply -f k8s/02-configmap.yaml
 kubectl apply -f k8s/services/
 kubectl apply -f k8s/03-gateway.yaml
-kubectl apply -f k8s/04-seed-job.yaml
 ```
 
 Wait for `auth`/`catalog`/`cart`/`order`/`payment` pods Ready (they gate on
 Mongo the same way compose's `depends_on: condition: service_healthy` did,
-via readiness probes on `/health`), then the seed Job runs once.
+via readiness probes on `/health`). The initial catalog and admin user are
+created as part of MongoDB's first startup.
 
 ## 5. Reach the app
 

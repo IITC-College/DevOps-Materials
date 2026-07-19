@@ -1,6 +1,9 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { apiFetch } from '../api'
+import { useCart } from '../cart'
+import { Spinner } from '../components/Loading'
+import Seo from '../components/Seo'
 
 const EMPTY_ADDRESS = {
   full_name: '',
@@ -12,6 +15,7 @@ const EMPTY_ADDRESS = {
 
 export default function Checkout() {
   const navigate = useNavigate()
+  const { setCart } = useCart()
   const [address, setAddress] = useState(EMPTY_ADDRESS)
   const [cardNumber, setCardNumber] = useState('')
   const [error, setError] = useState('')
@@ -33,6 +37,7 @@ export default function Checkout() {
           card_number: cardNumber,
         }),
       })
+      setCart({ items: [], subtotal: 0 })
       navigate('/orders')
     } catch (err) {
       if (err.status === 402) {
@@ -46,7 +51,8 @@ export default function Checkout() {
   }
 
   return (
-    <form className="form" onSubmit={submit}>
+    <form className="form checkout-form" onSubmit={submit}>
+      <Seo title="Checkout" description="Complete your Stryda Athletics demo order securely." />
       <h1>Checkout</h1>
       {error && <p className="error">{error}</p>}
       <label>
@@ -85,7 +91,7 @@ export default function Checkout() {
         simulates a declined payment.
       </p>
       <button className="button" type="submit" disabled={submitting}>
-        {submitting ? 'Processing…' : 'Place order'}
+        {submitting ? <><Spinner small /> Processing order…</> : 'Place order securely'}
       </button>
     </form>
   )
