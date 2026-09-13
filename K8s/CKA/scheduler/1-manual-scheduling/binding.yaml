@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Binding
+metadata:
+  name: pending-pod # Must match the EXACT name of the Pod you want to bind
+  namespace: default # Must match the namespace of the Pod
+target:
+  apiVersion: v1
+  kind: Node
+  name: CHANGE-ME # The name of the target Node you want to place the Pod on

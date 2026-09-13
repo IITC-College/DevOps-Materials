@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nodename-pod
+  namespace: default
+  labels:
+    lab: manual-scheduling
+spec:
+  # nodeName tells the kubelet on that node to run this Pod directly.
+  # The scheduler is never involved - fill in a real node name first.
+  nodeName: CHANGE-ME
+  containers:
+    - name: nginx
+      image: nginx:1.27-alpine
