@@ -77,7 +77,7 @@ Everything runs in the `default` namespace.
 >
 > - `kubectl explain pod.spec.schedulerName`
 > - Is there a scheduler in your cluster that answers to that name? `kubectl get pods -n kube-system`
-> - To see the raw status, use `kubectl get --help` and look at the `-o jsonpath` examples.
+> - To see the raw status, `kubectl get --help` - which output format prints the whole object?
 
 ---
 
@@ -124,11 +124,11 @@ target:
 
 > **Hints**
 >
-> - Copy `binding.yaml` per Pod, or edit and re-send the same file.
+> - Reuse `binding.yaml`: edit the Pod name and the node name, then send it again.
 > - `apply` reports an error, but check the Pod before believing it. Then try `create` for the same Pod.
 > - Want to see what `apply` really sent? `kubectl options` - look for the log verbosity flag, and try level 6.
 > - All three lab Pods share the label `lab=manual-scheduling`. `kubectl get --help` - find the label selector flag.
-> - For a POD / NODE table only, `kubectl get --help` - look at `-o custom-columns`.
+> - To list only the Pods on one node, `kubectl get --help` - look for the field selector flag.
 
 ---
 
