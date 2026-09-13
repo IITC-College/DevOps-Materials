@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pending-pod
+  namespace: default
+  labels:
+    lab: manual-scheduling
+spec:
+  # No scheduler in the cluster answers to this name, so nobody will
+  # ever assign a node to this Pod. It stays Pending until YOU bind it.
+  schedulerName: manual-scheduler
+  containers:
+    - name: nginx
+      image: nginx:1.27-alpine
