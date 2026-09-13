@@ -3,6 +3,9 @@
 Verified on a 3-node minikube cluster (`minikube start -p cka --nodes 3`, Kubernetes v1.37)
 with the control plane tainted. Node A is `cka-m02`, Node B is `cka-m03`.
 
+Lab files: [K8s/CKA/scheduler/1-manual-scheduling/](../../../../../K8s/CKA/scheduler/1-manual-scheduling/).
+Run every command below from **that** folder, not from here.
+
 The commands below use `sed ... | kubectl ... -f -` to fill in `CHANGE-ME` without editing the
 files. It works with both macOS and GNU `sed`, and the YAML stays reusable.
 
