@@ -19,7 +19,10 @@
     "test:cleanup": "tsx scripts/cleanup.ts",
     "format": "prettier --write src scripts tests *.ts *.json README.md labs runtime/*.json",
     "format:check": "prettier --check src scripts tests *.ts *.json README.md labs runtime/*.json",
-    "test:packaged-resume": "tsx scripts/packaged-resume.ts"
+    "test:packaged-resume": "tsx scripts/packaged-resume.ts",
+    "server:dev": "tsx backend/main.ts",
+    "server:build": "tsc --noEmit && node scripts/build-server.mjs",
+    "server:start": "node dist/server/main.mjs"
   },
   "dependencies": {
     "@monaco-editor/react": "^4.7.0",

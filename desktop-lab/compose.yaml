@@ -1,0 +1,14 @@
+services:
+  catalog:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    environment:
+      KLAB_ADMIN_PASSWORD: ${KLAB_ADMIN_PASSWORD:?Set a strong admin password of at least 16 characters}
+    ports:
+      - "127.0.0.1:4318:4318"
+    volumes:
+      - catalog-data:/data
+    restart: unless-stopped
+volumes:
+  catalog-data:

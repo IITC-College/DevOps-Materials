@@ -9,8 +9,21 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "noEmit": true,
-    "lib": ["ES2022", "DOM", "DOM.Iterable"],
-    "types": ["node", "vite/client"]
+    "lib": [
+      "ES2022",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    "types": [
+      "node",
+      "vite/client"
+    ]
   },
-  "include": ["src", "scripts", "tests", "*.ts"]
+  "include": [
+    "src",
+    "scripts",
+    "tests",
+    "*.ts",
+    "backend"
+  ]
 }
