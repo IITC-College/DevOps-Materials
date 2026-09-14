@@ -1,0 +1,320 @@
+schemaVersion: 1
+id: manual-scheduling
+version: 1.0.0
+title: Manual scheduling
+description: Create and manually schedule an nginx Pod.
+runtime:
+  kubernetesVersion: v1.37.0
+  nginxImage: nginx@sha256:552e7481ca93ffccd046aa658dbbed22caefbc09c66fa7cd247cbb90b8a5c609
+  toolboxImage: kubernetes-lab-toolbox:0.1.0
+  nodes: 2
+  setup: manual-scheduling
+steps:
+  - id: create
+    title: Create the Pod
+    instructions: instructions/01-create.md
+    hint: Use kubectl create with the file flag.
+    checks:
+      - id: exists
+        label: Pod default/nginx exists
+        type: exists
+        target:
+          resource: pod
+          name: nginx
+          namespace: default
+      - id: name
+        label: Pod name is nginx
+        type: field
+        target:
+          resource: pod
+          name: nginx
+          namespace: default
+        path: metadata.name
+        equals: nginx
+      - id: namespace
+        label: Pod is in default
+        type: field
+        target:
+          resource: pod
+          name: nginx
+          namespace: default
+        path: metadata.namespace
+        equals: default
+      - id: image
+        label: nginx container uses the required image
+        type: container
+        target:
+          resource: pod
+          name: nginx
+          namespace: default
+        name: nginx
+        image: "{{nginxImage}}"
+      - id: active
+        label: Pod is not being deleted
+        type: field
+        target:
+          resource: pod
+          name: nginx
+          namespace: default
+        path: metadata.deletionTimestamp
+        equals: null
+      - id: unassigned
+        label: Pod has no node assignment
+        type: field
+        target:
+          resource: pod
+          name: nginx
+          namespace: default
+        path: spec.nodeName
+        equals: null
+      - id: pending
+        label: Pod is Pending
+        type: field
+        target:
+          resource: pod
+          name: nginx
+          namespace: default
+        path: status.phase
+        equals: Pending
+  - id: inspect
+    title: Capture diagnostics
+    instructions: instructions/02-inspect.md
+    hint: Use kubectl get with -o json. The > operator saves output to a file.
+    checks:
+      - id: exists
+        label: Pod default/nginx exists
+        type: exists
+        target:
+          resource: pod
+          name: nginx
+          namespace: default
+      - id: name
+        label: Pod name is nginx
+        type: field
+        target:
+          resource: pod
+          name: nginx
+          namespace: default
+        path: metadata.name
+        equals: nginx
+      - id: namespace
+        label: Pod is in default
+        type: field
+        target:
+          resource: pod
+          name: nginx
+          namespace: default
+        path: metadata.namespace
+        equals: default
+      - id: image
+        label: nginx container uses the required image
+        type: container
+        target:
+          resource: pod
+          name: nginx
+          namespace: default
+        name: nginx
+        image: "{{nginxImage}}"
+      - id: active
+        label: Pod is not being deleted
+        type: field
+        target:
+          resource: pod
+          name: nginx
+          namespace: default
+        path: metadata.deletionTimestamp
+        equals: null
+      - id: unassigned
+        label: Pod has no node assignment
+        type: field
+        target:
+          resource: pod
+          name: nginx
+          namespace: default
+        path: spec.nodeName
+        equals: null
+      - id: pending
+        label: Pod is Pending
+        type: field
+        target:
+          resource: pod
+          name: nginx
+          namespace: default
+        path: status.phase
+        equals: Pending
+      - id: pod-evidence
+        label: Current Pod diagnostic saved
+        type: diagnostic
+        path: diagnostics/pod.json
+        source: pod
+      - id: system-evidence
+        label: Control-plane inventory saved
+        type: diagnostic
+        path: diagnostics/system-pods.json
+        source: systemPods
+  - id: worker
+    title: Schedule on the worker
+    instructions: instructions/03-worker.md
+    hint: Add spec.nodeName to nginx.yaml, then delete and recreate the Pod.
+    checks:
+      - id: exists
+        label: Pod default/nginx exists
+        type: exists
+        target:
+          resource: pod
+          name: nginx
+          namespace: default
+      - id: name
+        label: Pod name is nginx
+        type: field
+        target:
+          resource: pod
+          name: nginx
+          namespace: default
+        path: metadata.name
+        equals: nginx
+      - id: namespace
+        label: Pod is in default
+        type: field
+        target:
+          resource: pod
+          name: nginx
+          namespace: default
+        path: metadata.namespace
+        equals: default
+      - id: image
+        label: nginx container uses the required image
+        type: container
+        target:
+          resource: pod
+          name: nginx
+          namespace: default
+        name: nginx
+        image: "{{nginxImage}}"
+      - id: active
+        label: Pod is not being deleted
+        type: field
+        target:
+          resource: pod
+          name: nginx
+          namespace: default
+        path: metadata.deletionTimestamp
+        equals: null
+      - id: node
+        label: Pod is on the required node
+        type: field
+        target:
+          resource: pod
+          name: nginx
+          namespace: default
+        path: spec.nodeName
+        equals: "{{worker}}"
+      - id: running
+        label: Pod is Running
+        type: field
+        target:
+          resource: pod
+          name: nginx
+          namespace: default
+        path: status.phase
+        equals: Running
+      - id: ready
+        label: Pod is Ready
+        type: condition
+        target:
+          resource: pod
+          name: nginx
+          namespace: default
+        condition: Ready
+        equals: "True"
+      - id: recreated
+        label: Pod was recreated
+        type: uidChanged
+        target:
+          resource: pod
+          name: nginx
+          namespace: default
+        checkpoint: create
+  - id: control-plane
+    title: Schedule on the control plane
+    instructions: instructions/04-control-plane.md
+    hint: Change spec.nodeName in nginx.yaml, then delete and recreate the Pod.
+    checks:
+      - id: exists
+        label: Pod default/nginx exists
+        type: exists
+        target:
+          resource: pod
+          name: nginx
+          namespace: default
+      - id: name
+        label: Pod name is nginx
+        type: field
+        target:
+          resource: pod
+          name: nginx
+          namespace: default
+        path: metadata.name
+        equals: nginx
+      - id: namespace
+        label: Pod is in default
+        type: field
+        target:
+          resource: pod
+          name: nginx
+          namespace: default
+        path: metadata.namespace
+        equals: default
+      - id: image
+        label: nginx container uses the required image
+        type: container
+        target:
+          resource: pod
+          name: nginx
+          namespace: default
+        name: nginx
+        image: "{{nginxImage}}"
+      - id: active
+        label: Pod is not being deleted
+        type: field
+        target:
+          resource: pod
+          name: nginx
+          namespace: default
+        path: metadata.deletionTimestamp
+        equals: null
+      - id: node
+        label: Pod is on the required node
+        type: field
+        target:
+          resource: pod
+          name: nginx
+          namespace: default
+        path: spec.nodeName
+        equals: "{{controlPlane}}"
+      - id: running
+        label: Pod is Running
+        type: field
+        target:
+          resource: pod
+          name: nginx
+          namespace: default
+        path: status.phase
+        equals: Running
+      - id: ready
+        label: Pod is Ready
+        type: condition
+        target:
+          resource: pod
+          name: nginx
+          namespace: default
+        condition: Ready
+        equals: "True"
+      - id: recreated
+        label: Pod was recreated
+        type: uidChanged
+        target:
+          resource: pod
+          name: nginx
+          namespace: default
+        checkpoint: worker

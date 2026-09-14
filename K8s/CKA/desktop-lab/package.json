@@ -1,0 +1,91 @@
+{
+  "name": "local-kubernetes-lab",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Real local Kubernetes practice with verified checkpoints",
+  "main": "dist/main/main.cjs",
+  "scripts": {
+    "dev": "npm run build && node scripts/launch.mjs",
+    "build": "tsc --noEmit && vite build && node scripts/build-main.mjs",
+    "test": "vitest run",
+    "test:runtime": "tsx scripts/runtime-proof.ts",
+    "test:integration": "tsx scripts/integration.ts",
+    "test:e2e": "npm run build && playwright test",
+    "package": "npm run build && electron-builder --mac dir --arm64",
+    "postinstall": "electron-builder install-app-deps",
+    "test:recovery": "tsx scripts/recovery.ts",
+    "test:packaged": "tsx scripts/packaged-proof.ts",
+    "test:cleanup": "tsx scripts/cleanup.ts",
+    "format": "prettier --write src scripts tests *.ts *.json README.md labs runtime/*.json",
+    "format:check": "prettier --check src scripts tests *.ts *.json README.md labs runtime/*.json",
+    "test:packaged-resume": "tsx scripts/packaged-resume.ts"
+  },
+  "dependencies": {
+    "@monaco-editor/react": "^4.7.0",
+    "@xterm/addon-fit": "^0.11.0",
+    "@xterm/xterm": "^6.0.0",
+    "monaco-editor": "^0.56.0",
+    "node-pty": "^1.1.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "react-markdown": "^10.1.0",
+    "yaml": "^2.8.1",
+    "zod": "^4.1.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.58.0",
+    "@types/node": "^24.0.0",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "@vitejs/plugin-react": "^5.1.0",
+    "electron": "^44.3.0",
+    "electron-builder": "^26.0.12",
+    "esbuild": "^0.28.2",
+    "prettier": "^3.6.2",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.0",
+    "vite": "^7.3.0",
+    "vitest": "^4.0.0"
+  },
+  "build": {
+    "appId": "dev.local.kuberneteslab",
+    "productName": "Kubernetes Lab",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "labs",
+        "to": "labs"
+      },
+      {
+        "from": "runtime",
+        "to": "runtime"
+      }
+    ],
+    "asarUnpack": [
+      "node_modules/node-pty/**/*"
+    ],
+    "mac": {
+      "target": [
+        {
+          "target": "dir",
+          "arch": [
+            "arm64"
+          ]
+        }
+      ],
+      "identity": null,
+      "category": "public.app-category.education"
+    }
+  },
+  "overrides": {
+    "dompurify": "3.4.15"
+  },
+  "author": "Local Kubernetes Lab"
+}

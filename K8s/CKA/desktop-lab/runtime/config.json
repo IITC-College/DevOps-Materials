@@ -1,0 +1,5 @@
+{
+  "kubernetesVersion": "v1.37.0",
+  "nginxImage": "nginx@sha256:552e7481ca93ffccd046aa658dbbed22caefbc09c66fa7cd247cbb90b8a5c609",
+  "toolboxImage": "kubernetes-lab-toolbox:0.1.0"
+}
